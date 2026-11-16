@@ -184,3 +184,4 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 - Record new decisions in `docs/decision-log.md`: date, decision, reason, alternatives rejected.
 - When a requirement is ambiguous, ask before designing around it. Prefer simple, maintainable designs a small team can run.
 - Separate infrastructure: own GitHub repo, Vercel project, Neon project and `NEXTAUTH_SECRET`. Never point at the Reporting Hub's or Project Brain's database.
+- **One database during the pilot**: the Neon `production` branch is used locally and on Vercel (decision log, 16 Nov). Local migrations, seeds and tests that touch the database change live data: seed synthetic data only, ask Paul before running a migration, and never run destructive scripts.

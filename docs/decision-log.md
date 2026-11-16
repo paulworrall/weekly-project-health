@@ -136,3 +136,6 @@ Eyebrows, link hover and form errors use `--eyebrow` `#B34F00`, not the Reportin
 
 ## 16 Nov 2026 — First commit straight to main
 The scaffold is the repository's first commit, made directly on `main` at Paul's request (an empty repository has no base branch for a pull request). From brief 01 on, work goes through pull requests with regular merges. Rejected: a PR for the first commit.
+
+## 16 Nov 2026 — One database for the pilot (production only)
+The Neon project `weekly-project-health` (AWS Europe West 2, London) has only its default `production` branch. Local development, the Vercel deployment and migrations all use it. Reason: this is a pilot; one database is simpler to run. Consequences: anything run locally (migrations, seed, manual testing) changes the live data, so seed only synthetic data, run migrations deliberately, and never run destructive scripts locally. Rejected: a separate `development` branch, as brief 00 proposed. Revisit before wider roll-out.
