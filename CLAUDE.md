@@ -110,7 +110,7 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 - "Include in weekly report" carries over week to week until changed.
 
 **Week close** (automatic)
-- Vercel Cron runs a close job often enough to catch Friday 23:59 Europe/London in both GMT and BST; the job closes any open period whose `closesAt` has passed. Idempotent. The next period opens immediately; edits after close belong to the next week.
+- Vercel Cron runs a close job often enough to catch Friday 23:59 Europe/London in both GMT and BST (on the Hobby plan crons run at most daily: schedule it early Saturday UK time); the job closes any open period whose `closesAt` has passed. Idempotent. The next period opens immediately; edits after close belong to the next week.
 - Snapshot per included project: included flag, status, Delivery RAG, % complete, update, submitted by/at, `notUpdated` flag, % spend + spend status + upload extract date, open risk and issue counts by level, overdue counts.
 - No submission by close → carry forward last week's submitted values, `notUpdated: true`. Unsubmitted drafts are ignored.
 - Also snapshot each reported workstream's pipeline, and per client the risk and issue log totals needed for the week-on-week and month-on-month trends.
@@ -163,7 +163,7 @@ Past weeks: `?week=2026-W46` on client, workstream, project and log routes.
 
 Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: investigate and report back**; stop and flag anything that contradicts this file, the decision log or the brief.
 
-0. Scaffold, docs, design tokens, CI. **Done 16 Nov 2026** except the Neon and Vercel set-up and the preview deployment (waiting on Paul) and the Prisma agent skills.
+0. Scaffold, docs, design tokens, CI. **Done 16 Nov 2026**, including Neon, GitHub and Vercel (live at weekly-project-health.vercel.app; public on the Hobby plan, so share nothing real until sign-in exists). Still to do: the Prisma agent skills.
 1. Front end on mock data (all screens).
 2. Database schema, migrations, seed (synthetic), audit helper.
 3. Auth and roles: sign-in, lockout, first-sign-in password change, role landing, permissions.

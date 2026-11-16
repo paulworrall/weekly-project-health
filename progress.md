@@ -16,3 +16,11 @@ Append-only. Newest at the bottom.
 
 **Not done (needs Paul):** Neon project, Vercel project and its environment variables, preview deployment. The screen mockups aren't in `docs/design/mockups/` yet.
 **Not done (follow-up):** the official Prisma agent skills in `.claude/skills/` (from `github.com/prisma/skills`).
+
+## 16 Nov 2026 — Infrastructure
+
+- Neon project `weekly-project-health` (AWS Europe West 2, London), `production` branch only (decision log). Pooled and direct connections tested from `.env.local` with `sslmode=verify-full`.
+- Pushed to `github.com/paulworrall/weekly-project-health` (private). CI run #1 passed.
+- Vercel project `weekly-project-health` on the MAP team (Hobby plan), environment variables set, live at https://weekly-project-health.vercel.app (checked: MAP header, WPP Sans, RAG labels, `noindex`).
+- ⚠️ On Hobby the production address is **public** (no login). It only shows the placeholder page, but don't share the address until the font licence is confirmed and sign-in exists (brief 03).
+- Week close on Hobby: Vercel Cron runs at most once a day, so brief 06 schedules it early Saturday UK time (after Friday 23:59 in both GMT and BST).
