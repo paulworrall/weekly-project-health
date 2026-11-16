@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/*
+ * WPP Enterprise Solutions | MAP design system.
+ * Source: docs/design/ds/wppesmap/tokens.json and the Reporting Hub handover pack.
+ * Square corners everywhere; only pills are fully rounded. No shadows.
+ */
+:root {
+  /* Brand */
+  --navy: #000050;
+  --cream: #fafaf0;
+  --white: #ffffff;
+  --orange: #ff7800; /* orange-700: dots, accent, focus ring. Never small text on Cream. */
+  --orange-dark: #d94e0e; /* orange-800: large text and decoration only */
+  --orange-deep: #6a290a; /* orange-900: chart fill */
+  --tint: #fff5cd; /* orange-500: highlights */
+
+  /* Text */
+  --muted: #59598d; /* secondary text (Reporting Hub) */
+  --eyebrow: #b34f00; /* orange for small text: WCAG AA on Cream and White */
+  --overspend: #a03a00; /* "Over budget" % spend text */
+  --disabled: #8a8ab0;
+
+  /* Lines and surfaces */
+  --line: #d9d9e5;
+  --line-strong: #666696;
+  --line-soft: #e6e6ee;
+  --track: #e6e6ee; /* bar tracks */
+  --pinned: #fff1c9; /* ticked rows pinned to the top */
+  --warning-tint: #ffe3c2;
+  --success-tint: #e3f5d3;
+
+  /*
+   * Delivery RAG fills: the Reporting Hub's PROPOSED tokens, not yet signed off by the design
+   * system owner. Change them here only. Always shown with the word and meaning (src/lib/rag.ts),
+   * with Navy text on top.
+   */
+  --rag-green: #b4ff64;
+  --rag-amber: #f9bd5d;
+  --rag-red: #ffb4b4;
+
+  /* Severity */
+  --blocker: #7a1010;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-cream: var(--cream);
+  --color-white: var(--white);
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-orange-deep: var(--orange-deep);
+  --color-tint: var(--tint);
+  --color-muted: var(--muted);
+  --color-eyebrow: var(--eyebrow);
+  --color-overspend: var(--overspend);
+  --color-disabled: var(--disabled);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-soft: var(--line-soft);
+  --color-track: var(--track);
+  --color-pinned: var(--pinned);
+  --color-warning-tint: var(--warning-tint);
+  --color-success-tint: var(--success-tint);
+  --color-rag-green: var(--rag-green);
+  --color-rag-amber: var(--rag-amber);
+  --color-rag-red: var(--rag-red);
+  --color-blocker: var(--blocker);
+
+  --font-sans: var(--font-wpp), "Poppins", "Century Gothic", system-ui, sans-serif;
+}
+
+/* Element defaults live in the base layer so Tailwind utilities always win over them. */
+@layer base {
+  html {
+    background: var(--cream);
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--navy);
+    font-family: var(--font-sans);
+    font-feature-settings: "salt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:hover {
+    color: var(--eyebrow);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+  }
+}
+
+/* Small uppercase section label used across screens */
+.lbl {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Orange eyebrow above page titles: the darker orange, so it passes AA as small text */
+.eyebrow {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--eyebrow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

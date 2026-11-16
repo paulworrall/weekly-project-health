@@ -1,0 +1,13 @@
+// Weekly Project Health — Prisma schema.
+// Models arrive in brief 02 (CLAUDE.md §8). IDs: String @id @default(cuid()), plus
+// createdAt @default(now()) and updatedAt @updatedAt. Constraints Prisma can't express
+// go in the migration as raw SQL, with a comment here.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}

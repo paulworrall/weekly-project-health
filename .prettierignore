@@ -1,0 +1,6 @@
+docs/
+briefs/
+src/generated/
+.next/
+package-lock.json
+*.md

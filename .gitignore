@@ -1,0 +1,36 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.local.example
+
+# Real client spend files must never be committed (synthetic fixtures only, under tests/fixtures/)
+*.xlsx
+*.xlsm
+!tests/fixtures/**/*.xlsx
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# Prisma client (generated on install)
+src/generated/
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+/build
+
+# Misc
+.DS_Store
+*.pem
+npm-debug.log*
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Claude Code local settings
+.claude/settings.local.json
