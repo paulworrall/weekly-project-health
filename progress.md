@@ -88,3 +88,11 @@ Append-only. Newest at the bottom.
 - `scripts/import-spend-file.mts` now uses the same parser; new `npm run upload:dry-run` (read-only).
 - Real TCCC file: parses with 0 errors; uploading it corrected 6 % spend figures by 0.1 point (rounding in the hand conversion of 17 Nov). Paul checked and confirmed it locally: new upload Live (869 rows, file stored), previous Replaced, audit written.
 - 100 tests pass (parser on synthetic workbooks, diff, Confirm rules, preview component); lint, typecheck, build pass.
+
+## 17 Nov 2026 — Brief 05: saving the weekly inputs (branch `brief-05-weekly`)
+
+- Step 0 report and answers: `briefs/brief-05-step0-report.md`. Decisions (17 Nov): when two people edit the same thing, the second save is refused with "changed by X at HH:MM" and a Reload button; the open reporting week is created on first save.
+- Server actions (`src/server/actions/weekly.ts`): include tick, weekly update (Save draft / Submit; no draft after a submission), risks and issues (add with per-client ref from the Client counter, edit, close, delete = archive), pipeline (add, edit, archive). Every one checks the person on the server, refuses closed weeks, writes audit rows in the same transaction and refreshes the pages.
+- Pure rules in `src/lib/weekly-rules.ts` with tests. Forms show save problems in a box; a failed tick is put back with a message.
+- Paul tested on the local copy: ticks, weekly update, risks and pipeline all saved (Northwind sample data only).
+- 107 tests pass; lint, typecheck, build pass.

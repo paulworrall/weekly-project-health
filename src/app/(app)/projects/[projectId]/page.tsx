@@ -13,6 +13,14 @@ import { canEditWeek } from "@/lib/permissions";
 import { hasFigure, isOverBudget, spendLabel, spendPointsChange } from "@/lib/spend";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
+import {
+  archiveLogItemAction,
+  createLogItemAction,
+  saveWeeklyUpdateAction,
+  updateLogItemAction,
+} from "@/server/actions/weekly";
+import type { LogActions } from "@/components/features/risk-issue-table";
+import type { LogKind } from "@/types/domain";
 import type { ProjectPageView } from "@/types/views";
 
 export const metadata: Metadata = { title: "Project" };
@@ -26,6 +34,35 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
   if (!v) notFound();
   const p = v.project;
   const readOnly = !canEditWeek(viewer, v.week.closed);
+  const weekKey = v.week.key;
+  // Saving is only offered in the open week; the actions check again on the server.
+  const onSave = readOnly
+    ? undefined
+    : async (
+        kind: "DRAFT" | "SUBMITTED",
+        values: { status: string; rag: string; percentComplete: number; updateText: string },
+        version: string | null
+      ) => {
+        "use server";
+        return saveWeeklyUpdateAction({ projectId, weekKey, kind, version, values });
+      };
+  const logActions = (kind: LogKind): LogActions | undefined =>
+    readOnly
+      ? undefined
+      : {
+          create: async (values) => {
+            "use server";
+            return createLogItemAction({ kind, projectId, weekKey, values });
+          },
+          update: async (id, values, version) => {
+            "use server";
+            return updateLogItemAction({ kind, id, weekKey, version, values });
+          },
+          archive: async (id, version) => {
+            "use server";
+            return archiveLogItemAction({ kind, id, weekKey, version });
+          },
+        };
   const clientHref = withWeek(`/clients/${v.client.id}`, v.week);
   const wsHref = withWeek(`/clients/${v.client.id}/workstreams/${v.workstream.id}`, v.week);
   const last = v.lastSubmission;
@@ -85,6 +122,8 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
             lastSubmissionText={lastText}
             closedText={closedText}
             now={repo.now().toISOString()}
+            version={v.thisWeek?.updatedAt ?? null}
+            onSave={onSave}
           />
         </section>
         <aside
@@ -124,6 +163,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}
+        actions={logActions("RISK")}
       />
       <RiskIssueTable
         kind="ISSUE"
@@ -134,6 +174,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}
+        actions={logActions("ISSUE")}
       />
     </>
   );

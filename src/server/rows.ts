@@ -101,6 +101,7 @@ export interface DbRows {
     submittedAt: Date | null;
     submittedById: string | null;
     notUpdated: boolean;
+    updatedAt?: Date;
   }[];
   uploads: {
     id: string;
@@ -151,6 +152,7 @@ export interface DbRows {
     nextSteps: string;
     createdAt: Date;
     archivedAt: Date | null;
+    updatedAt?: Date;
   }[];
   auditEvents: {
     id: string;
@@ -179,6 +181,7 @@ interface LogRowDb<K extends "RISK" | "ISSUE"> {
   action: string;
   closedOn: Date | null;
   archivedAt: Date | null;
+  updatedAt?: Date;
 }
 
 const isConfirmed = (s: SpendUpload["status"]) => s === "LIVE" || s === "REPLACED";
@@ -431,6 +434,7 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
       submittedAt: isoTimeOpt(e.submittedAt),
       submittedById: e.submittedById,
       notUpdated: e.notUpdated,
+      ...(e.updatedAt ? { updatedAt: isoTime(e.updatedAt) } : {}),
     });
   }
 
@@ -451,6 +455,7 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
       action: l.action,
       closedOn: isoDateOpt(l.closedOn),
       archivedAt: isoTimeOpt(l.archivedAt),
+      ...(l.updatedAt ? { updatedAt: isoTime(l.updatedAt) } : {}),
     });
 
   const userName = new Map(users.map((u) => [u.id, u.name]));
@@ -518,6 +523,7 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
       nextSteps: o.nextSteps,
       createdOn: isoDate(o.createdAt),
       archivedAt: isoTimeOpt(o.archivedAt),
+      ...(o.updatedAt ? { updatedAt: isoTime(o.updatedAt) } : {}),
     })),
     uploads: uploads.filter((u) => u.status !== "READY_TO_REVIEW" && u.status !== "CHECKING"),
     staged: uploads

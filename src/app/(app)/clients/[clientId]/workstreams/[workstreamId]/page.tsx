@@ -9,6 +9,12 @@ import { formatDate } from "@/lib/dates";
 import { withWeek } from "@/lib/links";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
+import {
+  archivePipelineAction,
+  savePipelineAction,
+  setIncludedAction,
+} from "@/server/actions/weekly";
+import type { WorkstreamActions } from "@/components/features/workstream-body";
 
 export const metadata: Metadata = { title: "Workstream" };
 
@@ -26,6 +32,27 @@ export default async function WorkstreamPage(
   if (!v) notFound();
   const clientHref = withWeek(`/clients/${v.client.id}`, v.week);
   const logBase = `/clients/${v.client.id}`;
+  const weekKey = v.week.key;
+  const wsId = v.workstream.id;
+  // Saving is only offered in the open week; the actions check again on the server.
+  const actions: WorkstreamActions | undefined = v.week.closed
+    ? undefined
+    : {
+        setIncluded: async (projectId: string, included: boolean) => {
+          "use server";
+          return setIncludedAction(projectId, included, weekKey);
+        },
+        pipeline: {
+          save: async (id, values, version) => {
+            "use server";
+            return savePipelineAction({ workstreamId: wsId, id, weekKey, version, values });
+          },
+          archive: async (id, version) => {
+            "use server";
+            return archivePipelineAction({ id, weekKey, version });
+          },
+        },
+      };
 
   return (
     <>
@@ -70,7 +97,7 @@ export default async function WorkstreamPage(
           </Link>
         </div>
       </div>
-      <WorkstreamBody v={v} now={repo.now().toISOString()} />
+      <WorkstreamBody v={v} now={repo.now().toISOString()} actions={actions} />
     </>
   );
 }
