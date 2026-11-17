@@ -26,6 +26,7 @@ import type {
 import { ISSUE_PRIORITIES, RISK_SEVERITIES } from "@/types/domain";
 import { addDays, daysBetween } from "@/lib/dates";
 import { addWeeks, formatWeekParam, weekRange, weeksBetween, type WeekRef } from "@/lib/week";
+import tcccFile from "./clients/tccc.json";
 
 /** Tuesday of week 47, mid-morning. */
 export const MOCK_NOW = new Date("2026-11-17T10:30:00Z");
@@ -486,8 +487,10 @@ export const LOG_ITEMS: LogItem[] = rawLogs.map((l) => {
   const ref = `${l.kind === "RISK" ? "R" : "I"}-${String(seq[l.kind]).padStart(3, "0")}`;
   return { ...l, id: `${l.kind.toLowerCase()}-${seq[l.kind]}`, ref };
 });
-/** Next refs per client (counters on Client in brief 02). */
-export const LOG_SEQ = { ...seq };
+/** Last refs used per client (counters on Client in brief 02). */
+export const LOG_SEQ: Record<string, { RISK: number; ISSUE: number }> = {
+  [CLIENT_ID]: { ...seq },
+};
 
 // ── Pipeline ─────────────────────────────────────────────────────────────────────────────────
 
@@ -771,3 +774,87 @@ export const AUDIT_EVENTS: AuditEvent[] = (() => {
   });
   return events;
 })();
+
+// ── Real client from its spend file (decision log, 17 Nov 2026) ──────────────────────────────
+//
+// Loaded from src/mocks/clients/*.json, converted from the client's own spend file with
+// scripts/import-spend-file.mts and approved by the Admin for use on the site. Only what the
+// file contains is used: job numbers, project names, workstreams and % spend. No weekly
+// updates, risks, issues or pipeline are invented for real projects, so nothing is in the
+// weekly report until someone ticks it. Client and workstream names live in the JSON only.
+
+interface SpendFile {
+  client: { id: string; name: string };
+  extractDate: string;
+  fileName: string;
+  reported: string[];
+  rows: {
+    jobNumber: string;
+    name: string;
+    workstream: string;
+    percentSpent: number | null;
+    spendStatus: string;
+  }[];
+}
+
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+function loadSpendFile(f: SpendFile) {
+  const clientId = f.client.id;
+  CLIENTS.push({ id: clientId, name: f.client.name, archivedAt: null });
+  LOG_SEQ[clientId] = { RISK: 0, ISSUE: 0 };
+  const wsIds = new Map<string, string>();
+  for (const name of [...new Set(f.rows.map((r) => r.workstream))]) {
+    const id = `${clientId}-${slug(name)}`;
+    wsIds.set(name, id);
+    WORKSTREAMS.push({
+      id,
+      clientId,
+      name,
+      reported: f.reported.includes(name),
+      accountDirector: null,
+      firstSeen: f.extractDate,
+    });
+  }
+  for (const row of f.rows) {
+    const id = `p-${clientId}-${row.jobNumber}`;
+    PROJECTS.push({
+      id,
+      clientId,
+      workstreamId: wsIds.get(row.workstream) as string,
+      jobNumber: row.jobNumber,
+      name: row.name,
+      includeInReport: false,
+      missingFromFileSince: null,
+      markedNoLongerInFileAt: null,
+    });
+    const spend: Spend = {
+      percentSpent: row.spendStatus === "VALUE" ? row.percentSpent : null,
+      spendStatus: row.spendStatus as Spend["spendStatus"],
+    };
+    // One upload so far: the same figures stand for every week shown (decision log: a week
+    // without its own upload uses the latest confirmed one).
+    SPEND[id] = Object.fromEntries(ALL_WEEKS.map((w) => [formatWeekParam(w), spend]));
+  }
+  UPLOADS.push({
+    id: `up-${clientId}-${f.extractDate}`,
+    clientId,
+    uploadedAt: `${f.extractDate}T09:00:00.000Z`,
+    uploadedById: ADMIN.id,
+    extractDate: f.extractDate,
+    fileName: f.fileName,
+    status: "LIVE",
+    note: null,
+    rowCount: f.rows.length,
+    newCount: f.rows.length,
+    changedCount: 0,
+    missingCount: 0,
+    errorCount: 0,
+  });
+}
+
+loadSpendFile(tcccFile as SpendFile);

@@ -80,7 +80,7 @@ describe("permissions", () => {
     expect(canAdminister(null)).toBe(false);
     expect(canEditWeek(updater, false)).toBe(true);
     expect(canEditWeek(admin, true)).toBe(false);
-    expect(landingPath(admin, "c1")).toBe("/admin");
-    expect(landingPath(updater, "c1")).toBe("/clients/c1");
+    expect(landingPath(admin)).toBe("/admin");
+    expect(landingPath(updater)).toBe("/clients");
   });
 });

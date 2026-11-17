@@ -21,7 +21,7 @@ export function canView(viewer: Viewer | null): boolean {
   return !!viewer;
 }
 
-/** Where each role lands after signing in. */
-export function landingPath(viewer: Viewer, defaultClientId: string): string {
-  return viewer.role === "ADMIN" ? "/admin" : `/clients/${defaultClientId}`;
+/** Where each role lands after signing in: Admin home, or the client list (decision 17 Nov). */
+export function landingPath(viewer: Viewer): string {
+  return viewer.role === "ADMIN" ? "/admin" : "/clients";
 }

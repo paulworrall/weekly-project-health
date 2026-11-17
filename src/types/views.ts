@@ -178,14 +178,14 @@ export interface ProjectPageView {
 
 export interface AdminHomeView {
   week: WeekContext;
+  /** Across every client's reported workstreams. */
   outstanding: ProjectRow[];
   inReport: number;
   submitted: number;
-  client: ClientOverview;
-  latestUpload: UploadInfo | null;
+  clients: ClientOverview[];
+  /** Latest confirmed upload per client, newest first. */
+  uploads: { client: Client; info: UploadInfo }[];
   users: { admins: number; updaters: number; neverSignedIn: number };
-  openRisks: number;
-  openIssues: number;
 }
 
 export interface UploadsView {
@@ -204,7 +204,8 @@ export interface UploadsView {
     noBudget: number;
     noTimesheet: number;
   };
-  staged: { upload: SpendUpload; fileChecks: string[]; changes: SpendUploadChange[] };
+  /** A checked file waiting for review, if any. */
+  staged: { upload: SpendUpload; fileChecks: string[]; changes: SpendUploadChange[] } | null;
   history: UploadInfo[];
   workstreams: (Workstream & { projectCount: number })[];
   previousUploadDate: IsoDate | null;

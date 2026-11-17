@@ -119,7 +119,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         initial={v.risks}
         projectId={p.id}
         clientId={v.client.id}
-        nextSeq={LOG_SEQ.RISK + 1}
+        nextSeq={(LOG_SEQ[v.client.id]?.RISK ?? 0) + 1}
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}
@@ -129,7 +129,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         initial={v.issues}
         projectId={p.id}
         clientId={v.client.id}
-        nextSeq={LOG_SEQ.ISSUE + 1}
+        nextSeq={(LOG_SEQ[v.client.id]?.ISSUE ?? 0) + 1}
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}

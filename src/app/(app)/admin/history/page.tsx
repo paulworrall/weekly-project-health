@@ -4,7 +4,7 @@ import { SimpleTablePage } from "@/components/features/simple-table";
 import { formatDateTime } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { DEFAULT_CLIENT_ID, getAuditEvents } from "@/mocks/repository";
+import { getAuditEvents } from "@/mocks/repository";
 
 export const metadata: Metadata = { title: "Change history" };
 
@@ -17,7 +17,7 @@ const ACTION = {
 
 export default async function HistoryPage() {
   const viewer = await requireViewer();
-  if (!canAdminister(viewer)) return <Forbidden backHref={`/clients/${DEFAULT_CLIENT_ID}`} />;
+  if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   return (
     <SimpleTablePage
       eyebrow="Admin · Change history"

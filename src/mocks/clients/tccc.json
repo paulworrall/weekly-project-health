@@ -1,0 +1,6100 @@
+{
+ "client": {
+  "id": "tccc",
+  "name": "TCCC"
+ },
+ "extractDate": "2026-11-16",
+ "fileName": "TCCC_Weekly_Helath_Check_In_V1.xlsx",
+ "reported": [
+  "Josefine",
+  "Mette",
+  "Mike",
+  "Nadine EU",
+  "Nadine Global"
+ ],
+ "rows": [
+  {
+   "jobNumber": "307271",
+   "name": "TCCC_Connected Packaging",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "311803",
+   "name": "TCCC_Costa Coffee_CRM_1_Planning",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "312352",
+   "name": "TCCC_Travel time & expenses_Non-billable",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "315926",
+   "name": "TCCC_OTD_Hosting",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "316481",
+   "name": "TCCC_Onboarding & Education (non-billable)",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "316482",
+   "name": "TCCC_Internal time_Management & Administration (non-billable)",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "324143",
+   "name": "TCCC_EU_Transactional Journeys_Owned & Paid_Pilot_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "324145",
+   "name": "TCCC_EU_CPE_OwnedChannels_Pilot_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "331667",
+   "name": "TCCC_Global Marketing Data Model",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "333417",
+   "name": "TCCC_EU_CA&CPE_PaidMediaChannels (Meta)_Pilot_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "333525",
+   "name": "TCCC_Charter_Christmas 2023_CRM & Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "334988",
+   "name": "TCCC_AEP_Weekly_Adobe_Meetings",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "336155",
+   "name": "TCCC_EU_AlwaysOnProgramOptimization_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "337401",
+   "name": "TCCC_Charter_Coke_Breaks Screentime 2023_CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "344307",
+   "name": "TCCC_EU_Transactional Journeys_Pilot_Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "344312",
+   "name": "TCCC_EU_Pilot_ProgressiveProfiling_Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "344314",
+   "name": "TCCC_EU_AlwaysOnProgramOptimization_Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "344435",
+   "name": "TCCC_E2E Match & Thrive_WPP (Oct-Dec)",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "345115",
+   "name": "TCCC_C4M_OPPORTUNITY",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "352673",
+   "name": "TCCC_Charter_CokeStudio 2023_CRM",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "352877",
+   "name": "TCCC_Loyalty_RealVerse_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "354251",
+   "name": "TCCC_Global_PiCoS Roll Out",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "359504",
+   "name": "TCCC_Global_2 New Pilots",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "360673",
+   "name": "TCCC_PICOS_Invoicing 2023",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "361218",
+   "name": "TCCC_Charter_CCTM_Football_charter",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "361844",
+   "name": "TCCC_Studio_X",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "361845",
+   "name": "TCCC_Global_Data Collection & Governance",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "361846",
+   "name": "TCCC_Global_W+ and UMM Integration",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "361847",
+   "name": "TCCC_Global_Daily Office Tasks",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "361848",
+   "name": "TCCC_Available + investment time_2023",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "365510",
+   "name": "TCCC_IMX Digital_Tagging & Analytics",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "365613",
+   "name": "TCCC_Workfront for MTO_AWATING PO",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "366404",
+   "name": "TCCC_EU_NextPilots_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "366513",
+   "name": "TCCC_NA_+One value proposition and member experience",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "368648",
+   "name": "TCCC_B2B_OPPORTUNITY 2023",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "371049",
+   "name": "TCCC_Charter_Aquarius_Red Peach_CRM toolkit",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "371275",
+   "name": "TCCC_AO_Global_Implementations",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "371298",
+   "name": "TCCC_Costa Coffee_CRM_6_Invoice job",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "371299",
+   "name": "TCCC_Costa Coffee_CRM_2_Develop",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "371301",
+   "name": "TCCC_Costa Coffee_CRM_3_Migration",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "371302",
+   "name": "TCCC_Costa Coffee_CRM_4_Testing & Support",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "371431",
+   "name": "TCCC_Global Loyalty Program pitch_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "371780",
+   "name": "TCCC_WoW_Intercom Resource (new PO)",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "371819",
+   "name": "TCCC_Charter_Fanta_Carnival_CRM and Landing page content (EU)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "372240",
+   "name": "TCCC_Costa Coffee_CRM_0_Discovery",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "376083",
+   "name": "TCCC_Discovery_Project Helix_2023 - Pending PO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "376220",
+   "name": "TCCC_Discovery_Audience Planning_2023 and 2024 - Pending PO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "376344",
+   "name": "TCCC_Discovery_Codifying Consumer Value Exchange Framework_2024 - Pending PO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "376355",
+   "name": "TCCC_Disc_Gamified experiences Intenders_2024-Pending PO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "376373",
+   "name": "TCCC_Costa Coffee_CRM_7_Quick Launch",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "377068",
+   "name": "TCCC_Discovery_Walmart 1PD experiments_2023-Pending PO",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "377287",
+   "name": "TCCC_EU_Creative Forum inspiration session_Q3 2023_INVEST",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "377681",
+   "name": "TCCC_Charter_CCZS Euro 2024_CRM&Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378277",
+   "name": "TCCC_EU_1PD Strategy Playbook_ 2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378278",
+   "name": "TCCC_EU_Progressive Profiling in a new channel",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378279",
+   "name": "TCCC_EU_New Nurture Programs_Now for Next",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378566",
+   "name": "TCCC_EU_Run & operate pilots in more markets_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378567",
+   "name": "TCCC_EU_App Push Notification_Test&Learn_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378568",
+   "name": "TCCC_EU_EU_App_Engagement_Programs_Phase 1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378569",
+   "name": "TCCC_EU_CRM Frequency Testing  Phase 1 & 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378571",
+   "name": "TCCC_EU_Sign-up process assessment",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "378763",
+   "name": "TCCC_LATAM_Data Insights Report 2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "380904",
+   "name": "TCCC_NAOU_+One_Tiering Model Development",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "381583",
+   "name": "TCCC_AOU_Strategy Development_2023/2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "382042",
+   "name": "TCCC_Costa_Coffee_OPPORTUNITY 2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "382898",
+   "name": "TCCC_EU_Eduacation, inspirtion, Workshops_2023",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "384281",
+   "name": "TCCC_Charter_LATAM_CokeMeals_2024_CRM",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "384507",
+   "name": "TCCC_Charter_RBK_Q2Burst_2024_CRM+Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "384718",
+   "name": "TCCC_AudiencePlanning_Media_WoW",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "385665",
+   "name": "TCCC_Sprite_Investment_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "385865",
+   "name": "TCCC_EU_CRM Helix_DCO_EU",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "385954",
+   "name": "TCCC_Charter_AOU_WTF2.0_Q4-2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "386027",
+   "name": "TCCC_Internal_Development_CampaignReporting_Template_2023",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "387327",
+   "name": "TCCC_Emerging Brands_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "387329",
+   "name": "TCCC_Sparkling Flavors_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "387331",
+   "name": "TCCC_CCTM_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "387385",
+   "name": "TCCC_EU_Data & Analytics retainer",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "388412",
+   "name": "TCCC_Fanta_HLW_Case_2023_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "389397",
+   "name": "TCCC_Studio X_Process consultants retainer_Sept-Dec 2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "389402",
+   "name": "TCCC_Studio X_Tech Transformation PMO retainer_Oct-Dec 2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "389578",
+   "name": "TCCC_LATAM_Legal_Deck",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "389812",
+   "name": "TCCC_Charter_Christmas 2023_SantaQuiz_Localization",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "390347",
+   "name": "TCCC_Costa Coffee_T1 discovery_INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "390348",
+   "name": "TCCC_Costa Coffee_ABP 2024_INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "390554",
+   "name": "TCCC_StudioX INSWA_WoW discovery w EM_INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "391165",
+   "name": "TCCC_Process and Workfront_Q4",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "391170",
+   "name": "TCCC_Octopus_Q4",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "392452",
+   "name": "TCCC_LATAM_Progressive_Profiling",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "392470",
+   "name": "TCCC_E@SNewVerticals_Intenders - Pending PO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "393021",
+   "name": "TCCC_NA_+one CRM Comms Strategy_2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "393204",
+   "name": "TCCC_AOU_South Africa_Coke Studio Rollout",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "393558",
+   "name": "TCCC_EU_ Re-consent email & LP refresh",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "393917",
+   "name": "TCCC_EU_Charter_Powerade_TX_Strava_CRM_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "394494",
+   "name": "TCCC_Charter_FuzeTea_Refresh2024_CRM+Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "395439",
+   "name": "TCCC_NAOU_DCX operating model redesign_Q4 2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "395442",
+   "name": "TCCC_EU_Data Strategy framework for MW",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "395861",
+   "name": "TCCC_Networked Marketing Awards_2023",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "396127",
+   "name": "TCCC_NAOU_CRM_RFP_2023",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "396189",
+   "name": "TCCC_EU_Charter_Fanta_YummySnacking_2024_CRM",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "397224",
+   "name": "TCCC_Costa_Coffee_New Market Roll-out",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "398003",
+   "name": "TCCC_Innovation Fund 2023_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "399075",
+   "name": "TCCC_Activation_EU_Charter_CCTM Coke Breaks_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "399132",
+   "name": "TCCC_DE_Charter_MezzoMix LIB_CRM_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "399344",
+   "name": "TCCC_EU_Interim CRM Taxonomy Generator (until June24)",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "400112",
+   "name": "TCCC_Development_Global Charter_Coke Studio_Q2_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "400127",
+   "name": "TCCC_Global_Digital IMX_TTA_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "400128",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "400129",
+   "name": "TCCC_WTData_DCX_Data Engineering_Workstream",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "400380",
+   "name": "TCCC_Global IMX_Open X 1PD branding",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "400891",
+   "name": "TCCC_NA_+one CRM Comms Activation_2023_DISCOVERY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "401181",
+   "name": "TCCC_AOU_Progressive_Profiling",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "401549",
+   "name": "TCCC_C4M_VAR_2023/2024_AwaitngPO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "403056",
+   "name": "TCCC_AOU_Q1 Charters",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "403811",
+   "name": "TCCC_EU_App Push Notification Test & Learn_Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "404625",
+   "name": "TCCC_Onboarding & Education (non-billable)_2024",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "404626",
+   "name": "TCCC_Internal time_Management & Administration (non-billable)_2024",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "405523",
+   "name": "TCCC_Development_Global_Charter_Project Epic_Q2_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405745",
+   "name": "TCCC_Global_Workstream Management_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405752",
+   "name": "TCCC_Global Pilot_MarTech Intake & Backlog Management_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405755",
+   "name": "TCCC_Travel Time (non-billable)_2024",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "405757",
+   "name": "TCCC_Global_Studio X_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405759",
+   "name": "TCCC_Global Pilot_Prism 1.0 Integration_Progressive Profiling_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405760",
+   "name": "TCCC_Global Pilot_Prism 1.0 Integration_Refer a Friend_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405761",
+   "name": "TCCC_Global Pilot_1PD x Audience Planning_New Standard Audiences_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405762",
+   "name": "TCCC_Global Pilot_1PD x Audience Planning_Data Clean Room_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405763",
+   "name": "TCCC_Global Pilot_1PD x Audience Planning_Resolve_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405821",
+   "name": "TCCC_Studio X_SX_PMO_Retainer_Jan_Dec_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "405843",
+   "name": "TCCC_Process and Workfront_Q1 2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406148",
+   "name": "TCCC_Global Pilot_OKR & 1PD Consumer Insights Reporting_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406150",
+   "name": "TCCC_Global Pilot_Adobe Target and Voucher Solution_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406151",
+   "name": "TCCC_Global Pilot_W+ Content AI_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406152",
+   "name": "TCCC_Global Pilot_W+ Survey Roll Out_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406153",
+   "name": "TCCC_Global Pilot_Connected pack 1PD integration_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406154",
+   "name": "TCCC_Global Pilot_LINE channel roll out_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406155",
+   "name": "TCCC_Global Pilot_Transactional Refer a Friend_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406156",
+   "name": "TCCC_Global Pilot_Master Template Brand Expansion_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406159",
+   "name": "TCCC_Travel Expenses (non-billable)_2024",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "406497",
+   "name": "TCCC_Costa Coffee_CRM_5_extension phase 2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406647",
+   "name": "TCCC_AOU_Act_Egypt_Home Delivery ​Platform Email​",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "406895",
+   "name": "TCCC_Costa_Coffee_Opportunity 2024_H1",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "406904",
+   "name": "TCCC_IMX Global_SOW #1 invoicing",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "406905",
+   "name": "TCCC_IMX Global_SOW #2 invoicing",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "406906",
+   "name": "TCCC_IMX Global_SOW #3 invoicing",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "406907",
+   "name": "TCCC_IMX Global_SOW #4 invoicing",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "407304",
+   "name": "TCCC_AOU_Dev_Welcome Program_Q1_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "407306",
+   "name": "TCCC_AOU_Dev_Re-engagement Program_Q1_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "407315",
+   "name": "TCCC_Global_Charter_Fanta Halloween 2024 Global Charter_Q4_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "407662",
+   "name": "TCCC_Global_CPD/Retail Media_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "407663",
+   "name": "TCCC_EU_Activation & Scaling_Pilots-Charters_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "407997",
+   "name": "TCCC_Activation_NAOU-EOU_Coca-Cola Happy Tears_Q1_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "408057",
+   "name": "TCCC_Studio X_Global Digital Lead_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "408222",
+   "name": "TCCC_Activation_ASP_Coke Breaks 2024_Q1_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "408223",
+   "name": "TCCC_Activation_ASP_Coke Meals_Foodmarks_2024_Q1_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "408224",
+   "name": "TCCC_Copy Standard Tasks from Here",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "408279",
+   "name": "TCCC_EU_AppPushTest_&_ControlGroups_ScaleUp_OPPORTUNITY_2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "408637",
+   "name": "TCCC_AOU_Act_Audience Planning_Q1_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "408665",
+   "name": "TCCC_Global_W+ Survey_Minute Maid_Q1 2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "409068",
+   "name": "TCCC_Global TTA_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "409111",
+   "name": "TCCC_EU Operating Model Proposal 2024_ Internal",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "409612",
+   "name": "TCCC_AOU_Act_Egypt_Comms_activation_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "409862",
+   "name": "TCCC_Studio X_Process_Architect_Feb-Dec-2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "410124",
+   "name": "TCCC_EU Master Template",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "410156",
+   "name": "TCCC_NAOU_4StandardAudiences_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "410170",
+   "name": "TCCC_Activation_EU_Charter_CCTM Coke Meals Always-on_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "410173",
+   "name": "TCCC_Activation_EU_Charter_CCTM Choices Always-on_2024_CANCELLED",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "410563",
+   "name": "TCCC_MX GA4 Transition_OPPORTUNITY",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "410840",
+   "name": "TCCC_NA_IMX Transformation workshop_INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "411009",
+   "name": "TCCC_Global_Incident Handling_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "411123",
+   "name": "TCCC_Global_Catalyst Integration with AEP/AJO",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "411126",
+   "name": "TCCC_EU_Weekly+_Survey_11x",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "411208",
+   "name": "TCCC_Costa_Coffee_Non-billable expenses",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "411588",
+   "name": "TCCC_EU_Panini_Re-Engagement",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "411599",
+   "name": "TCCC_ABBA Absolut Sprite_Global Charter_Q2_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "411782",
+   "name": "TCCC_Global Charter_Schweppes Born Social Club_Bot_Q1 2024_INVEST",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "412292",
+   "name": "TCCC_AOU_Dev_Loyalty Program_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412302",
+   "name": "TCCC_Adobe Summit_2024_NON BILLABLE",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "412372",
+   "name": "TCCC_EU_W+ Survey Now For Next_incl. Rewarding Schema",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412376",
+   "name": "TCCC_EU_Dev_Content Recommendations Q1_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412377",
+   "name": "TCCC_EU_Progressive Profile in a new channel_Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412381",
+   "name": "TCCC_EU_Progressive Profile enrich with Consumer Behaviour",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "412383",
+   "name": "TCCC_EU_CRM Frequency Testing_Phase3",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412610",
+   "name": "TCCC_AOU_Charter_Cappy Reground_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412611",
+   "name": "TCCC_AOU_Charter_MM Reward Me_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "412759",
+   "name": "TCCC_Development_Global_Charter_Coke_Christmas_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "412899",
+   "name": "TCCC_Internal_TTA & DCX_JIRA Management_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "412915",
+   "name": "TCCC_WTData_DCX_Testing & Personalization_Workstream",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "413459",
+   "name": "TCCC_Global_Digital IMX_TTA_Regional Tagging_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "413541",
+   "name": "TCCC_TEMPORARY_JOB NR_TPM & TAD Admin Tasks",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "413576",
+   "name": "TCCC_AOU_Charter_WOZA_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "413577",
+   "name": "TCCC_Global_PRISM_AdHoc_Non_Bilable",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "414279",
+   "name": "TCCC_Activation_ASP_PH Wilkins_WHC.COM Launch_Q3_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "414524",
+   "name": "TCCC_EU_Reactivation_of_inactive_Revoke_strategy&plan_Phase1",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "414947",
+   "name": "TCCC_AOU_Act_Egypt_HDP_Ramadan Email",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "414993",
+   "name": "TCCC_Global Charter_Fanta Snacking AO_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "415023",
+   "name": "TCCC_EME_Azerbaijan_MusicCampaign_Proposal_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415028",
+   "name": "TCCC_NAOU_DCX invoicing job 2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415092",
+   "name": "TCCC_Charter_CCZS Euro 2024_Believerboard-Localization",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "415365",
+   "name": "TCCC_AOU_Paid_MVP_CampiagnBuilder_INTERNAL",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "415373",
+   "name": "TCCC_EU_Nurture Programs_Now for Now_local activation support",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "415433",
+   "name": "TCCC_Internal_TAD_Idle_Time",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415442",
+   "name": "TCCC_Onboarding & Education (non-billable)_2024 Q2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415467",
+   "name": "TCCC_Mano (100% passthrough invoicing)",
+   "workstream": "WPP Network intercompany invoicing",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415625",
+   "name": "TCCC_EU_Charter_Aquarius_Sweat is Beautiful Y3_2025_CANCELLED",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "415652",
+   "name": "TCCC_EU_Sprite HH Summer_Digital_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "416366",
+   "name": "TCCC_EU_Progressive Profile enrich with Consumer Behaviour",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "416504",
+   "name": "TCCC_NA_+one CRM Comms Content_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "416537",
+   "name": "TCCC_Activation_ASP_AU Coke Studio Q2 2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "416585",
+   "name": "TCCC_EU_Opt Out investigation & Reactivation strategy_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "416655",
+   "name": "TCCC_Global_Charter_Share A Coke_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "416719",
+   "name": "TCCC_Internal_TAD_Essentials",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "416924",
+   "name": "TCCC_NA_+one CRM Tiering Model and Value Exchange Strategy 2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "417500",
+   "name": "TCCC_Nurture_Programs_Now_for_now_End_Report",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "417574",
+   "name": "TCCC_EU_DE unsubscription investigation - INVESTMENT",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "417679",
+   "name": "TCCC_Process and Workfront_Q2 2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "417693",
+   "name": "TCCC_NA_+one CRM Comms Creatives_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "417700",
+   "name": "TCCC_EU_Charter_Fanta_Q1_TX Driver_2025 (previously Carnival)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "417995",
+   "name": "TCCC_AOU_H2_Roadmap discovery",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "417997",
+   "name": "TCCC_Global Charter_Schweppes_Born Social Club_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "418408",
+   "name": "TCCC_EU_Reactivation_of_inactive_Revoke_strategy&plan_Phase2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "418458",
+   "name": "TCCC_IMX_Global_Operating_Model",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "418578",
+   "name": "TCCC_AOU_1PDCustomAudiences_2024_awatingPO",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "418694",
+   "name": "TCCC_MPS_GA operations_OPPORTUNITY",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "418952",
+   "name": "TCCC_EU_H2_Roadmap",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "418988",
+   "name": "TCCC_Global_Digital IMX Global Retained Team_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "419449",
+   "name": "TCCC_EU_Sign up assessment Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "419891",
+   "name": "TCCC_AOU_Charter_Fanta Fenix SA",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "420206",
+   "name": "TCCC_Global_CPD/Retail Media_2024 (Q4)",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420310",
+   "name": "TCCC_Global_Charter_Share_A_Coke_Travel_Costs",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420391",
+   "name": "TCCC_Pilot_Football_Second_Phase",
+   "workstream": "PICOS",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420498",
+   "name": "TCCC_Global Charter_FIFA_WC_2026_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420500",
+   "name": "TCCC_NAOU_Activation_Global1PD_BP_&_PP_AwatingPO",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "420543",
+   "name": "TCCC_Global Charter_Share_A_Coke_Travel Costs",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420616",
+   "name": "TCCC_Global_StudioX_Future_of_Digital_Project",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420745",
+   "name": "TCCC_EU_Digital 1PD Acceleration_2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "420860",
+   "name": "TCCC_Global_Charter_FuzeTea_MadeofFusion_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.1117,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "420930",
+   "name": "TCCC_Activation_ASP_SIMA_WhatsApp_EPIC MUSIC_Q3_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421043",
+   "name": "TCCC_Activation_ASP_SG EPIC MUSIC PROMO_Q3_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421516",
+   "name": "TCCC_Digital Innovation_Messenger global program_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421770",
+   "name": "TCCC_Activation_ASP_MY_EPIC MUSIC PROMO_Q3_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421800",
+   "name": "TCCC_ASP_Invoicing Job_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421818",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Philippines",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421819",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Singapore",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421821",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Malaysia",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "421822",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Australia",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "422171",
+   "name": "TCCC_Charter_CCZS Euro 2024_1PD end report_EU_Q3-2024 (invoiced from job 410173)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "422178",
+   "name": "TCCC_EU_Charter_CCTM Coke Breaks EPIC_CCA & Digital_2024 (invoiced from job 410173)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "422258",
+   "name": "TCCC_EU_Charter_BALyte_2025_1PDCollection_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "422312",
+   "name": "TCCC_Studio_X_SOP_Implementation",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "422314",
+   "name": "TCCC_Biz_Dev_Graham_Smith_Visist_May2024",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "422975",
+   "name": "TCCC_Conversational_Channels_WhatsApp_OPPORTUNITY",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "423231",
+   "name": "TCCC_Costa Coffee_Project Darwin_Sell-in",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "423564",
+   "name": "TCCC_Internal_Operazionalize_TTA_H2 2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "423758",
+   "name": "TCCC_EU_Charter_CCTM Coke Breaks EPIC_OneXP_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424256",
+   "name": "TCCC_EU_CRM Operations_POC",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424290",
+   "name": "TCCC_OneXP_CPH_Visit_June2024",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424548",
+   "name": "TCCC_EU_Guess the XI_Game_2024_CANCELLED",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424727",
+   "name": "TCCC_EU_Consent Extension Email Support_New Revoke Policy",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424730",
+   "name": "TCCC_EU_Consent Extension Email Support_New Revoke Policy",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "424910",
+   "name": "TCCC_EU_Charter_Cross-Category Summer Promo_2025_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "425046",
+   "name": "TCCC_EU_2025 1PD Strategy Playbook_Collect & Activate",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "425247",
+   "name": "TCCC_Global Charter_Share_A_Coke_AI_Digital Consulting",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "425263",
+   "name": "TCCC_Cannes Data Inspiration for Linked In_2024",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "425296",
+   "name": "TCCC_Process and Workfront_Q3 2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "425338",
+   "name": "TCCC_AOU_Charter_Coke Studio_NG_SA",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "425392",
+   "name": "TCCC_Onboarding & Education (non-billable)_2024 Q3",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "425654",
+   "name": "TCCC_Network_Visits_2024",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "425918",
+   "name": "TCCC_Costa Coffee_CRM_3 month support retainer",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "425959",
+   "name": "TCCC_Nurture Program Now for Now recommendations",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426037",
+   "name": "TCCC_Internal_Audience Manager",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426042",
+   "name": "TCCC_NAOU_VML NAOU INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426259",
+   "name": "TCCC_1PD_AudienceSupport_AdHoc_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426478",
+   "name": "TCCC_Process and Workfront_User_Guide_retainer_Q3_2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "426499",
+   "name": "TCCC_EU_Studio X POC_Fanta Halloween FR_2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "426787",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_New Zealand",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "426788",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Thailand_remaining base",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426789",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Vietnam",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "426792",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Indonesia",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "427142",
+   "name": "TCCC_Costa_Coffee_Opportunity 2024_H2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "427165",
+   "name": "TCCC_EU_Consumer Lifecycle Program",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "427166",
+   "name": "TCCC_EU_Personalization with Adobe Target",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "427167",
+   "name": "TCCC_EU_W+ Survey Rest of EU",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "427985",
+   "name": "TCCC_Global Pilot_Freestyle_Machines_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428160",
+   "name": "TCCC_AOU_Charter_Fanta Wanta",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "428161",
+   "name": "TCCC_AOU_Charter_Sprite_limelight",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "428209",
+   "name": "TCCC_EU_Digital_Coke_Meals_Q1_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "428436",
+   "name": "TCCC_Global_Retail_Media_Phase_2_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428491",
+   "name": "TCCC_Global Charter_CRM_FIFA 2026_Workshop & Travel costs",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428526",
+   "name": "TCCC_AOU_Act_Leadgen_Data collection",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428604",
+   "name": "TCCC_AOU_Studio_X_CRM_FTE_Invoicing_Job_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428661",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Cambodia",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428662",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Myanmar",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428663",
+   "name": "TCCC_ASP_Nurture Program Activation_Cluster 1",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428664",
+   "name": "TCCC_ASP_Nurture Program Activation_Cluster 2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428665",
+   "name": "TCCC_ASP_IP Warming_ Data Validation_Papua New Guinea",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "428722",
+   "name": "TCCC_AOU_ACT_Egypt_Home delivery email_August",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "429050",
+   "name": "TCCC_EU_Local Charter_Sprite Spicy_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429186",
+   "name": "TCCC_Costa Coffee_INCIDENT JOB",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429430",
+   "name": "TCCC_Costa Coffee_Project Darwin_Pillar 1 & 2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429437",
+   "name": "TCCC_Costa Coffee_Project Darwin_Pillar 2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429457",
+   "name": "TCCC_AOU_Loyalty Program_Phase 2_2024_OPPORTUNITY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429482",
+   "name": "TCCC_EU_Charter_Fanta Halloween_CCA & Additional Content_2024",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "429919",
+   "name": "TCCC_EU_Testing Enrichment Based on Consumer Behavior",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "429979",
+   "name": "TCCC_Costa Coffee_Admin tasks",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "430026",
+   "name": "TCCC_AOU_Charter_Coke Christmas AOU 2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "430296",
+   "name": "TCCC_Global_Digital IMX_TTA_Product Owner_Retainer",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "430348",
+   "name": "TCCC_EU_Project Orbit_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "430706",
+   "name": "Descoped_TCCC_Open X 1PD_AOU_Egypt_HDP_CRM Strategy",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "431212",
+   "name": "TCCC_Global_IMX_Project_Harmony_UTM_Retainer",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "431506",
+   "name": "TCCC_Global_AEP_CleanUp_2024 (cancelled, budget used for 435092)",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "431509",
+   "name": "TCCC_Global_AttributeEnrichment_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "431510",
+   "name": "TCCC_Global_Human Insights workshop_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "431511",
+   "name": "TCCC_Global_1PD_Audience_Planning_2024_Extra",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "431578",
+   "name": "TCCC_Activation_ASP_PH Wilkins_Brand specific email template",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "431850",
+   "name": "TCCC_GLOBAL_MarTech_Virtual_workshop_Oct2024",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "432081",
+   "name": "TCCC_EU_2025 1PD Strategy Playbook_Strategy & Vision",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "432533",
+   "name": "TCCC_NA_Data_DCX Program Ops_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "432730",
+   "name": "TCCC_Costa Coffee CRM_7 Invoice job project Darwin",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433003",
+   "name": "TCCC_AOU_Charter_Coke Meals_2024",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433099",
+   "name": "TCCC_Global_Networked Marketing Awards_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433131",
+   "name": "TCCC_EU_Brief Label Update",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433470",
+   "name": "TCCC_Process and Workfront_Q4_2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "433503",
+   "name": "TCCC_Costa Coffee_CRM_8_Extra support during September",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433690",
+   "name": "TCCC_Global_Owned Platforms Newsletter_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "433763",
+   "name": "TCCC_Global Charter Optimization_INVESTMENT_2+24",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433859",
+   "name": "TCCC_Global_Digital IMX_Evergreen Media Tagging_TikTok_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "433944",
+   "name": "TCCC_Global Charter_Schweppes_Fizz It Up_Q1_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "434065",
+   "name": "TCCC_AOU_FOH_Invoicing job",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434073",
+   "name": "TCCC_Global_Taxonomy Management & Updates_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434123",
+   "name": "TCCC_Global_FIFA 2026_Digital_Pitch Support",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434299",
+   "name": "TCCC_Costa Coffee_CRM_9_Support September and October",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434323",
+   "name": "TCCC_Onboarding & Education (non-billable)_2024 Q4",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434409",
+   "name": "TCCC_Costa Coffee CRM_10_T1 training",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "434867",
+   "name": "TCCC_AOU_Act_1PD_Audience_CCTM Price promo",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "434985",
+   "name": "TCCC_Internal_TAD_Idle_Time Q4",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "435092",
+   "name": "TCCC_Global_Digital IMX_ Data Consent Mgmt",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "435585",
+   "name": "TCCC_AOU_Act_Kenya counts",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "435728",
+   "name": "TCCC_EU_Charter_Coke_Coke Music 2025_Q1 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "435735",
+   "name": "TCCC_EU_Charter_Fanta_Fanta Wanta_Q1 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "435750",
+   "name": "TCCC_Internal_TAD_Investment",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "436132",
+   "name": "TCCC_Costa Coffee_CRM_10_Support November and December",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "436174",
+   "name": "TCCC_Global_FOH_Audience_Sell_In",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "436372",
+   "name": "TCCC_EU_Project Orbit Phase 2_2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "436970",
+   "name": "TCCC_Studio_X_SOP_Phase2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "437037",
+   "name": "TCCC_AOU_Act_Algeria_Audiences",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "437217",
+   "name": "TCCC_Global_1PD Value creation_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "437438",
+   "name": "TCCC_WTData_DCX_Testing & Personalization_Workstream_Q4_Target (Copy from 412915)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "437700",
+   "name": "TCCC_EU_2025 Roadmap Proposal",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "437904",
+   "name": "TCCC_EU_Brief Label Update",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "437993",
+   "name": "TCCC_Internal_WPP and VML Reporting",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438109",
+   "name": "TCCC_EU_Wilcard Sprint_Cannes 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438118",
+   "name": "TCCC_LATAM_W+ Survey Roll Out_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438484",
+   "name": "TCCC_WPP_Internal_Various_Opps",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438775",
+   "name": "TCCC_Global_OneXP Features Update",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438883",
+   "name": "TCCC_AOU_SAF_Digital seeding_OPPORTUNITY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "438966",
+   "name": "TCCC_ASP_PH_Wilkins_Birthday Program",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "439094",
+   "name": "TCCC_Studio X_Workshop CPH Nov. (invoicing job)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "439201",
+   "name": "TCCC_EU_Charter_Star Wars Disney_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "439748",
+   "name": "TCCC_EU_Charter_RBK_CRM & OneXP & CCA_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "439983",
+   "name": "TCCC_AOU_Dev_Coke Meals_End report",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "439986",
+   "name": "TCCC_AOU_Dev_WOZA_End report",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "439989",
+   "name": "TCCC_AOU_Dev_AOU_Custom Audiences top 4 brands",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "440045",
+   "name": "TCCC_EU_Charter_Coke_Share a Coke EU_Q1_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "440102",
+   "name": "TCCC_Global_Charter_Fanta Halloween 2025_Q2_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.1893,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "440358",
+   "name": "TCCC_Internal_Taxonomy",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "440558",
+   "name": "TCCC_ASP_Dev_Coke_ID Coke Break Browser Push_2024​",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "440687",
+   "name": "TCCC_Studio X_SOP_2025_Implementation",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "440688",
+   "name": "TCCC_Studio X_Digital Lead_2025",
+   "workstream": "Mike",
+   "percentSpent": 0.0006,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "441044",
+   "name": "TCCC_EU_Charter_Fanta Snacking_2025_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "441541",
+   "name": "TCCC_EU_Dev_Project Orbit Sizzle Reel_Q1_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "441595",
+   "name": "TCCC_LATAM_Automated W+ Survey Roll Out_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "441851",
+   "name": "TCCC_Costa Coffee_CRM_11_Support January and February",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "441897",
+   "name": "TCCC_EU_Panini_Re-Engagement_translation_Cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442188",
+   "name": "TCCC_AOU_Dev_Progressive Profiling_Pilot",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "442306",
+   "name": "TCCC_Global_CRM Toolkit_Disney Star Wars_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442352",
+   "name": "TCCC_EU_New Revoke Comms_Translation cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442354",
+   "name": "TCCC_EU_W+ 2023 Survey_Translation_Cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442355",
+   "name": "TCCC_EU_Translation of unsubscription page_Translation_Cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442357",
+   "name": "TCCC_EU_Nurture Program – Now for Now Scaling_Translation_Cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442361",
+   "name": "TCCC_EU_Adpeople_Translation_Cost",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442380",
+   "name": "TCCC_Global_TTA_Regional Tagging_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442381",
+   "name": "TCCC_Global_TTA_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "442513",
+   "name": "TCCC_EU_Dev_Project Orbit Workshop_Q1_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "442897",
+   "name": "TCCC_Onboarding & Education (non-billable)_2025 Q1",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442898",
+   "name": "TCCC_Internal time_Management & Administration (non-billable) 2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "442985",
+   "name": "TCCC_EU_Project_Orbit-2025 Q1",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443077",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_2025 Q1",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443078",
+   "name": "TCCC_WTData_DCX_Testing & Personalization_Workstream_2025 Q1",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443079",
+   "name": "TCCC_WTData_DCX_Data Engineering_Workstream_2025 Q1",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443108",
+   "name": "TCCC_ASP_Act_1PD Audiences Creation_Q1_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443196",
+   "name": "TCCC_Global_Charter Specific Audiences_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443198",
+   "name": "TCCC_Global_WINR Tracking_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443199",
+   "name": "TCCC_Global_Real Time Event Offers Pilot_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443200",
+   "name": "TCCC_Global_Workstream Management_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443202",
+   "name": "TCCC_Global_TTA_Product Owner Retainer_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443299",
+   "name": "TCCC_Travel Time (non-billable)_2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443300",
+   "name": "TCCC_Travel Expenses (non-billable)_2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443302",
+   "name": "TCCC_Internal_TAD_Idle_Time 2025 Q1",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443304",
+   "name": "TCCC_Internal_TAD_Essentials 2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443305",
+   "name": "TCCC_Internal_Audience Manager 2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443553",
+   "name": "TCCC_FIFA_2025_Global_CRM Delivery",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443554",
+   "name": "TCCC_Global_Retail_Media_Opportunity",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443612",
+   "name": "TCCC_AOU_Dev_Coke Christmas 2024_End report",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443613",
+   "name": "TCCC_AOU_Dev_Fanta Fenix 2024_End report",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443667",
+   "name": "TCCC_AOU_Dev_Coke Studio 2024_End report",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443748",
+   "name": "TCCC_Global_Digital IMX_Embedded Resource_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "443759",
+   "name": "TCCC_ASP_Dev_CRM Platform Readiness _DISCOVERY_Q1_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443784",
+   "name": "TCCC_ASP_FOH Admin_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443786",
+   "name": "TCCC_ASP_FOH Support_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443789",
+   "name": "TCCC_ASP_Support investigating technical issues_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443840",
+   "name": "TCCC_AOU_FOH Support_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443841",
+   "name": "TCCC_AOU_FOH Admin 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443843",
+   "name": "TCCC_Global_Website Personalization Discover for ABP25_2024",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443991",
+   "name": "TCCC_Studio_X_Tech and Data PMO_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "443992",
+   "name": "TCCC_Tech Augmented Ways of Wokring_Retainers_Q1_2025",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "444010",
+   "name": "TCCC_ASP_Dev_Indonesia IP Warmup & Data Validation_Q1-Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "444070",
+   "name": "TCCC_Global_MarTech Support & Enablement_Q1 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444157",
+   "name": "TCCC_EU_Connected Pack_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444241",
+   "name": "TCCC_EU_Hybrid Operations Roll Out 2024",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444505",
+   "name": "TCCC_NAOU_Invest_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444549",
+   "name": "TCCC_EU_Charter_Fanta_Snacktime_Q2 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444569",
+   "name": "TCCC_Test Investment Job",
+   "workstream": "TCCC Investment",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444575",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_OOS_Incremental Powerade 2025-01",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444576",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_OOS_Incremental Fairlife 2025-01 (Copy from 444575)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444581",
+   "name": "TCCC_NA_FOH Admin 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444582",
+   "name": "TCCC_NA_FOH Support_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444670",
+   "name": "TCCC_NA_FOH Support_Q1 2025 Future Proofing Summit",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "444711",
+   "name": "TCCC_EU_DAO_Brainstorming_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445130",
+   "name": "TCCC_LATAM_FOH Support_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445131",
+   "name": "TCCC_LATAM_FOH Admin 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445569",
+   "name": "TCCC_EU_Act_Coke_W+ Survey In App_Q2_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445570",
+   "name": "TCCC_EU_Act_Fanta_W+ Survey_Q2_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "445760",
+   "name": "TCCC_ASP_FOH Support_Q1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445773",
+   "name": "TCCC_EUOU_FOH Admin 2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445774",
+   "name": "TCCC_EUOU_FOH Support_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445784",
+   "name": "TCCC_Internal_Idle_Time_CE&D_Q1",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445794",
+   "name": "TCCC_LATAM_Dev_Coke_Adobe Target Personalization Pilot_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445795",
+   "name": "TCCC_LATAM_Dev_Coke_1PD Data Clean Room Sync_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445864",
+   "name": "TCCC_Global_Studio X Oversight_Q1 2025_INVEST",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445951",
+   "name": "TCCC_Costa Coffe_Opportunity H1 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "445965",
+   "name": "TCCC_EU_User_Journey Optimization_Playbook_Q1_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "446017",
+   "name": "TCCC_EU_Charter_CCTM_University_Q3 2025(OPPORTUNITY)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446088",
+   "name": "TCCC_Global_ABP invoicing job 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446103",
+   "name": "TCCC_NAOU_DCX invoicing job 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446162",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_OOS_Incremental Fall Sports Planning 2025-02 (Copy from 444575)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446187",
+   "name": "TCCC_ASP_Act_1PD into Media",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446328",
+   "name": "TCCC_Internal_Productivity_Tracker",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446359",
+   "name": "TCCC_Studio X_SOP_IA360",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "446360",
+   "name": "TCCC_Studio X_SOP_GCM_Train_The_Trainer",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "446361",
+   "name": "TCCC_Studio X_SOP_Exp_Loop_3.0",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "446966",
+   "name": "TCCC_Global_Data Governance & Privacy_2025_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "447166",
+   "name": "TCCC_EU_Charter_Coke_Uplift_Tactical_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "447278",
+   "name": "TCCC_Studio_X_WPP_Open",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "447299",
+   "name": "TCCC_Global_TTA_Conversational Channels_Q2_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "447398",
+   "name": "TCCC_Martech_GCP_Opportunity",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "447456",
+   "name": "TCCC_ASP_Dev_TikTok integration with AEP for 1PD Paid Media",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "447766",
+   "name": "TCCC_Global_1PD Intelligence Engine_Q2_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "447969",
+   "name": "TCCC_Global Charters_INVESTMENT",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448050",
+   "name": "TCCC_Costa_BrandEdge",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448128",
+   "name": "TCCC_B2B_Opportunity",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448443",
+   "name": "TCCC_EU_Charter_CCTM_Red Cities 2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "448450",
+   "name": "TCCC_Costa Coffee_CRM_11_Support March",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "448458",
+   "name": "TCCC_Global_Charter_Uplift_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448506",
+   "name": "TCCC_Global_ObservePoint_License",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448585",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_OOS_Incremental [Orange Cream Walmart Scream Game] 2025-02",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448743",
+   "name": "TCCC_Adobe_Gen_Studio",
+   "workstream": "TCCC Investment",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448804",
+   "name": "TCCC_Studio X_SOP_Value_Tracking",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "448806",
+   "name": "TCCC_Studio X_ShopX_Change Partner 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "448807",
+   "name": "TCCC_Studio X_Tech_Roadmap (Opportunity)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "449704",
+   "name": "TCCC_AOU_Dev_Re-engagement program roll out",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "449706",
+   "name": "TCCC_AOU_Dev_Nurture program strategy",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "449733",
+   "name": "TCCC_Agentic_Opportunity",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "449746",
+   "name": "TCCC_ASP_Internal_Roadmap Projects_Specialists Estimation",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "449749",
+   "name": "TCCC_EU_Charter_Fanta Snacking 1XP CCA_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "449845",
+   "name": "TCCC_EU_Charter_CRM & Digital_Coke Meals_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.2569,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "450468",
+   "name": "TCCC_LATAM_Act_Coke_1PD Audiences Creation_Q1_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "450477",
+   "name": "TCCC_Studio X_SOP_NA_Media",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "450479",
+   "name": "TCCC_EU_Lifecycle Inactive Content & Audience Development​_Q2_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "450544",
+   "name": "TCCC_EU_Dev_1PD X Influencer",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0055,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "450577",
+   "name": "TCCC_Global_AOU_Dev_Intelligence Engine dashboard_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "450922",
+   "name": "TCCC_NAOU_DCX invoicing job 2024 (ext. cost)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451085",
+   "name": "TCCC_Costa Coffee_Support_April",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451089",
+   "name": "TCCC_Costa Coffee_Support_May",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451090",
+   "name": "TCCC_Costa Coffee_Support_June",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451139",
+   "name": "TCCC_EU_Charter_Coke Flavours 2026_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451182",
+   "name": "TCCC_Global_Charter_Holidays 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451242",
+   "name": "TCCC_Global_Digital IMX_Embedded Resource_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451310",
+   "name": "TCCC_Global_CCTM Data Strategy pilots",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451404",
+   "name": "TCCC_Internal_TAD_Idle_Time 2025 Q2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451407",
+   "name": "TCCC_Onboarding & Education (non-billable)_2025 Q2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451408",
+   "name": "TCCC_Internal_Idle_Time_CE&D_Q2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451418",
+   "name": "TCCC_AOU_ACT_SX_CRM_Invoicing job_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451472",
+   "name": "TCCC_Global_Workstream Management_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451492",
+   "name": "TCCC_Global_WINR Tracking_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451493",
+   "name": "TCCC_Global_MarTech Support & Enablement_Q2_2025_INVESTMENT",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451495",
+   "name": "TCCC_Global_TTA Backbone of Coke.ID_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451496",
+   "name": "TCCC_Global_TTA_Product Owner Retainer_April 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451497",
+   "name": "TCCC_Global_TTA_WhatsApp Strategy_OPPORTUNITY Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451498",
+   "name": "TCCC_Global_TTA Evolving Foundational Platforms _Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451499",
+   "name": "TCCC_Global Pilot_Personalization & Testing Framework_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451500",
+   "name": "TCCC_Global Pilot_Activation Academy_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451502",
+   "name": "TCCC_Global_Studio X Governance_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451503",
+   "name": "TCCC_Global Pilot_Partnership Guidelines_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451506",
+   "name": "TCCC_Global Pilot_Custom Audiences_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451507",
+   "name": "TCCC_AOU_FOH Support_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451508",
+   "name": "TCCC_Global Consumer Data strategy, enablement, and activation for Uplift_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451595",
+   "name": "TCCC_ASP_FOH Support_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451664",
+   "name": "TCCC_WTData_DCX_Data Engineering_Workstream_2025 Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451665",
+   "name": "TCCC_WTData_DCX_Testing & Personalization_Workstream_2025 Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451666",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_2025 Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451671",
+   "name": "TCCC_ASP_FOH Admin_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451689",
+   "name": "TCCC_Global_TTA_RTR Tagging_2025_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "451808",
+   "name": "TCCC_Costa_RFP",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451874",
+   "name": "TCCC_Onboarding & Education (non-billable)_2025 Q2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451898",
+   "name": "TCCC_NA_FOH Support_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "451904",
+   "name": "TCCC_LATAM_FOH Support_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452081",
+   "name": "TCCC_Tech Augmented Ways of Wokring_Retainers_Q2_2025",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452115",
+   "name": "TCCC_VML Workshop Copenhagen",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452503",
+   "name": "TCCC_EU_Proactive_Studio X",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452520",
+   "name": "TCCC_AOU_Dev_Adobe target_OPPORTUNITY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452776",
+   "name": "TCCC_Global_CCTM_FIFA WC26_CCX & 1PD principles",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "452777",
+   "name": "TCCC_Global_CCTM_FIFA WC26_Always On CRM Football Activation (playbook)",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.7482,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "452778",
+   "name": "TCCC_Global_CCTM_FIFA WC26_1PD Custom Audience Segments",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.0264,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "452779",
+   "name": "TCCC_Global_CCTM_FIFA WC26_2PD Global Activation Framework_Q2 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.0373,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "452971",
+   "name": "TCCC_Studio X_Comms Project Manager_April to August",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "453201",
+   "name": "TCCC_Global_CCTM_FIFA WC26_Overall Management",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "453565",
+   "name": "TCCC_EU_Project_Orbit-2025 Q2+3",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "453596",
+   "name": "TCCC_LATAM_Act_Coke_1PD Audiences Creation_2025 Pack_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "454025",
+   "name": "TCCC_EME_PRISM Progressive Profiling_INVESTMENT",
+   "workstream": "OU Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "454112",
+   "name": "TCCC_AOU_Act_E@S 1PD Audiences_May2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "454132",
+   "name": "TCCC_LATAM_Dev_Coke_OneXP_Web Push Demo_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "454162",
+   "name": "TCCC_Global Charter_ Coke Meals_2026_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "454322",
+   "name": "TCCC_Global_CCTM_CokeStudio",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "454482",
+   "name": "TCCC_Global_CCTM_Foodmarks_Value Exchange & CRM Toolkit",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.0725,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "455026",
+   "name": "TCCC_EME_FOH Support_Q2 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455135",
+   "name": "TCCC_VML Mexico (100% passthrough invoicing)",
+   "workstream": "WPP Network intercompany invoicing",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455153",
+   "name": "TCCC_EU_Charter_Powerade 1PD/CRM Toolkit_2026_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455269",
+   "name": "TCCC_LATAM_Dev_Coke_Lifecycle Nurture Program_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455448",
+   "name": "TCCC_AOU_Charter_Spring Boks",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "455515",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_OOS_Incremental_Strategic Reporting_Estimate",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455517",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_OOS_Incremental_CDSA_Migration _Discovery",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455645",
+   "name": "TCCC_EU_Charter_MICO_Olympics_Ticketing_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "455870",
+   "name": "TCCC_EU_DAO_Opportunities",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "456080",
+   "name": "TCCC_Global_Enabling OU Adoption of WhatsApp Conversational Channels_Q2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "456106",
+   "name": "TCCC_AOU_Dev_SAF_Notify me scope",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "456282",
+   "name": "TCCC_Studio_X_Various_Opps",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "456441",
+   "name": "TCCC_Studio X_Digital Ops Model_update 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "456854",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_OOS_Incremental_Consumer_Aquisition_Activation_Estimate)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "457793",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_OOS_WoCC-2025/26 Support",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "457835",
+   "name": "TCCC_AOU_Dev_Transactional Strategy",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "457855",
+   "name": "TCCC_EU_Charter_MiCo Olympics_Games Time_2026_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "458082",
+   "name": "TCCC_AOU_Charter_FIFA Trophy tour",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "458444",
+   "name": "TCCC_B2B_Experience Studio Implementation & Hypercare",
+   "workstream": "Mette",
+   "percentSpent": 2.5276,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "458538",
+   "name": "TCCC_EU_Charter_Holidays 1PD/CRM Toolkit_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "458643",
+   "name": "TCCC_LATAM_Act_Coke_WA AEP Connection_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "458736",
+   "name": "TCCC_LATAM_Act_Coke_Media Connection_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "458749",
+   "name": "TCCC_LATAM_Act_Coke_1PD Standard Audiences Redelivery and Investigation_Q2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "458764",
+   "name": "TCCC_LATAM_Dev_Coke_Digital Operationalization_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459123",
+   "name": "TCCC_Global_Charter_Wanta Fanta_Q2_2026",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.3075,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "459197",
+   "name": "TCCC_AOU_Dev_Project Quanta",
+   "workstream": "Mike",
+   "percentSpent": 0.7047,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "459253",
+   "name": "TCCC_EU_Charter_Coke & Music_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.4699,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "459262",
+   "name": "TCCC_WTData_DCX_Tagging-Data-Testing_Special-Requests",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459295",
+   "name": "TCCC_EU_Lifecycle Slow Burn Guidance & Measurement​_Q3_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459331",
+   "name": "TCCC_AOU_Dev_1PD and digital workshop_investment",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459498",
+   "name": "TCCC_Costa Coffee_Support_July",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "459574",
+   "name": "TCCC_Global_TTA_Operationalization_Internal_2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459611",
+   "name": "TCCC_B2B_NAOU_Dev_myCoke_Growth Opportunities",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459620",
+   "name": "TCCC_Global_CCTM_FIFA WC26_SSS Bottlers Video",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "459674",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_2025_Q3_Q4",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459676",
+   "name": "TCCC_WTData_DCX_Testing & Personalization_Workstream_2025_Q3_Q4",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459677",
+   "name": "TCCC_WTData_DCX_Data Engineering_Workstream_2025_Q3_Q4",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459719",
+   "name": "TCCC_EU_DAO_Transactional Project_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "459729",
+   "name": "TCCC_Global_Digital IMX_Embedded Resource_Q3 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459821",
+   "name": "TCCC_Global Charter_Fuze Tea_2026",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.1576,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "459845",
+   "name": "TCCC_Global_TTA Backbone of Coke.ID_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "459877",
+   "name": "TCCC_ASP_FOH Admin_Q3-4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459878",
+   "name": "TCCC_ASP_FOH Support_Q3-4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "459965",
+   "name": "TCCC_AOU_AO_Football lead ads campaign",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "459973",
+   "name": "TCCC_Global_Segment manager x Open Intelligence_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460007",
+   "name": "TCCC_AOU_FOH Support_Q3 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460102",
+   "name": "TCCC_B2B_Interim myCoke Campaign support",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460208",
+   "name": "TCCC_ASP_Ad hoc reporting_July 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460252",
+   "name": "TCCC_Onboarding & Education (non-billable)_2025 Q3",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460275",
+   "name": "TCCC_Internal_TAD_Idle_Time 2025 Q3",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460442",
+   "name": "TCCC_LATAM_FOH Support_Q3-4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460458",
+   "name": "TCCC_Global_New Marketing Model H2",
+   "workstream": "Josefine",
+   "percentSpent": 0.0086,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460521",
+   "name": "TCCC_ASP_Web push TH_OPPORTUNITY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460709",
+   "name": "TCCC_EU_Automated Multi-touch Email Journey",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.3685,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460711",
+   "name": "TCCC_EU_Automated Multi-touch Omnichannel Journey",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.3853,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460712",
+   "name": "TCCC_EU_AI Promo Participation Scoring",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.3988,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460713",
+   "name": "TCCC_EU_WA EU Fanta HLW Content",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460729",
+   "name": "TCCC_ASP_FTH Webpush_ OPPORTUNITY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460830",
+   "name": "TCCC_WTData_DCX_CI&T_Replacement",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460911",
+   "name": "TCCC_Global_1PD activation - Adoption & Scale, Conversational_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460974",
+   "name": "TCCC_Global_1PD x Transactions_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": 0.0883,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460975",
+   "name": "TCCC_Global_1PD activation - Adoption & Scale_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460976",
+   "name": "TCCC_Global_1PD Personalization at scale_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460977",
+   "name": "TCCC_Global_Tiered Service Model_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460978",
+   "name": "TCCC_Global_Intelligence Engine Dashboard_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "460979",
+   "name": "TCCC_Global_Weekly+ Survey_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": 0.1252,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460980",
+   "name": "TCCC_Global_Deployment of PRISM survey_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": 0.1289,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "460981",
+   "name": "TCCC_Global_Segment manager x Open Intelligence_H2 2025_DUPLICATE",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "460982",
+   "name": "TCCC_Global_TTA Backbone of Coke.ID_H2 2025_DUPLICATE",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461044",
+   "name": "TCCC_WTData_DCX_WoCC-Quick-Fixes",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461211",
+   "name": "TCCC_LATAM_Act_Coke_WA  WINR Custom Audiences_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461354",
+   "name": "TCCC_Global_Charter_Rings of Magic_1PD/CRM Toolkit_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.2059,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "461518",
+   "name": "TCCC_Agentic_Craft Beverages@McDonalds",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461526",
+   "name": "TCCC_EU_Charter_Wanta Fanta_Q1_TX_CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "461604",
+   "name": "TCCC_WTData_DCX_Audience_Build_(AEP/CJA)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461867",
+   "name": "TCCC_Global_Charter_CCZS_007 Partnership",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461875",
+   "name": "TCCC_Global_1PD activation - Adoption & Scale, Acceleration_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": 0.5896,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "461887",
+   "name": "TCCC_LATAM_Act_Coke_1PD MX Standard Audiences Google Redelivery_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "461912",
+   "name": "TCCC_AOU_Dev_Sprite_Spicy welcome email_EGY",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462077",
+   "name": "TCCC_Costa Coffee_Support_August",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "462135",
+   "name": "TCCC_Costa_RFP (Copy from 451808)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462293",
+   "name": "TCCC_WT_DCX_Targeted_VML_MAP_SME_Support",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462363",
+   "name": "TCCC_Global_Workstream Management_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462503",
+   "name": "TCCC_LATAM_Dev_Coke_1PD Open Intelligence_Q3_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462762",
+   "name": "TCCC_EU_Charter_MiCo Olympics_OTR_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "462789",
+   "name": "TCCC_Studio X rebate (8%)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "462994",
+   "name": "TCCC_Costa Coffee_Support_September",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "463118",
+   "name": "TCCC_B2B_MarTech Roadmap for 2025-2026",
+   "workstream": "Mette",
+   "percentSpent": 0.1401,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "463253",
+   "name": "TCCC_AOU_Charter_WA roll out/SAC",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "463593",
+   "name": "TCCC_EU_Charter_EPL Q1 & Q2_& 2026 Football Strategy CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.066,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "463594",
+   "name": "TCCC_EU_FIFA 2026_CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.761,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "463595",
+   "name": "TCCC_Global_Charter_Powerade_2026_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "464162",
+   "name": "TCCC_Global_Studio X_WhatsApp Operationalization",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "464163",
+   "name": "TCCC_Studio X_SOP_Digital & Commerce Integration",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "464323",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_MMS Deactivation Pre-Processing",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "464324",
+   "name": "TCCC_Global_Nutrition_Accelerate with 1PD_Q3 2025",
+   "workstream": "Nadine Global",
+   "percentSpent": 1.3573,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "464374",
+   "name": "TCCC_AOU_Dev_Nurture program rollout",
+   "workstream": "Mike",
+   "percentSpent": 0.4511,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "465145",
+   "name": "TCCC_EU_Charter_Wanta Fanta Q2 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.4738,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "465197",
+   "name": "TCCC_Global_Digital IMX 5.3 Digital Value & Performance_H2 2025",
+   "workstream": "Josefine",
+   "percentSpent": 0.0105,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "465411",
+   "name": "TCCC_VML_Atlanta_Summit_Sept2025",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "465463",
+   "name": "TCCC_EU_Transactional Real-time Personalized Offer - Live event_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.4357,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "465706",
+   "name": "TCCC_Global_Charter_Premiere League Digital Pitch",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "466338",
+   "name": "TCCC_Global Charter_Schweppes Fizz It Up",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "466526",
+   "name": "TCCC_Global_Charter_Rings of Magic_Digital_2025_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "466841",
+   "name": "TCCC_Studio X_360IA Global",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "466969",
+   "name": "TCCC_EU Charter_Royal Bliss Kinely_Q1 2026_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "466992",
+   "name": "TCCC_Global_Digital IMX_Embedded Resource_Q4 2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "467042",
+   "name": "TCCC_EU_Charter_RBK_&Schweppes_CRM_Toolkits_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.2834,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "467074",
+   "name": "TCCC_EU_Sprite Spicy Digital Support_2025_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "467612",
+   "name": "TCCC_EU_Transactional Real-time Personalized Offer - FSA_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.1607,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "467613",
+   "name": "TCCC_EU_WhatsApp Toolkit adaptation_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.6936,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "467803",
+   "name": "TCCC_EU_Transactional module_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.0327,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "467814",
+   "name": "TCCC_Studio X_360IA_Global_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468098",
+   "name": "TCCC_Costa Coffee_Support_Oct-Dec_Q4_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "468204",
+   "name": "TCCC_Onboarding & Education (non-billable)_Q4 2025",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468227",
+   "name": "TCCC_EU_RFP_Operations",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468233",
+   "name": "TCCC_Internal_TAD_Idle_Time 2025 Q4",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468331",
+   "name": "TCCC_AOU_FOH Support_Q4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468503",
+   "name": "TCCC_Global_Charter_Meals 2026_Pitch Suport",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "468633",
+   "name": "TCCC_EU_Charter_Cappy 2026_Digital Creative Support",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.1324,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "469094",
+   "name": "TCCC_EU_Orbit module_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.354,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "469468",
+   "name": "TCCC_B2B_Experience Studio Discovery_SMS & Banners",
+   "workstream": "Mette",
+   "percentSpent": 0.0456,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "469550",
+   "name": "TCCC_ASP_MY_Act_Trophy Tour_Q4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "469577",
+   "name": "TCCC_EU_Content Optimization Recommendations_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 6.9177,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "470131",
+   "name": "TCCC_EU_TX WhatsApp FIFA activation",
+   "workstream": "Nadine EU",
+   "percentSpent": 5.1324,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "470290",
+   "name": "TCCC_WTData_DCX_Tagging & Reporting_Workstream_2025_(Walmart Flag Bearers)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "470303",
+   "name": "TCCC_Global_CCTM_FIFA WC26_The Draw",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "470463",
+   "name": "TCCC_EU_Roadmap planning 2026_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "470781",
+   "name": "TCCC_EU_Charter_ICON_TX Driver_CRM_Toolkit_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471121",
+   "name": "TCCC_EU_Charter_Schweppes Claud (Leopard)_CRM Toolkit_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471132",
+   "name": "TCCC_ASP_ID_Act_Trophy Tour_Q4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471133",
+   "name": "TCCC_ASP_TH_Act_Trophy Tour_Q4 2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "471203",
+   "name": "TCCC_LATAM_Progressive_Profiling (copy of 392452)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471222",
+   "name": "TCCC_Global_Charter_Fanta Halloween 2026",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471605",
+   "name": "TCCC_Global_Charter_EPL_CRM + Digital Toolkit_Q3_2026",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.8408,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "471624",
+   "name": "TCCC_Ways of Working_DTIF Playground H2 2024",
+   "workstream": "Ways of Working",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471843",
+   "name": "TCCC_Global_CCTM_FIFA WC26_ V2 Always On CRM Football Activation (playbook)",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "471930",
+   "name": "TCCC_EU_Orbit Activation Toolkit Q4 2025",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "471934",
+   "name": "TCCC_EU_TX Always on: Nurture program_2025",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.2688,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "472514",
+   "name": "TCCC_Crafted Beverages_New concept name",
+   "workstream": "Mette",
+   "percentSpent": 0.8791,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "472581",
+   "name": "TCCC_EU_Studio X Creative Support_ FIFA Draw_Meta Ads",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "472621",
+   "name": "TCCC_Crafted Beverages_Go to market plan",
+   "workstream": "Mette",
+   "percentSpent": 1.0723,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "473014",
+   "name": "TCCC_Global_CCTM_FIFA WC26_Internal Overall Measurement Reporting Insights",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "473124",
+   "name": "TCCC_EU_Charter_Coca Cola ICON 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "473129",
+   "name": "TCCC_EU_Charter_Supercan_Digital_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.2629,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "473153",
+   "name": "TCCC_WTData_DCX_Social_Media_Dashboard",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "473204",
+   "name": "TCCC_AOU_Ad Hoc_Nigeria_ Coke_Zero",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "473205",
+   "name": "TCCC_Global_Charter_Coke Meals x Connected Pack EME_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "473590",
+   "name": "TCCC_AOU_Charter_FIFA_TROPHY TOUR_WA",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474238",
+   "name": "TCCC_Global Charter_Christmas 2026_CRM Toolkit_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474359",
+   "name": "TCCC_EU_Charter_EPL & FIFA WhatsApp_2026_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474452",
+   "name": "TCCC_Global_Charter_Share A Coke_End Report_2025",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474620",
+   "name": "TCCC_EU_Fanta Halloween_Invoice Job",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474866",
+   "name": "TCCC_EU_Charter_Supercan Music Q2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.899,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "474920",
+   "name": "TCCC_EU_Charter_Sprite Spicy_Q1_CRM_2026_Cancelled",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "474980",
+   "name": "TCCC_Studio X_FSA 360IA EU",
+   "workstream": "Mike",
+   "percentSpent": 0.6163,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "475053",
+   "name": "TCCC_Global_Segment Manager Operations_2025/2026",
+   "workstream": "OpenX Business Development",
+   "percentSpent": 1.3708,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "475579",
+   "name": "TCCC_Holiday Email Template",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "475584",
+   "name": "TCCC_AOU_Dev_FIFA WA_2026",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "476743",
+   "name": "TCCC_WPP Open Operating Model_H1_2026",
+   "workstream": "OpenX Business Development",
+   "percentSpent": 2.3246,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "476745",
+   "name": "TCCC_Global_1PD SM additional scope Dec 2025",
+   "workstream": "OpenX Business Development",
+   "percentSpent": 1.0886,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477219",
+   "name": "TCCC_Onboarding & Education (non-billable)_Q1 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477220",
+   "name": "TCCC_Internal time_Management & Administration (non-billable) 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477297",
+   "name": "TCCC_Internal_T&D_Essentials 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477299",
+   "name": "TCCC_Internal_T&D_Idle_Time 2026 H2",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477305",
+   "name": "TCCC_Travel Time (non-billable)_2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477306",
+   "name": "TCCC_Travel Expenses (non-billable)_2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477541",
+   "name": "TCCC_Costa Coffee_Support_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": 0.6169,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477593",
+   "name": "TCCC_WTData_DCX_Data_Engineering_Workstream_2026_Q1-Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477594",
+   "name": "TCCC_WTData_DCX_Testing-Personalization_Workstream_2026_Q1-Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477595",
+   "name": "TCCC_WTData_DCX_Tagging-Reporting_Workstream_2026_Q1-Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477804",
+   "name": "TCCC_Global_Sprite x Basketball_Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": 3.105,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477823",
+   "name": "TCCC_Cross Workstream Managment (Non-billable)_2026",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477837",
+   "name": "TCCC_Global_5.0 AI Empowered Operating Model_Q1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 0.9573,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477839",
+   "name": "TCCC_Global_5.0 Digital Lead_Q1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 1.0217,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477841",
+   "name": "TCCC_Global_5.1 Social_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477842",
+   "name": "TCCC_Global_5.1 1PD, CRM & GCM_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 0.1224,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477843",
+   "name": "TCCC_Global_5.1 TTA_Q1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 1.0028,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477845",
+   "name": "TCCC_Global_5.2 1PD E2E Strategy SME",
+   "workstream": "Josefine",
+   "percentSpent": 1.0043,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477848",
+   "name": "TCCC_Global_5.2 Social E2E Strategy SME",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477852",
+   "name": "TCCC_Global_5.3 Lead & PMO_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 1.0448,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477855",
+   "name": "TCCC_Global_5.3 GTM_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 0.8747,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477856",
+   "name": "TCCC_Global_5.3 Strategy_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 1.0518,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477857",
+   "name": "TCCC_Global_5.3 1PD Intelligence Engine completion_H1_2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477858",
+   "name": "TCCC_Global_5.3 Build_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 0.7404,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477860",
+   "name": "TCCC_Global_5.3 Retainer (Strategy & Value)_H1 2026",
+   "workstream": "Josefine",
+   "percentSpent": 0.9985,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "477861",
+   "name": "TCCC_Global_5.3 Social Measurement_H1_2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477997",
+   "name": "TCCC_LATAM_Act_Coke_1PD Standard Audiences_Google Partner Level Delivery_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "477998",
+   "name": "TCCC_Global_TTA_User Access Management_2026 Audit_Q1_2025",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478069",
+   "name": "TCCC_ASP_FOH Admin_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478142",
+   "name": "TCCC_Studio X_ShopX_2026_Retainer",
+   "workstream": "Mike",
+   "percentSpent": 0.8206,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "478217",
+   "name": "TCCC_EUOU_FOH Admin 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478219",
+   "name": "TCCC_Global Charter_CCTM Meals 2026_Digital opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478474",
+   "name": "TCCC_Global_ABP invoicing job 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478475",
+   "name": "TCCC_NAOU_DCX invoicing job 2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478888",
+   "name": "TCCC_EME_WA GCCC_FIFA SipScanScore_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "478972",
+   "name": "TCCC_NA_FOH Admin 2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "479235",
+   "name": "TCCC_AOU_Dev_Coke_Scheduled-Time offers via WhatsApp_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "479236",
+   "name": "TCCC_AOU_Dev_Fanta_Always-On QR_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "479426",
+   "name": "TCCC_B2B_Creative Development transition",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "480168",
+   "name": "TCCC_LATAM_FOH Admin 2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "480449",
+   "name": "TCCC_AOU_Invoice_H1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "480716",
+   "name": "TCCC_Costa Coffee_Support_Q2_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "480839",
+   "name": "TCCC_EU_The Club Market Townhall sizzle reel",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "481333",
+   "name": "TCCC_B2B_NAOU_Ops_myCoke_Segmentation and Campaigns Consultancy_Q3_2026",
+   "workstream": "Mette",
+   "percentSpent": 1.3117,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "481369",
+   "name": "TCCC_AOU_SAC_Report_H2_2025",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "481430",
+   "name": "TCCC_EU_Charter_Devil Wears Prada 2_CRM Toolkit",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.1646,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "481548",
+   "name": "TCCC_EU_Charter_Wanta Fanta_Q1_TX_CRM_Catalyst Issue",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "482158",
+   "name": "TCCC_EU_Dev_Oasis_WhatsApp_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "482217",
+   "name": "TCCC_WTData_DCX_Data&CDS_Workstream_WOCC-2026",
+   "workstream": "Mike",
+   "percentSpent": 1.0882,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "482368",
+   "name": "TCCC_Global_Charter_Bonaqua Digital Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "482374",
+   "name": "TCCC_EU_Sprite x Basketball_1PD/CRM Toolkit",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.323,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "482803",
+   "name": "TCCC_ASP_Digital Coordinator Retainer",
+   "workstream": "Mike",
+   "percentSpent": 18.0059,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "482911",
+   "name": "TCCC_Global_Sprite x Basketball_CRM_Toolkit",
+   "workstream": "Nadine Global",
+   "percentSpent": 1.0404,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "483043",
+   "name": "TCCC_Global_Charters_Growth Opportunities",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "483045",
+   "name": "TCCC_AOU_Ad-Hoc Client requests_Q1_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "483304",
+   "name": "TCCC_Global_Re-Org_Growth_Tasks (Non-billable)",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "483745",
+   "name": "TCCC_EU_GB Orbit Program_Opportunities",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "483788",
+   "name": "TCCC_EU_Orbit CRM Phase 2",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.5001,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "484306",
+   "name": "TCCC_AOU_FOH Support_Q1 2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "484340",
+   "name": "TCCC_AOU_Dev_Project Quanta_Phase_2",
+   "workstream": "Mike",
+   "percentSpent": 0.5451,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "484371",
+   "name": "TCCC_Global_CCTM_FIFA WC26_Reporting & Consultation",
+   "workstream": "Nadine Global",
+   "percentSpent": 1.6017,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "484735",
+   "name": "TCCC_EU_XP Playbook_Design & Content Optimization",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.8189,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "485241",
+   "name": "TCCC_EU Charter_CCZZ 007_HTML Development_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.9081,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "485294",
+   "name": "TCCC_EU_Refer a Friend Acquisition",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485298",
+   "name": "TCCC_EU_ Media x TX WhatsApp",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485300",
+   "name": "TCCC_EU_1PD Measurement & Attribution: Promo participation",
+   "workstream": "Nadine EU",
+   "percentSpent": 5.8841,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "485302",
+   "name": "TCCC_EU_ CRM_“Surprise & Delight”_Accelerator",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485320",
+   "name": "TCCC_Global_CCTM_FIFA WC26 1PD Audiences",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485426",
+   "name": "TCCC_Internal_Creative_Backlog & Overall sharing",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485720",
+   "name": "TCCC_Internal_Digital & CRM Toolkit Onboarding (non-billable)_2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485723",
+   "name": "TCCC_Crafted Beverages_Global Asset Pack",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "485737",
+   "name": "TCCC_Global_5.1 TTA_Q2 2026",
+   "workstream": "Josefine",
+   "percentSpent": 1.1336,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "485741",
+   "name": "TCCC_B2B_NAOU_Dev_myCoke_Creative Development_Q2_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486364",
+   "name": "TCCC_EU_Coke.ID Scorecard Value (CLV) H1 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486435",
+   "name": "TCCC_WTData_DCX_Testing-Personalization_Workstream_2026_Q1-Q2 (Cinemark Fan Favorite 2026)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486489",
+   "name": "TCCC_WTData_DCX_Audience_Activation_2026_Q1-Q2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486566",
+   "name": "TCCC_Crafted Beverages_Data-Driven E2E Strategy & Customer SI Deck",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486603",
+   "name": "TCCC_AOU_Ad-Hoc Client requests_Q2_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486621",
+   "name": "TCCC_AOU_FOH Support_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486830",
+   "name": "TCCC_EU_1PD Qualification at Scale H1 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.7696,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "486873",
+   "name": "TCCC_EU_Adobe Target Training_DUPLICATE",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486904",
+   "name": "TCCC_Onboarding & Education (non-billable)_Q2 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "486911",
+   "name": "TCCC_EU_Orbit module Charter Integration",
+   "workstream": "Nadine EU",
+   "percentSpent": 10.449,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "487241",
+   "name": "TCCC_EU_Internal_WhatsApp Ops model 2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "487348",
+   "name": "TCCC_EU_EPL Real-time Offer - Live event_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "487865",
+   "name": "TCCC_WTData_DCX_Simply_Pop_Q2_26",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "487950",
+   "name": "TCCC_EU_Charter_Schweppes Q4_2026_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "487951",
+   "name": "TCCC_EU_Charter_Christmas 2026_EU Adaptation_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "488016",
+   "name": "TCCC_EU_Adobe Target Training",
+   "workstream": "Nadine EU",
+   "percentSpent": 5.2841,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "488689",
+   "name": "TCCC_Global_Adobe Summit & Google Next 2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "488690",
+   "name": "TCCC_Global_5.0 Digital Lead_Q2 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "488691",
+   "name": "TCCC_Global_5.0 Digital Lead_Q2 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "488718",
+   "name": "TCCC_B2B_NA_Campaign optimization & Monday recommendations",
+   "workstream": "Mette",
+   "percentSpent": 1.4433,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "489415",
+   "name": "TCCC_Agentic_Project Sicily_Germany_2026",
+   "workstream": "Other",
+   "percentSpent": 2.1866,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "489914",
+   "name": "TCCC_AOU_Quanta_Store_Reach_Oppurtunity",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "490602",
+   "name": "TCCC_EU_Germany Pilot DE_2026_Digital Deliverables_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "490603",
+   "name": "TCCC_EU_Coke Meals AO 2027_Digital_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491084",
+   "name": "TCCC_EU_Content Optimizations_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491098",
+   "name": "TCCC_Global_Charter_Olympics LA28_2028_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.0014,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "491099",
+   "name": "TCCC_Global_Charter_Coke Music_LUX_CRM_2027",
+   "workstream": "Nadine Global",
+   "percentSpent": 0.91,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "491100",
+   "name": "TCCC_Global_Charter_Coke Meals_2027_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491101",
+   "name": "TCCC_Global_Charter_Sprite Spicy_2027_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491102",
+   "name": "TCCC_Global_Charter_Sprite Summer_2027_OPPORTUNITY",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491103",
+   "name": "TCCC_Global_Charter_Fanta Gaming_2027_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491187",
+   "name": "TCCC_AI Creative Ideation and Proof of Concept",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491303",
+   "name": "TCCC_OWI_2026_PO PEDING",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491400",
+   "name": "TCCC_OpenX_Internal_Alignment",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491401",
+   "name": "TCCC_Internal_Management and Team_Admin",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491459",
+   "name": "TCCC_WTData_DCX_Audience_Support_May-Dec 2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491481",
+   "name": "TCCC_B2B_NAOU_Dev_myCoke_Creative Development_Q3_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491681",
+   "name": "TCCC_Global_OU Community Call_ Q3 2026_OPPORTUNITY",
+   "workstream": "OpenX Business Development",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491862",
+   "name": "TCCC_B2B_NAOU_Experience Studio Phase 2",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "491920",
+   "name": "TCCC_NA_DCX 2026 H2",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "492268",
+   "name": "TCCC_EU_Coke Meals AO 2027_Digital & CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.5173,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "492271",
+   "name": "TCCC_EU_CCME LUX EU Adaptation 2027",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0246,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "492272",
+   "name": "T&D Allocation 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "492480",
+   "name": "TCCC_ CRM_Springbok_Call-Up_email_dev_ support",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "492483",
+   "name": "TCCC_Global_Charter Sprite Summer 2027_Digital",
+   "workstream": "Nadine Global",
+   "percentSpent": 2.042,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "492557",
+   "name": "CONA_T&D Allocation 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "492581",
+   "name": "TCCC growth",
+   "workstream": "TCCC Investment",
+   "percentSpent": 1.9267,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "492684",
+   "name": "TCCC_Agentic_Functional Beverages Workshop_2026",
+   "workstream": "Other",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "492868",
+   "name": "TCCC_EU_Charter_EPL Q3 EU Version",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.1021,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "492882",
+   "name": "TCCC_Global_Coke LUX Charter_Definition Workshop",
+   "workstream": "Nadine Global",
+   "percentSpent": 1.9781,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "493036",
+   "name": "TCCC_EU_B2B Integration with The Club",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "493045",
+   "name": "TCCC_EU_A.I. Campaign Optimization",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0817,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "493047",
+   "name": "TCCC_EU_Orbit CRM Personalization",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "493048",
+   "name": "TCCC_EU_1 Click Survey",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493049",
+   "name": "TCCC_EU_CRM Phase 2 Comms Visual Optimisation",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "493050",
+   "name": "TCCC_EU_Student Campaign_H2_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493051",
+   "name": "TCCC_EU_Coke.ID Scorecard Value (CLV) Phase 2_ H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493052",
+   "name": "TCCC_EU_Enhanced Recruitment_H2_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493053",
+   "name": "TCCC_EU_Linked Memberships_H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493054",
+   "name": "TCCC_EU_Nurture Program Automation_H2_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493113",
+   "name": "TCCC_EU_Charter_Fanta Q1_2027",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.6005,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "493146",
+   "name": "TCCC_EU_Charter_Coke Music_LUX_2026_OPPORTUNITY",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493173",
+   "name": "TCCC_EU_Sprite Summer_EU Adaptation_CRM_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "493175",
+   "name": "TCCC_EU_Charter_Sprite Summer_CRM_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493352",
+   "name": "TCCC_EU_H1 Content report",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "493455",
+   "name": "TCCC_EU_CRM YCCC Email",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493765",
+   "name": "TCCC_ASP_Loyalty Pitch",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "493984",
+   "name": "TCCC_EU_Fuze Tea Email_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.9827,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "494282",
+   "name": "TCCC_Onboarding & Education (non-billable)_Q3 2026",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "494332",
+   "name": "TCCC_B2B_NAOU_Dev_myCoke_Loyalty Program_Q3_2026",
+   "workstream": "Mette",
+   "percentSpent": 0.2502,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "494459",
+   "name": "TCCC_B2B_NAOU_Ops_myCoke_Tech Solution Consultancy_Q3_2026",
+   "workstream": "Mette",
+   "percentSpent": 0.9148,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "494571",
+   "name": "TCCC_Costa Coffee_Support_Q3_2026",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "494627",
+   "name": "TCCC_EU_The Club HTML Templates",
+   "workstream": "Nadine EU",
+   "percentSpent": 2.3034,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "494908",
+   "name": "TCCC_EU_CRM Phase 2_Visual Updates",
+   "workstream": "Nadine EU",
+   "percentSpent": 1.5869,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "495491",
+   "name": "TCCC_EU_Prospect Conversion to Core",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0204,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "495925",
+   "name": "TCCC_Global_Charter_Wanta Fanta_Gaming 2026_Report",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496201",
+   "name": "TCCC_B2B_NAOU_Dev_myCoke_Incidents_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496350",
+   "name": "TCCC_B2B_NAOU_Ops_myCoke_MO_Admin Support_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496359",
+   "name": "TCCC_B2B_NAOU_Ops_myCoke_MO_Non Billable_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496438",
+   "name": "TCCC_Global Charter_EPL_2027_Pitch",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496850",
+   "name": "TCCC_EU_Charters_DKO_CCL_2027_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "496851",
+   "name": "TCCC_EU_Charters_Fanta Q1_2027_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "497572",
+   "name": "TCCC_EU_Charter_Add a Coke_Use Case_Non Billable",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "497776",
+   "name": "TCCC_EU_Email HTML optimization for Inboxes ​",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0399,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "497778",
+   "name": "TCCC_EU_Profiling-Personalization_H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.0569,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "497779",
+   "name": "TCCC_EU_Welcome Journey Automation_H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "497806",
+   "name": "TCCC_EU_Student Campaign_H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "497809",
+   "name": "TCCC_EU_Enhanced Recruitment_H2_2026",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "498518",
+   "name": "TCCC_Global_Loyalty Playbook_H2 2026_OPPORTUNITY",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "498891",
+   "name": "TCCC_Global_Digital Value Creation_Q3 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "498892",
+   "name": "TCCC_Global_Monthly OKR Tracking_H2 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "498893",
+   "name": "TCCC_Global_Monthly OKR tracking_H2 2026",
+   "workstream": "Josefine",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "499225",
+   "name": "TCCC_B2B_NAOU_Ops_myCoke_CONA T&D Support_Q3_2026",
+   "workstream": "Mette",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "499342",
+   "name": "TCCC_NA_CRM_and_Loyalty",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "500033",
+   "name": "TCCC_EU_Charter_Coke Cherry_2027_Digital",
+   "workstream": "Nadine EU",
+   "percentSpent": 0.3814,
+   "spendStatus": "VALUE"
+  },
+  {
+   "jobNumber": "500998",
+   "name": "TCCC_EU_Charter MW Test job",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "501259",
+   "name": "TCCC_EU_MW Test 2027_Digital & CRM",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_TIMESHEET"
+  },
+  {
+   "jobNumber": "501371",
+   "name": "TCCC_EU_New Consents Framework_Opportunity",
+   "workstream": "Nadine EU",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "501383",
+   "name": "TCCC_Global_EPL 2027_CRM & Digital_Opportunity",
+   "workstream": "Nadine Global",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "800048",
+   "name": "TCCC_DCX NAOU Owned Experience Analytics H1 2026 (MAP US)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "800054",
+   "name": "TCCC_DCX NAOU Owned Experience Analytics H2 2026 (MAP US)",
+   "workstream": "Mike",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  },
+  {
+   "jobNumber": "800058",
+   "name": "TCCC_unknown US POs",
+   "workstream": "SophiaASD",
+   "percentSpent": null,
+   "spendStatus": "NO_BUDGET"
+  }
+ ]
+}

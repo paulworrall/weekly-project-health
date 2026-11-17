@@ -22,7 +22,7 @@ Source: a TCCC sample workbook reviewed 16 Nov 2026. Status: agreed. Decisions a
 - **% spend status.** ProjectSpend has `percentSpent` (decimal, nullable) and `spendStatus` (`VALUE` / `NO_BUDGET` / `NO_TIMESHEET`). Over 100% is valid and is shown as "Over budget", never capped. Any other text in column D is a row error.
 - **Workstreams.** Created on first appearance per client (shown in the preview as "new workstream"), Hidden by default; Admin switches them to Reported. `UNMAPPED` is loaded as a normal workstream, no warning.
 - **Non-billable and internal jobs** (travel, admin, onboarding, 800xxx job numbers) load like any project.
-- **Missing projects.** The extract includes all historical jobs, so a project should not drop out. If one does, the preview flags it, the default decision is "Keep as is", and the project stays in the report and lists either way.
+- **Missing projects.** The extract includes all historical jobs, so a project should not drop out. If one does, the preview flags it and the Admin must choose "Keep as is" or "Mark No longer in file" for each (nothing pre-selected, decision 17 Nov); the project stays in the report and lists either way.
 - **Upload day.** Mondays. If a week has no confirmed upload, reports and snapshots use the latest confirmed upload.
 
 ## Validation
@@ -38,4 +38,4 @@ Source: a TCCC sample workbook reviewed 16 Nov 2026. Status: agreed. Decisions a
 
 ## Data governance
 
-The sample is real client data (client and staff names). Do not commit it to the repo or use it as a test fixture. Build a synthetic fixture with the same shape: same sheet and headers, mixed numeric and text spend values, values over 100%, an UNMAPPED row, non-billable and 800xxx jobs, formula cells with cached values, plain-value cells, and a formula cell without a cached value.
+The sample is real client data (client and staff names). Do not commit the .xlsx or use it as a test fixture. Exception (decision log, 17 Nov 2026): Paul approved its contents for use on the site, so `src/mocks/clients/tccc.json`, converted from it, is committed. Build a synthetic fixture with the same shape: same sheet and headers, mixed numeric and text spend values, values over 100%, an UNMAPPED row, non-billable and 800xxx jobs, formula cells with cached values, plain-value cells, and a formula cell without a cached value.

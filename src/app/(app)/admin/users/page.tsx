@@ -5,13 +5,13 @@ import { SimpleTablePage } from "@/components/features/simple-table";
 import { formatDateTime } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { DEFAULT_CLIENT_ID, getUsers } from "@/mocks/repository";
+import { getUsers } from "@/mocks/repository";
 
 export const metadata: Metadata = { title: "Users and access" };
 
 export default async function UsersPage() {
   const viewer = await requireViewer();
-  if (!canAdminister(viewer)) return <Forbidden backHref={`/clients/${DEFAULT_CLIENT_ID}`} />;
+  if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   const users = getUsers();
   return (
     <SimpleTablePage

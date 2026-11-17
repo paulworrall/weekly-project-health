@@ -47,3 +47,11 @@ Append-only. Newest at the bottom.
 - Nothing persists: every change is local state until briefs 02–05.
 - The mock "today" is fixed at Tue 17 Nov 2026 10:30 so figures don't drift.
 - Prisma agent skills still to install.
+
+## 17 Nov 2026 — TCCC added as a second client (Paul's approval)
+
+- TCCC's spend file checked against `docs/excel-file-spec.md`: one sheet, exact headers, 869 rows, no duplicate jobs, every formula has a cached value, % spend only numbers or the two known phrases (100 figures, 44 over budget, 517 Add budget, 252 No timesheet data).
+- `scripts/import-spend-file.mts` converts it to `src/mocks/clients/tccc.json` (committed; the .xlsx isn't). The mock repository loads it as client "TCCC" with its 13 workstreams, 5 reported (as in the decision log), and one confirmed upload dated 16 Nov 2026.
+- Nothing invented for real projects: none in the weekly report, no updates, risks, issues or pipeline.
+- Multi-client: `/clients` list (Updater landing), client-aware menu, a card per client on Admin home, client switcher on Spend uploads, risk/issue refs per client.
+- Decisions recorded (17 Nov); CLAUDE.md and the spend file spec updated. 76 tests pass.

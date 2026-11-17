@@ -2,6 +2,9 @@
  * Guard (CLAUDE.md §11, brief 01 acceptance): no real client, workstream or person names in the
  * code, mocks or tests. The mockups in docs/design/mockups contain real names; they must never be
  * copied in. Add to this list if new real names appear in source material.
+ *
+ * Exception (decision log, 17 Nov 2026): client data files in src/mocks/clients/, converted from a
+ * client's own spend file with the Admin's approval. Real names live there and nowhere else.
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
@@ -23,7 +26,7 @@ const BANNED = [
 function files(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const p = path.join(dir, name);
-    if (statSync(p).isDirectory()) return name === "generated" ? [] : files(p);
+    if (statSync(p).isDirectory()) return ["generated", "clients"].includes(name) ? [] : files(p);
     return /\.(ts|tsx|css|json)$/.test(name) ? [p] : [];
   });
 }
