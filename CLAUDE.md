@@ -21,7 +21,7 @@ It is a separate application from the Reporting Hub but uses the same stack, con
 | `docs/decision-log.md` | Every decision made so far. **Authoritative.** |
 | `docs/excel-file-spec.md` | The spend file: sheet, columns, values, validation. |
 | `docs/tech-stack.md` | Stack, versions, scaffold, config, gotchas (copied from the Reporting Hub). |
-| `docs/design/mockups/*.dc.html` | Design mockups of every designed screen: markup for layout and copy, inline script for data shape and behaviour. Reference only, not production code. Names are invented. **Not in the repo yet** (they are on a Claude Design canvas); brief 01 needs them, so ask Paul for them if they're missing. |
+| `docs/design/mockups/*.dc.html` | Design mockups of every designed screen (added 17 Nov 2026; see the README there for the file → screen → route map): markup for layout and copy, inline script for data shape and behaviour. Reference only, not production code. The client and workstream names in them are real; project names and figures are samples. Never copy any of them into data. |
 | `docs/design/README.md` | MAP design system notes: tokens, differences from the Reporting Hub, font licence warning. Tokens in `docs/design/ds/wppesmap/tokens.json`; fonts in `public/fonts/`, logos in `public/brand/`. |
 | `progress.md`, `agent.md` | Progress log (append-only) and codebase summary (rewritten at checkpoints). |
 

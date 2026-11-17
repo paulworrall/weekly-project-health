@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TCCC — risk and issue logs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+input,select,button{font-family:inherit;color:#000050}
+</style>
+</helmet>
+<div style="background: #FAFAF0; min-height: 100vh; box-sizing: border-box">
+  <header style="background: #000050; color: #FAFAF0">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Weekly Project Health</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
+        <a href="Client.dc.html" style="color: #FAFAF0; text-decoration: none">Clients</a>
+        <a href="Main.dc.html" style="color: #FAFAF0; text-decoration: none">Workstreams</a>
+        <a href="#" style="color: #FAFAF0; text-decoration: none; border-bottom: 2px solid #FF7800; padding-bottom: 2px">Risks and issues</a>
+        <span style="color: #FAFAF0">Signed in as Updater</span>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 24px 32px 48px; box-sizing: border-box">
+    <nav aria-label="Breadcrumb" style="font-size: 13px; margin-bottom: 8px">
+      <a href="Client.dc.html">TCCC</a>
+      <span aria-hidden="true" style="margin: 0 8px">›</span>
+      <span>{{pageTitle}}</span>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 20px">
+      <div style="flex: 1 1 520px; min-width: 0">
+        <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">{{eyebrow}}</p>
+        <h1 style="margin: 0; font-size: 48px; line-height: 1.1; font-weight: 400">{{pageTitle}}</h1>
+        <p style="margin: 10px 0 0; font-size: 15px">{{scopeLine}}</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px">
+        <div role="tablist" aria-label="Log" style="display: flex">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+            <button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="scope" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Workstream</label>
+          <select id="scope" value="{{ws}}" onChange="{{setWs}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+            <option value="">All reported workstreams</option>
+            <option value="Josefine">Josefine</option>
+            <option value="Mette">Mette</option>
+            <option value="Mike">Mike</option>
+            <option value="Nadine EU">Nadine EU</option>
+            <option value="Nadine Global">Nadine Global</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="lweek" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Week</label>
+          <select id="lweek" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+            <option>Week 47 · 16–20 Nov 2026 (open)</option>
+            <option>Week 46 · 9–13 Nov 2026 (closed)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <section aria-label="Summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px">
+      <div style="background: #000050; color: #FAFAF0; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFA552">Open</div>
+        <div style="font-size: 40px; margin-top: 10px">{{openCount}}</div>
+        <div style="font-size: 14px; margin-top: 4px">{{openSplit}}</div>
+        <div style="font-size: 13px; margin-top: 10px; font-weight: 700">{{wow}}</div>
+        <div style="font-size: 13px; margin-top: 2px; font-weight: 700">{{mom}}</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px; grid-column: span 2">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">{{levelHead}}</div>
+        <div style="display: flex; height: 16px; margin-top: 16px; background: #E6E6EE" role="img" aria-label="{{levelAria}}">
+          <sc-for list="{{levelBars}}" as="b" hint-placeholder-count="3">
+            <div style="{{b.style}}"></div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px">
+          <sc-for list="{{levelBars}}" as="b" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px">
+              <span style="{{b.tagStyle}}">{{b.level}}</span>
+              <span style="font-size: 22px">{{b.n}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Average age</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 10px">
+          <span style="font-size: 40px">{{avgAge}}</span><span style="font-size: 16px">days</span>
+        </div>
+        <div style="font-size: 14px; margin-top: 4px">{{ageDelta}}</div>
+        <div style="font-size: 13px; margin-top: 8px; color: #3D3D73">Oldest: {{oldest}}</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">This week</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px">
+          <div><div style="font-size: 32px">{{raisedWk}}</div><div style="font-size: 13px">raised</div></div>
+          <div><div style="font-size: 32px">{{closedWk}}</div><div style="font-size: 13px">closed</div></div>
+        </div>
+        <div style="font-size: 13px; margin-top: 8px; color: #3D3D73">{{monthLine}}</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Ageing</div>
+        <div style="display: grid; gap: 6px; margin-top: 12px; font-size: 14px">
+          <sc-for list="{{ageing}}" as="a" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 8px">
+              <span style="width: 74px">{{a.label}}</span>
+              <div style="flex: 1; height: 10px; background: #E6E6EE"><div style="{{a.style}}"></div></div>
+              <span style="width: 22px; text-align: right; font-weight: 700">{{a.n}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Overdue</div>
+        <div style="font-size: 40px; margin-top: 10px; color: #A03A00">{{overdueN}}</div>
+        <div style="font-size: 14px; margin-top: 4px">{{overdueShare}}</div>
+        <div style="font-size: 13px; margin-top: 8px; color: #3D3D73">{{dueSoon}}</div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px">
+      <section aria-labelledby="wow-h" style="flex: 3 1 560px; min-width: 0; background: #FFFFFF; padding: 24px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px">
+          <h2 id="wow-h" style="margin: 0; font-size: 20px; font-weight: 400">Week on week</h2>
+          <div style="display: flex; gap: 16px; font-size: 12px">
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; background: #000050" aria-hidden="true"></span>Open at week end</span>
+          </div>
+        </div>
+        <div role="img" aria-label="{{wowAria}}" style="display: flex; align-items: flex-end; gap: 8px; height: 170px; margin-top: 18px; border-bottom: 1px solid #000050">
+          <sc-for list="{{weeks}}" as="w" hint-placeholder-count="12">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px">
+              <span style="font-size: 12px; font-weight: 700">{{w.open}}</span>
+              <div style="{{w.style}}"></div>
+            </div>
+          </sc-for>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px; table-layout: fixed">
+          <caption style="position: absolute; left: -9999px">Raised and closed per week</caption>
+          <tbody>
+            <tr>
+              <th scope="row" style="text-align: left; width: 64px; padding: 4px 0; font-weight: 400; color: #3D3D73">Week</th>
+              <sc-for list="{{weeks}}" as="w" hint-placeholder-count="12"><td style="text-align: center; padding: 4px 0">{{w.label}}</td></sc-for>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; padding: 4px 0; font-weight: 400; color: #3D3D73">Raised</th>
+              <sc-for list="{{weeks}}" as="w" hint-placeholder-count="12"><td style="text-align: center; padding: 4px 0">{{w.raised}}</td></sc-for>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align: left; padding: 4px 0; font-weight: 400; color: #3D3D73">Closed</th>
+              <sc-for list="{{weeks}}" as="w" hint-placeholder-count="12"><td style="text-align: center; padding: 4px 0">{{w.closed}}</td></sc-for>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin: 10px 0 0; font-size: 12px; color: #3D3D73">From closed-week snapshots; week 47 is live until the week closes.</p>
+      </section>
+      <section aria-labelledby="mom-h" style="flex: 2 1 400px; min-width: 0; background: #FFFFFF; padding: 24px">
+        <h2 id="mom-h" style="margin: 0 0 14px; font-size: 20px; font-weight: 400">Month on month</h2>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 8px 8px 8px 0">Month</th>
+              <th scope="col" style="padding: 8px; text-align: right">Open at end</th>
+              <th scope="col" style="padding: 8px; text-align: right">Change</th>
+              <th scope="col" style="padding: 8px; text-align: right">Raised</th>
+              <th scope="col" style="padding: 8px; text-align: right">Closed</th>
+              <th scope="col" style="padding: 8px; text-align: right">Avg age</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{months}}" as="m" hint-placeholder-count="4">
+              <tr style="border-bottom: 1px solid #D6D6E0">
+                <th scope="row" style="padding: 10px 8px 10px 0; text-align: left; font-weight: 400">{{m.month}}</th>
+                <td style="padding: 10px 8px; text-align: right; font-weight: 700">{{m.open}}</td>
+                <td style="padding: 10px 8px; text-align: right">{{m.change}}</td>
+                <td style="padding: 10px 8px; text-align: right">{{m.raised}}</td>
+                <td style="padding: 10px 8px; text-align: right">{{m.closed}}</td>
+                <td style="padding: 10px 8px; text-align: right">{{m.age}} days</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <p style="margin: 10px 0 0; font-size: 12px; color: #3D3D73">November is month to date.</p>
+      </section>
+    </div>
+
+    <section aria-labelledby="byws-h" style="background: #FFFFFF; padding: 24px; margin-bottom: 24px">
+      <h2 id="byws-h" style="margin: 0 0 14px; font-size: 20px; font-weight: 400">By workstream</h2>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px">
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 8px 8px 8px 0">Workstream</th>
+              <th scope="col" style="padding: 8px; text-align: right">Open</th>
+              <sc-for list="{{levelNames}}" as="ln" hint-placeholder-count="3"><th scope="col" style="padding: 8px; text-align: right">{{ln}}</th></sc-for>
+              <th scope="col" style="padding: 8px; text-align: right">Avg age</th>
+              <th scope="col" style="padding: 8px; text-align: right">vs last week</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{byWs}}" as="b" hint-placeholder-count="5">
+              <tr style="border-bottom: 1px solid #D6D6E0">
+                <th scope="row" style="padding: 10px 8px 10px 0; text-align: left; font-weight: 400">{{b.name}}</th>
+                <td style="padding: 10px 8px; text-align: right; font-weight: 700">{{b.open}}</td>
+                <sc-for list="{{b.levels}}" as="n" hint-placeholder-count="3"><td style="padding: 10px 8px; text-align: right">{{n}}</td></sc-for>
+                <td style="padding: 10px 8px; text-align: right">{{b.age}} days</td>
+                <td style="padding: 10px 8px; text-align: right">{{b.delta}}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="list-h" style="background: #FFFFFF; padding: 24px">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px">
+        <h2 id="list-h" style="margin: 0; font-size: 24px; font-weight: 400">{{listTitle}}</h2>
+        <span style="font-size: 14px">{{listCount}}</span>
+      </div>
+      <form aria-label="Filter the log" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; align-items: end; margin-bottom: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px; grid-column: span 2">
+          <label for="lq" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Search</label>
+          <input id="lq" type="search" value="{{q}}" onChange="{{setQ}}" placeholder="ID, title, project or owner" style="height: 44px; padding: 0 12px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box"></input>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="llevel" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">{{levelHead}}</label>
+          <select id="llevel" value="{{lvl}}" onChange="{{setLvl}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+            <option value="">Any</option>
+            <sc-for list="{{levelNames}}" as="ln" hint-placeholder-count="3"><option value="{{ln}}">{{ln}}</option></sc-for>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="lstatus" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Status</label>
+          <select id="lstatus" value="{{st}}" onChange="{{setSt}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+            <option value="active">Open and on pause</option>
+            <option value="Open">Open</option>
+            <option value="On pause">On pause</option>
+            <option value="Closed">Closed</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="lage" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Age and due</label>
+          <select id="lage" value="{{age}}" onChange="{{setAge}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+            <option value="">Any</option>
+            <option value="new">Under 14 days</option>
+            <option value="mid">14–30 days</option>
+            <option value="old">Over 30 days</option>
+            <option value="overdue">Overdue</option>
+          </select>
+        </div>
+      </form>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 1300px; border-collapse: collapse; font-size: 14px">
+          <caption style="position: absolute; left: -9999px">{{listTitle}}</caption>
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 10px 10px 10px 0; width: 64px">ID</th>
+              <th scope="col" style="padding: 10px">{{singular}}</th>
+              <th scope="col" style="padding: 10px">Project</th>
+              <th scope="col" style="padding: 10px">Workstream</th>
+              <th scope="col" style="padding: 10px">{{levelHead}}</th>
+              <th scope="col" style="padding: 10px">Owner</th>
+              <th scope="col" style="padding: 10px">Status</th>
+              <th scope="col" style="padding: 10px">Raised</th>
+              <th scope="col" style="padding: 10px; text-align: right">Age</th>
+              <th scope="col" style="padding: 10px">Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+              <tr style="border-bottom: 1px solid #D6D6E0; vertical-align: top">
+                <td style="padding: 12px 10px 12px 0; font-weight: 700">{{r.id}}</td>
+                <td style="padding: 12px 10px; max-width: 320px">{{r.title}}</td>
+                <td style="padding: 12px 10px; max-width: 240px"><a href="Project.dc.html">{{r.job}}</a><div style="font-size: 12px; color: #3D3D73">{{r.project}}</div></td>
+                <td style="padding: 12px 10px">{{r.ws}}</td>
+                <td style="padding: 12px 10px"><span style="{{r.levelStyle}}">{{r.level}}</span></td>
+                <td style="padding: 12px 10px">{{r.owner}}</td>
+                <td style="padding: 12px 10px"><span style="{{r.statusStyle}}">{{r.status}}</span></td>
+                <td style="padding: 12px 10px; white-space: nowrap">{{r.raised}}</td>
+                <td style="padding: 12px 10px; text-align: right; white-space: nowrap">{{r.ageText}}</td>
+                <td style="padding: 12px 10px; white-space: nowrap">
+                  <div>{{r.due}}</div>
+                  <sc-if value="{{r.overdue}}" hint-placeholder-val="{{ false }}">
+                    <span style="display: inline-block; margin-top: 4px; padding: 2px 8px; background: #FFE3C2; font-size: 12px; font-weight: 700">{{r.overdueText}}</span>
+                  </sc-if>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <p style="margin: 0; padding: 20px 0; font-size: 14px">Nothing matches these filters.</p>
+      </sc-if>
+      <sc-if value="{{hasMore}}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{showAll}}" style="margin-top: 16px; height: 44px; padding: 0 20px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">{{moreLabel}}</button>
+      </sc-if>
+      <p style="margin: 16px 0 0; font-size: 13px; color: #3D3D73">Sorted by {{levelLower}}, then oldest first. Overdue means past its due date and still open or on pause. Items are added and edited on each project's page. Counts include open and on-pause items only.</p>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'risks', ws: '', q: '', lvl: '', st: 'active', age: '', all: false };
+  }
+  build(kind) {
+    var seed = kind === 'risks' ? 7 : 19;
+    var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    var projects = {
+      'Josefine': [['481207', 'NO_CRM_Lifecycle Programme'], ['481955', 'DK_App_Rewards Launch'], ['482640', 'SE_Email_Template Rebuild']],
+      'Mette': [['483302', 'NORDICS_Social_Content Studio']],
+      'Mike': [['479310', 'GL_Brand Platform_Content Hub'], ['480566', 'GL_Media Reporting_Dashboard'], ['481880', 'GL_Consent Platform_Upgrade']],
+      'Nadine EU': [['484902', 'EU_Paid Social_Always-on_Q4'], ['483725', 'EU_Loyalty Programme_Discovery'], ['482110', 'EU_CRM_Welcome Journey_Phase 2'], ['486311', 'EU_Owned Channels_Pilot_Phase 1']],
+      'Nadine Global': [['485420', 'GL_Data Model_Market Rollout'], ['485977', 'GL_Measurement_Framework']]
+    };
+    var counts = kind === 'risks' ? { 'Josefine': 12, 'Mette': 1, 'Mike': 9, 'Nadine EU': 10, 'Nadine Global': 4 } : { 'Josefine': 5, 'Mette': 0, 'Mike': 3, 'Nadine EU': 4, 'Nadine Global': 1 };
+    var titles = kind === 'risks' ? [
+      'Client budget sign-off may slip into next quarter', 'Key stakeholder changing role in January', 'Third-party data feed may not be ready for launch',
+      'Creative approvals slipping past the weekly deadline', 'Media costs rising faster than planned', 'Platform API deprecation due in Q1',
+      'Resourcing gap over the Christmas period', 'Scope creep from additional market requests', 'Legal review of new markets not yet scheduled',
+      'Consent banner changes could reduce addressable audience', 'Dependency on client IT release calendar', 'Translation turnaround longer than planned'
+    ] : [
+      'Budget exceeded with delivery still to run', 'Tracking pixel missing on landing pages', 'Data feed failing nightly since last release',
+      'Client feedback outstanding for two weeks', 'Test environment unavailable', 'Wrong segment sent in last campaign', 'Invoice rejected: PO number missing'
+    ];
+    var levels = kind === 'risks' ? ['High', 'Medium', 'Low'] : ['Blocker', 'High', 'Medium', 'Low'];
+    var owners = ['MR', 'AK', 'JS', 'NB', 'TH', 'KL', 'PF'];
+    var items = [], n = 1, months = ['Aug', 'Sep', 'Oct', 'Nov'];
+    var dateFor = function (days) {
+      var d = new Date(2026, 10, 16); d.setDate(d.getDate() - days);
+      return d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getFullYear();
+    };
+    Object.keys(counts).forEach(function (ws) {
+      var total = counts[ws] + (counts[ws] > 2 ? 1 : 0);
+      for (var i = 0; i < total; i++) {
+        var p = projects[ws][i % projects[ws].length];
+        var days = Math.floor(rnd() * 62);
+        var lvIdx = Math.min(levels.length - 1, Math.floor(rnd() * levels.length));
+        var closed = i === counts[ws];
+        var status = closed ? 'Closed' : (rnd() < 0.15 ? 'On pause' : 'Open');
+        var dueIn = 14 + Math.floor(rnd() * 32) - days;
+        items.push({ id: (kind === 'risks' ? 'R-' : 'I-') + String(n++).padStart(3, '0'), title: titles[Math.floor(rnd() * titles.length)], job: p[0], project: p[1], ws: ws, level: levels[lvIdx], lvIdx: lvIdx, owner: owners[Math.floor(rnd() * owners.length)], status: status, days: days, raised: dateFor(days), dueIn: dueIn, due: dateFor(-dueIn) });
+      }
+    });
+    return { items: items, levels: levels };
+  }
+  renderVals() {
+    var s = this.state, self = this, isR = s.tab === 'risks';
+    var b = this.build(s.tab);
+    var levels = b.levels;
+    var inScope = b.items.filter(function (i) { return !s.ws || i.ws === s.ws; });
+    var active = inScope.filter(function (i) { return i.status !== 'Closed'; });
+    var tag = 'display: inline-flex; align-items: center; justify-content: center; min-width: 76px; height: 26px; padding: 0 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; box-sizing: border-box;';
+    var lvStyle = { Blocker: tag + 'background: #7A1010; color: #FFFFFF;', High: tag + 'background: #000050; color: #FAFAF0;', Medium: tag + 'background: #FFC97A; color: #000050;', Low: tag + 'border: 1px solid #000050; color: #000050; background: #FFFFFF;' };
+    var barColor = { Blocker: '#7A1010', High: '#000050', Medium: '#F5A623', Low: '#B8B8CC' };
+    var pill = 'display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap;';
+    var stStyle = { 'Open': pill + 'border: 1px solid #000050; background: #FFFFFF;', 'On pause': pill + 'background: #E6E6EE;', 'Closed': pill + 'background: #000050; color: #FAFAF0;' };
+    var openN = active.length;
+    var paused = active.filter(function (i) { return i.status === 'On pause'; }).length;
+    var avg = openN ? Math.round(active.reduce(function (a, i) { return a + i.days; }, 0) / openN) : 0;
+    var oldest = active.slice().sort(function (a, c) { return c.days - a.days; })[0];
+    var levelBars = levels.map(function (l) {
+      var c = active.filter(function (i) { return i.level === l; }).length;
+      return { level: l, n: c, tagStyle: lvStyle[l], style: 'width: ' + (openN ? c / openN * 100 : 0) + '%; background: ' + barColor[l] + ';' };
+    });
+    var overdueList = active.filter(function (i) { return i.dueIn < 0; });
+    var soon = active.filter(function (i) { return i.dueIn >= 0 && i.dueIn <= 4; }).length;
+    var band = function (d) { return d < 14 ? 'new' : (d <= 30 ? 'mid' : 'old'); };
+    var ageing = [['new', 'Under 14d'], ['mid', '14–30d'], ['old', 'Over 30d']].map(function (a) {
+      var c = active.filter(function (i) { return band(i.days) === a[0]; }).length;
+      return { label: a[1], n: c, style: 'height: 100%; width: ' + (openN ? c / openN * 100 : 0) + '%; background: ' + (a[0] === 'old' ? '#A03A00' : '#000050') + ';' };
+    });
+    var scale = s.ws ? openN / Math.max(1, b.items.filter(function (i) { return i.status !== 'Closed'; }).length) : 1;
+    var wkOpen = isR ? [24, 25, 27, 26, 28, 29, 31, 30, 32, 33, 34, 36] : [6, 7, 7, 9, 8, 10, 9, 11, 10, 12, 11, 13];
+    var wkRaised = isR ? [3, 4, 5, 2, 4, 3, 5, 2, 4, 3, 3, 4] : [2, 2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3];
+    var wkClosed = isR ? [2, 3, 3, 3, 2, 2, 3, 3, 2, 2, 2, 2] : [1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1];
+    var sc = function (v) { return Math.round(v * scale); };
+    var maxOpen = Math.max.apply(null, wkOpen.map(sc).concat([1]));
+    var weeks = wkOpen.map(function (v, i) {
+      var o = i === 11 ? openN : sc(v);
+      return { label: 'W' + (36 + i), open: o, raised: sc(wkRaised[i]), closed: sc(wkClosed[i]), style: 'width: 70%; height: ' + (o / maxOpen * 80) + '%; background: ' + (i === 11 ? '#FF7800' : '#000050') + ';' };
+    });
+    var prevWk = weeks[10].open, prev4 = weeks[7].open;
+    var d = function (now, prev, txt) { var x = now - prev; return (x > 0 ? '▲ +' + x : (x < 0 ? '▼ ' + x : 'No change')) + ' ' + txt; };
+    var mData = isR ? [[20, 11, 9, 24], [24, 15, 11, 27], [32, 17, 9, 29], [36, 10, 6, 31]] : [[5, 6, 4, 10], [7, 8, 6, 12], [11, 9, 5, 14], [13, 5, 3, 15]];
+    var months = ['August', 'September', 'October', 'November'].map(function (m, i) {
+      var o = i === 3 ? openN : sc(mData[i][0]);
+      var prev = i === 0 ? null : (i - 1 === 3 ? openN : sc(mData[i - 1][0]));
+      return { month: m, open: o, change: prev === null ? '—' : d(o, prev, '').trim(), raised: sc(mData[i][1]), closed: sc(mData[i][2]), age: i === 3 ? avg : mData[i][3] };
+    });
+    var wsNames = ['Josefine', 'Mette', 'Mike', 'Nadine EU', 'Nadine Global'];
+    var prevWs = isR ? { 'Josefine': 10, 'Mette': 2, 'Mike': 9, 'Nadine EU': 8, 'Nadine Global': 5 } : { 'Josefine': 4, 'Mette': 0, 'Mike': 2, 'Nadine EU': 3, 'Nadine Global': 1 };
+    var byWs = wsNames.filter(function (w) { return !s.ws || w === s.ws; }).map(function (w) {
+      var a = b.items.filter(function (i) { return i.ws === w && i.status !== 'Closed'; });
+      var ag = a.length ? Math.round(a.reduce(function (x, i) { return x + i.days; }, 0) / a.length) : 0;
+      return { name: w, open: a.length, levels: levels.map(function (l) { return a.filter(function (i) { return i.level === l; }).length; }), age: ag, delta: d(a.length, prevWs[w], '').trim() };
+    });
+    var q = s.q.trim().toLowerCase();
+    var list = inScope.filter(function (i) {
+      if (s.st === 'active' && i.status === 'Closed') return false;
+      if (s.st !== 'active' && s.st !== 'all' && i.status !== s.st) return false;
+      if (s.lvl && i.level !== s.lvl) return false;
+      if (s.age === 'overdue' && !(i.status !== 'Closed' && i.dueIn < 0)) return false;
+      if (s.age && s.age !== 'overdue' && band(i.days) !== s.age) return false;
+      if (q && (i.id + ' ' + i.title + ' ' + i.job + ' ' + i.project + ' ' + i.owner).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    }).sort(function (a, c) { return (a.lvIdx - c.lvIdx) || (c.days - a.days); });
+    var shown = s.all ? list : list.slice(0, 12);
+    var rows = shown.map(function (i) {
+      return Object.assign({}, i, { levelStyle: lvStyle[i.level], statusStyle: stStyle[i.status], ageText: i.days === 0 ? 'Today' : i.days + ' days', overdue: i.status !== 'Closed' && i.dueIn < 0, overdueText: 'Overdue by ' + (-i.dueIn) + (i.dueIn === -1 ? ' day' : ' days') });
+    });
+    var name = isR ? 'Risks' : 'Issues', lvHead = isR ? 'Severity' : 'Priority';
+    var tabStyle = 'height: 44px; padding: 0 22px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1px solid #000050; border-radius: 0; margin-left: -1px;';
+    var setter = function (k) { return function (e) { var o = { all: false }; o[k] = e.target.value; self.setState(o); }; };
+    return {
+      tabs: [['risks', 'Risk log'], ['issues', 'Issue log']].map(function (t) {
+        var on = s.tab === t[0];
+        return { label: t[1], selected: on ? 'true' : 'false', style: tabStyle + (on ? 'background: #000050; color: #FAFAF0;' : 'background: #FFFFFF; color: #000050;'), pick: function () { self.setState({ tab: t[0], lvl: '', all: false }); } };
+      }),
+      pageTitle: isR ? 'Risk log' : 'Issue log',
+      eyebrow: (isR ? 'Risk log' : 'Issue log') + ' · Week 47 · 16–20 Nov 2026',
+      scopeLine: (s.ws ? s.ws + ' · TCCC' : 'TCCC · all five reported workstreams') + ' · ' + inScope.length + ' ' + name.toLowerCase() + ' logged, ' + openN + ' open',
+      ws: s.ws, setWs: setter('ws'),
+      openCount: openN, openSplit: (openN - paused) + ' open · ' + paused + ' on pause',
+      wow: d(openN, prevWk, 'on last week'), mom: d(openN, prev4, 'on 4 weeks ago'),
+      levelHead: lvHead, levelLower: lvHead.toLowerCase(), levelNames: levels, levelBars: levelBars,
+      levelAria: name + ' by ' + lvHead.toLowerCase() + ': ' + levelBars.map(function (x) { return x.n + ' ' + x.level; }).join(', '),
+      avgAge: avg, ageDelta: d(avg, months[2].age, 'days on October'),
+      oldest: oldest ? oldest.id + ', ' + oldest.days + ' days' : '—',
+      raisedWk: weeks[11].raised, closedWk: weeks[11].closed,
+      monthLine: 'November to date: ' + months[3].raised + ' raised · ' + months[3].closed + ' closed',
+      overdueN: overdueList.length,
+      overdueShare: openN ? Math.round(overdueList.length / openN * 100) + '% of open ' + name.toLowerCase() : 'None open',
+      dueSoon: soon + ' more due by Fri 20 Nov',
+      ageing: ageing, weeks: weeks, months: months, byWs: byWs,
+      wowAria: 'Open ' + name.toLowerCase() + ' at the end of each week, W36 to W47: ' + weeks.map(function (w) { return w.open; }).join(', '),
+      listTitle: 'All ' + name.toLowerCase(), singular: isR ? 'Risk' : 'Issue',
+      listCount: 'Showing ' + rows.length + ' of ' + list.length,
+      rows: rows, empty: list.length === 0, hasMore: !s.all && list.length > 12,
+      moreLabel: 'Show all ' + list.length, showAll: function () { self.setState({ all: true }); },
+      q: s.q, lvl: s.lvl, st: s.st, age: s.age,
+      setQ: setter('q'), setLvl: setter('lvl'), setSt: setter('st'), setAge: setter('age')
+    };
+  }
+}
+</script>
+</body>
+</html>

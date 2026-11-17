@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Sign in — Weekly Project Health</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+input,button{font-family:inherit;color:#000050}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #FAFAF0">
+  <section aria-label="About this tool" style="flex: 1 1 420px; min-width: 0; background: #000050; color: #FAFAF0; padding: 56px 56px 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 640px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <span style="display: inline-block; width: 12px; height: 12px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+      <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">WPP Enterprise Solutions · MAP</span>
+    </div>
+    <div style="max-width: 520px">
+      <p style="margin: 0 0 14px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #FFA552">Week 47 · 16–20 Nov 2026 · closes Fri 20 Nov</p>
+      <h1 style="margin: 0; font-size: 56px; line-height: 1.05; font-weight: 400">Weekly Project Health</h1>
+      <p style="margin: 20px 0 0; font-size: 17px; line-height: 1.5">Track the health of projects across clients and workstreams each week: Delivery RAG, % complete, % spend, risks and issues.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px" aria-hidden="true">
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #C9F2A6; color: #000050; font-size: 13px; font-weight: 700">Green · On track</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #FFC97A; color: #000050; font-size: 13px; font-weight: 700">Amber · At risk</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #FFC2C2; color: #000050; font-size: 13px; font-weight: 700">Red · Blocked</span>
+      </div>
+    </div>
+    <p style="margin: 0; font-size: 13px; line-height: 1.5; max-width: 520px">Internal tool. It holds client and project information, so it is for authorised WPP Enterprise Solutions staff only. Clients never see it.</p>
+  </section>
+
+  <main style="flex: 1 1 480px; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 56px 32px; box-sizing: border-box">
+    <div style="width: 100%; max-width: 420px">
+      <h2 style="margin: 0; font-size: 34px; font-weight: 400">Sign in</h2>
+      <p style="margin: 8px 0 28px; font-size: 15px">Use your work email and the password the Admin set up for you.</p>
+
+      <sc-if value="{{showFormError}}" hint-placeholder-val="{{ false }}">
+        <div role="alert" style="background: #FFE3C2; border-left: 0; padding: 14px 16px; margin-bottom: 20px; font-size: 14px">
+          <strong>{{formErrorTitle}}</strong>
+          <div style="margin-top: 4px">{{formErrorText}}</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{signedIn}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="background: #E3F5D3; padding: 14px 16px; margin-bottom: 20px; font-size: 14px">
+          <strong>{{signedInText}}</strong>
+          <div style="margin-top: 4px"><a href="{{landingHref}}" style="font-weight: 700">{{landingLabel}}</a></div>
+        </div>
+      </sc-if>
+
+      <form aria-label="Sign in" style="display: grid; gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="email" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Work email</label>
+          <input id="email" type="email" autocomplete="username" value="{{email}}" onChange="{{setEmail}}" placeholder="name@es.wpp.com" aria-invalid="{{emailInvalid}}" aria-describedby="email-err" style="{{emailStyle}}"></input>
+          <sc-if value="{{hasEmailErr}}" hint-placeholder-val="{{ false }}">
+            <span id="email-err" style="font-size: 13px; font-weight: 700; color: #A03A00">{{emailErr}}</span>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <label for="pw" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Password</label>
+            <button type="button" onClick="{{toggleShow}}" aria-controls="pw" aria-pressed="{{showPressed}}" style="border: 0; background: transparent; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 6px 0; min-height: 32px">{{showLabel}}</button>
+          </div>
+          <input id="pw" type="{{pwType}}" autocomplete="current-password" value="{{pw}}" onChange="{{setPw}}" aria-invalid="{{pwInvalid}}" aria-describedby="pw-err" style="{{pwStyle}}"></input>
+          <sc-if value="{{hasPwErr}}" hint-placeholder-val="{{ false }}">
+            <span id="pw-err" style="font-size: 13px; font-weight: 700; color: #A03A00">{{pwErr}}</span>
+          </sc-if>
+        </div>
+        <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; min-height: 44px">
+          <input type="checkbox" checked="{{remember}}" onChange="{{toggleRemember}}" style="width: 20px; height: 20px; accent-color: #000050"></input>
+          Keep me signed in on this device for 8 hours
+        </label>
+        <button type="button" onClick="{{submit}}" style="height: 48px; border: 0; background: #000050; color: #FAFAF0; font-size: 15px; font-weight: 700; cursor: pointer; border-radius: 0">Sign in</button>
+      </form>
+
+      <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #D6D6E0; font-size: 14px; line-height: 1.6">
+        <div><strong>Forgotten your password or need access?</strong></div>
+        <div>Ask the Admin. Accounts and access are set up by the Admin; there is no self sign-up.</div>
+      </div>
+      <p style="margin: 20px 0 0; font-size: 12px; color: #3D3D73">Single sign-on with your Microsoft work account is planned. Until then, sign in with email and password.</p>
+      <p style="margin: 12px 0 0; font-size: 12px; color: #3D3D73">Try in Play: password "admin" signs in as Admin (lands on Admin home); "demo" signs in as an Updater (lands on the client page). Any other password shows the error.</p>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { email: '', pw: '', show: false, remember: false, tried: false, failed: 0, signedIn: false, role: '' };
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var emailErr = '', pwErr = '';
+    if (s.tried) {
+      if (!s.email.trim()) emailErr = 'Enter your work email.';
+      else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email.trim())) emailErr = 'Enter an email address like name@es.wpp.com.';
+      if (!s.pw) pwErr = 'Enter your password.';
+    }
+    var field = function (bad) { return 'height: 48px; padding: 0 14px; font-size: 15px; border-radius: 0; box-sizing: border-box; background: #FFFFFF; border: ' + (bad ? '2px solid #A03A00' : '1px solid #000050') + ';'; };
+    var locked = s.failed >= 5;
+    return {
+      email: s.email, pw: s.pw, remember: s.remember,
+      pwType: s.show ? 'text' : 'password', showLabel: s.show ? 'Hide' : 'Show', showPressed: s.show ? 'true' : 'false',
+      emailErr: emailErr, pwErr: pwErr, hasEmailErr: !!emailErr, hasPwErr: !!pwErr,
+      emailInvalid: emailErr ? 'true' : 'false', pwInvalid: pwErr ? 'true' : 'false',
+      emailStyle: field(!!emailErr), pwStyle: field(!!pwErr),
+      showFormError: !s.signedIn && s.failed > 0,
+      formErrorTitle: locked ? 'Account locked for 15 minutes.' : 'Email or password not recognised.',
+      formErrorText: locked ? 'Too many attempts. Try again later or ask the Admin to unlock your account.' : 'Check both and try again. ' + (5 - s.failed) + ' attempts left before the account is locked for 15 minutes.',
+      signedIn: s.signedIn,
+      signedInText: s.role === 'Admin' ? 'Signed in as Admin.' : 'Signed in as Updater.',
+      landingHref: s.role === 'Admin' ? 'Home.dc.html' : 'Client.dc.html',
+      landingLabel: s.role === 'Admin' ? 'Continue to Admin home →' : 'Continue to TCCC →',
+      setEmail: function (e) { self.setState({ email: e.target.value }); },
+      setPw: function (e) { self.setState({ pw: e.target.value }); },
+      toggleShow: function () { self.setState({ show: !s.show }); },
+      toggleRemember: function () { self.setState({ remember: !s.remember }); },
+      submit: function () {
+        var okEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email.trim());
+        if (!okEmail || !s.pw) { self.setState({ tried: true }); return; }
+        if (locked) return;
+        if (s.pw === 'admin' || s.pw === 'demo') self.setState({ tried: true, signedIn: true, failed: 0, role: s.pw === 'admin' ? 'Admin' : 'Updater' });
+        else self.setState({ tried: true, failed: s.failed + 1, signedIn: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

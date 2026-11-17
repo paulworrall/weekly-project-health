@@ -24,3 +24,8 @@ Append-only. Newest at the bottom.
 - Vercel project `weekly-project-health` on the MAP team (Hobby plan), environment variables set, live at https://weekly-project-health.vercel.app (checked: MAP header, WPP Sans, RAG labels, `noindex`).
 - ⚠️ On Hobby the production address is **public** (no login). It only shows the placeholder page, but don't share the address until the font licence is confirmed and sign-in exists (brief 03).
 - Week close on Hobby: Vercel Cron runs at most once a day, so brief 06 schedules it early Saturday UK time (after Friday 23:59 in both GMT and BST).
+
+## 17 Nov 2026 — Mockups
+
+- Seven mockups saved unchanged from Paul's Claude Design artifact into `docs/design/mockups/` (checksums match the artifact), with a README mapping each file to its screen and route.
+- Noted in the README: real client and workstream names appear in the mockups (never copy into data), the Login mockup's demo passwords are prototype-only, and the RAG tokens win over the mockups' shades.

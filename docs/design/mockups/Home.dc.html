@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Weekly Project Health — Admin home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+</style>
+</helmet>
+<div style="background: #FAFAF0; min-height: 100vh; box-sizing: border-box">
+  <header style="background: #000050; color: #FAFAF0">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Weekly Project Health</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
+        <a href="#" style="color: #FAFAF0; text-decoration: none; border-bottom: 2px solid #FF7800; padding-bottom: 2px">Admin home</a>
+        <a href="Client.dc.html" style="color: #FAFAF0; text-decoration: none">Clients</a>
+        <a href="Main.dc.html" style="color: #FAFAF0; text-decoration: none">Workstreams</a>
+        <a href="Log.dc.html" style="color: #FAFAF0; text-decoration: none">Risks and issues</a>
+        <a href="Upload.dc.html" style="color: #FAFAF0; text-decoration: none">Spend uploads</a>
+        <a href="#" style="color: #FAFAF0; text-decoration: none">Users and access</a>
+        <span style="color: #FAFAF0">Signed in as Admin</span>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 32px 32px 48px; box-sizing: border-box">
+    <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Admin home · Week 47 · 16–20 Nov 2026 · closes Fri 20 Nov</p>
+    <h1 style="margin: 0; font-size: 48px; line-height: 1.1; font-weight: 400">Weekly Project Health</h1>
+    <p style="margin: 10px 0 32px; font-size: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+      <span>The weekly view of project health across clients and workstreams.</span>
+      <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 12px; border-radius: 999px; background: #000050; color: #FAFAF0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em">INTERNAL</span>
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+        <section aria-labelledby="out-h" style="background: #FFFFFF; padding: 28px">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px">
+            <h2 id="out-h" style="margin: 0; font-size: 24px; font-weight: 400">Updates outstanding</h2>
+            <span style="font-size: 14px; font-weight: 700">{{outCount}} of 29 not yet submitted · due Fri 20 Nov</span>
+          </div>
+          <div style="display: flex; height: 8px; background: #E6E6EE; margin-bottom: 6px" role="img" aria-label="21 of 29 updates submitted">
+            <div style="width: 72.4%; background: #000050"></div>
+          </div>
+          <p style="margin: 0 0 16px; font-size: 13px; color: #3D3D73">21 of 29 projects in the weekly report have been submitted this week. Projects without a submission by Friday carry last week's values into the snapshot, marked "Not updated".</p>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px">
+              <caption style="position: absolute; left: -9999px">Projects in the weekly report with no submission this week</caption>
+              <thead>
+                <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+                  <th scope="col" style="padding: 10px 10px 10px 0">Project</th>
+                  <th scope="col" style="padding: 10px">Workstream</th>
+                  <th scope="col" style="padding: 10px">Updaters</th>
+                  <th scope="col" style="padding: 10px">Last submitted</th>
+                  <th scope="col" style="padding: 10px">This week</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{outstanding}}" as="o" hint-placeholder-count="8">
+                  <tr style="border-bottom: 1px solid #D6D6E0">
+                    <td style="padding: 12px 10px 12px 0"><a href="Project.dc.html">{{o.name}}</a><div style="font-size: 12px; color: #3D3D73">{{o.job}}</div></td>
+                    <td style="padding: 12px 10px">{{o.ws}}</td>
+                    <td style="padding: 12px 10px">{{o.who}}</td>
+                    <td style="padding: 12px 10px">{{o.last}}</td>
+                    <td style="padding: 12px 10px"><span style="{{o.stateStyle}}">{{o.state}}</span></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="clients-h">
+          <h2 id="clients-h" style="margin: 8px 0 14px; font-size: 26px; font-weight: 400">Clients</h2>
+          <article style="background: #FFFFFF; padding: 28px; border-top: 4px solid #000050">
+            <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px">
+              <div>
+                <h3 style="margin: 0; font-size: 30px; font-weight: 400"><a href="Client.dc.html" style="text-decoration: none">TCCC</a></h3>
+                <p style="margin: 6px 0 0; font-size: 14px; color: #3D3D73">5 reported workstreams · 29 projects in weekly report · spend upload 16 Nov 2026</p>
+              </div>
+              <a href="Client.dc.html" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; background: #000050; color: #FAFAF0; font-size: 14px; font-weight: 700; text-decoration: none">Open TCCC overview →</a>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 22px; padding-top: 20px; border-top: 1px solid #D6D6E0">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Updates this week</div>
+                <div style="font-size: 30px; margin-top: 6px">21 <span style="font-size: 16px">of 29</span></div>
+              </div>
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Delivery RAG</div>
+                <div style="display: flex; height: 10px; margin-top: 12px; background: #E6E6EE" role="img" aria-label="Delivery RAG: 18 Green, on track; 8 Amber, at risk; 3 Red, blocked">
+                  <div style="width: 62%; background: #7FCB3F"></div>
+                  <div style="width: 28%; background: #F5A623"></div>
+                  <div style="width: 10%; background: #F08A8A"></div>
+                </div>
+                <div style="display: grid; gap: 2px; font-size: 13px; margin-top: 8px"><span>18 Green · On track</span><span>8 Amber · At risk</span><span>3 Red · Blocked</span></div>
+              </div>
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Open risks</div>
+                <div style="font-size: 30px; margin-top: 6px">36 <span style="font-size: 14px; font-weight: 700">▲ +2</span></div>
+              </div>
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Open issues</div>
+                <div style="font-size: 30px; margin-top: 6px">13 <span style="font-size: 14px; font-weight: 700">▲ +3</span></div>
+              </div>
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Over budget</div>
+                <div style="font-size: 30px; margin-top: 6px; color: #A03A00">4</div>
+              </div>
+            </div>
+            <nav aria-label="TCCC workstreams" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px">
+              <sc-for list="{{ws}}" as="w" hint-placeholder-count="5">
+                <a href="{{w.href}}" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid #000050; border-radius: 999px; font-size: 14px; text-decoration: none">{{w.name}} <span style="font-size: 12px; color: #3D3D73">{{w.note}}</span></a>
+              </sc-for>
+            </nav>
+          </article>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #3D3D73">A client appears here once its first spend file has been uploaded and at least one workstream is set to Reported.</p>
+        </section>
+      </div>
+
+      <aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-labelledby="week-h" style="background: #FFFFFF; padding: 24px">
+          <h2 id="week-h" style="margin: 0 0 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">This week</h2>
+          <ol style="list-style: none; margin: 0; padding: 0; display: grid; gap: 14px">
+            <sc-for list="{{steps}}" as="st" hint-placeholder-count="4">
+              <li style="display: flex; gap: 12px; align-items: flex-start">
+                <span style="{{st.dotStyle}}" aria-hidden="true">{{st.mark}}</span>
+                <div>
+                  <div style="font-size: 14px; font-weight: 700">{{st.title}}</div>
+                  <div style="font-size: 13px; color: #3D3D73; margin-top: 2px">{{st.when}}</div>
+                </div>
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+
+        <section aria-labelledby="adm-h" style="background: #000050; color: #FAFAF0; padding: 24px">
+          <h2 id="adm-h" style="margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFA552">Admin</h2>
+          <div style="font-size: 14px; line-height: 1.6">
+            <div>Latest TCCC upload: <strong>16 Nov 2026, 09:12</strong></div>
+            <div>869 records · 3 missing from file · 0 errors</div>
+            <div>Next upload due by Mon 23 Nov</div>
+          </div>
+          <a href="Upload.dc.html" style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; margin-top: 16px; border: 1px solid #FAFAF0; color: #FAFAF0; font-size: 14px; font-weight: 700; text-decoration: none">Go to spend uploads →</a>
+        </section>
+
+        <section aria-labelledby="users-h" style="background: #FFFFFF; padding: 24px">
+          <h2 id="users-h" style="margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Users and access</h2>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+            <div><div style="font-size: 30px">1</div><div style="font-size: 13px">Admin</div></div>
+            <div><div style="font-size: 30px">14</div><div style="font-size: 13px">Updaters (PMs and Account Directors)</div></div>
+          </div>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #3D3D73">2 Updaters haven't signed in yet.</p>
+          <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; margin-top: 12px; border: 1px solid #000050; font-size: 14px; font-weight: 700; text-decoration: none">Manage users →</a>
+        </section>
+
+        <section aria-labelledby="links-h" style="background: #FFFFFF; padding: 24px">
+          <h2 id="links-h" style="margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Logs</h2>
+          <div style="display: grid; gap: 8px">
+            <a href="Log.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #000050; text-decoration: none; font-size: 14px"><span>Risk log</span><span style="font-weight: 700">36 open</span></a>
+            <a href="Log.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #000050; text-decoration: none; font-size: 14px"><span>Issue log</span><span style="font-weight: 700">13 open</span></a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var pill = 'display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap;';
+    var ragBg = { Green: '#C9F2A6', Amber: '#FFC97A', Red: '#FFC2C2' };
+    var meaning = { Green: 'On track', Amber: 'At risk', Red: 'Blocked' };
+    var btn = 'display: inline-flex; align-items: center; height: 40px; padding: 0 16px; font-size: 14px; font-weight: 700; text-decoration: none;';
+    var outstanding = [
+      { name: 'EU_Paid Social_Always-on_Q4', job: '484902', ws: 'Nadine EU', who: 'MR, AK', last: '13 Nov 2026', kind: 'todo' },
+      { name: 'EU_Owned Channels_Pilot_Phase 1', job: '486311', ws: 'Nadine EU', who: 'AK', last: '6 Nov 2026', kind: 'todo' },
+      { name: 'GL_Brand Platform_Content Hub', job: '479310', ws: 'Mike', who: 'TH', last: '13 Nov 2026', kind: 'draft' },
+      { name: 'NO_CRM_Lifecycle Programme', job: '481207', ws: 'Josefine', who: 'KL', last: '13 Nov 2026', kind: 'todo' },
+      { name: 'DK_App_Rewards Launch', job: '481955', ws: 'Josefine', who: 'KL, PF', last: '30 Oct 2026', kind: 'todo' },
+      { name: 'SE_Email_Template Rebuild', job: '482640', ws: 'Josefine', who: 'PF', last: '13 Nov 2026', kind: 'draft' },
+      { name: 'NO_Paid Search_Q4', job: '482901', ws: 'Josefine', who: 'KL', last: '12 Nov 2026', kind: 'todo' },
+      { name: 'GL_Consent Platform_Upgrade', job: '481880', ws: 'Mike', who: 'TH', last: '13 Nov 2026', kind: 'todo' }
+    ].map(function (o) {
+      return Object.assign({}, o, { state: o.kind === 'draft' ? 'Draft saved' : 'Not started',
+        stateStyle: pill + (o.kind === 'draft' ? 'background: #E6E6EE;' : 'background: #FFE3C2;') });
+    });
+    var ws = [['Josefine', '3 of 7 updated'], ['Mette', 'all updated'], ['Mike', '6 of 8 updated'], ['Nadine EU', '4 of 6 updated', 'Main.dc.html'], ['Nadine Global', 'all updated']]
+      .map(function (w) { return { name: w[0], note: w[1], href: w[2] || '#' }; });
+    var dot = 'flex: none; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; font-size: 13px; font-weight: 700;';
+    var steps = [
+      { title: 'Spend file uploaded', when: 'Mon 16 Nov, 09:12 · TCCC', done: true },
+      { title: 'PMs submit updates', when: '21 of 29 so far · due Fri 20 Nov', done: false },
+      { title: 'Week closes', when: 'Fri 20 Nov, end of day · snapshot saved', done: false },
+      { title: 'Week 48 opens', when: 'Mon 23 Nov · next spend upload', done: false }
+    ].map(function (s) { return Object.assign({}, s, { mark: s.done ? '✓' : '', dotStyle: dot + (s.done ? 'background: #000050; color: #FAFAF0;' : 'border: 2px solid #000050; box-sizing: border-box;') }); });
+    return { outstanding: outstanding, outCount: outstanding.length, ws: ws, steps: steps };
+  }
+}
+</script>
+</body>
+</html>
