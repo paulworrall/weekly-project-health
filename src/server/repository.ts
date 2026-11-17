@@ -22,6 +22,7 @@ export async function loadRows(): Promise<DbRows> {
     projectWeeks,
     uploads,
     uploadChanges,
+    uploadRowErrors,
     projectSpends,
     risks,
     issues,
@@ -127,7 +128,12 @@ export async function loadRows(): Promise<DbRows> {
         workstreamName: true,
         before: true,
         after: true,
+        decision: true,
       },
+    }),
+    prisma.spendUploadRow.findMany({
+      where: { error: { not: null }, upload: { status: "READY_TO_REVIEW" } },
+      select: { uploadId: true, rowNumber: true, error: true },
     }),
     prisma.projectSpend.findMany({
       select: { id: true, projectId: true, uploadId: true, percentSpent: true, spendStatus: true },
@@ -180,6 +186,7 @@ export async function loadRows(): Promise<DbRows> {
     projectWeeks,
     uploads,
     uploadChanges,
+    uploadRowErrors,
     projectSpends,
     risks,
     issues,

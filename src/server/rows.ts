@@ -127,7 +127,10 @@ export interface DbRows {
     workstreamName: string;
     before: string | null;
     after: string | null;
+    decision: "KEEP" | "MARK" | null;
   }[];
+  /** Row errors of files waiting for review. */
+  uploadRowErrors: { uploadId: string; rowNumber: number; error: string | null }[];
   projectSpends: {
     id: string;
     projectId: string;
@@ -304,8 +307,10 @@ export function rowsFromDataset(ds: Dataset): DbRows {
         workstreamName: c.workstreamName,
         before: c.before,
         after: c.after,
+        decision: c.decision ?? null,
       }))
     ),
+    uploadRowErrors: [],
     projectSpends,
     risks: ds.logItems
       .filter((l) => l.kind === "RISK")
@@ -461,6 +466,7 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
       workstreamName: c.workstreamName,
       before: c.before,
       after: c.after,
+      ...(c.decision ? { decision: c.decision } : {}),
     });
     changesByUpload.set(c.uploadId, list);
   }
@@ -516,7 +522,14 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
     uploads: uploads.filter((u) => u.status !== "READY_TO_REVIEW" && u.status !== "CHECKING"),
     staged: uploads
       .filter((u) => u.status === "READY_TO_REVIEW")
-      .map((u) => ({ upload: u, changes: changesByUpload.get(u.id) ?? [] })),
+      .map((u) => ({
+        upload: u,
+        changes: changesByUpload.get(u.id) ?? [],
+        rowErrors: rows.uploadRowErrors
+          .filter((e) => e.uploadId === u.id && e.error)
+          .sort((a, b) => a.rowNumber - b.rowNumber)
+          .map((e) => ({ rowNumber: e.rowNumber, message: e.error as string })),
+      })),
     auditEvents: rows.auditEvents
       .map((e): AuditEvent => ({
         id: e.id,

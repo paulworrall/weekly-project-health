@@ -1,6 +1,8 @@
 "use client";
 
-import { useId, useRef, useState, type KeyboardEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useId, useRef, useState, useTransition, type KeyboardEvent } from "react";
+import type { ActionResult } from "@/types/action-result";
 import type { MissingDecision, SpendUploadChange } from "@/types/domain";
 import { Button } from "@/components/ui/button";
 import { TableScroll, tableClass, tbodyRow, td, th, theadRow } from "./display";
@@ -31,30 +33,82 @@ export function allDecided(
   return changes.filter((c) => c.type === "MISSING").every((c) => !!decisions[c.id]);
 }
 
+export interface PreviewActions {
+  decide: (changeId: string, decision: string) => Promise<ActionResult<null>>;
+  confirm: (uploadId: string) => Promise<ActionResult<{ rows: number }>>;
+  cancel: (uploadId: string) => Promise<ActionResult<null>>;
+}
+
 /**
  * Step 2 of 3: preview of changes, tabbed by type. Every project missing from the file needs a
- * decision, with nothing pre-selected (decision 17 Nov); Confirm stays disabled until then.
+ * decision, with nothing pre-selected (decision 17 Nov), saved as it's clicked; Confirm stays
+ * disabled until then, and while the file has row errors.
  */
 export function UploadPreview({
+  uploadId,
   changes,
   fileChecks,
+  rowErrors = [],
   clientName,
   rowCount,
+  actions,
 }: {
+  uploadId: string;
   changes: SpendUploadChange[];
   fileChecks: string[];
+  rowErrors?: { rowNumber: number; message: string }[];
   clientName: string;
   rowCount: number;
+  actions: PreviewActions;
 }) {
-  const [tab, setTab] = useState<TabKey>("MISSING");
-  const [decisions, setDecisions] = useState<Record<string, MissingDecision>>({});
+  const router = useRouter();
+  const [pendingAction, start] = useTransition();
+  const [tab, setTab] = useState<TabKey>(
+    () => TABS.find((t) => changes.some((c) => inTab(c, t.key)))?.key ?? "MISSING"
+  );
+  const [decisions, setDecisions] = useState<Record<string, MissingDecision>>(() =>
+    Object.fromEntries(
+      changes.filter((c) => c.decision).map((c) => [c.id, c.decision as MissingDecision])
+    )
+  );
   const [done, setDone] = useState<"" | "confirmed" | "cancelled">("");
+  const [error, setError] = useState("");
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const panelId = useId();
 
   const missing = changes.filter((c) => c.type === "MISSING");
   const pending = missing.filter((c) => !decisions[c.id]).length;
-  const ready = allDecided(changes, decisions);
+  const ready = allDecided(changes, decisions) && rowErrors.length === 0;
+
+  function decide(changeId: string, value: MissingDecision) {
+    const before = decisions[changeId];
+    setDecisions((s) => ({ ...s, [changeId]: value }));
+    setError("");
+    start(async () => {
+      const r = await actions.decide(changeId, value);
+      if (!r.ok) {
+        setDecisions((s) => {
+          const next = { ...s };
+          if (before) next[changeId] = before;
+          else delete next[changeId];
+          return next;
+        });
+        setError(r.message);
+      }
+    });
+  }
+
+  function finish(kind: "confirmed" | "cancelled") {
+    setError("");
+    start(async () => {
+      const r =
+        kind === "confirmed" ? await actions.confirm(uploadId) : await actions.cancel(uploadId);
+      if (r.ok) {
+        setDone(kind);
+        router.refresh();
+      } else setError(r.message);
+    });
+  }
   const current = TABS.find((t) => t.key === tab)!;
   const rows = changes.filter((c) => inTab(c, tab));
 
@@ -84,26 +138,16 @@ export function UploadPreview({
     return (
       <div
         role="status"
-        className={`px-4 py-3.5 text-[14px] ${done === "confirmed" ? "bg-success-tint" : "bg-line-soft"}`}
+        className={`mt-4 px-4 py-3.5 text-[14px] ${done === "confirmed" ? "bg-success-tint" : "bg-line-soft"}`}
       >
         <p className="font-medium">
-          {done === "confirmed"
-            ? "Upload confirmed (sample only)."
-            : "Upload cancelled (sample only)."}
+          {done === "confirmed" ? "Upload confirmed." : "Upload cancelled."}
         </p>
         <p className="mt-1">
-          Nothing is saved yet: uploads start working in a later phase. In the real tool this
           {done === "confirmed"
-            ? ` replaces the current ${clientName} list.`
-            : " is kept in the history as Cancelled."}
+            ? `${rowCount} records are now the live ${clientName} list. The history below shows it as Confirmed.`
+            : "Nothing was changed. It stays in the history as Cancelled."}
         </p>
-        <button
-          type="button"
-          onClick={() => setDone("")}
-          className="mt-2 min-h-11 cursor-pointer underline"
-        >
-          Back to the preview
-        </button>
       </div>
     );
   }
@@ -112,13 +156,33 @@ export function UploadPreview({
     <>
       <div
         role="status"
-        className="mt-4 mb-5 flex flex-wrap gap-x-6 gap-y-2 bg-success-tint px-4 py-3 text-[14px]"
+        className={`mt-4 mb-5 flex flex-wrap gap-x-6 gap-y-2 px-4 py-3 text-[14px] ${rowErrors.length ? "bg-warning-tint" : "bg-success-tint"}`}
       >
-        <span className="font-medium">File checks passed</span>
+        <span className="font-medium">
+          {rowErrors.length ? "File has rows with errors" : "File checks passed"}
+        </span>
         {fileChecks.map((c) => (
           <span key={c}>{c}</span>
         ))}
       </div>
+      {rowErrors.length ? (
+        <div className="mb-5">
+          <h3 className="lbl mb-2">Rows with errors</h3>
+          <ul className="grid gap-1 text-[14px]">
+            {rowErrors.slice(0, 50).map((e) => (
+              <li key={e.rowNumber}>
+                <span className="font-medium">Row {e.rowNumber}:</span> {e.message}
+              </li>
+            ))}
+          </ul>
+          {rowErrors.length > 50 ? (
+            <p className="mt-1 text-[13px] text-muted">…and {rowErrors.length - 50} more.</p>
+          ) : null}
+          <p className="mt-2 text-[13px]">
+            Fix these in the source workbook, save it, and check the file again.
+          </p>
+        </div>
+      ) : null}
       <div role="tablist" aria-label="Change type" className="mb-4 flex flex-wrap">
         {TABS.map((t, i) => {
           const on = t.key === tab;
@@ -191,7 +255,7 @@ export function UploadPreview({
                               type="button"
                               role="radio"
                               aria-checked={d === value}
-                              onClick={() => setDecisions((s) => ({ ...s, [c.id]: value }))}
+                              onClick={() => decide(c.id, value)}
                               className={`min-h-11 cursor-pointer border border-navy px-3.5 text-[13px] ${d === value ? "bg-navy font-medium text-cream" : "bg-white"}`}
                             >
                               {label}
@@ -216,17 +280,24 @@ export function UploadPreview({
         ) : null}
       </div>
       <div className="mt-5.5 flex flex-wrap items-center gap-3.5 border-t border-line pt-4.5">
-        <Button disabled={!ready} onClick={() => setDone("confirmed")}>
-          Confirm upload
+        <Button disabled={!ready || pendingAction} onClick={() => finish("confirmed")}>
+          {pendingAction ? "Saving…" : "Confirm upload"}
         </Button>
-        <Button variant="secondary" onClick={() => setDone("cancelled")}>
+        <Button variant="secondary" disabled={pendingAction} onClick={() => finish("cancelled")}>
           Cancel
         </Button>
         <span role="status" className={`text-[13px] font-medium ${ready ? "" : "text-overspend"}`}>
-          {ready
-            ? `Ready to confirm: ${rowCount} records will replace the current ${clientName} list.`
-            : `${pending} missing ${pending === 1 ? "project needs" : "projects need"} a decision before you can confirm.`}
+          {rowErrors.length
+            ? "Confirm is off while the file has rows with errors."
+            : ready
+              ? `Ready to confirm: ${rowCount} records will replace the current ${clientName} list.`
+              : `${pending} missing ${pending === 1 ? "project needs" : "projects need"} a decision before you can confirm.`}
         </span>
+        {error ? (
+          <p role="alert" className="w-full bg-warning-tint px-4 py-2.5 text-[14px] font-medium">
+            {error}
+          </p>
+        ) : null}
       </div>
     </>
   );

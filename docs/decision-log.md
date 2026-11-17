@@ -175,3 +175,9 @@ The first real Admin account (Paul's WPP work email) is created with `scripts/cr
 
 ## 17 Nov 2026 — Sign-in messages don't reveal whether an account exists
 A wrong email or password shows "Email or password not recognised. … After 5 failed attempts in a row the account is locked for 15 minutes." without the mockup's "N attempts left", which would show that the email has an account. Unknown emails take as long to check as real ones. The "locked" message is unchanged. Reason: don't help anyone guess which emails have accounts. Rejected: the mockup's attempts-left count.
+
+## 17 Nov 2026 — TCCC's weekly spend files approved for upload
+Paul approved uploading TCCC's weekly spend files through Spend uploads on the live site; the file is stored in the database for the audit trail. Extends the 17 Nov approval of the first file. Other clients' real data still needs Paul's approval. Test fixtures stay synthetic. Reason: the weekly routine needs real files. Rejected: waiting for the data governance review.
+
+## 17 Nov 2026 — A newer file cancels one still waiting for review
+Checking a new spend file cancels any earlier file for the same client that is still Ready to review; it stays in the history as Cancelled ("Replaced by a newer file before review"). Reason: only one preview per client, no dead ends. Rejected: blocking the new file until the earlier one is confirmed or cancelled.

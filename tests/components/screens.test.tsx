@@ -236,15 +236,27 @@ describe("RiskIssueTable", () => {
 describe("UploadPreview", () => {
   const v = getUploadsView(DEFAULT_CLIENT_ID)!;
   const staged = v.staged!;
+  vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: () => {}, push: () => {} }) }));
 
-  it("enables Confirm only when every missing project has a decision", async () => {
+  function actions() {
+    return {
+      decide: vi.fn(async () => ({ ok: true as const, data: null })),
+      confirm: vi.fn(async () => ({ ok: true as const, data: { rows: 636 } })),
+      cancel: vi.fn(async () => ({ ok: true as const, data: null })),
+    };
+  }
+
+  it("enables Confirm only when every missing project has a decision, saving each choice", async () => {
     const user = userEvent.setup();
+    const a = actions();
     render(
       <UploadPreview
+        uploadId="up-1"
         changes={staged.changes}
         fileChecks={staged.fileChecks}
         clientName="Northwind Drinks"
         rowCount={636}
+        actions={a}
       />
     );
     const confirm = screen.getByRole("button", { name: "Confirm upload" });
@@ -264,6 +276,32 @@ describe("UploadPreview", () => {
     expect(confirm).toBeDisabled();
     await user.click(within(groups[2]).getByRole("radio", { name: "Keep as is" }));
     expect(confirm).toBeEnabled();
+    expect(a.decide).toHaveBeenCalledTimes(3);
+    expect(a.decide).toHaveBeenNthCalledWith(2, expect.any(String), "MARK");
+    await user.click(confirm);
+    expect(a.confirm).toHaveBeenCalledWith("up-1");
+    expect(await screen.findByText("Upload confirmed.")).toBeInTheDocument();
+  });
+
+  it("keeps Confirm off while the file has row errors", () => {
+    render(
+      <UploadPreview
+        uploadId="up-2"
+        changes={staged.changes.map((c) =>
+          c.type === "MISSING" ? { ...c, decision: "KEEP" as const } : c
+        )}
+        fileChecks={staged.fileChecks}
+        rowErrors={[{ rowNumber: 7, message: "Job Number is empty." }]}
+        clientName="Northwind Drinks"
+        rowCount={636}
+        actions={actions()}
+      />
+    );
+    expect(screen.getByRole("button", { name: "Confirm upload" })).toBeDisabled();
+    expect(screen.getByText("Row 7:")).toBeInTheDocument();
+    expect(
+      screen.getByText("Confirm is off while the file has rows with errors.")
+    ).toBeInTheDocument();
   });
 });
 

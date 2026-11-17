@@ -75,7 +75,11 @@ export interface Dataset {
   pipeline: PipelineOpportunity[];
   uploads: SpendUpload[];
   /** Files checked and waiting for review, with their change lists. */
-  staged: { upload: SpendUpload; changes: SpendUploadChange[] }[];
+  staged: {
+    upload: SpendUpload;
+    changes: SpendUploadChange[];
+    rowErrors?: { rowNumber: number; message: string }[];
+  }[];
   auditEvents: AuditEvent[];
   /** Last risk / issue numbers used, per client. */
   logSeq: Record<string, { RISK: number; ISSUE: number }>;
@@ -496,10 +500,11 @@ export function createViews(ds: Dataset) {
             upload: staged.upload,
             fileChecks: [
               "Sheet and 4 headers match",
-              `${staged.upload.rowCount} rows read · ${staged.upload.errorCount} errors`,
-              "Job numbers unique",
+              `${staged.upload.rowCount} rows read · ${staged.upload.errorCount} ${staged.upload.errorCount === 1 ? "error" : "errors"}`,
+              ...(staged.upload.errorCount ? [] : ["Job numbers unique"]),
             ],
             changes: staged.changes,
+            rowErrors: staged.rowErrors ?? [],
           }
         : null,
       history: ds.uploads

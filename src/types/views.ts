@@ -207,7 +207,12 @@ export interface UploadsView {
     noTimesheet: number;
   };
   /** A checked file waiting for review, if any. */
-  staged: { upload: SpendUpload; fileChecks: string[]; changes: SpendUploadChange[] } | null;
+  staged: {
+    upload: SpendUpload;
+    fileChecks: string[];
+    changes: SpendUploadChange[];
+    rowErrors: { rowNumber: number; message: string }[];
+  } | null;
   history: UploadInfo[];
   workstreams: (Workstream & { projectCount: number })[];
   previousUploadDate: IsoDate | null;

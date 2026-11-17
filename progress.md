@@ -78,3 +78,13 @@ Append-only. Newest at the bottom.
 - Users and access: create (temporary password shown once), change role, reset password, unlock, archive, restore; all audited, all checked on the server, with rules that keep at least one Admin and stop the Admin changing or archiving themself.
 - Paul created his Admin account with `npm run user:create-admin`, signed in locally and chose his own password (audited).
 - 92 tests pass; lint, typecheck, build pass. Found and fixed: the sign-in form cleared the email after a failed attempt.
+
+## 17 Nov 2026 — Brief 04: spend uploads (branch `brief-04-uploads`)
+
+- Step 0 report and answers: `briefs/brief-04-step0-report.md`. Decisions (17 Nov): TCCC weekly files approved for upload; a newer file cancels one still waiting for review.
+- Parser `src/services/parsing/spend-file.ts` (exceljs, cached formula results, structure rejection with expected/found, row errors), compare-with-live `src/lib/spend-diff.ts`, Confirm rules `confirmProblem`.
+- Actions: check (stores the file, rejected or ready, cancels an earlier waiting file), decide (Keep/Mark saved per click), confirm (one transaction: new Hidden workstreams, new/renamed/moved projects, % spend per project, missing marks, previous upload Replaced, audit), cancel, Reported, Account Director. All Admin-only on the server.
+- Upload form, preview (row errors, decisions, Confirm/Cancel) and workstream settings wired to the actions.
+- `scripts/import-spend-file.mts` now uses the same parser; new `npm run upload:dry-run` (read-only).
+- Real TCCC file: parses with 0 errors; uploading it corrected 6 % spend figures by 0.1 point (rounding in the hand conversion of 17 Nov). Paul checked and confirmed it locally: new upload Live (869 rows, file stored), previous Replaced, audit written.
+- 100 tests pass (parser on synthetic workbooks, diff, Confirm rules, preview component); lint, typecheck, build pass.

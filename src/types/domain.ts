@@ -167,6 +167,8 @@ export interface SpendUploadChange {
   workstreamName: string;
   before: string | null;
   after: string | null;
+  /** MISSING only: the Admin's choice, nothing until chosen. */
+  decision?: MissingDecision | null;
 }
 
 export interface AuditEvent {

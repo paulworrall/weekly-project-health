@@ -7,8 +7,8 @@ import { archiveData, restoreData } from "@/lib/archive";
 import { archiveRow, createRow, restoreRow, updateRows, type AuditRow } from "@/lib/audit";
 import { writeAudit } from "@/lib/audit-db";
 import { temporaryPassword } from "@/lib/passwords";
-import { canAdminister, initialsFor, userActionProblem, type UserAction } from "@/lib/permissions";
-import { getViewer } from "@/lib/viewer";
+import { initialsFor, userActionProblem, type UserAction } from "@/lib/permissions";
+import { adminViewer } from "@/server/guards";
 import { hashPassword } from "@/server/passwords";
 import { fail, ok, type ActionResult } from "@/types/action-result";
 import { fieldErrors } from "@/types/schemas";
@@ -35,16 +35,6 @@ const createSchema = z.object({
     .pipe(z.email({ error: "Enter an email address like name@example.com." })),
   role: ROLE,
 });
-
-async function adminViewer() {
-  const viewer = await getViewer();
-  if (!viewer) return { error: fail<never>("UNAUTHENTICATED", "Sign in again.") };
-  if (viewer.mustChangePassword)
-    return { error: fail<never>("FORBIDDEN", "Choose your own password first.") };
-  if (!canAdminister(viewer))
-    return { error: fail<never>("FORBIDDEN", "Only the Admin can manage users.") };
-  return { viewer };
-}
 
 function done() {
   revalidatePath("/admin/users");

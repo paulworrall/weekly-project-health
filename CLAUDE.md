@@ -168,7 +168,7 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 1. Front end on mock data (all screens). **Done 17 Nov 2026.**
 2. Database schema, migrations, seed (synthetic), audit helper. **Done 17 Nov 2026**: pages read the live database through `src/server/repository.ts`; edits stay local until brief 05.
 3. Auth and roles: sign-in, lockout, first-sign-in password change, role landing, permissions. **Done 17 Nov 2026**: NextAuth v5 (`src/auth.ts`), sign-in action with lockout, `requireViewer()` checks the database on every request, Users and access actions (audited). First Admin via `npm run user:create-admin` (run by Paul).
-4. Spend upload: parser, validation, preview, decisions, confirm, history, Reported flag.
+4. Spend upload: parser, validation, preview, decisions, confirm, history, Reported flag. **Done 17 Nov 2026**: `src/services/parsing/spend-file.ts`, `src/lib/spend-diff.ts`, actions in `src/app/(app)/admin/uploads/actions.ts`; `npm run upload:dry-run` previews a file read-only.
 5. Weekly inputs: selection, weekly update, risks, issues, pipeline (all audited).
 6. Periods and snapshots: automatic close, carry-forward, snapshots.
 7. Reports and logs: aggregations, trends, past weeks. HTML report layouts once designed.

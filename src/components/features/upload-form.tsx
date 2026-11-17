@@ -1,41 +1,82 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition, type FormEvent } from "react";
 import type { Client } from "@/types/domain";
-import { fieldErrors, uploadFormSchema } from "@/types/schemas";
+import type { ActionResult } from "@/types/action-result";
 import { Button } from "@/components/ui/button";
 import { FormError, SelectField, TextField } from "@/components/ui/fields";
 
-/** Step 1 of 3: client, extract date (defaults to today) and the .xlsx file. Parsing arrives in brief 04. */
-export function UploadForm({ clients, today }: { clients: Client[]; today: string }) {
-  const [clientId, setClientId] = useState(clients[0]?.id ?? "");
-  const [extractDate, setExtractDate] = useState(today);
-  const [file, setFile] = useState<{ name: string; size: number } | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [checked, setChecked] = useState(false);
+export type CheckFile = (
+  formData: FormData
+) => Promise<
+  ActionResult<{ status: "READY_TO_REVIEW" | "REJECTED"; reason?: string; errors: number }>
+>;
 
-  function check(e: FormEvent) {
+/**
+ * Step 1 of 3: client, extract date (defaults to today, never in the future) and the .xlsx file.
+ * "Check file" uploads it; the server checks it and saves the preview (or the rejection).
+ */
+export function UploadForm({
+  clients,
+  clientId: initialClient,
+  today,
+  check,
+}: {
+  clients: Client[];
+  clientId: string;
+  today: string;
+  check: CheckFile;
+}) {
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const [clientId, setClientId] = useState(initialClient);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [result, setResult] = useState<{ tone: "ok" | "bad"; text: string } | null>(null);
+  const [fileInfo, setFileInfo] = useState<string>("");
+
+  function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const parsed = uploadFormSchema.safeParse({
-      clientId,
-      extractDate,
-      fileName: file?.name ?? "",
-    });
-    setChecked(false);
-    if (!parsed.success) {
-      setErrors(fieldErrors(parsed.error));
-      return;
-    }
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     setErrors({});
-    setChecked(true);
+    setResult(null);
+    start(async () => {
+      const r = await check(fd);
+      if (!r.ok) {
+        setErrors(r.fieldErrors ?? {});
+        if (!r.fieldErrors) setResult({ tone: "bad", text: r.message });
+        return;
+      }
+      if (r.data.status === "REJECTED") {
+        setResult({
+          tone: "bad",
+          text: `File rejected. ${r.data.reason ?? ""} It's kept in the history below.`,
+        });
+      } else {
+        setResult({
+          tone: "ok",
+          text: r.data.errors
+            ? `File checked: ${r.data.errors} ${r.data.errors === 1 ? "row has" : "rows have"} errors. See the preview.`
+            : "File checked. Review the changes in the preview, then confirm.",
+        });
+        form.reset();
+        setFileInfo("");
+      }
+      router.refresh();
+    });
   }
 
   return (
-    <form noValidate onSubmit={check} aria-labelledby="new-h" className="grid gap-4.5">
+    <form noValidate onSubmit={submit} aria-labelledby="new-h" className="grid gap-4.5">
       <SelectField
         label="Client"
+        name="clientId"
         value={clientId}
-        onChange={(e) => setClientId(e.target.value)}
+        onChange={(e) => {
+          setClientId(e.target.value);
+          router.push(`/admin/uploads?client=${e.target.value}`);
+        }}
         error={errors.clientId}
       >
         {clients.map((c) => (
@@ -46,9 +87,10 @@ export function UploadForm({ clients, today }: { clients: Client[]; today: strin
       </SelectField>
       <TextField
         label="Extract date"
+        name="extractDate"
         type="date"
-        value={extractDate}
-        onChange={(e) => setExtractDate(e.target.value)}
+        defaultValue={today}
+        max={today}
         hint="The date the spend figures were taken from the source workbook."
         error={errors.extractDate}
       />
@@ -59,22 +101,20 @@ export function UploadForm({ clients, today }: { clients: Client[]; today: strin
         <div className="flex flex-col items-start gap-2.5 border-2 border-dashed border-navy bg-cream p-5.5">
           <input
             id="spend-file"
+            name="file"
             type="file"
             accept=".xlsx"
             aria-invalid={errors.fileName ? true : undefined}
             aria-describedby={errors.fileName ? "spend-file-error" : undefined}
             onChange={(e) => {
               const f = e.target.files?.[0];
-              setFile(f ? { name: f.name, size: f.size } : null);
-              setChecked(false);
+              setFileInfo(
+                f ? `Selected: ${f.name} · ${Math.max(1, Math.round(f.size / 1024))} KB` : ""
+              );
             }}
             className="max-w-full text-[14px]"
           />
-          <span className="text-[13px]">
-            {file
-              ? `Selected: ${file.name} · ${Math.max(1, Math.round(file.size / 1024))} KB`
-              : "No file chosen."}
-          </span>
+          <span className="text-[13px]">{fileInfo || "No file chosen."}</span>
         </div>
         <FormError id="spend-file-error">{errors.fileName}</FormError>
       </div>
@@ -96,14 +136,17 @@ export function UploadForm({ clients, today }: { clients: Client[]; today: strin
           calculated.
         </p>
       </details>
-      <Button type="submit" className="justify-self-start">
-        Check file
+      <Button type="submit" className="justify-self-start" disabled={pending}>
+        {pending ? "Checking…" : "Check file"}
       </Button>
-      <p role="status" className={checked ? "bg-line-soft px-4 py-3 text-[14px]" : "sr-only"}>
-        {checked
-          ? "Reading the file arrives in a later phase. The preview shows a sample file that has already been checked."
-          : ""}
-      </p>
+      {result ? (
+        <p
+          role={result.tone === "bad" ? "alert" : "status"}
+          className={`px-4 py-3 text-[14px] ${result.tone === "bad" ? "bg-warning-tint font-medium" : "bg-success-tint"}`}
+        >
+          {result.text}
+        </p>
+      ) : null}
     </form>
   );
 }
