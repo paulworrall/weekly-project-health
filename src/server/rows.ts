@@ -18,7 +18,8 @@ import type {
   User,
   Workstream,
 } from "@/types/domain";
-import type { Dataset } from "@/lib/views";
+import type { Dataset, SnapshotStore } from "@/lib/views";
+import type { LogSnapshot, PipelineSnapshot, ProjectSnapshot } from "@/lib/snapshot";
 import { londonDate } from "@/lib/dates";
 import {
   closesAt,
@@ -154,6 +155,12 @@ export interface DbRows {
     archivedAt: Date | null;
     updatedAt?: Date;
   }[];
+  /** Closed-week snapshots (brief 06); the seed writes none. */
+  snapshots?: {
+    projects: { periodId: string; projectId: string; data: unknown }[];
+    pipelines: { periodId: string; workstreamId: string; data: unknown }[];
+    logs: { periodId: string; clientId: string; data: unknown }[];
+  };
   auditEvents: {
     id: string;
     at: Date;
@@ -476,6 +483,32 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
     changesByUpload.set(c.uploadId, list);
   }
 
+  let snapshots: SnapshotStore | undefined;
+  if (rows.snapshots) {
+    const store = (list: { periodId: string; id: string; data: unknown }[]) => {
+      const m = new Map<string, unknown>();
+      for (const r of list) {
+        const week = periodKey.get(r.periodId);
+        if (week) m.set(`${r.id}|${week}`, r.data);
+      }
+      return m;
+    };
+    snapshots = {
+      projects: store(rows.snapshots.projects.map((r) => ({ ...r, id: r.projectId }))) as Map<
+        string,
+        ProjectSnapshot
+      >,
+      pipelines: store(rows.snapshots.pipelines.map((r) => ({ ...r, id: r.workstreamId }))) as Map<
+        string,
+        PipelineSnapshot
+      >,
+      logs: store(rows.snapshots.logs.map((r) => ({ ...r, id: r.clientId }))) as Map<
+        string,
+        LogSnapshot
+      >,
+    };
+  }
+
   const clients: Client[] = rows.clients.map((c) => ({
     id: c.id,
     name: c.name,
@@ -552,5 +585,6 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
     logSeq: Object.fromEntries(
       rows.clients.map((c) => [c.id, { RISK: c.riskSeq, ISSUE: c.issueSeq }])
     ),
+    ...(snapshots ? { snapshots } : {}),
   };
 }
