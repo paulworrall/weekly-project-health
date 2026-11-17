@@ -7,7 +7,7 @@ WPP Enterprise Solutions | MAP design system, taken from the Reporting Hub hando
 | Path | What it is |
 |---|---|
 | `ds/wppesmap/tokens.json` | Full MAP token set exported from Claude Design. |
-| `mockups/*.dc.html` | **Not added yet.** The screen mockups (Login, Home, Client, Main, Project, Log, Upload) are on a Claude Design canvas. Add them here before brief 01. They use canvas-only template syntax and won't run on their own: treat them as a specification, not code. |
+| `mockups/*.dc.html` | The seven screen mockups (Login, Home, Client, Main, Project, Log, Upload), saved unchanged from Claude Design on 17 Nov 2026. `mockups/README.md` maps each to its screen and route. |
 
 The fonts are in `public/fonts/` (WPP Thin, Light, Regular, Medium, Bold), loaded with `next/font/local` in `src/app/layout.tsx`. The logos are in `public/brand/` (navy for light backgrounds, white for Navy).
 

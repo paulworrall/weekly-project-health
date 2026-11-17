@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Admin — spend uploads</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+input,select,button{font-family:inherit;color:#000050}
+</style>
+</helmet>
+<div style="background: #FAFAF0; min-height: 100vh; box-sizing: border-box">
+  <header style="background: #000050; color: #FAFAF0">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+        <a href="Home.dc.html" style="color: #FAFAF0; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Weekly Project Health</a>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
+        <a href="Client.dc.html" style="color: #FAFAF0; text-decoration: none">Clients</a>
+        <a href="Main.dc.html" style="color: #FAFAF0; text-decoration: none">Workstreams</a>
+        <a href="Log.dc.html" style="color: #FAFAF0; text-decoration: none">Risks and issues</a>
+        <a href="#" style="color: #FAFAF0; text-decoration: none; border-bottom: 2px solid #FF7800; padding-bottom: 2px">Spend uploads</a>
+        <span style="color: #FAFAF0">Signed in as Admin</span>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 24px 32px 48px; box-sizing: border-box">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 24px">
+      <div style="flex: 1 1 520px; min-width: 0">
+        <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Admin · Spend uploads · Week 47 · 16–20 Nov 2026</p>
+        <h1 style="margin: 0; font-size: 48px; line-height: 1.1; font-weight: 400">Spend uploads</h1>
+        <p style="margin: 10px 0 0; font-size: 15px">One file per client, each week. Every upload is checked, previewed and confirmed before anything is saved. Nothing is deleted.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <label for="uclient" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Client</label>
+        <select id="uclient" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0; min-width: 220px">
+          <option>TCCC</option>
+        </select>
+      </div>
+    </div>
+
+    <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 400">Latest upload · TCCC</h2>
+    <section aria-label="Latest upload" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px">
+      <div style="background: #000050; color: #FAFAF0; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFA552">Uploaded</div>
+        <div style="font-size: 28px; margin-top: 10px">16 Nov 2026</div>
+        <div style="font-size: 14px; margin-top: 4px">09:12 by Paul Worrall</div>
+        <div style="font-size: 13px; margin-top: 10px">Extract date 16 Nov 2026 · next due by Mon 23 Nov</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Records</div>
+        <div style="font-size: 40px; margin-top: 10px">869</div>
+        <div style="font-size: 14px; margin-top: 4px">{{reportedProjects}} in reported workstreams</div>
+        <div style="font-size: 13px; margin-top: 8px; color: #3D3D73">{{hiddenProjects}} hidden · 0 rejected rows</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Workstreams</div>
+        <div style="font-size: 40px; margin-top: 10px">13</div>
+        <div style="font-size: 14px; margin-top: 4px">{{reportedCount}} reported · {{hiddenCount}} hidden</div>
+        <div style="font-size: 13px; margin-top: 8px; color: #3D3D73">0 new this upload</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">% spend</div>
+        <div style="display: grid; gap: 4px; margin-top: 12px; font-size: 14px">
+          <div style="display: flex; justify-content: space-between"><span>With a figure</span><span style="font-weight: 700">100</span></div>
+          <div style="display: flex; justify-content: space-between"><span>Over budget</span><span style="font-weight: 700; color: #A03A00">44</span></div>
+          <div style="display: flex; justify-content: space-between"><span>Add budget</span><span style="font-weight: 700">517</span></div>
+          <div style="display: flex; justify-content: space-between"><span>No timesheet data</span><span style="font-weight: 700">252</span></div>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Changes vs 9 Nov</div>
+        <div style="display: grid; gap: 4px; margin-top: 12px; font-size: 14px">
+          <div style="display: flex; justify-content: space-between"><span>New projects</span><span style="font-weight: 700">6</span></div>
+          <div style="display: flex; justify-content: space-between"><span>Renamed</span><span style="font-weight: 700">2</span></div>
+          <div style="display: flex; justify-content: space-between"><span>Moved workstream</span><span style="font-weight: 700">1</span></div>
+          <div style="display: flex; justify-content: space-between"><span>% spend changed</span><span style="font-weight: 700">38</span></div>
+          <div style="display: flex; justify-content: space-between"><span>Missing from file</span><span style="font-weight: 700">3</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 40px">
+      <section aria-labelledby="new-h" style="flex: 1 1 400px; min-width: 0; background: #FFFFFF; padding: 28px; box-sizing: border-box">
+        <h2 id="new-h" style="margin: 0 0 6px; font-size: 24px; font-weight: 400">Upload a new file</h2>
+        <p style="margin: 0 0 20px; font-size: 14px; color: #3D3D73">Step 1 of 3: choose the file. Then check the preview and confirm.</p>
+        <div style="display: grid; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="nclient" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Client</label>
+            <select id="nclient" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+              <option>TCCC</option>
+            </select>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="ndate" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Extract date</label>
+            <input id="ndate" type="date" value="2026-11-16" style="height: 44px; padding: 0 12px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box"></input>
+            <span style="font-size: 12px; color: #3D3D73">The date the spend figures were taken from the source workbook.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="nfile" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Spend file (.xlsx)</label>
+            <div style="border: 2px dashed #000050; background: #FAFAF0; padding: 22px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+              <input id="nfile" type="file" accept=".xlsx" style="font-size: 14px"></input>
+              <span style="font-size: 13px">Selected: TCCC_Weekly_Health_Check_In_W47.xlsx · 212 KB</span>
+            </div>
+          </div>
+          <details style="font-size: 13px">
+            <summary style="cursor: pointer; font-weight: 700">Expected file structure</summary>
+            <p style="margin: 8px 0 4px">Sheet <strong>Project Budget Usage</strong>, header row 1:</p>
+            <ol style="margin: 0; padding-left: 20px; line-height: 1.6">
+              <li>Job Number</li>
+              <li>Project Name</li>
+              <li>Default Reporting Workstream</li>
+              <li>Percentage Spent to Date</li>
+            </ol>
+            <p style="margin: 8px 0 0">Refresh the source workbook before saving: the upload reads the values Excel last calculated.</p>
+          </details>
+          <button type="button" style="align-self: flex-start; height: 44px; padding: 0 22px; border: 0; background: #000050; color: #FAFAF0; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">Check file</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="prev-h" style="flex: 2 1 640px; min-width: 0; background: #FFFFFF; padding: 28px; box-sizing: border-box">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px">
+          <h2 id="prev-h" style="margin: 0; font-size: 24px; font-weight: 400">Preview of changes</h2>
+          <span style="font-size: 13px; color: #3D3D73">Step 2 of 3 · nothing saved yet</span>
+        </div>
+        <div role="status" style="display: flex; flex-wrap: wrap; gap: 8px 24px; background: #E3F5D3; padding: 12px 16px; margin: 16px 0 20px; font-size: 14px">
+          <span style="font-weight: 700">File checks passed</span>
+          <span>Sheet and 4 headers match</span>
+          <span>872 rows read · 0 errors</span>
+          <span>Job numbers unique</span>
+        </div>
+        <div role="tablist" aria-label="Change type" style="display: flex; flex-wrap: wrap; margin-bottom: 16px">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+            <button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px">
+            <caption style="position: absolute; left: -9999px">{{tabTitle}}</caption>
+            <thead>
+              <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+                <th scope="col" style="padding: 10px 10px 10px 0; width: 80px">Job no.</th>
+                <th scope="col" style="padding: 10px">Project</th>
+                <th scope="col" style="padding: 10px">{{colA}}</th>
+                <th scope="col" style="padding: 10px">{{colB}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+                <tr style="border-bottom: 1px solid #D6D6E0; vertical-align: top">
+                  <td style="padding: 12px 10px 12px 0; font-weight: 700">{{r.job}}</td>
+                  <td style="padding: 12px 10px">{{r.name}}</td>
+                  <td style="padding: 12px 10px">{{r.a}}</td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.decide}}" hint-placeholder-val="{{ false }}">
+                      <div role="radiogroup" aria-label="{{r.decideLabel}}" style="display: flex; flex-wrap: wrap; gap: 6px">
+                        <button type="button" role="radio" aria-checked="{{r.keepOn}}" onClick="{{r.keep}}" style="{{r.keepStyle}}">Keep as is</button>
+                        <button type="button" role="radio" aria-checked="{{r.markOn}}" onClick="{{r.mark}}" style="{{r.markStyle}}">Mark "No longer in file"</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{r.plain}}" hint-placeholder-val="{{ true }}">
+                      <span style="{{r.bStyle}}">{{r.b}}</span>
+                    </sc-if>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #D6D6E0">
+          <button type="button" disabled="{{confirmDisabled}}" style="{{confirmStyle}}">Confirm upload</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">Cancel</button>
+          <span style="font-size: 13px; font-weight: 700; color: {{pendingColor}}">{{pendingText}}</span>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="hist-h" style="background: #FFFFFF; padding: 28px; margin-bottom: 24px">
+      <h2 id="hist-h" style="margin: 0 0 6px; font-size: 24px; font-weight: 400">Upload history</h2>
+      <p style="margin: 0 0 18px; font-size: 14px; color: #3D3D73">Every upload attempt is kept, including cancelled and rejected files.</p>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 1180px; border-collapse: collapse; font-size: 14px">
+          <caption style="position: absolute; left: -9999px">Upload history</caption>
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 10px 10px 10px 0">Uploaded</th>
+              <th scope="col" style="padding: 10px">Client</th>
+              <th scope="col" style="padding: 10px">Extract date</th>
+              <th scope="col" style="padding: 10px">File</th>
+              <th scope="col" style="padding: 10px">By</th>
+              <th scope="col" style="padding: 10px; text-align: right">Records</th>
+              <th scope="col" style="padding: 10px; text-align: right">New</th>
+              <th scope="col" style="padding: 10px; text-align: right">Changed</th>
+              <th scope="col" style="padding: 10px; text-align: right">Missing</th>
+              <th scope="col" style="padding: 10px; text-align: right">Errors</th>
+              <th scope="col" style="padding: 10px">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{history}}" as="h" hint-placeholder-count="5">
+              <tr style="border-bottom: 1px solid #D6D6E0; vertical-align: top">
+                <td style="padding: 12px 10px 12px 0; white-space: nowrap">{{h.at}}</td>
+                <td style="padding: 12px 10px">{{h.client}}</td>
+                <td style="padding: 12px 10px; white-space: nowrap">{{h.extract}}</td>
+                <td style="padding: 12px 10px">{{h.file}}</td>
+                <td style="padding: 12px 10px">{{h.by}}</td>
+                <td style="padding: 12px 10px; text-align: right">{{h.records}}</td>
+                <td style="padding: 12px 10px; text-align: right">{{h.added}}</td>
+                <td style="padding: 12px 10px; text-align: right">{{h.changed}}</td>
+                <td style="padding: 12px 10px; text-align: right">{{h.missing}}</td>
+                <td style="padding: 12px 10px; text-align: right">{{h.errors}}</td>
+                <td style="padding: 12px 10px">
+                  <span style="{{h.style}}">{{h.status}}</span>
+                  <sc-if value="{{h.hasNote}}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size: 12px; margin-top: 6px; max-width: 260px">{{h.note}}</div>
+                  </sc-if>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="ws-h" style="background: #FFFFFF; padding: 28px">
+      <h2 id="ws-h" style="margin: 0 0 6px; font-size: 24px; font-weight: 400">Workstreams · TCCC</h2>
+      <p style="margin: 0 0 18px; font-size: 14px; color: #3D3D73">Workstreams come from the file. Only reported workstreams get a landing page and appear in reports; the rest are stored but hidden.</p>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px">
+          <caption style="position: absolute; left: -9999px">Workstreams and whether they are reported</caption>
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 10px 10px 10px 0">Workstream (as in file)</th>
+              <th scope="col" style="padding: 10px; text-align: right">Projects</th>
+              <th scope="col" style="padding: 10px">First seen</th>
+              <th scope="col" style="padding: 10px">Reported</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ws}}" as="w" hint-placeholder-count="13">
+              <tr style="border-bottom: 1px solid #D6D6E0">
+                <th scope="row" style="padding: 10px 10px 10px 0; text-align: left; font-weight: 400">{{w.name}}</th>
+                <td style="padding: 10px; text-align: right">{{w.n}}</td>
+                <td style="padding: 10px">{{w.first}}</td>
+                <td style="padding: 6px 10px">
+                  <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; min-height: 44px">
+                    <input type="checkbox" checked="{{w.on}}" onChange="{{w.toggle}}" style="width: 22px; height: 22px; accent-color: #000050"></input>
+                    <span>{{w.label}}</span>
+                  </label>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":2600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: 'missing', decisions: {},
+      reported: { 'Josefine': true, 'Mette': true, 'Mike': true, 'Nadine EU': true, 'Nadine Global': true }
+    };
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var pill = 'display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap;';
+    var changes = {
+      added: { label: 'New projects', colA: 'Workstream', colB: '% spend', rows: [
+        ['493102', 'EU_CRM_Winback Journeys_Phase 1', 'Nadine EU', 'No timesheet data'],
+        ['493140', 'GL_Brand Platform_Asset Library', 'Mike', 'Add budget'],
+        ['493177', 'NO_App_Push Notifications Pilot', 'Josefine', '2.5%'],
+        ['493201', 'GL_Measurement_Q1 Planning', 'Nadine Global', 'Add budget'],
+        ['493255', 'NORDICS_Social_Q1 Always-on', 'Mette', 'No timesheet data'],
+        ['800061', 'Internal time_Q1 Planning (non-billable)', 'Other', 'Add budget']
+      ] },
+      renamed: { label: 'Renamed', colA: 'Was', colB: 'Now', rows: [
+        ['482110', '', 'EU_CRM_Welcome Journey_Phase2', 'EU_CRM_Welcome Journey_Phase 2'],
+        ['485420', '', 'GL_Data Model_Rollout', 'GL_Data Model_Market Rollout']
+      ] },
+      moved: { label: 'Moved workstream', colA: 'Was', colB: 'Now', rows: [
+        ['481880', 'GL_Consent Platform_Upgrade', 'Nadine Global', 'Mike']
+      ] },
+      spend: { label: '% spend changed', colA: 'Was', colB: 'Now', rows: [
+        ['484902', 'EU_Paid Social_Always-on_Q4', '105.0%', '112.0%'],
+        ['483725', 'EU_Loyalty Programme_Discovery', '66.4%', '72.0%'],
+        ['480566', 'GL_Media Reporting_Dashboard', '124.0%', '131.0%'],
+        ['482110', 'EU_CRM_Welcome Journey_Phase 2', '44.1%', '48.0%']
+      ] },
+      missing: { label: 'Missing from file', colA: 'Workstream', colB: 'Decision', rows: [
+        ['478850', 'GL_Brand Platform_Discovery', 'Mike'],
+        ['479902', 'EU_Summer Campaign_2026', 'Nadine EU'],
+        ['480011', 'DK_Email_Migration', 'Josefine']
+      ] }
+    };
+    var counts = { added: 6, renamed: 2, moved: 1, spend: 38, missing: 3 };
+    var order = ['missing', 'added', 'renamed', 'moved', 'spend'];
+    var tabBase = 'height: 44px; padding: 0 16px; font-size: 14px; cursor: pointer; border: 1px solid #000050; border-radius: 0; margin: 0 -1px -1px 0;';
+    var tabs = order.map(function (k) {
+      var on = s.tab === k;
+      return { label: changes[k].label + ' (' + counts[k] + ')', selected: on ? 'true' : 'false', pick: function () { self.setState({ tab: k }); },
+        style: tabBase + (on ? 'background: #000050; color: #FAFAF0; font-weight: 700;' : 'background: #FFFFFF; color: #000050;') };
+    });
+    var c = changes[s.tab];
+    var opt = 'height: 40px; padding: 0 14px; font-size: 13px; cursor: pointer; border-radius: 0; border: 1px solid #000050;';
+    var rows = c.rows.map(function (r) {
+      var isMissing = s.tab === 'missing';
+      var d = s.decisions[r[0]];
+      var set = function (v) { return function () { var n = Object.assign({}, s.decisions); n[r[0]] = v; self.setState({ decisions: n }); }; };
+      var isRename = s.tab === 'renamed';
+      return {
+        job: r[0], name: isRename ? r[3] : r[1], a: isRename ? r[2] : r[2], b: isRename ? r[3] : r[3],
+        bStyle: s.tab === 'spend' ? 'font-weight: 700' : '',
+        decide: isMissing, plain: !isMissing,
+        decideLabel: 'Decision for ' + r[0],
+        keepOn: d === 'keep' ? 'true' : 'false', markOn: d === 'mark' ? 'true' : 'false',
+        keepStyle: opt + (d === 'keep' ? 'background: #000050; color: #FAFAF0; font-weight: 700;' : 'background: #FFFFFF;'),
+        markStyle: opt + (d === 'mark' ? 'background: #000050; color: #FAFAF0; font-weight: 700;' : 'background: #FFFFFF;'),
+        keep: set('keep'), mark: set('mark')
+      };
+    });
+    var decided = changes.missing.rows.filter(function (r) { return s.decisions[r[0]]; }).length;
+    var pending = changes.missing.rows.length - decided;
+    var history = [
+      { at: '16 Nov 2026, 09:12', client: 'TCCC', extract: '16 Nov 2026', file: 'TCCC_Weekly_Health_Check_In_W47.xlsx', by: 'Paul Worrall', records: 869, added: 6, changed: 41, missing: 3, errors: 0, status: 'Confirmed', kind: 'ok' },
+      { at: '16 Nov 2026, 08:55', client: 'TCCC', extract: '16 Nov 2026', file: 'TCCC_Weekly_Health_Check_In_W47.xlsx', by: 'Paul Worrall', records: '—', added: '—', changed: '—', missing: '—', errors: 1, status: 'Rejected', kind: 'bad', note: 'Header D1: expected "Percentage Spent to Date", found "Percent Spent".' },
+      { at: '9 Nov 2026, 10:03', client: 'TCCC', extract: '9 Nov 2026', file: 'TCCC_Weekly_Health_Check_In_W46.xlsx', by: 'Paul Worrall', records: 866, added: 4, changed: 35, missing: 1, errors: 0, status: 'Confirmed', kind: 'ok' },
+      { at: '2 Nov 2026, 09:40', client: 'TCCC', extract: '2 Nov 2026', file: 'TCCC_Weekly_Health_Check_In_W45.xlsx', by: 'Paul Worrall', records: 863, added: 2, changed: 29, missing: 0, errors: 0, status: 'Confirmed', kind: 'ok' },
+      { at: '2 Nov 2026, 09:31', client: 'TCCC', extract: '30 Oct 2026', file: 'TCCC_Weekly_Health_Check_In_W45_old.xlsx', by: 'Paul Worrall', records: '—', added: '—', changed: '—', missing: '—', errors: 0, status: 'Cancelled', kind: 'off', note: 'Cancelled at preview: wrong extract date.' }
+    ].map(function (h) {
+      return Object.assign({}, h, { hasNote: !!h.note,
+        style: pill + (h.kind === 'ok' ? 'background: #000050; color: #FAFAF0;' : (h.kind === 'bad' ? 'background: #FFC2C2; color: #000050;' : 'border: 1px solid #000050; background: #FFFFFF;')) });
+    });
+    var wsData = [['Mike', 292], ['Nadine EU', 181], ['Josefine', 141], ['Nadine Global', 116], ['SophiaASD', 56], ['Mette', 24], ['OpenX Business Development', 19], ['Ways of Working', 14], ['PICOS', 13], ['Other', 7], ['TCCC Investment', 3], ['WPP Network intercompany invoicing', 2], ['OU Business Development', 1]];
+    var ws = wsData.map(function (w) {
+      var on = !!s.reported[w[0]];
+      return { name: w[0], n: w[1], first: '5 Oct 2026', on: on, label: on ? 'Reported' : 'Hidden',
+        toggle: function () { var n = Object.assign({}, s.reported); n[w[0]] = !on; self.setState({ reported: n }); } };
+    });
+    var rep = wsData.filter(function (w) { return s.reported[w[0]]; });
+    var repProjects = rep.reduce(function (a, w) { return a + w[1]; }, 0);
+    return {
+      tabs: tabs, rows: rows, colA: c.colA, colB: c.colB, tabTitle: c.label,
+      confirmDisabled: pending > 0,
+      confirmStyle: 'height: 44px; padding: 0 22px; border: 0; font-size: 14px; font-weight: 700; border-radius: 0; ' + (pending > 0 ? 'background: #B8B8CC; color: #000050; cursor: not-allowed;' : 'background: #000050; color: #FAFAF0; cursor: pointer;'),
+      pendingText: pending > 0 ? pending + ' missing project' + (pending === 1 ? ' needs' : 's need') + ' a decision before you can confirm.' : 'Ready to confirm: 869 records will replace the current TCCC list.',
+      pendingColor: pending > 0 ? '#A03A00' : '#000050',
+      history: history, ws: ws,
+      reportedCount: rep.length, hiddenCount: wsData.length - rep.length,
+      reportedProjects: repProjects, hiddenProjects: 869 - repProjects
+    };
+  }
+}
+</script>
+</body>
+</html>

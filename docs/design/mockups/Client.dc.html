@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>TCCC — client overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+select,button{font-family:inherit}
+</style>
+</helmet>
+<div style="background: #FAFAF0; min-height: 100vh; box-sizing: border-box">
+  <header style="background: #000050; color: #FAFAF0">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Weekly Project Health</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
+        <a href="#" style="color: #FAFAF0; text-decoration: none; border-bottom: 2px solid #FF7800; padding-bottom: 2px">Clients</a>
+        <a href="Main.dc.html" style="color: #FAFAF0; text-decoration: none">Workstreams</a>
+        <a href="Log.dc.html" style="color: #FAFAF0; text-decoration: none">Risks and issues</a>
+        <span style="color: #FAFAF0">Signed in as Updater (MR)</span>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 24px 32px 48px; box-sizing: border-box">
+    <nav aria-label="Breadcrumb" style="font-size: 13px; margin-bottom: 8px">
+      <a href="#">Clients</a>
+      <span aria-hidden="true" style="margin: 0 8px">›</span>
+      <span>TCCC</span>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 24px">
+      <div style="flex: 1 1 520px; min-width: 0">
+        <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Client overview · Week 47 · 16–20 Nov 2026</p>
+        <h1 style="margin: 0; font-size: 48px; line-height: 1.1; font-weight: 400">TCCC</h1>
+        <p style="margin: 10px 0 0; font-size: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+          <span>{{wsCount}} reported workstreams · {{totalIn}} projects in weekly report · Spend upload 16 Nov 2026 ·</span>
+          <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 12px; border-radius: 999px; background: #000050; color: #FAFAF0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em">INTERNAL</span>
+        </p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <label for="cweek" style="position: absolute; left: -9999px">Week</label>
+        <select id="cweek" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; color: #000050; font-size: 14px; border-radius: 0">
+          <option>Week 47 · 16–20 Nov 2026 (open)</option>
+          <option>Week 46 · 9–13 Nov 2026 (closed)</option>
+          <option>Week 45 · 2–6 Nov 2026 (closed)</option>
+        </select>
+        <a href="Log.dc.html" style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border: 1px solid #000050; background: #FFFFFF; color: #000050; font-size: 14px; font-weight: 700; text-decoration: none">Risks report</a>
+        <a href="Log.dc.html" style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border: 1px solid #000050; background: #FFFFFF; color: #000050; font-size: 14px; font-weight: 700; text-decoration: none">Issues report</a>
+      </div>
+    </div>
+
+    <section aria-label="Client weekly summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px">
+      <div style="background: #000050; color: #FAFAF0; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFA552">In weekly report</div>
+        <div style="font-size: 36px; margin-top: 12px">{{totalIn}}</div>
+        <div style="font-size: 14px; margin-top: 6px">projects across {{wsCount}} workstreams</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Updates this week</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 12px">
+          <span style="font-size: 36px">{{totalSub}}</span>
+          <span style="font-size: 18px">of {{totalIn}}</span>
+        </div>
+        <div style="font-size: 14px; margin-top: 6px">due Fri 20 Nov</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Delivery RAG</div>
+        <div style="display: flex; height: 14px; margin-top: 16px; background: #E6E6EE" role="img" aria-label="{{ragLabel}}">
+          <div style="{{gStyle}}"></div>
+          <div style="{{aStyle}}"></div>
+          <div style="{{rStyle}}"></div>
+        </div>
+        <div style="display: grid; gap: 2px; font-size: 14px; margin-top: 10px"><span>{{totG}} Green · On track</span><span>{{totA}} Amber · At risk</span><span>{{totR}} Red · Blocked</span></div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Open risks</div>
+        <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 12px">
+          <span style="font-size: 36px">{{totRisks}}</span>
+          <span style="font-size: 15px; font-weight: 700">{{riskDelta}}</span>
+        </div>
+        <div style="font-size: 14px; margin-top: 6px">{{totRisksPrev}} last week</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Open issues</div>
+        <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 12px">
+          <span style="font-size: 36px">{{totIssues}}</span>
+          <span style="font-size: 15px; font-weight: 700">{{issueDelta}}</span>
+        </div>
+        <div style="font-size: 14px; margin-top: 6px">{{totIssuesPrev}} last week</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Over budget</div>
+        <div style="font-size: 36px; margin-top: 12px; color: #A03A00">{{totOver}}</div>
+        <div style="font-size: 14px; margin-top: 6px">{{totNoSpend}} with no spend figure</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 20px">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Pipeline</div>
+        <div style="font-size: 36px; margin-top: 12px">{{totPipe}}</div>
+        <div style="font-size: 14px; margin-top: 6px">opportunities · {{totPipeHigh}} High</div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px">
+      <h2 style="margin: 0; font-size: 26px; font-weight: 400">Workstreams</h2>
+      <span style="font-size: 14px">Projects in the weekly report only · open a workstream for its projects and pipeline</span>
+    </div>
+
+    <section aria-label="Workstreams" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 16px; margin-bottom: 40px">
+      <sc-for list="{{ws}}" as="w" hint-placeholder-count="5">
+        <article style="background: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 18px; border-top: 4px solid #000050">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+            <div>
+              <h3 style="margin: 0; font-size: 24px; font-weight: 400"><a href="{{w.href}}" style="text-decoration: none">{{w.name}}</a></h3>
+              <p style="margin: 4px 0 0; font-size: 13px; color: #3D3D73">Account Director {{w.ad}} · {{w.inReport}} of {{w.total}} projects in report</p>
+            </div>
+            <span style="{{w.subStyle}}">{{w.subText}}</span>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73; margin-bottom: 8px">Delivery RAG</div>
+            <div style="display: flex; height: 12px; background: #E6E6EE" role="img" aria-label="{{w.ragLabel}}">
+              <div style="{{w.gStyle}}"></div>
+              <div style="{{w.aStyle}}"></div>
+              <div style="{{w.rStyle}}"></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; margin-top: 8px"><span>{{w.g}} Green · On track</span><span>{{w.a}} Amber · At risk</span><span>{{w.r}} Red · Blocked</span></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; border-top: 1px solid #D6D6E0; padding-top: 16px">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Risks</div>
+              <div style="font-size: 26px; margin-top: 4px">{{w.risks}}</div>
+              <div style="font-size: 12px; margin-top: 2px; font-weight: 700">{{w.riskDelta}}</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Issues</div>
+              <div style="font-size: 26px; margin-top: 4px">{{w.issues}}</div>
+              <div style="font-size: 12px; margin-top: 2px; font-weight: 700">{{w.issueDelta}}</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Over budget</div>
+              <div style="{{w.overStyle}}">{{w.over}}</div>
+              <div style="font-size: 12px; margin-top: 2px">{{w.noSpend}} no figure</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Pipeline</div>
+              <div style="font-size: 26px; margin-top: 4px">{{w.pipe}}</div>
+              <div style="font-size: 12px; margin-top: 2px">{{w.pipeHigh}} High</div>
+            </div>
+          </div>
+
+          <a href="{{w.href}}" style="align-self: flex-start; display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border: 1px solid #000050; color: #000050; font-size: 14px; font-weight: 700; text-decoration: none">Open {{w.name}} →</a>
+        </article>
+      </sc-for>
+    </section>
+
+    <section aria-labelledby="attn-h" style="background: #FFFFFF; padding: 28px">
+      <h2 id="attn-h" style="margin: 0; font-size: 26px; font-weight: 400">Needs attention</h2>
+      <p style="margin: 8px 0 18px; font-size: 14px; color: #3D3D73">Projects in the weekly report that are Red (Blocked), over budget or not yet updated this week, across all workstreams.</p>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 960px; border-collapse: collapse; font-size: 14px">
+          <caption style="position: absolute; left: -9999px">Projects needing attention across TCCC</caption>
+          <thead>
+            <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+              <th scope="col" style="padding: 10px 10px 10px 0">Job no.</th>
+              <th scope="col" style="padding: 10px">Project</th>
+              <th scope="col" style="padding: 10px">Workstream</th>
+              <th scope="col" style="padding: 10px">PM</th>
+              <th scope="col" style="padding: 10px">Delivery RAG</th>
+              <th scope="col" style="padding: 10px; text-align: right">% spend</th>
+              <th scope="col" style="padding: 10px">Why it's here</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{attn}}" as="p" hint-placeholder-count="5">
+              <tr style="border-bottom: 1px solid #D6D6E0">
+                <td style="padding: 14px 10px 14px 0; font-weight: 700">{{p.job}}</td>
+                <td style="padding: 14px 10px"><a href="#">{{p.name}}</a></td>
+                <td style="padding: 14px 10px">{{p.ws}}</td>
+                <td style="padding: 14px 10px">{{p.pm}}</td>
+                <td style="padding: 14px 10px"><span style="{{p.ragStyle}}">{{p.rag}}</span></td>
+                <td style="padding: 14px 10px; text-align: right; font-weight: 700">{{p.spend}}</td>
+                <td style="padding: 14px 10px">{{p.why}}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p style="font-size: 12px; margin-top: 16px">Covers the five reported workstreams only. Each workstream's RAG mix is shown as counts; a single roll-up RAG per workstream or client is not shown until the roll-up rules are agreed.</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var ws = [
+      { name: 'Josefine', ad: 'Josefine', total: 141, inReport: 7, sub: 3, g: 3, a: 3, r: 1, risks: 12, risksPrev: 10, issues: 5, issuesPrev: 4, over: 1, noSpend: 3, pipe: 1, pipeHigh: 0 },
+      { name: 'Mette', ad: 'Mette', total: 24, inReport: 3, sub: 3, g: 3, a: 0, r: 0, risks: 1, risksPrev: 2, issues: 0, issuesPrev: 0, over: 0, noSpend: 1, pipe: 0, pipeHigh: 0 },
+      { name: 'Mike', ad: 'Mike', total: 292, inReport: 8, sub: 6, g: 5, a: 2, r: 1, risks: 9, risksPrev: 9, issues: 3, issuesPrev: 2, over: 2, noSpend: 4, pipe: 4, pipeHigh: 2 },
+      { name: 'Nadine EU', ad: 'Nadine', total: 181, inReport: 6, sub: 4, g: 3, a: 2, r: 1, risks: 10, risksPrev: 8, issues: 4, issuesPrev: 3, over: 1, noSpend: 2, pipe: 3, pipeHigh: 1, href: 'Main.dc.html' },
+      { name: 'Nadine Global', ad: 'Nadine', total: 116, inReport: 5, sub: 5, g: 4, a: 1, r: 0, risks: 4, risksPrev: 5, issues: 1, issuesPrev: 1, over: 0, noSpend: 1, pipe: 2, pipeHigh: 0 }
+    ];
+    var pill = 'display: inline-flex; align-items: center; height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap;';
+    var delta = function (now, prev) { var d = now - prev; return d > 0 ? '▲ +' + d + ' on last week' : (d < 0 ? '▼ ' + d + ' on last week' : 'No change'); };
+    var bar = function (n, of, c) { return 'width: ' + (of ? n / of * 100 : 0) + '%; background: ' + c + ';'; };
+    var G = '#7FCB3F', A = '#F5A623', R = '#F08A8A';
+    var tot = function (k) { return ws.reduce(function (s, w) { return s + w[k]; }, 0); };
+    var rows = ws.map(function (w) {
+      var rated = w.g + w.a + w.r;
+      var all = w.sub === w.inReport;
+      return Object.assign({}, w, {
+        href: w.href || '#',
+        subText: all ? 'All updated' : w.sub + ' of ' + w.inReport + ' updated',
+        subStyle: pill + (all ? 'background: #000050; color: #FAFAF0;' : 'background: #FFE3C2; color: #000050;'),
+        ragLabel: w.name + ' delivery RAG: ' + w.g + ' Green, on track; ' + w.a + ' Amber, at risk; ' + w.r + ' Red, blocked',
+        gStyle: bar(w.g, rated, G), aStyle: bar(w.a, rated, A), rStyle: bar(w.r, rated, R),
+        riskDelta: delta(w.risks, w.risksPrev), issueDelta: delta(w.issues, w.issuesPrev),
+        overStyle: 'font-size: 26px; margin-top: 4px;' + (w.over ? ' color: #A03A00;' : '')
+      });
+    });
+    var ragBg = { Green: '#C9F2A6', Amber: '#FFC97A', Red: '#FFC2C2' };
+    var attn = [
+      { job: '484902', name: 'EU_Paid Social_Always-on_Q4', ws: 'Nadine EU', pm: 'MR', rag: 'Red', spend: '112.0%', why: 'Blocked · over budget' },
+      { job: '479310', name: 'GL_Brand Platform_Content Hub', ws: 'Mike', pm: 'TH', rag: 'Red', spend: '88.5%', why: 'Blocked' },
+      { job: '481207', name: 'NO_CRM_Lifecycle Programme', ws: 'Josefine', pm: 'KL', rag: 'Red', spend: '104.2%', why: 'Blocked · over budget' },
+      { job: '480566', name: 'GL_Media Reporting_Dashboard', ws: 'Mike', pm: 'TH', rag: 'Amber', spend: '131.0%', why: 'Over budget' },
+      { job: '486311', name: 'EU_Owned Channels_Pilot_Phase 1', ws: 'Nadine EU', pm: 'AK', rag: 'Amber', spend: 'No timesheet data', why: 'Not updated this week' }
+    ].map(function (p) { return Object.assign({}, p, { rag: p.rag + ' · ' + ({ Green: 'On track', Amber: 'At risk', Red: 'Blocked' })[p.rag], ragStyle: pill + 'background: ' + ragBg[p.rag] + '; color: #000050;' }); });
+    var g = tot('g'), a = tot('a'), r = tot('r'), rated = g + a + r;
+    var d2 = function (now, prev) { var d = now - prev; return d > 0 ? '▲ +' + d : (d < 0 ? '▼ ' + d : 'No change'); };
+    return {
+      ws: rows, attn: attn, wsCount: ws.length,
+      totalIn: tot('inReport'), totalSub: tot('sub'),
+      totG: g, totA: a, totR: r,
+      ragLabel: 'TCCC delivery RAG: ' + g + ' Green, on track; ' + a + ' Amber, at risk; ' + r + ' Red, blocked',
+      gStyle: bar(g, rated, G), aStyle: bar(a, rated, A), rStyle: bar(r, rated, R),
+      totRisks: tot('risks'), totRisksPrev: tot('risksPrev'), riskDelta: d2(tot('risks'), tot('risksPrev')),
+      totIssues: tot('issues'), totIssuesPrev: tot('issuesPrev'), issueDelta: d2(tot('issues'), tot('issuesPrev')),
+      totOver: tot('over'), totNoSpend: tot('noSpend'), totPipe: tot('pipe'), totPipeHigh: tot('pipeHigh')
+    };
+  }
+}
+</script>
+</body>
+</html>

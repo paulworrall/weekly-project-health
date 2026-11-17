@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Project 484902 — weekly update</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+input,select,textarea,button{font-family:inherit;color:#000050}
+</style>
+</helmet>
+<div style="background: #FAFAF0; min-height: 100vh; box-sizing: border-box">
+  <header style="background: #000050; color: #FAFAF0">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Weekly Project Health</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
+        <a href="Client.dc.html" style="color: #FAFAF0; text-decoration: none">Clients</a>
+        <a href="Main.dc.html" style="color: #FAFAF0; text-decoration: none; border-bottom: 2px solid #FF7800; padding-bottom: 2px">Workstreams</a>
+        <a href="Log.dc.html" style="color: #FAFAF0; text-decoration: none">Risks and issues</a>
+        <span style="color: #FAFAF0">Signed in as Updater (MR)</span>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 24px 32px 48px; box-sizing: border-box">
+    <nav aria-label="Breadcrumb" style="font-size: 13px; margin-bottom: 8px">
+      <a href="Client.dc.html">TCCC</a>
+      <span aria-hidden="true" style="margin: 0 8px">›</span>
+      <a href="Main.dc.html">Nadine EU</a>
+      <span aria-hidden="true" style="margin: 0 8px">›</span>
+      <span>484902</span>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 20px">
+      <div style="flex: 1 1 600px; min-width: 0">
+        <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Project · Week 47 · 16–20 Nov 2026</p>
+        <h1 style="margin: 0; font-size: 40px; line-height: 1.15; font-weight: 400">EU_Paid Social_Always-on_Q4</h1>
+        <p style="margin: 10px 0 0; font-size: 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+          <span>Job 484902 · Nadine EU · TCCC · PMs MR, AK ·</span>
+          <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 12px; border-radius: 999px; background: #FFF1C9; border: 1px solid #000050; font-size: 12px; font-weight: 700">In weekly report</span>
+          <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 12px; border-radius: 999px; background: #000050; color: #FAFAF0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em">INTERNAL</span>
+        </p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <label for="pweek" style="position: absolute; left: -9999px">Week</label>
+        <select id="pweek" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+          <option>Week 47 · 16–20 Nov 2026 (open)</option>
+          <option>Week 46 · 9–13 Nov 2026 (closed)</option>
+        </select>
+      </div>
+    </div>
+
+    <div role="status" style="{{bannerStyle}}">
+      <span style="font-weight: 700">{{bannerTitle}}</span>
+      <span>{{bannerText}}</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 36px">
+      <section aria-labelledby="inputs-h" style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; padding: 28px; box-sizing: border-box">
+        <h2 id="inputs-h" style="margin: 0 0 20px; font-size: 24px; font-weight: 400">This week's update</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <label for="status" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Status</label>
+            <select id="status" value="{{status}}" onChange="{{setStatus}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+              <option value="In progress">In progress</option>
+              <option value="On hold">On hold</option>
+              <option value="Complete">Complete</option>
+            </select>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <label for="complete" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">% complete</label>
+            <select id="complete" value="{{complete}}" onChange="{{setComplete}}" style="height: 44px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+                <sc-for list="{{completeOpts}}" as="c" hint-placeholder-count="11"><option value="{{c.value}}">{{c.label}}</option></sc-for>
+              </select>
+          </div>
+          <div role="group" aria-labelledby="cvs-label" style="display: flex; flex-direction: column; gap: 8px">
+            <span id="cvs-label" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Complete vs spend</span>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 8px; min-height: 44px">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+              <span style="width: 64px">Complete</span>
+              <div style="flex: 1; height: 12px; background: #E6E6EE; position: relative"><div style="{{completeBar}}"></div></div>
+              <span style="width: 52px; text-align: right; font-weight: 700">{{complete}}%</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+              <span style="width: 64px">Spend</span>
+              <div style="flex: 1; height: 12px; background: #E6E6EE; position: relative"><div style="{{spendBar}}"></div></div>
+              <span style="width: 52px; text-align: right; font-weight: 700; color: #A03A00">112.0%</span>
+            </div>
+            </div>
+            <p style="margin: 0; font-size: 13px; font-weight: 700; color: #A03A00">{{gapText}}</p>
+          </div>
+          <fieldset style="border: 0; padding: 0; margin: 0; grid-column: 1 / -1">
+            <legend style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0; margin-bottom: 8px">Delivery RAG</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ragOpts}}" as="o" hint-placeholder-count="3">
+                <button type="button" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="{{o.style}}">{{o.label}}</button>
+              </sc-for>
+            </div>
+          </fieldset>
+          <div style="display: flex; flex-direction: column; gap: 8px; grid-column: 1 / -1">
+            <label for="update" style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Weekly update</label>
+            <textarea id="update" rows="5" value="{{update}}" onChange="{{setUpdate}}" style="padding: 12px; border: 1px solid #000050; font-size: 14px; line-height: 1.5; border-radius: 0; resize: vertical"></textarea>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px">
+          <button type="button" onClick="{{submit}}" style="height: 44px; padding: 0 22px; border: 0; background: #000050; color: #FAFAF0; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">{{submitLabel}}</button>
+          <button type="button" onClick="{{saveDraft}}" style="height: 44px; padding: 0 22px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">Save draft</button>
+        </div>
+      </section>
+
+      <aside aria-labelledby="spend-h" style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section style="background: #FFFFFF; padding: 24px">
+          <h2 id="spend-h" style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">% of budget spent</h2>
+          <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 10px">
+            <span style="font-size: 44px; color: #A03A00">112.0%</span>
+            <span style="font-size: 14px; font-weight: 700; color: #A03A00">Over budget · ▲ +7.0 pts on last week</span>
+          </div>
+          <p style="margin: 8px 0 0; font-size: 13px; color: #3D3D73">From the spend upload of 16 Nov 2026. Can't be edited here; corrections arrive with the next upload.</p>
+          <div style="margin-top: 20px">
+            <div style="display: flex; gap: 16px; font-size: 12px; margin-bottom: 8px">
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; background: #FF7800" aria-hidden="true"></span>% spend</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; background: #000050" aria-hidden="true"></span>% complete</span>
+            </div>
+            <div role="img" aria-label="{{trendLabel}}" style="position: relative; display: flex; align-items: flex-end; gap: 6px; height: 140px; border-bottom: 1px solid #000050">
+              <div style="position: absolute; left: 0; right: 0; bottom: 83.3%; border-top: 1px dashed #3D3D73" aria-hidden="true"></div>
+              <sc-for list="{{trend}}" as="t" hint-placeholder-count="8">
+                <div style="flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 2px; height: 100%">
+                  <div style="{{t.spendStyle}}"></div>
+                  <div style="{{t.completeStyle}}"></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 6px" aria-hidden="true">
+              <sc-for list="{{trend}}" as="t" hint-placeholder-count="8">
+                <span style="flex: 1; text-align: center; font-size: 11px">{{t.week}}</span>
+              </sc-for>
+            </div>
+            <p style="margin: 6px 0 0; font-size: 11px; color: #3D3D73">Dashed line = 100% of budget.</p>
+          </div>
+        </section>
+        <section aria-labelledby="ragh-h" style="background: #FFFFFF; padding: 24px">
+          <h2 id="ragh-h" style="margin: 0 0 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Delivery RAG, last 8 weeks</h2>
+          <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px">
+            <sc-for list="{{ragHist}}" as="h" hint-placeholder-count="8">
+              <li style="display: flex; flex-direction: column; gap: 4px; font-size: 11px">
+                <span>{{h.week}}</span>
+                <span style="{{h.style}}">{{h.rag}}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+      </aside>
+    </div>
+
+    <sc-for list="{{sections}}" as="sec" hint-placeholder-count="2">
+      <section aria-label="{{sec.title}}" style="background: #FFFFFF; padding: 28px; margin-bottom: 24px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px">
+          <div>
+            <h2 style="margin: 0; font-size: 24px; font-weight: 400">{{sec.title}}</h2>
+            <p style="margin: 6px 0 0; font-size: 14px">{{sec.summary}}</p>
+          </div>
+          <button type="button" onClick="{{sec.add}}" style="height: 44px; padding: 0 20px; border: 0; background: #000050; color: #FAFAF0; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 0">{{sec.addLabel}}</button>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 1240px; border-collapse: collapse; font-size: 14px">
+            <thead>
+              <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+                <th scope="col" style="padding: 10px 10px 10px 0; width: 70px">ID</th>
+                <th scope="col" style="padding: 10px">{{sec.single}}</th>
+                <th scope="col" style="padding: 10px; width: 120px">{{sec.levelLabel}}</th>
+                <th scope="col" style="padding: 10px; width: 90px">Owner</th>
+                <th scope="col" style="padding: 10px; width: 120px">Status</th>
+                <th scope="col" style="padding: 10px; width: 110px">Raised</th>
+                <th scope="col" style="padding: 10px; width: 150px">Due</th>
+                <th scope="col" style="padding: 10px">{{sec.actionLabel}}</th>
+                <th scope="col" style="padding: 10px; width: 170px"><span style="position: absolute; left: -9999px">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="3">
+                <tr style="{{r.rowStyle}}">
+                  <td style="padding: 12px 10px 12px 0; font-weight: 700">{{r.id}}</td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <input type="text" value="{{r.dTitle}}" onChange="{{r.onTitle}}" aria-label="{{r.titleLabel}}" style="width: 100%; height: 40px; padding: 0 10px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box"></input>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <span>{{r.title}}</span>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <select value="{{r.dLevel}}" onChange="{{r.onLevel}}" aria-label="{{r.levelAria}}" style="height: 40px; padding: 0 8px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+                        <sc-for list="{{r.levelOpts}}" as="lv" hint-placeholder-count="3"><option value="{{lv}}">{{lv}}</option></sc-for>
+                      </select>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <span style="{{r.levelStyle}}">{{r.level}}</span>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <input type="text" value="{{r.dOwner}}" onChange="{{r.onOwner}}" aria-label="Owner" style="width: 70px; height: 40px; padding: 0 8px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box"></input>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <span>{{r.owner}}</span>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <select value="{{r.dStatus}}" onChange="{{r.onStatus}}" aria-label="Status" style="height: 40px; padding: 0 8px; border: 1px solid #000050; background: #FFFFFF; font-size: 14px; border-radius: 0">
+                        <option value="Open">Open</option>
+                        <option value="On pause">On pause</option>
+                        <option value="Closed">Closed</option>
+                      </select>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <span style="{{r.statusStyle}}">{{r.status}}</span>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <div>{{r.raised}}</div>
+                    <div style="font-size: 12px; color: #3D3D73">{{r.age}}</div>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <input type="date" value="{{r.dDue}}" onChange="{{r.onDue}}" aria-label="Due date" style="height: 40px; padding: 0 8px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box"></input>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <div>{{r.dueText}}</div>
+                      <sc-if value="{{r.overdue}}" hint-placeholder-val="{{ false }}">
+                        <span style="display: inline-block; margin-top: 4px; padding: 2px 8px; background: #FFE3C2; font-size: 12px; font-weight: 700">{{r.overdueText}}</span>
+                      </sc-if>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 12px 10px">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <textarea rows="2" value="{{r.dAction}}" onChange="{{r.onAction}}" aria-label="{{sec.actionLabel}}" style="width: 100%; padding: 8px 10px; border: 1px solid #000050; font-size: 14px; border-radius: 0; box-sizing: border-box; resize: vertical"></textarea>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <span>{{r.action}}</span>
+                    </sc-if>
+                  </td>
+                  <td style="padding: 8px 0 8px 10px; white-space: nowrap">
+                    <sc-if value="{{r.editing}}" hint-placeholder-val="{{ false }}">
+                      <div style="display: flex; gap: 6px">
+                        <button type="button" onClick="{{r.save}}" style="height: 40px; padding: 0 14px; border: 0; background: #000050; color: #FAFAF0; font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 0">Save</button>
+                        <button type="button" onClick="{{r.cancel}}" style="height: 40px; padding: 0 12px; border: 1px solid #000050; background: #FFFFFF; font-size: 13px; cursor: pointer; border-radius: 0">Cancel</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{r.viewing}}" hint-placeholder-val="{{ true }}">
+                      <div style="display: flex; gap: 6px">
+                        <button type="button" onClick="{{r.edit}}" aria-label="{{r.editLabel}}" style="height: 40px; padding: 0 14px; border: 1px solid #000050; background: #FFFFFF; font-size: 13px; cursor: pointer; border-radius: 0">Edit</button>
+                        <button type="button" onClick="{{r.remove}}" aria-label="{{r.removeLabel}}" style="height: 40px; padding: 0 14px; border: 1px solid #A03A00; background: #FFFFFF; color: #A03A00; font-size: 13px; cursor: pointer; border-radius: 0">Delete</button>
+                      </div>
+                    </sc-if>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin: 14px 0 0; font-size: 13px; color: #3D3D73">{{sec.footer}}</p>
+      </section>
+    </sc-for>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":2050}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      status: 'In progress', rag: 'Red', complete: 80, submitted: false, draftSaved: false,
+      update: 'Delivery on track for the Q4 flighting, but spend is now 112% of budget with around 20% of activity still to run. Rising CPMs are the main cause. A change request for extra budget went to the client on 14 Nov; decision expected at the 20 Nov review. Two landing pages are missing the tracking pixel; fix goes live 18 Nov.',
+      editing: null, draft: {}, seq: { risks: 22, issues: 10 },
+      items: {
+        risks: [
+          { id: 'R-014', title: 'Q4 media costs rising faster than planned (CPMs up 18%)', level: 'High', owner: 'MR', status: 'Open', raised: '21 Oct 2026', days: 26, due: '2026-11-20', action: 'Rebalance spend towards owned channels; review with client on 20 Nov.' },
+          { id: 'R-017', title: 'Creative approvals slipping past the weekly deadline', level: 'Medium', owner: 'AK', status: 'Open', raised: '3 Nov 2026', days: 13, due: '2026-11-12', action: 'Agree a 48-hour approval turnaround with the brand team.' },
+          { id: 'R-019', title: 'Platform policy change on promotions aimed at under-18s', level: 'Medium', owner: 'MR', status: 'On pause', raised: '28 Oct 2026', days: 19, due: '2026-12-04', action: 'Legal review booked once the new policy is published.' },
+          { id: 'R-021', title: 'Lead analyst on leave for two weeks in December', level: 'Low', owner: 'MR', status: 'Open', raised: '10 Nov 2026', days: 6, due: '2026-11-27', action: 'Handover notes written; cover agreed with the data team.' }
+        ],
+        issues: [
+          { id: 'I-008', title: 'Budget exceeded: 112% spent with about 20% of delivery remaining', level: 'Blocker', owner: 'MR', status: 'Open', raised: '12 Nov 2026', days: 4, due: '2026-11-20', action: 'Change request for extra budget sent to the client on 14 Nov.' },
+          { id: 'I-009', title: 'Tracking pixel missing on two landing pages', level: 'High', owner: 'JS', status: 'Open', raised: '13 Nov 2026', days: 3, due: '2026-11-18', action: 'Fix deployed to staging; live by 18 Nov.' }
+        ]
+      },
+      archived: { risks: 0, issues: 0 }
+    };
+  }
+  renderVals() {
+    var s = this.state, self = this;
+    var pill = 'display: inline-flex; align-items: center; justify-content: center; height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap;';
+    var tag = 'display: inline-flex; align-items: center; justify-content: center; min-width: 80px; height: 28px; padding: 0 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; box-sizing: border-box;';
+    var levelStyle = {
+      Blocker: tag + 'background: #7A1010; color: #FFFFFF;',
+      High: tag + 'background: #000050; color: #FAFAF0;',
+      Medium: tag + 'background: #FFC97A; color: #000050;',
+      Low: tag + 'border: 1px solid #000050; color: #000050; background: #FFFFFF;'
+    };
+    var statusStyle = {
+      'Open': pill + 'border: 1px solid #000050; background: #FFFFFF;',
+      'On pause': pill + 'background: #E6E6EE;',
+      'Closed': pill + 'background: #000050; color: #FAFAF0;'
+    };
+    var ragBg = { Green: '#C9F2A6', Amber: '#FFC97A', Red: '#FFC2C2' };
+    var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var fmt = function (iso) { if (!iso) return 'No due date'; var p = iso.split('-'); return Number(p[2]) + ' ' + MONTHS[Number(p[1]) - 1] + ' ' + p[0]; };
+    var daysLate = function (iso) { if (!iso) return 0; return Math.round((new Date(2026, 10, 16) - new Date(iso + 'T00:00:00')) / 86400000); };
+    var setField = function (k) { return function (e) { var d = Object.assign({}, s.draft); d[k] = e.target.value; self.setState({ draft: d }); }; };
+    var mk = function (key, single, levelLabel, levels, actionLabel) {
+      var list = s.items[key];
+      var open = list.filter(function (i) { return i.status !== 'Closed'; });
+      var overdueN = open.filter(function (i) { return daysLate(i.due) > 0; }).length;
+      var byLevel = levels.map(function (l) { return open.filter(function (i) { return i.level === l; }).length + ' ' + l; }).join(' · ');
+      var rows = list.map(function (it) {
+        var ed = s.editing && s.editing.key === key && s.editing.id === it.id;
+        return {
+          id: it.id, title: it.title, level: it.level, owner: it.owner, status: it.status, raised: it.raised,
+          age: it.days === 0 ? 'Today' : it.days + (it.days === 1 ? ' day' : ' days') + ' open',
+          action: it.action, editing: ed, viewing: !ed,
+          dueText: fmt(it.due), overdue: it.status !== 'Closed' && daysLate(it.due) > 0,
+          overdueText: 'Overdue by ' + daysLate(it.due) + (daysLate(it.due) === 1 ? ' day' : ' days'),
+          dDue: ed ? (s.draft.due || '') : '', onDue: setField('due'),
+          dTitle: ed ? s.draft.title : '', dLevel: ed ? s.draft.level : '', dOwner: ed ? s.draft.owner : '', dStatus: ed ? s.draft.status : '', dAction: ed ? s.draft.action : '',
+          onTitle: setField('title'), onLevel: setField('level'), onOwner: setField('owner'), onStatus: setField('status'), onAction: setField('action'),
+          levelOpts: levels, levelStyle: levelStyle[it.level], statusStyle: statusStyle[it.status],
+          titleLabel: single + ' title', levelAria: levelLabel,
+          editLabel: 'Edit ' + it.id, removeLabel: 'Delete ' + it.id + ' (archived and kept in the history)',
+          rowStyle: 'border-bottom: 1px solid #D6D6E0; vertical-align: top;' + (ed ? ' background: #FFF8E6;' : '') + (it.status === 'Closed' && !ed ? ' color: #5A5A85;' : ''),
+          edit: function () { self.setState({ editing: { key: key, id: it.id }, draft: { title: it.title, level: it.level, owner: it.owner, status: it.status, due: it.due || '', action: it.action } }); },
+          cancel: function () {
+            var items = Object.assign({}, s.items);
+            if (it.isNew) items[key] = items[key].filter(function (x) { return x.id !== it.id; });
+            self.setState({ editing: null, draft: {}, items: items });
+          },
+          save: function () {
+            var items = Object.assign({}, s.items);
+            items[key] = items[key].map(function (x) { return x.id === it.id ? Object.assign({}, x, s.draft, { isNew: false }) : x; });
+            self.setState({ items: items, editing: null, draft: {} });
+          },
+          remove: function () {
+            var items = Object.assign({}, s.items); items[key] = items[key].filter(function (x) { return x.id !== it.id; });
+            var ar = Object.assign({}, s.archived); ar[key] = ar[key] + 1;
+            self.setState({ items: items, archived: ar });
+          }
+        };
+      });
+      return {
+        title: single === 'Risk' ? 'Risks' : 'Issues', single: single, levelLabel: levelLabel, actionLabel: actionLabel,
+        addLabel: '+ Add ' + single.toLowerCase(),
+        summary: open.length + ' open or on pause · ' + byLevel + ' · ' + overdueN + ' overdue',
+        footer: 'Counts include open and on-pause items only. Close an item when it is resolved; Delete archives it and keeps it in the history.' + (s.archived[key] ? ' ' + s.archived[key] + ' archived this session.' : ''),
+        rows: rows,
+        add: function () {
+          if (s.editing) return;
+          var seq = Object.assign({}, s.seq); seq[key] = seq[key] + 1;
+          var id = (key === 'risks' ? 'R-' : 'I-') + String(seq[key]).padStart(3, '0');
+          var blank = { id: id, title: '', level: levels[levels.length - 2], owner: 'MR', status: 'Open', raised: '16 Nov 2026', days: 0, due: '2026-11-27', action: '', isNew: true };
+          var items = Object.assign({}, s.items); items[key] = [blank].concat(items[key]);
+          self.setState({ items: items, seq: seq, editing: { key: key, id: id }, draft: { title: '', level: blank.level, owner: 'MR', status: 'Open', due: '2026-11-27', action: '' } });
+        }
+      };
+    };
+    var sections = [
+      mk('risks', 'Risk', 'Severity', ['High', 'Medium', 'Low'], 'Mitigation'),
+      mk('issues', 'Issue', 'Priority', ['Blocker', 'High', 'Medium', 'Low'], 'Next step')
+    ];
+    var ragMeaning = { Green: 'On track', Amber: 'At risk', Red: 'Blocked' };
+    var ragOpts = ['Green', 'Amber', 'Red'].map(function (r) {
+      var on = s.rag === r;
+      return { label: r + ' · ' + ragMeaning[r], pressed: on ? 'true' : 'false', pick: function () { self.setState({ rag: r }); },
+        style: 'height: 44px; padding: 0 18px; border-radius: 999px; white-space: nowrap; font-size: 14px; font-weight: 700; cursor: pointer; border: ' + (on ? '2px solid #000050' : '1px solid #000050') + '; background: ' + (on ? ragBg[r] : '#FFFFFF') + '; color: #000050;' + (on ? ' box-shadow: inset 0 0 0 2px #FFFFFF;' : '') };
+    });
+    var spendPts = [0.55, 0.63, 0.71, 0.80, 0.88, 0.97, 1.05, 1.12];
+    var compPts = [45, 50, 55, 62, 68, 72, 76, Number(s.complete) || 0];
+    var weeks = ['W40', 'W41', 'W42', 'W43', 'W44', 'W45', 'W46', 'W47'];
+    var h = function (v) { return Math.min(v / 1.2 * 100, 100); };
+    var trend = weeks.map(function (w, i) {
+      return { week: w,
+        spendStyle: 'width: 40%; height: ' + h(spendPts[i]) + '%; background: #FF7800;',
+        completeStyle: 'width: 40%; height: ' + h(compPts[i] / 100) + '%; background: #000050;' };
+    });
+    var ragHist = ['Green', 'Green', 'Amber', 'Amber', 'Amber', 'Amber', 'Red', s.rag].map(function (r, i) {
+      return { week: i === 7 ? 'W47 (now)' : weeks[i], rag: r + ' · ' + ragMeaning[r], style: pill + 'background: ' + ragBg[r] + ';' };
+    });
+    var c = Number(s.complete) || 0;
+    var gap = 112 - c;
+    return {
+      completeOpts: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(function (v) { return { value: String(v), label: v + '%' }; }),
+      sections: sections, ragOpts: ragOpts, trend: trend, ragHist: ragHist,
+      trendLabel: '% spend and % complete by week, W40 to W47. Spend rose from 55% to 112%; complete rose from 45% to ' + c + '%.',
+      status: s.status, complete: String(s.complete), update: s.update,
+      setStatus: function (e) { self.setState({ status: e.target.value }); },
+      setComplete: function (e) { self.setState({ complete: Number(e.target.value) }); },
+      setUpdate: function (e) { self.setState({ update: e.target.value }); },
+      completeBar: 'position: absolute; left: 0; top: 0; bottom: 0; width: ' + c + '%; background: #000050;',
+      spendBar: 'position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: #FF7800;',
+      gapText: gap > 0 ? 'Spend is ' + gap + ' points ahead of completion.' : 'Completion is level with or ahead of spend.',
+      submitLabel: s.submitted ? 'Submit again' : 'Submit update',
+      submit: function () { self.setState({ submitted: true, draftSaved: false }); },
+      saveDraft: function () { self.setState({ draftSaved: true }); },
+      bannerTitle: s.submitted ? 'Submitted today at 14:05.' : (s.draftSaved ? 'Draft saved, not yet submitted.' : 'Not submitted this week.'),
+      bannerText: s.submitted ? 'This update is in the weekly report. You can edit and submit again until the week closes on Fri 20 Nov; the latest submission is what the report shows.' : 'Last submission: 13 Nov 2026 (week 46). Submit by Fri 20 Nov to include this week’s update in the report.',
+      bannerStyle: 'display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; background: ' + (s.submitted ? '#E3F5D3' : '#FFE3C2') + ';'
+    };
+  }
+}
+</script>
+</body>
+</html>
