@@ -4,7 +4,7 @@ import { SimpleTablePage } from "@/components/features/simple-table";
 import { formatDateTime } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { getAuditEvents } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 
 export const metadata: Metadata = { title: "Change history" };
 
@@ -17,6 +17,7 @@ const ACTION = {
 
 export default async function HistoryPage() {
   const viewer = await requireViewer();
+  const repo = await getRepository();
   if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   return (
     <SimpleTablePage
@@ -32,7 +33,7 @@ export default async function HistoryPage() {
         { label: "Old value" },
         { label: "New value" },
       ]}
-      rows={getAuditEvents().map((e) => ({
+      rows={repo.getAuditEvents().map((e) => ({
         key: e.id,
         cells: [
           formatDateTime(e.at),

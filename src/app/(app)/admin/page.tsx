@@ -21,7 +21,7 @@ import {
 } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { getAdminHome } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 import { ClientCard } from "@/components/features/client-card";
 
 export const metadata: Metadata = { title: "Admin home" };
@@ -30,8 +30,9 @@ const linkBtn = "inline-flex min-h-11 items-center px-5 text-[14px] font-medium 
 
 export default async function AdminHomePage() {
   const viewer = await requireViewer();
+  const repo = await getRepository();
   if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
-  const v = getAdminHome();
+  const v = repo.getAdminHome();
   const due = formatWeekdayDayMonth(v.week.closeDate);
   const share = v.inReport ? (v.submitted / v.inReport) * 100 : 0;
   const latest = v.uploads[0];

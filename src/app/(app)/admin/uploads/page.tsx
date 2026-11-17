@@ -25,7 +25,7 @@ import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DEFAULT_CLIENT_ID, getUploadsView, resolveWeek } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 import type { UploadStatus } from "@/types/domain";
 
 export const metadata: Metadata = { title: "Spend uploads" };
@@ -44,12 +44,13 @@ const STATUS: Record<
 
 export default async function UploadsPage(props: PageProps<"/admin/uploads">) {
   const viewer = await requireViewer();
+  const repo = await getRepository();
   if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   const { client } = await props.searchParams;
-  const v = getUploadsView(typeof client === "string" ? client : DEFAULT_CLIENT_ID);
+  const v = repo.getUploadsView(typeof client === "string" ? client : repo.defaultClientId);
   if (!v) notFound();
   const staged = v.staged;
-  const week = resolveWeek(undefined);
+  const week = repo.resolveWeek(undefined);
   const s = v.latestStats;
   const up = v.latest?.upload;
   const changes = (t: string, f?: string) =>

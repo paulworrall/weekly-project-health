@@ -214,3 +214,14 @@ export interface UploadsView {
 export interface SimpleUser extends User {
   lastSignInText: string;
 }
+
+/** Risk and issue log page data. */
+export interface LogData {
+  client: Client;
+  week: WeekContext;
+  weeks: WeekOption[];
+  /** Up to 12 weeks ending with the viewed week, oldest first (as ?week= keys). */
+  chartWeeks: string[];
+  workstreams: { id: string; name: string }[];
+  items: LogRow[];
+}

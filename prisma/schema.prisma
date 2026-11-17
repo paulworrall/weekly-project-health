@@ -1,7 +1,13 @@
-// Weekly Project Health — Prisma schema.
-// Models arrive in brief 02 (CLAUDE.md §8). IDs: String @id @default(cuid()), plus
-// createdAt @default(now()) and updatedAt @updatedAt. Constraints Prisma can't express
-// go in the migration as raw SQL, with a comment here.
+// Weekly Project Health — Prisma schema (CLAUDE.md §8, brief 02).
+//
+// IDs are strings (cuid by default; the seed sets readable ids such as "northwind" so URLs stay
+// stable). Every model has createdAt / updatedAt. Nothing is hard-deleted: archivable models
+// have archivedAt / archivedById (src/lib/archive.ts). Every change to user-entered data writes
+// an AuditEvent in the same transaction (src/lib/audit-db.ts).
+//
+// Migrations: written offline with `prisma migrate diff` and applied with
+// `prisma migrate deploy` after asking Paul. Never `migrate dev` / `migrate reset` on the live
+// database (decision log, 17 Nov 2026).
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +16,458 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ── Enums (mirror src/types/domain.ts) ───────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  UPDATER
+}
+
+enum ProjectStatus {
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETE
+}
+
+enum Rag {
+  GREEN
+  AMBER
+  RED
+}
+
+enum UpdateState {
+  DRAFT
+  SUBMITTED
+}
+
+enum RiskSeverity {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum IssuePriority {
+  BLOCKER
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum LogStatus {
+  OPEN
+  ON_PAUSE
+  CLOSED
+}
+
+enum Likelihood {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum SpendStatus {
+  VALUE
+  NO_BUDGET
+  NO_TIMESHEET
+}
+
+/// Reporting Hub lifecycle. UI words: Confirmed (LIVE / REPLACED), Rejected, Cancelled.
+enum UploadStatus {
+  CHECKING
+  REJECTED
+  READY_TO_REVIEW
+  CANCELLED
+  LIVE
+  REPLACED
+}
+
+enum ChangeType {
+  NEW
+  CHANGED
+  MOVED
+  MISSING
+}
+
+enum ChangeField {
+  name
+  percentSpent
+}
+
+enum MissingDecision {
+  KEEP
+  MARK
+}
+
+enum PeriodState {
+  OPEN
+  CLOSED
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  ARCHIVE
+  RESTORE
+}
+
+// ── People ───────────────────────────────────────────────────────────────────────────────────
+
+model User {
+  id                 String    @id @default(cuid())
+  name               String
+  initials           String
+  email              String    @unique
+  /// bcrypt hash; null until the Admin sets a temporary password (brief 03).
+  passwordHash       String?
+  role               Role
+  mustChangePassword Boolean   @default(true)
+  failedSignInCount  Int       @default(0)
+  lockedUntil        DateTime?
+  lastSignInAt       DateTime?
+  archivedAt         DateTime?
+  archivedById       String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  uploads     SpendUpload[]
+  submissions ProjectWeek[]
+  auditEvents AuditEvent[]
+}
+
+// ── Client > Workstream > Project ────────────────────────────────────────────────────────────
+
+model Client {
+  id           String    @id @default(cuid())
+  name         String    @unique
+  /// Last risk / issue number used ("R-001" …). Incremented in the insert transaction; never reused.
+  riskSeq      Int       @default(0)
+  issueSeq     Int       @default(0)
+  archivedAt   DateTime?
+  archivedById String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  workstreams  Workstream[]
+  projects     Project[]
+  uploads      SpendUpload[]
+  risks        RiskItem[]
+  issues       IssueItem[]
+  logSnapshots LogWeekSnapshot[]
+}
+
+model Workstream {
+  id              String   @id @default(cuid())
+  clientId        String
+  /// As in the spend file; never edited in the tool.
+  name            String
+  /// Only reported workstreams have pages and appear in reports.
+  reported        Boolean  @default(false)
+  /// Free text, set by the Admin (decision log, 17 Nov 2026).
+  accountDirector String?
+  firstSeen       DateTime @db.Date
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  client            Client                 @relation(fields: [clientId], references: [id])
+  projects          Project[]
+  pipeline          PipelineOpportunity[]
+  pipelineSnapshots PipelineWeekSnapshot[]
+
+  @@unique([clientId, name])
+}
+
+model Project {
+  id                     String    @id @default(cuid())
+  clientId               String
+  workstreamId           String
+  /// From the spend file, stored as text.
+  jobNumber              String
+  name                   String
+  /// Carries over week to week until changed.
+  includeInReport        Boolean   @default(false)
+  missingFromFileSince   DateTime? @db.Date
+  markedNoLongerInFileAt DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  client     Client                @relation(fields: [clientId], references: [id])
+  workstream Workstream            @relation(fields: [workstreamId], references: [id])
+  spends     ProjectSpend[]
+  weeks      ProjectWeek[]
+  risks      RiskItem[]
+  issues     IssueItem[]
+  snapshots  ProjectWeekSnapshot[]
+
+  @@unique([clientId, jobNumber])
+  @@index([workstreamId])
+}
+
+// ── Spend uploads ────────────────────────────────────────────────────────────────────────────
+
+model SpendUpload {
+  id           String       @id @default(cuid())
+  clientId     String
+  uploadedById String
+  uploadedAt   DateTime
+  extractDate  DateTime     @db.Date
+  fileName     String
+  /// The uploaded file (no separate blob storage at ~870 rows).
+  file         Bytes?
+  status       UploadStatus
+  /// Why it was rejected or cancelled.
+  note         String?
+  rowCount     Int?
+  newCount     Int?
+  changedCount Int?
+  missingCount Int?
+  errorCount   Int          @default(0)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  client     Client              @relation(fields: [clientId], references: [id])
+  uploadedBy User                @relation(fields: [uploadedById], references: [id])
+  rows       SpendUploadRow[]
+  changes    SpendUploadChange[]
+  spends     ProjectSpend[]
+
+  @@index([clientId, uploadedAt])
+}
+
+/// Staged parsed rows, with row-level errors.
+model SpendUploadRow {
+  id             String       @id @default(cuid())
+  uploadId       String
+  rowNumber      Int
+  jobNumber      String
+  projectName    String
+  workstreamName String
+  percentSpent   Decimal?     @db.Decimal(12, 6)
+  spendStatus    SpendStatus?
+  error          String?
+
+  upload SpendUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+
+  @@index([uploadId])
+}
+
+/// Preview change list for an upload.
+model SpendUploadChange {
+  id             String           @id @default(cuid())
+  uploadId       String
+  type           ChangeType
+  field          ChangeField?
+  jobNumber      String
+  projectName    String
+  workstreamName String
+  before         String?
+  after          String?
+  decision       MissingDecision?
+
+  upload SpendUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+
+  @@index([uploadId])
+}
+
+/// % spend for a project from a confirmed upload.
+model ProjectSpend {
+  id           String      @id @default(cuid())
+  projectId    String
+  uploadId     String
+  /// Fraction: 0.25 = 25%, may exceed 1. Null unless spendStatus is VALUE.
+  percentSpent Decimal?    @db.Decimal(12, 6)
+  spendStatus  SpendStatus
+
+  project Project     @relation(fields: [projectId], references: [id])
+  upload  SpendUpload @relation(fields: [uploadId], references: [id])
+
+  @@unique([projectId, uploadId])
+  @@index([uploadId])
+}
+
+// ── Reporting weeks and weekly inputs ────────────────────────────────────────────────────────
+
+model ReportingPeriod {
+  id        String      @id @default(cuid())
+  isoYear   Int
+  isoWeek   Int
+  startsOn  DateTime    @db.Date
+  endsOn    DateTime    @db.Date
+  /// Friday 23:59 Europe/London, stored in UTC.
+  closesAt  DateTime
+  state     PeriodState @default(OPEN)
+  closedAt  DateTime?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  projectWeeks      ProjectWeek[]
+  projectSnapshots  ProjectWeekSnapshot[]
+  pipelineSnapshots PipelineWeekSnapshot[]
+  logSnapshots      LogWeekSnapshot[]
+
+  @@unique([isoYear, isoWeek])
+}
+
+model ProjectWeek {
+  id              String        @id @default(cuid())
+  projectId       String
+  periodId        String
+  status          ProjectStatus
+  rag             Rag
+  /// 0–100 in steps of 10.
+  percentComplete Int
+  updateText      String        @default("")
+  state           UpdateState
+  submittedAt     DateTime?
+  submittedById   String?
+  /// Closed weeks only: no submission by close, last week's values carried forward.
+  notUpdated      Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  project     Project         @relation(fields: [projectId], references: [id])
+  period      ReportingPeriod @relation(fields: [periodId], references: [id])
+  submittedBy User?           @relation(fields: [submittedById], references: [id])
+
+  @@unique([projectId, periodId])
+  @@index([periodId])
+}
+
+// ── Risks, issues, pipeline ──────────────────────────────────────────────────────────────────
+
+model RiskItem {
+  id           String       @id @default(cuid())
+  clientId     String
+  projectId    String
+  /// "R-001", per client.
+  ref          String
+  title        String
+  level        RiskSeverity
+  /// Free text.
+  owner        String
+  status       LogStatus    @default(OPEN)
+  raisedOn     DateTime     @db.Date
+  dueOn        DateTime?    @db.Date
+  /// Mitigation.
+  action       String       @default("")
+  closedOn     DateTime?    @db.Date
+  archivedAt   DateTime?
+  archivedById String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  client  Client  @relation(fields: [clientId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@unique([clientId, ref])
+  @@index([projectId])
+}
+
+model IssueItem {
+  id           String        @id @default(cuid())
+  clientId     String
+  projectId    String
+  /// "I-001", per client.
+  ref          String
+  title        String
+  level        IssuePriority
+  /// Free text.
+  owner        String
+  status       LogStatus     @default(OPEN)
+  raisedOn     DateTime      @db.Date
+  dueOn        DateTime?     @db.Date
+  /// Next step.
+  action       String        @default("")
+  closedOn     DateTime?     @db.Date
+  archivedAt   DateTime?
+  archivedById String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  client  Client  @relation(fields: [clientId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@unique([clientId, ref])
+  @@index([projectId])
+}
+
+model PipelineOpportunity {
+  id            String     @id @default(cuid())
+  workstreamId  String
+  likelihood    Likelihood
+  title         String
+  possibleStart DateTime?  @db.Date
+  mapOwner      String
+  clientOwner   String     @default("")
+  nextSteps     String     @default("")
+  archivedAt    DateTime?
+  archivedById  String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  workstream Workstream @relation(fields: [workstreamId], references: [id])
+
+  @@index([workstreamId])
+}
+
+// ── Closed-week snapshots (written by the week close, brief 06; never modified) ──────────────
+
+model ProjectWeekSnapshot {
+  id        String   @id @default(cuid())
+  periodId  String
+  projectId String
+  data      Json
+  createdAt DateTime @default(now())
+
+  period  ReportingPeriod @relation(fields: [periodId], references: [id])
+  project Project         @relation(fields: [projectId], references: [id])
+
+  @@unique([periodId, projectId])
+}
+
+model PipelineWeekSnapshot {
+  id           String   @id @default(cuid())
+  periodId     String
+  workstreamId String
+  data         Json
+  createdAt    DateTime @default(now())
+
+  period     ReportingPeriod @relation(fields: [periodId], references: [id])
+  workstream Workstream      @relation(fields: [workstreamId], references: [id])
+
+  @@unique([periodId, workstreamId])
+}
+
+model LogWeekSnapshot {
+  id        String   @id @default(cuid())
+  periodId  String
+  clientId  String
+  data      Json
+  createdAt DateTime @default(now())
+
+  period ReportingPeriod @relation(fields: [periodId], references: [id])
+  client Client          @relation(fields: [clientId], references: [id])
+
+  @@unique([periodId, clientId])
+}
+
+// ── Change history ───────────────────────────────────────────────────────────────────────────
+
+model AuditEvent {
+  id       String      @id @default(cuid())
+  at       DateTime    @default(now())
+  userId   String?
+  entity   String
+  entityId String
+  action   AuditAction
+  /// Field name, or "*" for a whole-record create / archive / restore.
+  field    String
+  oldValue String?
+  newValue String?
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([entity, entityId])
+  @@index([at])
 }

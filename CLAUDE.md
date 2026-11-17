@@ -46,7 +46,8 @@ Follow `docs/tech-stack.md` exactly for versions, scaffold, folder structure and
 - **Install `exceljs`** (spend file parsing).
 - **Versions actually installed** (brief 00, see the decision log): Next.js 16.4.6, React 19.2.8, **Prisma 7.10.1** (not 7.9.1: security advisories), NextAuth 5.0.0-beta.32, exceljs 4.4.0, Vitest 4, Node 24 in CI. Tailwind v4 via `@tailwindcss/postcss` (not the starter's Turbopack loader), and no `cacheComponents`.
 - **`npm run typecheck`** runs `next typegen` before `tsc` (route types such as `LayoutProps` are generated).
-- **`prisma.config.ts`** only sets the datasource when `DATABASE_URL` exists, so `npm install` (which runs `prisma generate`) works in CI and on a fresh clone without a database.
+- **`prisma.config.ts`** uses `DIRECT_URL` (falling back to `DATABASE_URL`) for the CLI, and only when set, so `npm install` (which runs `prisma generate`) works without a database. Prisma 7's config has no `directUrl`: the CLI uses the direct URL, the app the pooled one via `@prisma/adapter-pg`.
+- **Database workflow (one live database):** write migrations offline with `npx prisma migrate diff --from-migrations prisma/migrations --to-schema prisma/schema.prisma --script -o prisma/migrations/<timestamp>_<name>/migration.sql`, review, commit, then **ask Paul** before `npm run db:migrate` (`prisma migrate deploy`). Apply before merging the code that needs it. **Never** `prisma migrate dev` or `prisma migrate reset`. `npm run db:seed` is idempotent (fixed ids, `skipDuplicates`); `npm run db:check` is read-only; `npm run db:status` shows pending migrations.
 - **Scaffold from `docs/tech-stack.md` §2, not from the Reporting Hub's `package.json`** (the Reporting Hub is still in Stage B and doesn't yet have Prisma, NextAuth or the SDK installed).
 - **Styling**: WPP Enterprise Solutions | MAP design system from the Reporting Hub handover pack (`docs/design/`, `tokens.json`), not the Project Brain tokens or Geist. Navy `#000050`, Cream `#FAFAF0`, Orange `#FF7800`, WPP Sans (self-hosted with `next/font/local`). Square corners everywhere; fully rounded pills only. WCAG AA: small text never uses Orange on Cream (use the darker orange `#B34F00` for eyebrow labels, as in the mockups).
 - **RAG colours**: use the Reporting Hub's proposed RAG tokens (Red `#FFB4B4`, Amber `#F9BD5D`, Green `#B4FF64`), always with the word and meaning. They are not yet signed off by the design system owner: keep them as tokens so they can change in one place. (The mockups use slightly different shades; the tokens win.)
@@ -164,8 +165,8 @@ Past weeks: `?week=2026-W46` on client, workstream, project and log routes.
 Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: investigate and report back**; stop and flag anything that contradicts this file, the decision log or the brief.
 
 0. Scaffold, docs, design tokens, CI. **Done 16 Nov 2026**, including Neon, GitHub and Vercel (live at weekly-project-health.vercel.app; public on the Hobby plan, so share nothing real until sign-in exists). Still to do: the Prisma agent skills.
-1. Front end on mock data (all screens).
-2. Database schema, migrations, seed (synthetic), audit helper.
+1. Front end on mock data (all screens). **Done 17 Nov 2026.**
+2. Database schema, migrations, seed (synthetic), audit helper. **Done 17 Nov 2026**: pages read the live database through `src/server/repository.ts`; edits stay local until brief 05.
 3. Auth and roles: sign-in, lockout, first-sign-in password change, role landing, permissions.
 4. Spend upload: parser, validation, preview, decisions, confirm, history, Reported flag.
 5. Weekly inputs: selection, weekly update, risks, issues, pipeline (all audited).

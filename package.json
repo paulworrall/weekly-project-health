@@ -12,7 +12,11 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:status": "prisma migrate status",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:check": "tsx scripts/db-check.mts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",

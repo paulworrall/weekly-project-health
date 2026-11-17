@@ -12,16 +12,17 @@ import { withWeek } from "@/lib/links";
 import { canEditWeek } from "@/lib/permissions";
 import { hasFigure, isOverBudget, spendLabel, spendPointsChange } from "@/lib/spend";
 import { requireViewer } from "@/lib/viewer";
-import { LOG_SEQ, getProjectPage, now } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 import type { ProjectPageView } from "@/types/views";
 
 export const metadata: Metadata = { title: "Project" };
 
 export default async function ProjectPage(props: PageProps<"/projects/[projectId]">) {
   const viewer = await requireViewer();
+  const repo = await getRepository();
   const { projectId } = await props.params;
   const { week } = await props.searchParams;
-  const v = getProjectPage(projectId, week);
+  const v = repo.getProjectPage(projectId, week);
   if (!v) notFound();
   const p = v.project;
   const readOnly = !canEditWeek(viewer, v.week.closed);
@@ -83,7 +84,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
             dueLabel={formatWeekdayDayMonth(v.week.closeDate)}
             lastSubmissionText={lastText}
             closedText={closedText}
-            now={now().toISOString()}
+            now={repo.now().toISOString()}
           />
         </section>
         <aside
@@ -119,7 +120,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         initial={v.risks}
         projectId={p.id}
         clientId={v.client.id}
-        nextSeq={(LOG_SEQ[v.client.id]?.RISK ?? 0) + 1}
+        nextSeq={(repo.logSeq[v.client.id]?.RISK ?? 0) + 1}
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}
@@ -129,7 +130,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[projectId
         initial={v.issues}
         projectId={p.id}
         clientId={v.client.id}
-        nextSeq={(LOG_SEQ[v.client.id]?.ISSUE ?? 0) + 1}
+        nextSeq={(repo.logSeq[v.client.id]?.ISSUE ?? 0) + 1}
         today={v.week.asOf}
         readOnly={readOnly}
         defaultOwner={viewer.name}

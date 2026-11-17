@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import type { LogKind, LogLevel } from "@/types/domain";
-import type { LogData } from "@/mocks/repository";
+import type { LogData } from "@/types/views";
 import {
   AGE_BAND_LABEL,
   AGE_BAND_SHORT,
