@@ -139,3 +139,15 @@ The scaffold is the repository's first commit, made directly on `main` at Paul's
 
 ## 16 Nov 2026 — One database for the pilot (production only)
 The Neon project `weekly-project-health` (AWS Europe West 2, London) has only its default `production` branch. Local development, the Vercel deployment and migrations all use it. Reason: this is a pilot; one database is simpler to run. Consequences: anything run locally (migrations, seed, manual testing) changes the live data, so seed only synthetic data, run migrations deliberately, and never run destructive scripts locally. Rejected: a separate `development` branch, as brief 00 proposed. Revisit before wider roll-out.
+
+## 17 Nov 2026 — "Last submitted by" replaces PM on screens
+The workstream project list (column and filter), the client page's Needs attention table and the project page header show "Last submitted by" instead of the mockups' PM. Reason: consistent with "no assignment of people to projects" (16 Nov). Rejected: a PM field typed on the project page.
+
+## 17 Nov 2026 — Account Director on workstreams, typed by the Admin
+Each workstream gets an optional free-text Account Director, edited by the Admin in Spend uploads › Workstreams and shown on workstream cards and the workstream header. Reason: the mockups show it; free text keeps it simple. Rejected: leaving it out; linking to a user.
+
+## 17 Nov 2026 — Missing-from-file decisions start empty
+In the upload preview, no decision is pre-selected for projects missing from the file; Confirm stays disabled until each has "Keep as is" or "Mark No longer in file". Supersedes "the default decision is Keep as is" (16 Nov, "Projects missing from a file stay in the report"); the rest of that entry stands. Reason: the check is a safeguard against a bad extract, so a deliberate choice makes the Admin notice. Rejected: pre-selecting Keep.
+
+## 17 Nov 2026 — "Keep me signed in" tick box
+The sign-in page keeps the mockup's tick box. Ticked: the session cookie lasts the full 8 hours, even after the browser closes. Unticked: it ends when the browser closes (and after 8 hours at most). Reason: safer on shared computers. Rejected: always 8 hours.

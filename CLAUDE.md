@@ -89,7 +89,7 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 
 **Landing after sign-in**: Admin → Admin home (`/admin`). Updater → client landing page (the only client today; later the last-viewed client or a picker).
 
-**Accounts**: Admin creates users with a temporary password; `mustChangePassword` forces a change on first sign-in. Admin resets passwords. 5 failed attempts lock the account for 15 minutes. JWT sessions last 8 hours. Keep auth SSO-ready (Microsoft Entra ID later).
+**Accounts**: Admin creates users with a temporary password; `mustChangePassword` forces a change on first sign-in. Admin resets passwords. 5 failed attempts lock the account for 15 minutes. JWT sessions last 8 hours; "Keep me signed in" ticked keeps the cookie for those 8 hours, unticked makes it end when the browser closes. Keep auth SSO-ready (Microsoft Entra ID later).
 
 ## 7. Domain rules
 
@@ -101,7 +101,7 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 - `UNMAPPED` is a normal workstream. Non-billable and internal jobs load like any project.
 - New workstreams are created on first appearance, Hidden by default.
 - Preview compares with live data: new projects, renamed, moved workstream, % spend changed, missing from file. Nothing is saved until Admin confirms. Confirm is disabled while row errors exist or any missing project lacks a decision.
-- Missing projects: decision "Keep as is" (default) or "Mark No longer in file". Either way the project **stays in the weekly report and lists**; the mark is informational.
+- Missing projects: decision "Keep as is" or "Mark No longer in file", nothing pre-selected (the Admin must choose each). Either way the project **stays in the weekly report and lists**; the mark is informational.
 - Every attempt is kept in the history: Confirmed, Cancelled, Rejected (with reason).
 - If a week has no confirmed upload, reports and snapshots use the latest confirmed upload and show its extract date.
 
@@ -128,7 +128,7 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 
 - `User` — name, email (unique), passwordHash, role (ADMIN | UPDATER), mustChangePassword, failedSignInCount, lockedUntil, lastSignInAt, archivedAt.
 - `Client` — name, riskSeq, issueSeq, archivedAt.
-- `Workstream` — client, name (as in file; unique per client), reported (default false).
+- `Workstream` — client, name (as in file; unique per client), reported (default false), accountDirector (optional free text, set by Admin).
 - `Project` — client, workstream, jobNumber (unique per client, stored as text), name, includeInReport, missingFromFileSince, markedNoLongerInFileAt.
 - `SpendUpload` — client, uploadedBy, uploadedAt, extractDate, fileName, file (Bytes in Postgres; no blob storage needed at ~870 rows), status following the Reporting Hub lifecycle (Checking → Rejected; Ready to review → Cancelled; Live → Replaced), rejectionReason, row / new / changed / missing / error counts. The UI words are Confirmed / Rejected / Cancelled as in the mockup.
 - `SpendUploadRow` — staged parsed rows with row-level errors.
