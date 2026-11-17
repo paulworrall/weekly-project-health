@@ -55,3 +55,16 @@ Append-only. Newest at the bottom.
 - Nothing invented for real projects: none in the weekly report, no updates, risks, issues or pipeline.
 - Multi-client: `/clients` list (Updater landing), client-aware menu, a card per client on Admin home, client switcher on Spend uploads, risk/issue refs per client.
 - Decisions recorded (17 Nov); CLAUDE.md and the spend file spec updated. 76 tests pass.
+
+## 17 Nov 2026 — Brief 02: database (branch `brief-02-database`)
+
+- Step 0 report and answers: `briefs/brief-02-step0-report.md` (no brief 02 file existed; scope from CLAUDE.md). Decisions: seed Northwind (sample) + TCCC; brief 02 is read-only.
+- `prisma/schema.prisma`: every §8 model (17 tables) plus `Workstream.accountDirector` and `ProjectWeek.notUpdated` (closed-week carry-forward, until brief 06 snapshots).
+- Migration `20261117120000_init` written offline (`prisma migrate diff`), applied to the live Neon database with `prisma migrate deploy` after Paul's OK.
+- Seed (`prisma/seed.ts`, idempotent): 13 users, 2 clients, 26 workstreams, 1,502 projects, 13 periods, 370 weekly entries, 17 uploads (incl. one awaiting review), 9,098 % spend figures, 66 risks, 23 issues, 11 opportunities, 8 audit events. Re-running adds nothing.
+- Page logic moved into `src/lib/views.ts` (`createViews(dataset)`), shared by the sample data (`src/mocks/repository.ts`, tests) and the database (`src/server/repository.ts`, the site). `src/server/rows.ts` maps rows ↔ dataset; a round-trip test proves database-shaped data gives identical pages.
+- Every page now reads the live database (one load per request, ~0.15–0.4 s locally). The clock is real (Europe/London), not the fixed mock date.
+- `src/lib/audit-db.ts`: `writeAudit(tx, actorId, rows)` for use inside transactions from brief 04/05.
+- Scripts: `db:migrate`, `db:seed`, `db:check` (read-only), `db:status`. 82 tests pass; lint, typecheck, build pass.
+
+**Follow-ups:** saving edits (brief 05, after sign-in in 03); snapshots and automatic close (06); move heavy aggregations into queries if pages slow down (07).

@@ -8,7 +8,7 @@ import { InternalPill } from "@/components/ui/pill";
 import { formatDate } from "@/lib/dates";
 import { withWeek } from "@/lib/links";
 import { requireViewer } from "@/lib/viewer";
-import { getWorkstreamOverview, now } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 
 export const metadata: Metadata = { title: "Workstream" };
 
@@ -19,9 +19,10 @@ export default async function WorkstreamPage(
   props: PageProps<"/clients/[clientId]/workstreams/[workstreamId]">
 ) {
   await requireViewer();
+  const repo = await getRepository();
   const { clientId, workstreamId } = await props.params;
   const { week } = await props.searchParams;
-  const v = getWorkstreamOverview(clientId, workstreamId, week);
+  const v = repo.getWorkstreamOverview(clientId, workstreamId, week);
   if (!v) notFound();
   const clientHref = withWeek(`/clients/${v.client.id}`, v.week);
   const logBase = `/clients/${v.client.id}`;
@@ -69,7 +70,7 @@ export default async function WorkstreamPage(
           </Link>
         </div>
       </div>
-      <WorkstreamBody v={v} now={now().toISOString()} />
+      <WorkstreamBody v={v} now={repo.now().toISOString()} />
     </>
   );
 }

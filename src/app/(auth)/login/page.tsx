@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import { LoginForm } from "@/components/features/login-form";
 import { RAG_VALUES, RAG, ragLabel } from "@/lib/rag";
 import { formatWeekdayDayMonth } from "@/lib/dates";
-import { resolveWeek } from "@/mocks/repository";
+import { currentWeek, weekLabel, weekRange } from "@/lib/week";
 
 export const metadata: Metadata = { title: "Sign in" };
 
+// The week label uses today's date, so render on each visit rather than once at build.
+export const dynamic = "force-dynamic";
+
 export default function LoginPage() {
-  const week = resolveWeek(undefined);
+  const ref = currentWeek(new Date());
+  const week = { label: weekLabel(ref), closeDate: weekRange(ref).friday };
   return (
     <div className="flex min-h-screen flex-wrap bg-cream">
       <section

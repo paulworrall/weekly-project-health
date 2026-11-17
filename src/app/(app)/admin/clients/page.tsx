@@ -5,12 +5,13 @@ import { SimpleTablePage } from "@/components/features/simple-table";
 import { formatDate } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { getClientsTable } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 
 export const metadata: Metadata = { title: "Clients" };
 
 export default async function ClientsPage() {
   const viewer = await requireViewer();
+  const repo = await getRepository();
   if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   return (
     <SimpleTablePage
@@ -24,7 +25,7 @@ export default async function ClientsPage() {
         { label: "Projects", align: "right" },
         { label: "Latest upload" },
       ]}
-      rows={getClientsTable().map((c) => ({
+      rows={repo.getClientsTable().map((c) => ({
         key: c.id,
         cells: [
           <Link key="l" href={`/clients/${c.id}`}>

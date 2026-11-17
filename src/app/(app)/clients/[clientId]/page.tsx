@@ -21,7 +21,7 @@ import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { formatDate, formatWeekdayDayMonth } from "@/lib/dates";
 import { withWeek } from "@/lib/links";
 import { requireViewer } from "@/lib/viewer";
-import { getClientOverview } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 
 export const metadata: Metadata = { title: "Client overview" };
 
@@ -30,9 +30,10 @@ const btnOutline =
 
 export default async function ClientPage(props: PageProps<"/clients/[clientId]">) {
   await requireViewer();
+  const repo = await getRepository();
   const { clientId } = await props.params;
   const { week: weekParam } = await props.searchParams;
-  const v = getClientOverview(clientId, weekParam);
+  const v = repo.getClientOverview(clientId, weekParam);
   if (!v) notFound();
   const t = v.totals;
   const base = `/clients/${v.client.id}`;

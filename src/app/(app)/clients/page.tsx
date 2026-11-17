@@ -3,16 +3,17 @@ import { ClientCard } from "@/components/features/client-card";
 import { ClosedWeekNote, WeekPicker } from "@/components/features/week";
 import { InternalPill } from "@/components/ui/pill";
 import { requireViewer } from "@/lib/viewer";
-import { getClientList, resolveWeek, weekOptions } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 
 export const metadata: Metadata = { title: "Clients" };
 
 /** Client list: where Updaters land, and the "Clients" menu item (decision 17 Nov). */
 export default async function ClientsPage(props: PageProps<"/clients">) {
   await requireViewer();
+  const repo = await getRepository();
   const { week: weekParam } = await props.searchParams;
-  const week = resolveWeek(weekParam);
-  const clients = getClientList(weekParam);
+  const week = repo.resolveWeek(weekParam);
+  const clients = repo.getClientList(weekParam);
   return (
     <>
       <ClosedWeekNote week={week} basePath="/clients" />
@@ -25,7 +26,7 @@ export default async function ClientsPage(props: PageProps<"/clients">) {
             <InternalPill />
           </p>
         </div>
-        <WeekPicker weeks={weekOptions()} value={week.key} />
+        <WeekPicker weeks={repo.weekOptions()} value={week.key} />
       </div>
       <div className="flex flex-col gap-4">
         {clients.map((c) => (

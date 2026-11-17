@@ -157,3 +157,9 @@ Paul (Admin) approved loading TCCC's real spend file (`TCCC_Weekly_Helath_Check_
 
 ## 17 Nov 2026 — Client list once there is more than one client
 With two clients, Updaters land on a client list (`/clients`) and "Clients" in the menu goes there; "Workstreams" and "Risks and issues" go to the client being viewed, or to the list. Admin home shows a card per client, and Spend uploads has a client switcher. Settles the open point in "Landing page by role" (16 Nov). Rejected: landing on the last-viewed client (needs storage; revisit with sign-in in brief 03).
+
+## 17 Nov 2026 — Seed the live database with Northwind (sample) and TCCC
+The single Neon database is seeded with Northwind Drinks (invented sample client, to practise on; archive it later in Admin › Clients) and TCCC (from its approved spend file). Reason: the site keeps looking as it does now. Rejected: TCCC only.
+
+## 17 Nov 2026 — Brief 02 is read-only; saving stays in brief 05
+After brief 02 every page reads from the database, but edits are still local until brief 05 (after sign-in in brief 03 and uploads in brief 04), so nobody can change live data on the public site without signing in. Migrations are written offline (`prisma migrate diff`) and applied with `prisma migrate deploy` only after asking Paul; `migrate dev` and `migrate reset` are never used on the live database. Rejected: bringing saving forward before sign-in.

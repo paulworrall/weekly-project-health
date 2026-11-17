@@ -3,7 +3,7 @@ import type { LogKind } from "@/types/domain";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { withWeek } from "@/lib/links";
 import { requireViewer } from "@/lib/viewer";
-import { getLogData } from "@/mocks/repository";
+import { getRepository } from "@/server/repository";
 import { LogView } from "./log-view";
 import { ClosedWeekNote } from "./week";
 
@@ -18,7 +18,8 @@ export async function LogPage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   await requireViewer();
-  const data = getLogData(clientId, searchParams.week);
+  const repo = await getRepository();
+  const data = repo.getLogData(clientId, searchParams.week);
   if (!data) notFound();
   const ws = typeof searchParams.ws === "string" ? searchParams.ws : "";
   const path = `/clients/${data.client.id}/${kind === "RISK" ? "risks" : "issues"}`;
