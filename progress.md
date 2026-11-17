@@ -29,3 +29,21 @@ Append-only. Newest at the bottom.
 
 - Seven mockups saved unchanged from Paul's Claude Design artifact into `docs/design/mockups/` (checksums match the artifact), with a README mapping each file to its screen and route.
 - Noted in the README: real client and workstream names appear in the mockups (never copy into data), the Login mockup's demo passwords are prototype-only, and the RAG tokens win over the mockups' shades.
+
+## 17 Nov 2026 — Brief 01: front end on sample data (branch `brief-01-frontend`)
+
+- Step 0 report and Paul's four answers: `briefs/brief-01-step0-report.md`, decision log (17 Nov).
+- **Screens** (Server Components with client islands): sign in, Admin home, client landing, workstream landing (tiles, pipeline, project list), project page (weekly update, % spend chart, RAG history, risks and issues), risk log / issue log, spend uploads (latest tiles, upload form, preview with decisions, history, workstream Reported + Account Director), Users, Clients, Change history, change password (visual only).
+- **Past weeks**: `?week=2026-W46` on every page shows that week read-only with a "Week 46 is closed" note.
+- **Dev role switch**: `?as=admin` / `?as=updater` (cookie set in `src/proxy.ts`), "Sign out" clears it. Stands in for auth until brief 03.
+- **Sample data** (`src/mocks/`): invented client "Northwind Drinks", 13 workstreams (5 reported, UNMAPPED hidden), 633 projects (181 in Alpha EU), 12 closed weeks + week 47, risks and issues with every status and level, pipeline, upload history and a staged upload. Pages read only through `src/mocks/repository.ts`.
+- **Pure functions** (`src/lib/`): week (Europe/London, Friday 23:59 close across GMT/BST), dates, spend, delta, ageing, pagination, sorting, filters, logs, rollup, rag, labels, permissions. zod schemas in `src/types/schemas.ts`.
+- **Tests**: 74 passing (unit tests for every lib function incl. BST/GMT close, repository tests, component tests from the brief, and a guard that fails if real names from the mockups appear in code).
+- **Checked in the browser**: every screen loads for Admin; ticks update tiles, filters reset to page 1, pagination, pipeline/risk validation, add/edit/archive, Confirm gating, closed weeks read-only, Updater blocked from admin pages, no sideways scroll at 375px.
+- **Fixed during checks**: hidden table captions widened pages at phone width (scroll boxes now `relative`); "Over budget" ran into the figure; closed risks showed an age instead of the close date; draft-after-submit banner wording.
+
+**Not done / follow-ups:**
+- Preview deployment of this branch not checked yet (needs the branch pushed).
+- Nothing persists: every change is local state until briefs 02–05.
+- The mock "today" is fixed at Tue 17 Nov 2026 10:30 so figures don't drift.
+- Prisma agent skills still to install.

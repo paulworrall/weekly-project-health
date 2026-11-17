@@ -40,3 +40,20 @@ export function ragCounts(values: readonly (Rag | null | undefined)[]): Record<R
   for (const v of values) if (v && isRag(v)) counts[v] += 1;
   return counts;
 }
+
+/** Percentage widths for a stacked RAG bar (0 everywhere when there are no values). */
+export function ragShares(counts: Record<Rag, number>): Record<Rag, number> {
+  const total = counts.GREEN + counts.AMBER + counts.RED;
+  if (!total) return { GREEN: 0, AMBER: 0, RED: 0 };
+  return {
+    GREEN: (counts.GREEN / total) * 100,
+    AMBER: (counts.AMBER / total) * 100,
+    RED: (counts.RED / total) * 100,
+  };
+}
+
+/** Text alternative for a RAG bar: "Delivery RAG: 3 Green, on track; 2 Amber, at risk; 1 Red, blocked". */
+export function ragDescription(counts: Record<Rag, number>, subject = "Delivery RAG"): string {
+  const part = (r: Rag) => `${counts[r]} ${RAG[r].word}, ${RAG[r].meaning.toLowerCase()}`;
+  return `${subject}: ${RAG_VALUES.map(part).join("; ")}`;
+}
