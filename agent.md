@@ -1,16 +1,19 @@
 # Codebase summary
 
-Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 02, database).
+Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 03, sign-in).
 
 ## State
 
-Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Interactions are still local state (saving arrives in brief 05). No real sign-in: a dev role switch (`?as=admin|updater`, cookie set in `src/proxy.ts`) stands in until brief 03.
+Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Interactions are still local state (saving arrives in brief 05), except Users and access, which saves. Real sign-in with NextAuth v5 (email + password, fixed 8-hour sessions, lockout); `src/proxy.ts` sends visitors without a session cookie to `/login`.
 
 ## Where things are
 
 | Path | What |
 |---|---|
-| `src/app/(auth)/login` | Sign in (form validation and lockout messages only; dev role links). |
+| `src/auth.ts` | NextAuth config: credentials provider, JWT callbacks (uid, role, signedInAt; refused after 8 h). `src/app/api/auth/[...nextauth]` exposes its handlers. |
+| `src/app/(auth)/login` | Sign in page, `actions.ts` (lockout, lastSignInAt, remember-me cookie), `state.ts`. |
+| `src/app/(app)/change-password` | Choose your own password (forced while `mustChangePassword`). |
+| `src/app/(app)/admin/users` | Users and access: page + `actions.ts` (create, change role, reset password, unlock, archive, restore; audited). |
 | `src/app/(app)/layout.tsx` | Signed-in shell: `requireViewer()` then `AppHeader` with the role's nav. |
 | `src/app/(app)/admin` | Admin home; `uploads`, `users`, `clients`, `history` (Admin only, `Forbidden` otherwise). |
 | `src/app/(app)/clients/[clientId]` | Client landing; `workstreams/[workstreamId]`; `risks` and `issues` (both render `LogPage`). |
@@ -18,7 +21,7 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/components/features/` | Screen pieces: `display` (RagBar, LevelTag, pills, Delta, SpendCell, TableScroll, table classes), `week` (WeekPicker, ClosedWeekNote), `pagination`, `project-list`, `workstream-body`, `pipeline-section`, `weekly-update-form` (+ RagSelector), `risk-issue-table`, `log-view`/`log-page`, `upload-form`, `upload-preview`, `workstream-settings`, `simple-table`, `login-form`, `forbidden`. |
 | `src/components/ui/` | Primitives from brief 00 (+ `rag-badge`, `stat-tile`). |
 | `src/components/layout/` | `app-header` (NAV per role), `nav-links` (current page), `breadcrumb`, `page-header`. |
-| `src/lib/` | Pure, tested: `week`, `dates`, `spend`, `delta`, `ageing`, `pagination`, `sorting`, `filters`, `logs`, `rollup`, `rag`, `labels`, `permissions`, `links` (`withWeek`). Server-only helpers: `viewer` (`getViewer`/`requireViewer`), `dev-role`. |
+| `src/lib/` | `viewer.ts`: `getViewer()` (session + database check, cached) and `requireViewer({ allowPasswordChange })`. `passwords.ts` (rule, temporary passwords), `lockout.ts`, `session-cookie.ts`. Pure, tested: `week`, `dates`, `spend`, `delta`, `ageing`, `pagination`, `sorting`, `filters`, `logs`, `rollup`, `rag`, `labels`, `permissions`, `links` (`withWeek`). Server-only helpers: `viewer` (`getViewer`/`requireViewer`), `dev-role`. |
 | `src/types/` | `domain.ts` (records, enums), `views.ts` (page view models), `schemas.ts` (zod), `action-result.ts`. |
 | `src/lib/views.ts` | `createViews(dataset)`: every page view model, built from a `Dataset`. Pure. |
 | `src/server/repository.ts` | `getRepository()` (React `cache`): loads all rows with Prisma, `datasetFromRows`, `createViews`. Used by every page and `lib/viewer.ts`. |
@@ -45,6 +48,11 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 - One live Neon database (`production` branch). Never `prisma migrate dev` / `reset`. Migrations: `prisma migrate diff` offline → commit → ask Paul → `npm run db:migrate`.
 - `npm run db:seed` (idempotent), `npm run db:check` (read-only), `npm run db:status`.
 
+## Accounts
+
+- `npm run user:create-admin` (scripts/create-admin.mts): creates or recovers an Admin and prints a temporary password in the terminal only. Paul runs it himself.
+- Sample users (invented) have no password and can't sign in; Paul's Admin account is real.
+
 ## Next
 
-Brief 03: sign-in (NextAuth credentials, lockout, first-sign-in password change, role landing), replacing the dev role switch.
+Brief 04: spend upload (parser, validation, preview, decisions, confirm, history, Reported setting). No brief file exists; write a Step 0 report from CLAUDE.md first.

@@ -26,6 +26,8 @@ export interface Viewer {
   name: string;
   initials: string;
   role: Role;
+  /** Signed in with a temporary password: must choose their own first. */
+  mustChangePassword?: boolean;
 }
 
 /** The week a page shows, and whether it is the open one. */

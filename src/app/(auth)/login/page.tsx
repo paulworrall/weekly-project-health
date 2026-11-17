@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/features/login-form";
+import { landingPath } from "@/lib/permissions";
+import { getViewer } from "@/lib/viewer";
+import { signInAction } from "./actions";
 import { RAG_VALUES, RAG, ragLabel } from "@/lib/rag";
 import { formatWeekdayDayMonth } from "@/lib/dates";
 import { currentWeek, weekLabel, weekRange } from "@/lib/week";
@@ -9,7 +13,9 @@ export const metadata: Metadata = { title: "Sign in" };
 // The week label uses today's date, so render on each visit rather than once at build.
 export const dynamic = "force-dynamic";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const viewer = await getViewer();
+  if (viewer) redirect(viewer.mustChangePassword ? "/change-password" : landingPath(viewer));
   const ref = currentWeek(new Date());
   const week = { label: weekLabel(ref), closeDate: weekRange(ref).friday };
   return (
@@ -58,7 +64,7 @@ export default function LoginPage() {
           <p className="mt-2 mb-7 text-[15px]">
             Use your work email and the password the Admin set up for you.
           </p>
-          <LoginForm />
+          <LoginForm action={signInAction} />
           <div className="mt-7 border-t border-line pt-5 text-[14px] leading-relaxed">
             <p className="font-medium">Forgotten your password or need access?</p>
             <p>
@@ -69,20 +75,6 @@ export default function LoginPage() {
             Single sign-on with your Microsoft work account is planned. Until then, sign in with
             email and password.
           </p>
-          <div className="mt-6 border border-dashed border-line-strong p-4 text-[13px]">
-            <p className="font-medium">Development only (until sign-in is built)</p>
-            <p className="mt-1">Sign-in doesn&apos;t work yet. View the sample data as:</p>
-            <p className="mt-2 flex flex-wrap gap-4">
-              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- full page load so the dev role cookie is set */}
-              <a href="/?as=admin" className="inline-flex min-h-11 items-center underline">
-                Admin
-              </a>
-              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- full page load so the dev role cookie is set */}
-              <a href="/?as=updater" className="inline-flex min-h-11 items-center underline">
-                Updater
-              </a>
-            </p>
-          </div>
         </div>
       </div>
     </div>

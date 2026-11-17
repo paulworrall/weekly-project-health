@@ -16,7 +16,8 @@
     "db:status": "prisma migrate status",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
-    "db:check": "tsx scripts/db-check.mts"
+    "db:check": "tsx scripts/db-check.mts",
+    "user:create-admin": "tsx scripts/create-admin.mts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",

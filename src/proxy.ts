@@ -1,33 +1,19 @@
 /**
- * DEV ROLE SWITCH (brief 01 only; replaced by NextAuth in brief 03).
- * `?as=admin` or `?as=updater` on any URL sets a cookie standing in for the session and sends
- * the user to their landing page. `/login?signout=1` clears it. The data behind it is synthetic or
- * approved by the Admin for use on the site (decision log, 17 Nov 2026).
+ * Quick sign-in check (brief 03): visitors with no session cookie are sent to /login before any
+ * page work. Not the lock: every page and Server Action checks the session and permissions itself
+ * (CLAUDE.md §5 rule 2).
  */
 import { NextResponse, type NextRequest } from "next/server";
-import { DEV_ROLE_COOKIE } from "@/lib/dev-role";
+import { hasSessionCookie } from "@/lib/session-cookie";
 
-const LANDING = { admin: "/admin", updater: "/clients" } as const;
+const PUBLIC = ["/login", "/api/auth"];
 
 export function proxy(request: NextRequest) {
-  const url = request.nextUrl;
-  const as = url.searchParams.get("as");
-  if (as === "admin" || as === "updater") {
-    const res = NextResponse.redirect(new URL(LANDING[as], request.url));
-    res.cookies.set(DEV_ROLE_COOKIE, as.toUpperCase(), {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-      maxAge: 8 * 60 * 60,
-    });
-    return res;
-  }
-  if (url.pathname === "/login" && url.searchParams.has("signout")) {
-    const res = NextResponse.redirect(new URL("/login", request.url));
-    res.cookies.delete(DEV_ROLE_COOKIE);
-    return res;
-  }
-  return NextResponse.next();
+  const { pathname } = request.nextUrl;
+  if (PUBLIC.some((p) => pathname === p || pathname.startsWith(`${p}/`)))
+    return NextResponse.next();
+  if (hasSessionCookie(request.cookies.getAll().map((c) => c.name))) return NextResponse.next();
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
