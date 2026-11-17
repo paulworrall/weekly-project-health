@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Role } from "@/types/domain";
+import { signOutAction } from "@/app/(app)/actions";
 import { NavLinks } from "./nav-links";
 
 export type { Role };
@@ -27,12 +28,20 @@ export function AppHeader({ role, userName }: { role: Role; userName: string }) 
           <p className="text-[14px]">
             Signed in as {role === "ADMIN" ? "Admin" : "Updater"} ({userName})
           </p>
-          <a
-            href="/login?signout=1"
+          <Link
+            href="/change-password"
             className="flex min-h-11 items-center text-[14px] underline underline-offset-2 hover:text-white"
           >
-            Sign out
-          </a>
+            Change password
+          </Link>
+          <form action={signOutAction}>
+            <button
+              type="submit"
+              className="flex min-h-11 cursor-pointer items-center text-[14px] underline underline-offset-2"
+            >
+              Sign out
+            </button>
+          </form>
         </div>
       </div>
     </header>

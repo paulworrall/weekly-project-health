@@ -68,3 +68,13 @@ Append-only. Newest at the bottom.
 - Scripts: `db:migrate`, `db:seed`, `db:check` (read-only), `db:status`. 82 tests pass; lint, typecheck, build pass.
 
 **Follow-ups:** saving edits (brief 05, after sign-in in 03); snapshots and automatic close (06); move heavy aggregations into queries if pages slow down (07).
+
+## 17 Nov 2026 — Brief 03: sign-in (branch `brief-03-signin`)
+
+- Step 0 report and answers: `briefs/brief-03-step0-report.md`. Decisions (17 Nov): fixed 8-hour sessions, password rule 8+ with upper, lower, number and symbol, Admin account via a script Paul runs, sign-in messages that don't reveal whether an email has an account.
+- NextAuth v5 credentials sign-in (`src/auth.ts`), sign-in action with lockout (5 attempts → 15 minutes), "Keep me signed in" (unticked = browser-session cookie), first-sign-in password change, Sign out, Change password link.
+- `requireViewer()` checks the session against the database on every request: role changes apply at once; archived or locked accounts are signed out. Forged cookies are refused (checked).
+- Dev role switch (`?as=`) removed. `src/proxy.ts` sends signed-out visitors to `/login`.
+- Users and access: create (temporary password shown once), change role, reset password, unlock, archive, restore; all audited, all checked on the server, with rules that keep at least one Admin and stop the Admin changing or archiving themself.
+- Paul created his Admin account with `npm run user:create-admin`, signed in locally and chose his own password (audited).
+- 92 tests pass; lint, typecheck, build pass. Found and fixed: the sign-in form cleared the email after a failed attempt.

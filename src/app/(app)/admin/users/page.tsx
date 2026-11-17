@@ -1,48 +1,69 @@
 import type { Metadata } from "next";
-import { Tag } from "@/components/features/display";
 import { Forbidden } from "@/components/features/forbidden";
-import { SimpleTablePage } from "@/components/features/simple-table";
-import { formatDateTime } from "@/lib/dates";
+import { UsersManager } from "@/components/features/users-manager";
+import { PageHeader } from "@/components/layout/page-header";
 import { canAdminister } from "@/lib/permissions";
+import { prisma } from "@/lib/prisma";
 import { requireViewer } from "@/lib/viewer";
-import { getRepository } from "@/server/repository";
+import {
+  archiveUserAction,
+  changeRoleAction,
+  createUserAction,
+  resetPasswordAction,
+  restoreUserAction,
+  unlockAction,
+} from "./actions";
 
 export const metadata: Metadata = { title: "Users and access" };
 
 export default async function UsersPage() {
   const viewer = await requireViewer();
-  const repo = await getRepository();
   if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
-  const users = repo.getUsers();
+  const users = await prisma.user.findMany({
+    orderBy: [{ archivedAt: { sort: "asc", nulls: "first" } }, { role: "asc" }, { name: "asc" }],
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      lastSignInAt: true,
+      archivedAt: true,
+      lockedUntil: true,
+      mustChangePassword: true,
+      passwordHash: true,
+    },
+  });
   return (
-    <SimpleTablePage
-      eyebrow="Admin · Users and access"
-      title="Users and access"
-      intro="Admin and Updaters (Project Managers and Account Directors). Updaters see every client."
-      columns={[
-        { label: "Name" },
-        { label: "Email" },
-        { label: "Role" },
-        { label: "Last signed in" },
-        { label: "Status" },
-      ]}
-      rows={users.map((u) => ({
-        key: u.id,
-        cells: [
-          u.name,
-          u.email,
-          u.role === "ADMIN" ? "Admin" : "Updater",
-          u.lastSignInAt ? formatDateTime(u.lastSignInAt) : "Never",
-          u.archivedAt ? (
-            <Tag tone="muted">Archived</Tag>
-          ) : u.lastSignInAt ? (
-            <Tag>Active</Tag>
-          ) : (
-            <Tag tone="warning">Not signed in yet</Tag>
-          ),
-        ],
-      }))}
-      note="Creating users, setting roles, resetting passwords, unlocking and archiving arrive with sign-in (brief 03)."
-    />
+    <>
+      <PageHeader
+        eyebrow="Admin · Users and access"
+        title="Users and access"
+        meta="Admin and Updaters (Project Managers and Account Directors). Updaters see every client."
+        internal
+      />
+      <UsersManager
+        now={new Date().toISOString()}
+        actions={{
+          create: createUserAction,
+          changeRole: changeRoleAction,
+          resetPassword: resetPasswordAction,
+          unlock: unlockAction,
+          archive: archiveUserAction,
+          restore: restoreUserAction,
+        }}
+        users={users.map((u) => ({
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          lastSignInAt: u.lastSignInAt?.toISOString() ?? null,
+          archivedAt: u.archivedAt?.toISOString() ?? null,
+          lockedUntil: u.lockedUntil?.toISOString() ?? null,
+          mustChangePassword: u.mustChangePassword,
+          hasPassword: !!u.passwordHash,
+          isSelf: u.id === viewer.id,
+        }))}
+      />
+    </>
   );
 }

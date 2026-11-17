@@ -14,6 +14,7 @@ vi.mock("next/link", () => ({
 }));
 
 import { LoginForm } from "@/components/features/login-form";
+import type { LoginState } from "@/app/(auth)/login/state";
 import { ProjectList, type ListState } from "@/components/features/project-list";
 import { RiskIssueTable } from "@/components/features/risk-issue-table";
 import { UploadPreview } from "@/components/features/upload-preview";
@@ -269,10 +270,14 @@ describe("UploadPreview", () => {
 describe("LoginForm", () => {
   it("shows field errors, then the not-recognised and locked states", async () => {
     const user = userEvent.setup();
-    render(<LoginForm />);
+    const replies: LoginState[] = [{ status: "not-recognised" }, { status: "locked", minutes: 15 }];
+    const action = vi.fn(async (): Promise<LoginState> => replies.shift() ?? { status: "idle" });
+    render(<LoginForm action={action} />);
+
     await user.click(screen.getByRole("button", { name: "Sign in" }));
     expect(screen.getByText("Enter your work email.")).toBeInTheDocument();
     expect(screen.getByText("Enter your password.")).toBeInTheDocument();
+    expect(action).not.toHaveBeenCalled();
 
     await user.type(screen.getByLabelText("Work email"), "not-an-email");
     await user.click(screen.getByRole("button", { name: "Sign in" }));
@@ -282,9 +287,13 @@ describe("LoginForm", () => {
     await user.type(screen.getByLabelText("Work email"), "sample@example.com");
     await user.type(screen.getByLabelText("Password"), "wrong");
     await user.click(screen.getByRole("button", { name: "Sign in" }));
-    expect(screen.getByText("Email or password not recognised.")).toBeInTheDocument();
-    expect(screen.getByText(/4 attempts left/)).toBeInTheDocument();
-    for (let i = 0; i < 4; i++) await user.click(screen.getByRole("button", { name: "Sign in" }));
-    expect(screen.getByText("Account locked for 15 minutes.")).toBeInTheDocument();
+    expect(await screen.findByText("Email or password not recognised.")).toBeInTheDocument();
+    expect(action).toHaveBeenCalledTimes(1);
+    const sent = action.mock.calls[0] as unknown as [LoginState, FormData];
+    expect(sent[1].get("email")).toBe("sample@example.com");
+
+    expect(screen.getByLabelText("Work email")).toHaveValue("sample@example.com");
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
+    expect(await screen.findByText("Account locked for 15 minutes.")).toBeInTheDocument();
   });
 });

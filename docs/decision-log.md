@@ -163,3 +163,15 @@ The single Neon database is seeded with Northwind Drinks (invented sample client
 
 ## 17 Nov 2026 — Brief 02 is read-only; saving stays in brief 05
 After brief 02 every page reads from the database, but edits are still local until brief 05 (after sign-in in brief 03 and uploads in brief 04), so nobody can change live data on the public site without signing in. Migrations are written offline (`prisma migrate diff`) and applied with `prisma migrate deploy` only after asking Paul; `migrate dev` and `migrate reset` are never used on the live database. Rejected: bringing saving forward before sign-in.
+
+## 17 Nov 2026 — Sessions: fixed 8 hours from sign-in
+A session ends 8 hours after signing in, even if the person is active; activity does not extend it. "Keep me signed in" ticked keeps the cookie for those 8 hours; unticked, it ends when the browser closes. Reason: simpler and safer; keeps "Keep me signed in" reliable. Rejected: a session that resets while active.
+
+## 17 Nov 2026 — Password rule
+New passwords (first sign-in change, and the Admin's temporary passwords) need at least 8 characters with an upper-case letter, a lower-case letter, a number and a symbol. Reason: Paul's choice. Rejected: 12+ characters with any mix.
+
+## 17 Nov 2026 — Paul's Admin account created by a script he runs
+The first real Admin account (Paul's WPP work email) is created with `scripts/create-admin.mts`, run in Paul's own terminal, which prints the temporary password there only. The email is not stored in the code or Git. The invented sample users have no password and can't sign in. Reason: keep credentials out of chat and the repository. Rejected: seeding the account.
+
+## 17 Nov 2026 — Sign-in messages don't reveal whether an account exists
+A wrong email or password shows "Email or password not recognised. … After 5 failed attempts in a row the account is locked for 15 minutes." without the mockup's "N attempts left", which would show that the email has an account. Unknown emails take as long to check as real ones. The "locked" message is unchanged. Reason: don't help anyone guess which emails have accounts. Rejected: the mockup's attempts-left count.

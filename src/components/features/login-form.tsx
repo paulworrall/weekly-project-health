@@ -1,59 +1,72 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { startTransition, useActionState, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/ui/fields";
+import { LOGIN_IDLE, type LoginState } from "@/app/(auth)/login/state";
 import { fieldErrors, loginSchema } from "@/types/schemas";
 
-const MAX_ATTEMPTS = 5;
-
 /**
- * Sign-in form. Brief 01: validates fields and shows the "not recognised / attempts left /
- * locked" states, but no account can sign in yet (NextAuth arrives in brief 03).
+ * Sign-in form (brief 03). Checks the fields in the browser first, then posts to the sign-in
+ * action, which shows "not recognised" or "locked" (5 failed attempts lock the account for 15
+ * minutes). Messages never say whether an email has an account.
  */
-export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export function LoginForm({
+  action,
+}: {
+  action: (prev: LoginState, formData: FormData) => Promise<LoginState>;
+}) {
+  const [state, formAction, pending] = useActionState(action, LOGIN_IDLE);
   const [show, setShow] = useState(false);
-  const [remember, setRemember] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [failed, setFailed] = useState(0);
+  const [clientErrors, setClientErrors] = useState<Record<string, string> | null>(null);
 
-  const locked = failed >= MAX_ATTEMPTS;
+  const errors = clientErrors ?? (state.status === "error" ? state.fieldErrors : {});
 
-  function submit(e: FormEvent) {
+  function check(e: FormEvent<HTMLFormElement>) {
+    const fd = new FormData(e.currentTarget);
+    const parsed = loginSchema.safeParse({
+      email: String(fd.get("email") ?? ""),
+      password: String(fd.get("password") ?? ""),
+      remember: fd.get("remember") === "on",
+    });
+    // Submit through the action ourselves: a plain form action would clear what was typed.
     e.preventDefault();
-    const parsed = loginSchema.safeParse({ email, password, remember });
     if (!parsed.success) {
-      setErrors(fieldErrors(parsed.error));
+      setClientErrors(fieldErrors(parsed.error));
       return;
     }
-    setErrors({});
-    if (!locked) setFailed((n) => n + 1);
+    setClientErrors(null);
+    startTransition(() => formAction(fd));
   }
+
+  const banner =
+    !clientErrors && state.status === "not-recognised"
+      ? {
+          title: "Email or password not recognised.",
+          text: "Check both and try again. After 5 failed attempts in a row the account is locked for 15 minutes.",
+        }
+      : !clientErrors && state.status === "locked"
+        ? {
+            title: `Account locked for ${state.minutes} ${state.minutes === 1 ? "minute" : "minutes"}.`,
+            text: "Too many attempts. Try again later or ask the Admin to unlock your account.",
+          }
+        : null;
 
   return (
     <>
-      {failed > 0 ? (
+      {banner ? (
         <div role="alert" className="mb-5 bg-warning-tint px-4 py-3.5 text-[14px]">
-          <p className="font-medium">
-            {locked ? "Account locked for 15 minutes." : "Email or password not recognised."}
-          </p>
-          <p className="mt-1">
-            {locked
-              ? "Too many attempts. Try again later or ask the Admin to unlock your account."
-              : `Check both and try again. ${MAX_ATTEMPTS - failed} ${MAX_ATTEMPTS - failed === 1 ? "attempt" : "attempts"} left before the account is locked for 15 minutes.`}
-          </p>
+          <p className="font-medium">{banner.title}</p>
+          <p className="mt-1">{banner.text}</p>
         </div>
       ) : null}
-      <form aria-label="Sign in" noValidate onSubmit={submit} className="grid gap-5">
+      <form aria-label="Sign in" noValidate onSubmit={check} className="grid gap-5">
         <TextField
           label="Work email"
+          name="email"
           type="email"
           autoComplete="username"
           placeholder="name@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           error={errors.email}
           className="border-navy"
         />
@@ -74,10 +87,9 @@ export function LoginForm() {
           </div>
           <input
             id="pw"
+            name="password"
             type={show ? "text" : "password"}
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             aria-invalid={errors.password ? true : undefined}
             aria-describedby={errors.password ? "pw-error" : undefined}
             className={`min-h-12 w-full bg-white px-3.5 text-[16px] ${errors.password ? "border-2 border-overspend" : "border border-navy"}`}
@@ -89,16 +101,11 @@ export function LoginForm() {
           ) : null}
         </div>
         <label className="inline-flex min-h-11 cursor-pointer items-center gap-2.5 text-[14px]">
-          <input
-            type="checkbox"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
-            className="size-5 accent-navy"
-          />
+          <input type="checkbox" name="remember" className="size-5 accent-navy" />
           Keep me signed in on this device for 8 hours
         </label>
-        <Button type="submit" size="lg" className="w-full" disabled={locked}>
-          Sign in
+        <Button type="submit" size="lg" className="w-full" disabled={pending}>
+          {pending ? "Signing in…" : "Sign in"}
         </Button>
       </form>
     </>

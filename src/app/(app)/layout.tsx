@@ -3,7 +3,7 @@ import { requireViewer } from "@/lib/viewer";
 
 /** Signed-in area: header with the role's nav. Each page also checks its own permissions. */
 export default async function AppLayout({ children }: LayoutProps<"/">) {
-  const viewer = await requireViewer();
+  const viewer = await requireViewer({ allowPasswordChange: true });
   return (
     <>
       <AppHeader role={viewer.role} userName={viewer.name} />
