@@ -27,6 +27,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getRepository } from "@/server/repository";
 import type { UploadStatus } from "@/types/domain";
+import {
+  cancelUploadAction,
+  checkFileAction,
+  confirmUploadAction,
+  decideAction,
+  setAccountDirectorAction,
+  setReportedAction,
+} from "./actions";
+
+// Checking and confirming a ~900-row file takes a few seconds at most.
+export const maxDuration = 60;
 
 export const metadata: Metadata = { title: "Spend uploads" };
 
@@ -182,7 +193,12 @@ export default async function UploadsPage(props: PageProps<"/admin/uploads">) {
           <p className="mb-5 text-[14px] text-muted">
             Step 1 of 3: choose the file. Then check the preview and confirm.
           </p>
-          <UploadForm clients={v.clients} today={week.asOf} />
+          <UploadForm
+            clients={v.clients}
+            clientId={v.client.id}
+            today={week.asOf}
+            check={checkFileAction}
+          />
         </section>
         <section aria-labelledby="prev-h" className="min-w-0 flex-[2_1_640px] bg-white p-5 sm:p-7">
           <div className="flex flex-wrap items-baseline justify-between gap-2.5">
@@ -197,13 +213,21 @@ export default async function UploadsPage(props: PageProps<"/admin/uploads">) {
                 {staged.upload.fileName} · checked {formatDateTime(staged.upload.uploadedAt)} ·{" "}
                 {changes("NEW")} new, {changes("CHANGED", "name")} renamed, {changes("MOVED")}{" "}
                 moved, {changes("CHANGED", "percentSpent")} % spend changed, {changes("MISSING")}{" "}
-                missing (sample)
+                missing
               </p>
               <UploadPreview
+                key={staged.upload.id}
+                uploadId={staged.upload.id}
                 changes={staged.changes}
                 fileChecks={staged.fileChecks}
+                rowErrors={staged.rowErrors}
                 clientName={v.client.name}
                 rowCount={staged.upload.rowCount ?? 0}
+                actions={{
+                  decide: decideAction,
+                  confirm: confirmUploadAction,
+                  cancel: cancelUploadAction,
+                }}
               />
             </>
           ) : (
@@ -286,7 +310,12 @@ export default async function UploadsPage(props: PageProps<"/admin/uploads">) {
         </TableScroll>
       </section>
 
-      <WorkstreamSettings clientName={v.client.name} initial={v.workstreams} />
+      <WorkstreamSettings
+        key={v.client.id}
+        clientName={v.client.name}
+        initial={v.workstreams}
+        actions={{ setReported: setReportedAction, setAccountDirector: setAccountDirectorAction }}
+      />
     </>
   );
 }

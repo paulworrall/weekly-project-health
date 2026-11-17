@@ -1,10 +1,10 @@
 # Codebase summary
 
-Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 03, sign-in).
+Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 04, spend uploads).
 
 ## State
 
-Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Interactions are still local state (saving arrives in brief 05), except Users and access, which saves. Real sign-in with NextAuth v5 (email + password, fixed 8-hour sessions, lockout); `src/proxy.ts` sends visitors without a session cookie to `/login`.
+Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Interactions are still local state (saving arrives in brief 05), except Users and access and Spend uploads (check, decide, confirm, cancel, Reported, Account Director), which save. Real sign-in with NextAuth v5 (email + password, fixed 8-hour sessions, lockout); `src/proxy.ts` sends visitors without a session cookie to `/login`.
 
 ## Where things are
 
@@ -13,6 +13,9 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/auth.ts` | NextAuth config: credentials provider, JWT callbacks (uid, role, signedInAt; refused after 8 h). `src/app/api/auth/[...nextauth]` exposes its handlers. |
 | `src/app/(auth)/login` | Sign in page, `actions.ts` (lockout, lastSignInAt, remember-me cookie), `state.ts`. |
 | `src/app/(app)/change-password` | Choose your own password (forced while `mustChangePassword`). |
+| `src/app/(app)/admin/uploads` | Spend uploads: page + `actions.ts` (check file → preview → decisions → confirm in one transaction; cancel; Reported; Account Director). |
+| `src/services/parsing/spend-file.ts` | Spend file parser (exceljs; structure rejection, row errors). `src/lib/spend-diff.ts`: compare with live data; `confirmProblem`. |
+| `src/server/guards.ts` | `adminViewer()` for Admin-only actions. |
 | `src/app/(app)/admin/users` | Users and access: page + `actions.ts` (create, change role, reset password, unlock, archive, restore; audited). |
 | `src/app/(app)/layout.tsx` | Signed-in shell: `requireViewer()` then `AppHeader` with the role's nav. |
 | `src/app/(app)/admin` | Admin home; `uploads`, `users`, `clients`, `history` (Admin only, `Forbidden` otherwise). |
@@ -53,6 +56,11 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 - `npm run user:create-admin` (scripts/create-admin.mts): creates or recovers an Admin and prints a temporary password in the terminal only. Paul runs it himself.
 - Sample users (invented) have no password and can't sign in; Paul's Admin account is real.
 
+## Uploads
+
+- `npm run upload:dry-run -- --client <id> --file <path>`: what a file would change, read-only.
+- Real TCCC weekly files are approved for upload (decision 17 Nov); other clients' real data needs Paul's OK. Tests build synthetic workbooks in memory.
+
 ## Next
 
-Brief 04: spend upload (parser, validation, preview, decisions, confirm, history, Reported setting). No brief file exists; write a Step 0 report from CLAUDE.md first.
+Brief 05: weekly inputs saved (selection ticks, weekly update, risks, issues, pipeline), all audited. No brief file exists; write a Step 0 report from CLAUDE.md first.
