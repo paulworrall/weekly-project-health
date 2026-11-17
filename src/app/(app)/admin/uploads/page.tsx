@@ -23,6 +23,8 @@ import {
 } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { DEFAULT_CLIENT_ID, getUploadsView, resolveWeek } from "@/mocks/repository";
 import type { UploadStatus } from "@/types/domain";
 
@@ -40,15 +42,18 @@ const STATUS: Record<
   READY_TO_REVIEW: { label: "Ready to review", tone: "muted" },
 };
 
-export default async function UploadsPage() {
+export default async function UploadsPage(props: PageProps<"/admin/uploads">) {
   const viewer = await requireViewer();
-  if (!canAdminister(viewer)) return <Forbidden backHref={`/clients/${DEFAULT_CLIENT_ID}`} />;
-  const v = getUploadsView(DEFAULT_CLIENT_ID)!;
+  if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
+  const { client } = await props.searchParams;
+  const v = getUploadsView(typeof client === "string" ? client : DEFAULT_CLIENT_ID);
+  if (!v) notFound();
+  const staged = v.staged;
   const week = resolveWeek(undefined);
   const s = v.latestStats;
   const up = v.latest?.upload;
   const changes = (t: string, f?: string) =>
-    v.staged.changes.filter((c) => c.type === t && (!f || c.field === f)).length;
+    (staged?.changes ?? []).filter((c) => c.type === t && (!f || c.field === f)).length;
   const dash = (n: number | null) => (n === null ? "—" : n);
 
   return (
@@ -62,6 +67,25 @@ export default async function UploadsPage() {
             anything is saved. Nothing is deleted.
           </p>
         </div>
+        <nav aria-label="Client" className="flex flex-col gap-1.5">
+          <span className="lbl">Client</span>
+          <ul className="flex flex-wrap">
+            {v.clients.map((c) => {
+              const on = c.id === v.client.id;
+              return (
+                <li key={c.id} className="-ml-px first:ml-0">
+                  <Link
+                    href={`/admin/uploads?client=${c.id}`}
+                    aria-current={on ? "page" : undefined}
+                    className={`flex min-h-11 items-center border border-navy px-4 text-[14px] no-underline ${on ? "bg-navy font-medium text-cream hover:text-cream" : "bg-white"}`}
+                  >
+                    {c.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </div>
 
       <h2 className="mb-3.5 text-[26px] font-light">Latest upload · {v.client.name}</h2>
@@ -166,18 +190,27 @@ export default async function UploadsPage() {
             </h2>
             <span className="text-[13px] text-muted">Step 2 of 3 · nothing saved yet</span>
           </div>
-          <p className="mt-2 text-[14px]">
-            {v.staged.upload.fileName} · checked {formatDateTime(v.staged.upload.uploadedAt)} ·{" "}
-            {changes("NEW")} new, {changes("CHANGED", "name")} renamed, {changes("MOVED")} moved,{" "}
-            {changes("CHANGED", "percentSpent")} % spend changed, {changes("MISSING")} missing
-            (sample)
-          </p>
-          <UploadPreview
-            changes={v.staged.changes}
-            fileChecks={v.staged.fileChecks}
-            clientName={v.client.name}
-            rowCount={v.staged.upload.rowCount ?? 0}
-          />
+          {staged ? (
+            <>
+              <p className="mt-2 text-[14px]">
+                {staged.upload.fileName} · checked {formatDateTime(staged.upload.uploadedAt)} ·{" "}
+                {changes("NEW")} new, {changes("CHANGED", "name")} renamed, {changes("MOVED")}{" "}
+                moved, {changes("CHANGED", "percentSpent")} % spend changed, {changes("MISSING")}{" "}
+                missing (sample)
+              </p>
+              <UploadPreview
+                changes={staged.changes}
+                fileChecks={staged.fileChecks}
+                clientName={v.client.name}
+                rowCount={staged.upload.rowCount ?? 0}
+              />
+            </>
+          ) : (
+            <p className="mt-4 text-[14px]">
+              No file is waiting for review for {v.client.name}. Check a file in step 1 to see its
+              changes here.
+            </p>
+          )}
         </section>
       </div>
 

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Card,
-  Delta,
-  RagBar,
   TableScroll,
   Tag,
   tableClass,
@@ -23,7 +21,8 @@ import {
 } from "@/lib/dates";
 import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
-import { DEFAULT_CLIENT_ID, getAdminHome } from "@/mocks/repository";
+import { getAdminHome } from "@/mocks/repository";
+import { ClientCard } from "@/components/features/client-card";
 
 export const metadata: Metadata = { title: "Admin home" };
 
@@ -31,20 +30,19 @@ const linkBtn = "inline-flex min-h-11 items-center px-5 text-[14px] font-medium 
 
 export default async function AdminHomePage() {
   const viewer = await requireViewer();
-  if (!canAdminister(viewer)) return <Forbidden backHref={`/clients/${DEFAULT_CLIENT_ID}`} />;
+  if (!canAdminister(viewer)) return <Forbidden backHref="/clients" />;
   const v = getAdminHome();
-  const c = v.client;
-  const t = c.totals;
   const due = formatWeekdayDayMonth(v.week.closeDate);
   const share = v.inReport ? (v.submitted / v.inReport) * 100 : 0;
-  const upload = v.latestUpload?.upload;
+  const latest = v.uploads[0];
+  const upload = latest?.info.upload;
   const nextMonday = addDays(v.week.closeDate, 3);
 
   const steps = [
     {
       title: "Spend file uploaded",
       when: upload
-        ? `${formatWeekdayDayMonth(upload.extractDate)}, ${formatTime(upload.uploadedAt)} · ${c.client.name}`
+        ? `${formatWeekdayDayMonth(upload.extractDate)}, ${formatTime(upload.uploadedAt)} · ${latest.client.name}`
         : "Not yet this week",
       done: !!upload,
     },
@@ -153,81 +151,11 @@ export default async function AdminHomePage() {
             <h2 id="clients-h" className="mt-2 mb-3.5 text-[26px] font-light">
               Clients
             </h2>
-            <article className="border-t-4 border-navy bg-white p-5 sm:p-7">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-[30px] font-light">
-                    <Link href={`/clients/${c.client.id}`} className="no-underline">
-                      {c.client.name}
-                    </Link>
-                  </h3>
-                  <p className="mt-1.5 text-[14px] text-muted">
-                    {c.workstreams.length} reported workstreams · {t.inReport} projects in weekly
-                    report · spend upload {formatDate(upload?.extractDate)}
-                  </p>
-                </div>
-                <Link
-                  href={`/clients/${c.client.id}`}
-                  className={`${linkBtn} bg-navy text-cream hover:text-cream`}
-                >
-                  Open {c.client.name} overview →
-                </Link>
-              </div>
-              <div className="mt-5 grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4 border-t border-line pt-5">
-                <div>
-                  <p className="lbl">Updates this week</p>
-                  <p className="mt-1.5 text-[30px] font-light">
-                    {t.submitted} <span className="text-[16px]">of {t.inReport}</span>
-                  </p>
-                </div>
-                <div>
-                  <p className="lbl">Delivery RAG</p>
-                  <div className="mt-3">
-                    <RagBar counts={t.rag} height={10} subject={`${c.client.name} Delivery RAG`} />
-                  </div>
-                </div>
-                <div>
-                  <p className="lbl">Open risks</p>
-                  <p className="mt-1.5 text-[30px] font-light">
-                    {t.risks}{" "}
-                    <Delta now={t.risks} prev={t.risksPrev} className="text-[14px] font-medium" />
-                  </p>
-                </div>
-                <div>
-                  <p className="lbl">Open issues</p>
-                  <p className="mt-1.5 text-[30px] font-light">
-                    {t.issues}{" "}
-                    <Delta now={t.issues} prev={t.issuesPrev} className="text-[14px] font-medium" />
-                  </p>
-                </div>
-                <div>
-                  <p className="lbl">Over budget</p>
-                  <p className="mt-1.5 text-[30px] font-light text-overspend">{t.spend.over100}</p>
-                </div>
-              </div>
-              <nav
-                aria-label={`${c.client.name} workstreams`}
-                className="mt-5 flex flex-wrap gap-2"
-              >
-                {c.workstreams.map((w) => {
-                  const all = w.tiles.submitted === w.tiles.inReport;
-                  return (
-                    <Link
-                      key={w.workstream.id}
-                      href={`/clients/${c.client.id}/workstreams/${w.workstream.id}`}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-navy px-4 text-[14px] no-underline"
-                    >
-                      {w.workstream.name}
-                      <span className="text-[12px] text-muted">
-                        {all
-                          ? "all updated"
-                          : `${w.tiles.submitted} of ${w.tiles.inReport} updated`}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </nav>
-            </article>
+            <div className="flex flex-col gap-4">
+              {v.clients.map((c) => (
+                <ClientCard key={c.client.id} c={c} />
+              ))}
+            </div>
             <p className="mt-3 text-[13px] text-muted">
               A client appears here once its first spend file has been uploaded and at least one
               workstream is set to Reported.
@@ -269,17 +197,20 @@ export default async function AdminHomePage() {
               Spend uploads
             </h2>
             <div className="text-[14px] leading-relaxed">
-              {upload ? (
-                <>
-                  <p>
-                    Latest {c.client.name} upload:{" "}
-                    <strong className="font-medium">{formatDateTime(upload.uploadedAt)}</strong>
-                  </p>
-                  <p>
-                    {upload.rowCount} records · {upload.missingCount ?? 0} missing from file ·{" "}
-                    {upload.errorCount} errors
-                  </p>
-                </>
+              {v.uploads.length ? (
+                <ul className="grid gap-2">
+                  {v.uploads.map(({ client, info }) => (
+                    <li key={client.id}>
+                      Latest {client.name} upload:{" "}
+                      <strong className="font-medium">
+                        {formatDateTime(info.upload.uploadedAt)}
+                      </strong>
+                      <br />
+                      {info.upload.rowCount} records · {info.upload.missingCount ?? 0} missing from
+                      file · {info.upload.errorCount} errors
+                    </li>
+                  ))}
+                </ul>
               ) : (
                 <p>No upload yet.</p>
               )}
@@ -327,21 +258,26 @@ export default async function AdminHomePage() {
             <h2 id="links-h" className="lbl mb-3">
               Logs
             </h2>
-            <div className="grid gap-2">
-              <Link
-                href={`/clients/${c.client.id}/risks`}
-                className="flex min-h-11 items-center justify-between border border-navy px-3.5 text-[14px] no-underline"
-              >
-                <span>Risk log</span>
-                <span className="font-medium">{t.risks} open</span>
-              </Link>
-              <Link
-                href={`/clients/${c.client.id}/issues`}
-                className="flex min-h-11 items-center justify-between border border-navy px-3.5 text-[14px] no-underline"
-              >
-                <span>Issue log</span>
-                <span className="font-medium">{t.issues} open</span>
-              </Link>
+            <div className="grid gap-4">
+              {v.clients.map((c) => (
+                <div key={c.client.id} className="grid gap-2">
+                  <p className="text-[14px] font-medium">{c.client.name}</p>
+                  <Link
+                    href={`/clients/${c.client.id}/risks`}
+                    className="flex min-h-11 items-center justify-between border border-navy px-3.5 text-[14px] no-underline"
+                  >
+                    <span>Risk log</span>
+                    <span className="font-medium">{c.totals.risks} open</span>
+                  </Link>
+                  <Link
+                    href={`/clients/${c.client.id}/issues`}
+                    className="flex min-h-11 items-center justify-between border border-navy px-3.5 text-[14px] no-underline"
+                  >
+                    <span>Issue log</span>
+                    <span className="font-medium">{c.totals.issues} open</span>
+                  </Link>
+                </div>
+              ))}
             </div>
           </Card>
         </aside>

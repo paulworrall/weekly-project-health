@@ -87,7 +87,7 @@ Follow `docs/tech-stack.md` exactly for versions, scaffold, folder structure and
 
 Updaters see **all** clients; there are no per-client or per-workstream assignments. Projects in hidden workstreams are invisible to Updaters.
 
-**Landing after sign-in**: Admin → Admin home (`/admin`). Updater → client landing page (the only client today; later the last-viewed client or a picker).
+**Landing after sign-in**: Admin → Admin home (`/admin`). Updater → client list (`/clients`) (decision 17 Nov).
 
 **Accounts**: Admin creates users with a temporary password; `mustChangePassword` forces a change on first sign-in. Admin resets passwords. 5 failed attempts lock the account for 15 minutes. JWT sessions last 8 hours; "Keep me signed in" ticked keeps the cookie for those 8 hours, unticked makes it end when the browser closes. Keep auth SSO-ready (Microsoft Entra ID later).
 
@@ -176,7 +176,7 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 ## 11. Ways of working
 
 - Design screens first (done), build the front end on mock data, then wire up data.
-- **Synthetic data only** until the data governance review. Never commit or seed real client files or names of real client contacts. This applies to mocks, fixtures, seed data and tests: invent client, workstream, project and people names (the decision log mentions the real client and workstreams; never copy them into data).
+- **Synthetic data only** until the data governance review. Never commit or seed real client files or names of real client contacts. **One exception** (decision log, 17 Nov 2026): TCCC's spend file, approved by Paul for use on the site, converted to `src/mocks/clients/tccc.json` (the .xlsx is never committed). Invent nothing for real projects. This applies to mocks, fixtures, seed data and tests: invent client, workstream, project and people names (the decision log mentions the real client and workstreams; never copy them into data).
 - **Never hardcode secrets.** They live in `.env.local` (git-ignored) and in Vercel's environment variables; `.env.local.example` lists the names only. Never paste a secret into chat, code, tests or docs.
 - Paul is not a developer: explain choices in plain English and ask one question at a time.
 - Every feature ships with Vitest tests in `tests/`; the full suite passes before a PR. GitHub PRs, regular merges (not squash).

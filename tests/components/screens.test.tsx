@@ -234,13 +234,14 @@ describe("RiskIssueTable", () => {
 
 describe("UploadPreview", () => {
   const v = getUploadsView(DEFAULT_CLIENT_ID)!;
+  const staged = v.staged!;
 
   it("enables Confirm only when every missing project has a decision", async () => {
     const user = userEvent.setup();
     render(
       <UploadPreview
-        changes={v.staged.changes}
-        fileChecks={v.staged.fileChecks}
+        changes={staged.changes}
+        fileChecks={staged.fileChecks}
         clientName="Northwind Drinks"
         rowCount={636}
       />

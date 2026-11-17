@@ -13,18 +13,50 @@ import { CLIENTS, PIPELINE, PROJECTS, USERS, WORKSTREAMS } from "@/mocks/data";
 
 describe("mock data", () => {
   it("has the agreed shape", () => {
-    expect(WORKSTREAMS).toHaveLength(13);
-    expect(WORKSTREAMS.filter((w) => w.reported)).toHaveLength(5);
-    expect(WORKSTREAMS.some((w) => w.name === "UNMAPPED" && !w.reported)).toBe(true);
+    const nw = WORKSTREAMS.filter((w) => w.clientId === "northwind");
+    expect(nw).toHaveLength(13);
+    expect(nw.filter((w) => w.reported)).toHaveLength(5);
+    expect(nw.some((w) => w.name === "UNMAPPED" && !w.reported)).toBe(true);
     expect(PROJECTS.filter((p) => p.workstreamId === "alpha-eu")).toHaveLength(181);
-    expect(new Set(PROJECTS.map((p) => p.jobNumber)).size).toBe(PROJECTS.length);
+    const nwProjects = PROJECTS.filter((p) => p.clientId === "northwind");
+    expect(new Set(nwProjects.map((p) => p.jobNumber)).size).toBe(nwProjects.length);
     expect(PROJECTS.every((p) => /^\d{6}$/.test(p.jobNumber))).toBe(true);
     expect(USERS.filter((u) => u.role === "ADMIN")).toHaveLength(1);
     expect(USERS.filter((u) => u.role === "UPDATER")).toHaveLength(12);
     expect(CLIENTS[0].name).toBe("Northwind Drinks");
+    expect(PROJECTS.filter((p) => p.clientId === "northwind")).toHaveLength(633);
     for (const w of WORKSTREAMS.filter((x) => x.reported)) {
       expect(PIPELINE.filter((o) => o.workstreamId === w.id).length).toBeLessThanOrEqual(4);
     }
+  });
+});
+
+describe("client from a spend file", () => {
+  it("loads every row of the approved file as a second client", () => {
+    const client = CLIENTS.find((c) => c.id === "tccc")!;
+    expect(client).toBeDefined();
+    const ws = WORKSTREAMS.filter((w) => w.clientId === client.id);
+    expect(ws).toHaveLength(13);
+    expect(ws.filter((w) => w.reported)).toHaveLength(5);
+    const projects = PROJECTS.filter((p) => p.clientId === client.id);
+    expect(projects).toHaveLength(869);
+    expect(projects.every((p) => !p.includeInReport)).toBe(true);
+    expect(new Set(PROJECTS.map((p) => p.id)).size).toBe(PROJECTS.length);
+  });
+
+  it("invents nothing for its real projects", () => {
+    const overview = getClientOverview("tccc")!;
+    expect(overview.totals.inReport).toBe(0);
+    expect(overview.totals.risks + overview.totals.issues + overview.totals.pipeline).toBe(0);
+    expect(overview.latestUpload?.upload.rowCount).toBe(869);
+    const up = getUploadsView("tccc")!;
+    expect(up.staged).toBeNull();
+    expect(up.latestStats).toMatchObject({
+      records: 869,
+      overBudget: 44,
+      noBudget: 517,
+      noTimesheet: 252,
+    });
   });
 });
 
@@ -81,7 +113,7 @@ describe("mock repository", () => {
     const home = getAdminHome();
     expect(home.outstanding.length).toBe(home.inReport - home.submitted);
     const up = getUploadsView(DEFAULT_CLIENT_ID)!;
-    expect(up.staged.changes.filter((c) => c.type === "MISSING")).toHaveLength(3);
+    expect(up.staged!.changes.filter((c) => c.type === "MISSING")).toHaveLength(3);
     expect(new Set(up.history.map((h) => h.upload.status))).toEqual(
       new Set(["LIVE", "REPLACED", "REJECTED", "CANCELLED"])
     );

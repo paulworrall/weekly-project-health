@@ -151,3 +151,9 @@ In the upload preview, no decision is pre-selected for projects missing from the
 
 ## 17 Nov 2026 — "Keep me signed in" tick box
 The sign-in page keeps the mockup's tick box. Ticked: the session cookie lasts the full 8 hours, even after the browser closes. Unticked: it ends when the browser closes (and after 8 hours at most). Reason: safer on shared computers. Rejected: always 8 hours.
+
+## 17 Nov 2026 — TCCC's spend file approved for use on the site
+Paul (Admin) approved loading TCCC's real spend file (`TCCC_Weekly_Helath_Check_In_V1.xlsx`, 869 rows, extract date taken as 16 Nov 2026) into the site, including the public Vercel address, stating it contains no sensitive information. It holds only job numbers, project names, workstream names and % spend. It is converted once with `scripts/import-spend-file.mts` into `src/mocks/clients/tccc.json`, which is committed; the .xlsx is not. Nothing is invented for TCCC's real projects: no weekly updates, RAGs, risks, issues or pipeline, and no project is in the weekly report until someone ticks it. Supersedes "synthetic data only" (CLAUDE.md §11, excel-file-spec "Data governance") for this file only; everything else stays synthetic, and the guard test still bans real names outside `src/mocks/clients/`. Reason: see real projects on the site before uploads are built. Rejected: waiting for brief 04 uploads; inventing weekly data for real projects.
+
+## 17 Nov 2026 — Client list once there is more than one client
+With two clients, Updaters land on a client list (`/clients`) and "Clients" in the menu goes there; "Workstreams" and "Risks and issues" go to the client being viewed, or to the list. Admin home shows a card per client, and Spend uploads has a client switcher. Settles the open point in "Landing page by role" (16 Nov). Rejected: landing on the last-viewed client (needs storage; revisit with sign-in in brief 03).

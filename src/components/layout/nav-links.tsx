@@ -2,40 +2,75 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { Role } from "@/types/domain";
 
 export interface NavItem {
   label: string;
-  href: string;
-  /** Path prefixes that make this item current. */
-  match: string[];
-  /** The first match must be the exact path (others are prefixes). */
-  exact?: boolean;
+  /** Where the item goes, given the client being viewed (null outside a client's pages). */
+  href: (clientId: string | null) => string;
+  /** Whether the item is the current section. */
+  current: (pathname: string) => boolean;
 }
 
-export function isCurrent(item: NavItem, pathname: string): boolean {
-  return item.match.some((m, i) =>
-    item.exact && i === 0 ? pathname === m : pathname === m || pathname.startsWith(`${m}/`)
-  );
+/** The client in the URL, e.g. "/clients/northwind/risks" → "northwind". */
+export function clientInPath(pathname: string): string | null {
+  return /^\/clients\/([^/]+)/.exec(pathname)?.[1] ?? null;
 }
 
-export function NavLinks({ items }: { items: NavItem[] }) {
+const inClient = (pathname: string, sub: RegExp) => {
+  const id = clientInPath(pathname);
+  return !!id && sub.test(pathname.slice(`/clients/${id}`.length));
+};
+
+const clients: NavItem = {
+  label: "Clients",
+  href: () => "/clients",
+  current: (p) => p === "/clients" || /^\/clients\/[^/]+$/.test(p) || p === "/admin/clients",
+};
+const workstreams: NavItem = {
+  label: "Workstreams",
+  href: (id) => (id ? `/clients/${id}#workstreams` : "/clients"),
+  current: (p) => inClient(p, /^\/workstreams\//) || p.startsWith("/projects/"),
+};
+const logs: NavItem = {
+  label: "Risks and issues",
+  href: (id) => (id ? `/clients/${id}/risks` : "/clients"),
+  current: (p) => inClient(p, /^\/(risks|issues)$/),
+};
+
+/** Nav per role, as in the mockups (Step 0 report §4). */
+export const NAV: Record<Role, NavItem[]> = {
+  ADMIN: [
+    { label: "Admin home", href: () => "/admin", current: (p) => p === "/admin" },
+    clients,
+    workstreams,
+    logs,
+    {
+      label: "Spend uploads",
+      href: () => "/admin/uploads",
+      current: (p) => p === "/admin/uploads",
+    },
+    {
+      label: "Users and access",
+      href: () => "/admin/users",
+      current: (p) => p === "/admin/users" || p === "/admin/history",
+    },
+  ],
+  UPDATER: [clients, workstreams, logs],
+};
+
+export function NavLinks({ role }: { role: Role }) {
   const pathname = usePathname() ?? "";
-  // The most specific match wins, so "/admin/uploads" doesn't also light up "Admin home".
-  const current = items
-    .filter((i) => isCurrent(i, pathname))
-    .sort(
-      (a, b) =>
-        Math.max(...b.match.map((m) => m.length)) - Math.max(...a.match.map((m) => m.length))
-    )[0];
+  const clientId = clientInPath(pathname);
   return (
     <nav aria-label="Main">
       <ul className="flex flex-wrap gap-x-5">
-        {items.map((item) => {
-          const on = item === current;
+        {NAV[role].map((item) => {
+          const on = item.current(pathname);
           return (
             <li key={item.label}>
               <Link
-                href={item.href}
+                href={item.href(clientId)}
                 aria-current={on ? "page" : undefined}
                 className={`flex min-h-11 items-center border-b-2 text-[14px] no-underline hover:text-white hover:underline ${
                   on ? "border-orange" : "border-transparent"

@@ -401,25 +401,36 @@ export function getLogData(clientId: string, weekParam?: string | string[]): Log
 
 export function getAdminHome(): AdminHomeView {
   const week = resolveWeek(undefined);
-  const client = getClientOverview(DEFAULT_CLIENT_ID)!;
-  const rows = reportedRows(DEFAULT_CLIENT_ID, week);
+  const clients = CLIENTS.filter((c) => !c.archivedAt)
+    .map((c) => getClientOverview(c.id) as ClientOverview)
+    .filter((c) => c.workstreams.length > 0);
+  const rows = clients.flatMap((c) => reportedRows(c.client.id, week));
   const included = rows.filter((r) => r.included);
   const updaters = USERS.filter((u) => u.role === "UPDATER" && !u.archivedAt);
+  const uploads = clients
+    .map((c) => ({ client: c.client, info: c.latestUpload }))
+    .filter((u): u is { client: Client; info: UploadInfo } => !!u.info)
+    .sort((a, b) => b.info.upload.uploadedAt.localeCompare(a.info.upload.uploadedAt));
   return {
     week,
     outstanding: outstandingUpdates(rows),
     inReport: included.length,
     submitted: included.filter((r) => r.submittedThisWeek).length,
-    client,
-    latestUpload: latestUpload(DEFAULT_CLIENT_ID, week.closeDate),
+    clients,
+    uploads,
     users: {
       admins: USERS.filter((u) => u.role === "ADMIN" && !u.archivedAt).length,
       updaters: updaters.length,
       neverSignedIn: updaters.filter((u) => !u.lastSignInAt).length,
     },
-    openRisks: LOG_ITEMS.filter((l) => l.kind === "RISK" && activeAt(l, week.asOf)).length,
-    openIssues: LOG_ITEMS.filter((l) => l.kind === "ISSUE" && activeAt(l, week.asOf)).length,
   };
+}
+
+/** Clients with at least one reported workstream, for the client list. */
+export function getClientList(weekParam?: string | string[]): ClientOverview[] {
+  return CLIENTS.filter((c) => !c.archivedAt)
+    .map((c) => getClientOverview(c.id, weekParam) as ClientOverview)
+    .filter((c) => c.workstreams.length > 0);
 }
 
 export function getUploadsView(clientId: string): UploadsView | null {
@@ -450,15 +461,18 @@ export function getUploadsView(clientId: string): UploadsView | null {
       noBudget: spends.filter((s) => s.spendStatus === "NO_BUDGET").length,
       noTimesheet: spends.filter((s) => s.spendStatus === "NO_TIMESHEET").length,
     },
-    staged: {
-      upload: STAGED_UPLOAD,
-      fileChecks: [
-        "Sheet and 4 headers match",
-        `${STAGED_UPLOAD.rowCount} rows read · 0 errors`,
-        "Job numbers unique",
-      ],
-      changes: STAGED_CHANGES,
-    },
+    staged:
+      STAGED_UPLOAD.clientId !== clientId
+        ? null
+        : {
+            upload: STAGED_UPLOAD,
+            fileChecks: [
+              "Sheet and 4 headers match",
+              `${STAGED_UPLOAD.rowCount} rows read · 0 errors`,
+              "Job numbers unique",
+            ],
+            changes: STAGED_CHANGES,
+          },
     history: UPLOADS.filter((u) => u.clientId === clientId)
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt))
       .slice(0, 8)
