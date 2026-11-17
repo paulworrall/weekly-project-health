@@ -44,6 +44,14 @@ describe("client from a spend file", () => {
     expect(new Set(PROJECTS.map((p) => p.id)).size).toBe(PROJECTS.length);
   });
 
+  it("lists reported workstreams A–Z on the client page and in the logs", () => {
+    for (const id of ["tccc", "northwind"]) {
+      const names = getClientOverview(id)!.workstreams.map((w) => w.workstream.name);
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, "en-GB")));
+      expect(getLogData(id)!.workstreams.map((w) => w.name)).toEqual(names);
+    }
+  });
+
   it("invents nothing for its real projects", () => {
     const overview = getClientOverview("tccc")!;
     expect(overview.totals.inReport).toBe(0);

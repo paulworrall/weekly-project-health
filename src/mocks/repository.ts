@@ -213,6 +213,13 @@ function workstreamSummary(wsId: string, week: WeekContext): WorkstreamSummary {
   };
 }
 
+/** A client's reported workstreams, A–Z by name. */
+function reportedWorkstreams(clientId: string) {
+  return WORKSTREAMS.filter((w) => w.clientId === clientId && w.reported).sort((a, b) =>
+    a.name.localeCompare(b.name, "en-GB", { sensitivity: "base" })
+  );
+}
+
 function reportedRows(clientId: string, week: WeekContext): ProjectRow[] {
   const reported = new Set(
     WORKSTREAMS.filter((w) => w.clientId === clientId && w.reported).map((w) => w.id)
@@ -231,9 +238,7 @@ export function getClientOverview(
   const client = getClient(clientId);
   if (!client) return null;
   const week = resolveWeek(weekParam);
-  const workstreams = WORKSTREAMS.filter((w) => w.clientId === clientId && w.reported).map((w) =>
-    workstreamSummary(w.id, week)
-  );
+  const workstreams = reportedWorkstreams(clientId).map((w) => workstreamSummary(w.id, week));
   return {
     client,
     week,
@@ -366,7 +371,7 @@ export function getLogData(clientId: string, weekParam?: string | string[]): Log
   const client = getClient(clientId);
   if (!client) return null;
   const week = resolveWeek(weekParam);
-  const workstreams = WORKSTREAMS.filter((w) => w.clientId === clientId && w.reported);
+  const workstreams = reportedWorkstreams(clientId);
   const wsIds = new Set(workstreams.map((w) => w.id));
   const projectById = new Map(PROJECTS.map((p) => [p.id, p]));
   const items: LogRow[] = LOG_ITEMS.filter((l: LogItem) => {
