@@ -1,5 +1,7 @@
 "use client";
 
+import type { ActionResult } from "@/types/action-result";
+import type { PipelineActions } from "./pipeline-section";
 import { useMemo, useState } from "react";
 import type { WorkstreamOverview } from "@/types/views";
 import { formatWeekdayDayMonth } from "@/lib/dates";
@@ -14,7 +16,25 @@ import { ProjectList, type ListState } from "./project-list";
  * Workstream landing body: weekly summary tiles, pipeline and project list. The include ticks
  * live here so the tiles recount as projects are ticked (local state until brief 05).
  */
-export function WorkstreamBody({ v, now }: { v: WorkstreamOverview; now: string }) {
+export interface WorkstreamActions {
+  setIncluded: (
+    projectId: string,
+    included: boolean
+  ) => Promise<ActionResult<{ included: boolean }>>;
+  pipeline: PipelineActions;
+}
+
+export function WorkstreamBody({
+  v,
+  now,
+  actions,
+}: {
+  v: WorkstreamOverview;
+  now: string;
+  /** Saves on the server (brief 05); omitted in a closed week. */
+  actions?: WorkstreamActions;
+}) {
+  const [problem, setProblem] = useState("");
   const [included, setIncluded] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(v.projects.map((p) => [p.id, p.included]))
   );
@@ -36,6 +56,16 @@ export function WorkstreamBody({ v, now }: { v: WorkstreamOverview; now: string 
     const next = !included[id];
     setIncluded((s) => ({ ...s, [id]: next }));
     setAnnounce(`${p?.name} ${next ? "included in" : "removed from"} the weekly report.`);
+    setProblem("");
+    if (!actions) return;
+    void actions.setIncluded(id, next).then((r) => {
+      if (!r.ok) {
+        // Put the tick back and say why.
+        setIncluded((s) => ({ ...s, [id]: !next }));
+        setAnnounce("");
+        setProblem(`${p?.name}: ${r.message}`);
+      }
+    });
   }
 
   return (
@@ -43,6 +73,11 @@ export function WorkstreamBody({ v, now }: { v: WorkstreamOverview; now: string 
       <p role="status" className="sr-only">
         {announce}
       </p>
+      {problem ? (
+        <p role="alert" className="mb-4 bg-warning-tint px-4 py-3 text-[14px] font-medium">
+          {problem}
+        </p>
+      ) : null}
       <section
         aria-label="Weekly summary"
         className="mb-9 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4"
@@ -124,6 +159,7 @@ export function WorkstreamBody({ v, now }: { v: WorkstreamOverview; now: string 
         initial={v.pipeline}
         readOnly={v.week.closed}
         today={v.week.asOf}
+        actions={actions?.pipeline}
       />
 
       <ProjectList

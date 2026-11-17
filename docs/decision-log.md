@@ -181,3 +181,9 @@ Paul approved uploading TCCC's weekly spend files through Spend uploads on the l
 
 ## 17 Nov 2026 — A newer file cancels one still waiting for review
 Checking a new spend file cancels any earlier file for the same client that is still Ready to review; it stays in the history as Cancelled ("Replaced by a newer file before review"). Reason: only one preview per client, no dead ends. Rejected: blocking the new file until the earlier one is confirmed or cancelled.
+
+## 17 Nov 2026 — Warn when someone else saved first
+Saving a weekly update, risk, issue or pipeline opportunity is refused if someone else changed it since the page was opened ("This was changed by … at … since you opened it"), and the latest values are shown so the change can be re-applied. "Include in weekly report" ticks are a single on/off, so the last tick wins. Reason: nobody's changes are silently overwritten. Rejected: last save wins.
+
+## 17 Nov 2026 — The open week is created on first save
+Weekly inputs are saved against the open reporting week, which is created in the database on first save if it doesn't exist yet (state Open, closing Friday 23:59 London). Saves for a week whose close time has passed are refused even before the close job runs. Reason: the automatic close (brief 06) isn't built yet, and the Hobby cron runs once a day. Rejected: creating weeks in advance.

@@ -1,6 +1,8 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useId, useState, useTransition, type FormEvent } from "react";
+import type { ActionResult } from "@/types/action-result";
 import type { Likelihood, PipelineOpportunity } from "@/types/domain";
 import { LIKELIHOODS } from "@/types/domain";
 import { fieldErrors, pipelineSchema } from "@/types/schemas";
@@ -50,19 +52,34 @@ const EMPTY: Draft = {
  * Workstream pipeline: add, edit and archive in local state (brief 01). Any Updater or Admin can
  * edit; archiving replaces deleting (decision log: "Workstream pipeline").
  */
+export interface PipelineActions {
+  save: (
+    id: string | null,
+    values: Draft,
+    version: string | null
+  ) => Promise<ActionResult<PipelineOpportunity>>;
+  archive: (id: string, version: string | null) => Promise<ActionResult<null>>;
+}
+
 export function PipelineSection({
   workstreamId,
   workstreamName,
   initial,
   readOnly,
   today,
+  actions,
 }: {
   workstreamId: string;
   workstreamName: string;
   initial: PipelineOpportunity[];
   readOnly: boolean;
   today: string;
+  /** Saves on the server (brief 05); without, changes stay in the page (tests). */
+  actions?: PipelineActions;
 }) {
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const [problem, setProblem] = useState<{ text: string; conflict: boolean } | null>(null);
   const [items, setItems] = useState(initial);
   const [editing, setEditing] = useState<string | "new" | null>(null);
   const [draft, setDraft] = useState<Draft>(EMPTY);
@@ -100,6 +117,29 @@ export function PipelineSection({
       return;
     }
     const values = { ...parsed.data, possibleStart: parsed.data.possibleStart || null };
+    if (actions) {
+      const target = editing;
+      const current = items.find((x) => x.id === target);
+      setProblem(null);
+      start(async () => {
+        const r = await actions.save(
+          target === "new" ? null : target,
+          { ...parsed.data, possibleStart: parsed.data.possibleStart ?? "" },
+          current?.updatedAt ?? null
+        );
+        if (r.ok) {
+          setItems((xs) =>
+            target === "new" ? [...xs, r.data] : xs.map((x) => (x.id === target ? r.data : x))
+          );
+          setMessage(`${target === "new" ? "Added" : "Saved"}: ${r.data.title}`);
+          setEditing(null);
+        } else {
+          if (r.fieldErrors) setErrors(r.fieldErrors);
+          setProblem({ text: r.message, conflict: r.code === "CONFLICT" });
+        }
+      });
+      return;
+    }
     if (editing === "new") {
       setItems((xs) => [
         ...xs,
@@ -120,6 +160,19 @@ export function PipelineSection({
   }
 
   function archive(o: PipelineOpportunity) {
+    if (actions) {
+      setProblem(null);
+      start(async () => {
+        const r = await actions.archive(o.id, o.updatedAt ?? null);
+        if (r.ok) {
+          setItems((xs) =>
+            xs.map((x) => (x.id === o.id ? { ...x, archivedAt: new Date().toISOString() } : x))
+          );
+          setMessage(`Archived: ${o.title}. It is kept in the history.`);
+        } else setProblem({ text: r.message, conflict: r.code === "CONFLICT" });
+      });
+      return;
+    }
     setItems((xs) =>
       xs.map((x) => (x.id === o.id ? { ...x, archivedAt: new Date().toISOString() } : x))
     );
@@ -153,6 +206,16 @@ export function PipelineSection({
         {message}
       </p>
       {message ? <p className="mb-3 bg-success-tint px-4 py-2.5 text-[14px]">{message}</p> : null}
+      {problem ? (
+        <div role="alert" className="mb-3 bg-warning-tint px-4 py-3 text-[14px]">
+          <p className="font-medium">{problem.text}</p>
+          {problem.conflict ? (
+            <Button variant="secondary" className="mt-2" onClick={() => router.refresh()}>
+              Reload the latest
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
 
       {editing !== null ? (
         <form
@@ -211,7 +274,9 @@ export function PipelineSection({
             />
           </div>
           <div className="flex flex-wrap gap-3 md:col-span-3">
-            <Button type="submit">{editing === "new" ? "Add opportunity" : "Save changes"}</Button>
+            <Button type="submit" disabled={pending}>
+              {pending ? "Saving…" : editing === "new" ? "Add opportunity" : "Save changes"}
+            </Button>
             <Button variant="secondary" onClick={() => setEditing(null)}>
               Cancel
             </Button>

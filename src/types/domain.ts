@@ -105,6 +105,8 @@ export interface ProjectWeek {
   submittedById: string | null;
   /** Closed weeks only: no submission by close, values carried forward. */
   notUpdated?: boolean;
+  /** When this record was last saved (for "changed since you opened it" checks). */
+  updatedAt?: IsoDateTime;
 }
 
 export interface LogItem {
@@ -125,6 +127,8 @@ export interface LogItem {
   action: string;
   closedOn: IsoDate | null;
   archivedAt: IsoDateTime | null;
+  /** When this record was last saved (for "changed since you opened it" checks). */
+  updatedAt?: IsoDateTime;
 }
 
 export interface PipelineOpportunity {
@@ -138,6 +142,8 @@ export interface PipelineOpportunity {
   nextSteps: string;
   createdOn: IsoDate;
   archivedAt: IsoDateTime | null;
+  /** When this record was last saved (for "changed since you opened it" checks). */
+  updatedAt?: IsoDateTime;
 }
 
 export interface SpendUpload {

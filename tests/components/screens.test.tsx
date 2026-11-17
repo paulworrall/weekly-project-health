@@ -88,6 +88,7 @@ describe("WeeklyUpdateForm", () => {
     dueLabel: "Fri 20 Nov",
     lastSubmissionText: "Last submission: 13 Nov 2026 (week 46).",
     now: "2026-11-17T10:30:00Z",
+    version: null,
   };
 
   it("validates % complete and shows field errors", async () => {

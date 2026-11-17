@@ -95,6 +95,7 @@ export async function loadRows(): Promise<DbRows> {
         submittedAt: true,
         submittedById: true,
         notUpdated: true,
+        updatedAt: true,
       },
     }),
     prisma.spendUpload.findMany({
@@ -159,6 +160,7 @@ export async function loadRows(): Promise<DbRows> {
         nextSteps: true,
         createdAt: true,
         archivedAt: true,
+        updatedAt: true,
       },
     }),
     prisma.auditEvent.findMany({
@@ -209,6 +211,7 @@ const logSelect = {
   action: true,
   closedOn: true,
   archivedAt: true,
+  updatedAt: true,
 } as const;
 
 /** The views over the live database, loaded once per request. */

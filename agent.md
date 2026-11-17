@@ -1,10 +1,10 @@
 # Codebase summary
 
-Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 04, spend uploads).
+Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 05, weekly inputs).
 
 ## State
 
-Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Interactions are still local state (saving arrives in brief 05), except Users and access and Spend uploads (check, decide, confirm, cancel, Reported, Account Director), which save. Real sign-in with NextAuth v5 (email + password, fixed 8-hour sessions, lockout); `src/proxy.ts` sends visitors without a session cookie to `/login`.
+Every page reads the live Neon database (Northwind sample + TCCC) through `src/server/repository.ts`. Everything people enter now saves: include ticks, weekly updates (draft / submit), risks, issues, pipeline (brief 05), Users and access, and Spend uploads. Closed weeks are read-only (snapshots and automatic close arrive in brief 06). Real sign-in with NextAuth v5 (email + password, fixed 8-hour sessions, lockout); `src/proxy.ts` sends visitors without a session cookie to `/login`.
 
 ## Where things are
 
@@ -15,7 +15,9 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/app/(app)/change-password` | Choose your own password (forced while `mustChangePassword`). |
 | `src/app/(app)/admin/uploads` | Spend uploads: page + `actions.ts` (check file → preview → decisions → confirm in one transaction; cancel; Reported; Account Director). |
 | `src/services/parsing/spend-file.ts` | Spend file parser (exceljs; structure rejection, row errors). `src/lib/spend-diff.ts`: compare with live data; `confirmProblem`. |
-| `src/server/guards.ts` | `adminViewer()` for Admin-only actions. |
+| `src/server/guards.ts` | `adminViewer()` for Admin-only actions, `editorViewer()` for actions any signed-in person may take. |
+| `src/server/actions/weekly.ts` | Weekly inputs: include tick, weekly update, risk/issue create/update/archive (refs from Client counters in the same transaction), pipeline save/archive. All audited, open week only, version check (`updatedAt`) against overwriting someone else's change. Pages bind them in inline `"use server"` closures. |
+| `src/server/periods.ts` | `ensureOpenPeriod(tx, weekKey)`: creates the open ReportingPeriod on first save. |
 | `src/app/(app)/admin/users` | Users and access: page + `actions.ts` (create, change role, reset password, unlock, archive, restore; audited). |
 | `src/app/(app)/layout.tsx` | Signed-in shell: `requireViewer()` then `AppHeader` with the role's nav. |
 | `src/app/(app)/admin` | Admin home; `uploads`, `users`, `clients`, `history` (Admin only, `Forbidden` otherwise). |
@@ -24,7 +26,7 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/components/features/` | Screen pieces: `display` (RagBar, LevelTag, pills, Delta, SpendCell, TableScroll, table classes), `week` (WeekPicker, ClosedWeekNote), `pagination`, `project-list`, `workstream-body`, `pipeline-section`, `weekly-update-form` (+ RagSelector), `risk-issue-table`, `log-view`/`log-page`, `upload-form`, `upload-preview`, `workstream-settings`, `simple-table`, `login-form`, `forbidden`. |
 | `src/components/ui/` | Primitives from brief 00 (+ `rag-badge`, `stat-tile`). |
 | `src/components/layout/` | `app-header` (NAV per role), `nav-links` (current page), `breadcrumb`, `page-header`. |
-| `src/lib/` | `viewer.ts`: `getViewer()` (session + database check, cached) and `requireViewer({ allowPasswordChange })`. `passwords.ts` (rule, temporary passwords), `lockout.ts`, `session-cookie.ts`. Pure, tested: `week`, `dates`, `spend`, `delta`, `ageing`, `pagination`, `sorting`, `filters`, `logs`, `rollup`, `rag`, `labels`, `permissions`, `links` (`withWeek`). Server-only helpers: `viewer` (`getViewer`/`requireViewer`), `dev-role`. |
+| `src/lib/` | `viewer.ts`: `getViewer()` (session + database check, cached) and `requireViewer({ allowPasswordChange })`. `passwords.ts` (rule, temporary passwords), `lockout.ts`, `session-cookie.ts`. Pure, tested: `week`, `dates`, `spend`, `delta`, `ageing`, `pagination`, `sorting`, `filters`, `logs`, `rollup`, `rag`, `labels`, `permissions`, `links` (`withWeek`), `weekly-rules` (week-open check, refs, closed date, version, conflict message). Server-only helpers: `viewer` (`getViewer`/`requireViewer`), `dev-role`. |
 | `src/types/` | `domain.ts` (records, enums), `views.ts` (page view models), `schemas.ts` (zod), `action-result.ts`. |
 | `src/lib/views.ts` | `createViews(dataset)`: every page view model, built from a `Dataset`. Pure. |
 | `src/server/repository.ts` | `getRepository()` (React `cache`): loads all rows with Prisma, `datasetFromRows`, `createViews`. Used by every page and `lib/viewer.ts`. |
@@ -44,7 +46,7 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 ## Commands
 
 - `npm run dev` · `npm run lint` · `npm run typecheck` (runs `next typegen`) · `npm test` · `npm run build` · `npm run format`.
-- Sample data views: open `/login` and use the Development links, or add `?as=admin` / `?as=updater` to any URL.
+- Run the built site locally: `npm run build` then `npm run start` (port 3000), signed in with your own account.
 
 ## Database
 
@@ -63,4 +65,4 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 
 ## Next
 
-Brief 05: weekly inputs saved (selection ticks, weekly update, risks, issues, pipeline), all audited. No brief file exists; write a Step 0 report from CLAUDE.md first.
+Brief 06: automatic week close (Vercel Cron, early Saturday UK time on Hobby), carry-forward and snapshots. Paul has also added `briefs/brief-05b-pipeline-value.md` and `briefs/brief-07-generate-report.md`; agree the order with him.

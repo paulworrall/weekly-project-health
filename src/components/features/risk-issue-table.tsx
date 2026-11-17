@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import type { ActionResult } from "@/types/action-result";
 import type { IsoDate, LogItem, LogKind, LogLevel, LogStatus } from "@/types/domain";
 import { LOG_STATUSES } from "@/types/domain";
 import { fieldErrors, issueSchema, riskSchema } from "@/types/schemas";
@@ -29,9 +31,16 @@ type Draft = {
 
 const input = "min-h-10 w-full border border-navy bg-white px-2.5 text-[14px]";
 
+export interface LogActions {
+  create: (values: Draft) => Promise<ActionResult<LogItem>>;
+  update: (id: string, values: Draft, version: string | null) => Promise<ActionResult<LogItem>>;
+  archive: (id: string, version: string | null) => Promise<ActionResult<null>>;
+}
+
 /**
  * Risks or issues on the project page: inline add, edit (including the due date) and delete,
- * which archives (local state until brief 05). Refs continue the client's sequence.
+ * which archives. With `actions` every change is saved on the server (brief 05), which assigns the
+ * next per-client ref; without, changes stay in the page (tests).
  */
 export function RiskIssueTable({
   kind,
@@ -42,6 +51,7 @@ export function RiskIssueTable({
   today,
   readOnly,
   defaultOwner,
+  actions,
 }: {
   kind: LogKind;
   initial: LogItem[];
@@ -51,7 +61,11 @@ export function RiskIssueTable({
   today: IsoDate;
   readOnly: boolean;
   defaultOwner: string;
+  actions?: LogActions;
 }) {
+  const router = useRouter();
+  const [pending, start] = useTransition();
+  const [problem, setProblem] = useState<{ text: string; conflict: boolean } | null>(null);
   const [items, setItems] = useState(initial);
   const [seq, setSeq] = useState(nextSeq);
   const [editing, setEditing] = useState<{ id: string; isNew: boolean } | null>(null);
@@ -86,8 +100,9 @@ export function RiskIssueTable({
 
   function add() {
     if (editing) return;
-    const ref = `${kind === "RISK" ? "R" : "I"}-${String(seq).padStart(3, "0")}`;
-    const id = `new-${ref}`;
+    // With actions the server assigns the ref on save; until then the row shows "New".
+    const ref = actions ? "New" : `${kind === "RISK" ? "R" : "I"}-${String(seq).padStart(3, "0")}`;
+    const id = `new-${seq}`;
     const level = levels[levels.length - 2];
     const blank: LogItem = {
       id,
@@ -134,6 +149,27 @@ export function RiskIssueTable({
       return;
     }
     const d = parsed.data;
+    if (actions) {
+      const target = editing;
+      const current = items.find((x) => x.id === target.id);
+      const values: Draft = { ...d, dueOn: d.dueOn ?? "" };
+      setProblem(null);
+      start(async () => {
+        const r = target.isNew
+          ? await actions.create(values)
+          : await actions.update(target.id, values, current?.updatedAt ?? null);
+        if (r.ok) {
+          setItems((xs) => xs.map((x) => (x.id === target.id ? r.data : x)));
+          setMessage(`${r.data.ref} ${target.isNew ? "added" : "saved"}.`);
+          setEditing(null);
+          setDraft(null);
+        } else {
+          if (r.fieldErrors) setErrors(r.fieldErrors);
+          setProblem({ text: r.message, conflict: r.code === "CONFLICT" });
+        }
+      });
+      return;
+    }
     setItems((xs) =>
       xs.map((x) =>
         x.id === editing.id
@@ -153,6 +189,20 @@ export function RiskIssueTable({
   }
 
   function remove(item: LogItem) {
+    if (actions) {
+      setProblem(null);
+      start(async () => {
+        const r = await actions.archive(item.id, item.updatedAt ?? null);
+        if (r.ok) {
+          setItems((xs) =>
+            xs.map((x) => (x.id === item.id ? { ...x, archivedAt: new Date().toISOString() } : x))
+          );
+          setArchived((n) => n + 1);
+          setMessage(`${item.ref} deleted. It is archived and kept in the history.`);
+        } else setProblem({ text: r.message, conflict: r.code === "CONFLICT" });
+      });
+      return;
+    }
     setItems((xs) =>
       xs.map((x) => (x.id === item.id ? { ...x, archivedAt: new Date().toISOString() } : x))
     );
@@ -175,7 +225,7 @@ export function RiskIssueTable({
           </p>
         </div>
         {!readOnly ? (
-          <Button onClick={add} disabled={!!editing}>
+          <Button onClick={add} disabled={!!editing || pending}>
             <PlusIcon /> Add {single.toLowerCase()}
           </Button>
         ) : null}
@@ -183,6 +233,16 @@ export function RiskIssueTable({
       <p role="status" className="sr-only">
         {message}
       </p>
+      {problem ? (
+        <div role="alert" className="mb-4 bg-warning-tint px-4 py-3 text-[14px]">
+          <p className="font-medium">{problem.text}</p>
+          {problem.conflict ? (
+            <Button variant="secondary" className="mt-2" onClick={() => router.refresh()}>
+              Reload the latest
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
       <TableScroll label={title}>
         <table className={`${tableClass} min-w-[1240px]`}>
           <caption className="sr-only">{title} on this project</caption>
@@ -352,7 +412,9 @@ export function RiskIssueTable({
                     <td className="py-2 pl-2.5 whitespace-nowrap">
                       {ed ? (
                         <div className="flex gap-1.5">
-                          <Button onClick={save}>Save</Button>
+                          <Button onClick={save} disabled={pending}>
+                            {pending ? "Saving…" : "Save"}
+                          </Button>
                           <Button variant="secondary" onClick={cancel}>
                             Cancel
                           </Button>
@@ -363,7 +425,7 @@ export function RiskIssueTable({
                             variant="secondary"
                             onClick={() => edit(it)}
                             aria-label={`Edit ${it.ref}`}
-                            disabled={!!editing}
+                            disabled={!!editing || pending}
                           >
                             Edit
                           </Button>
@@ -371,7 +433,7 @@ export function RiskIssueTable({
                             variant="danger"
                             onClick={() => remove(it)}
                             aria-label={`Delete ${it.ref} (archived and kept in the history)`}
-                            disabled={!!editing}
+                            disabled={!!editing || pending}
                           >
                             Delete
                           </Button>

@@ -1,6 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useId, useState, useTransition } from "react";
+import type { ActionResult } from "@/types/action-result";
 import type { ProjectStatus, Rag, Spend, UpdateState } from "@/types/domain";
 import { PROJECT_STATUSES } from "@/types/domain";
 import { fieldErrors, weeklySubmitSchema, weeklyUpdateSchema } from "@/types/schemas";
@@ -69,11 +71,20 @@ export interface WeeklyUpdateFormProps {
   /** Closed week: what was saved at the close. */
   closedText?: string;
   now: string;
+  /** Version of this week's saved entry (null if none yet), for "changed since you opened it". */
+  version: string | null;
+  /** Saves the update; omitted in a closed week. */
+  onSave?: (
+    kind: UpdateState,
+    values: { status: string; rag: string; percentComplete: number; updateText: string },
+    version: string | null
+  ) => Promise<ActionResult<{ state: UpdateState; submittedAt: string | null; version: string }>>;
 }
 
 /**
  * This week's update: status, % complete (0–100 in steps of 10), Complete vs spend, Delivery RAG
- * and update text, with Submit and Save draft (local state until brief 05).
+ * and update text, with Submit and Save draft. Saved on the server (brief 05); once submitted,
+ * changes are made with "Submit again" (the latest submission counts).
  */
 export function WeeklyUpdateForm(p: WeeklyUpdateFormProps) {
   const ids = { status: useId(), complete: useId(), update: useId() };
@@ -87,6 +98,10 @@ export function WeeklyUpdateForm(p: WeeklyUpdateFormProps) {
   const [state, setState] = useState<UpdateState | null>(p.initial.state);
   const [submittedAt, setSubmittedAt] = useState<string | null>(p.submittedAt);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [version, setVersion] = useState<string | null>(p.version);
+  const [problem, setProblem] = useState<{ text: string; conflict: boolean } | null>(null);
+  const [pending, start] = useTransition();
+  const router = useRouter();
 
   const values = { status, rag, percentComplete: complete ?? Number.NaN, updateText };
 
@@ -98,8 +113,24 @@ export function WeeklyUpdateForm(p: WeeklyUpdateFormProps) {
       return;
     }
     setErrors({});
-    setState(kind);
-    if (kind === "SUBMITTED") setSubmittedAt(p.now);
+    setProblem(null);
+    if (!p.onSave) {
+      setState(kind);
+      if (kind === "SUBMITTED") setSubmittedAt(p.now);
+      return;
+    }
+    const save = p.onSave;
+    start(async () => {
+      const r = await save(kind, parsed.data, version);
+      if (r.ok) {
+        setState(r.data.state);
+        setSubmittedAt(r.data.submittedAt);
+        setVersion(r.data.version);
+      } else {
+        if (r.fieldErrors) setErrors(r.fieldErrors);
+        setProblem({ text: r.message, conflict: r.code === "CONFLICT" });
+      }
+    });
   }
 
   const banner = p.readOnly
@@ -110,23 +141,17 @@ export function WeeklyUpdateForm(p: WeeklyUpdateFormProps) {
           title: `Submitted${submittedAt ? ` at ${formatTime(submittedAt)}` : ""}.`,
           text: `This update is in the weekly report. You can edit and submit again until the week closes on ${p.dueLabel}; the latest submission is what the report shows.`,
         }
-      : state === "DRAFT" && submittedAt
+      : state === "DRAFT"
         ? {
             tone: "bg-warning-tint",
-            title: "Draft saved.",
-            text: `The report still shows the update submitted at ${formatTime(submittedAt)} until you submit again, by ${p.dueLabel}.`,
+            title: "Draft saved, not yet submitted.",
+            text: `${p.lastSubmissionText} Submit by ${p.dueLabel} to include this week's update in the report.`,
           }
-        : state === "DRAFT"
-          ? {
-              tone: "bg-warning-tint",
-              title: "Draft saved, not yet submitted.",
-              text: `${p.lastSubmissionText} Submit by ${p.dueLabel} to include this week's update in the report.`,
-            }
-          : {
-              tone: "bg-warning-tint",
-              title: "Not submitted this week.",
-              text: `${p.lastSubmissionText} Submit by ${p.dueLabel} to include this week's update in the report.`,
-            };
+        : {
+            tone: "bg-warning-tint",
+            title: "Not submitted this week.",
+            text: `${p.lastSubmissionText} Submit by ${p.dueLabel} to include this week's update in the report.`,
+          };
 
   const c = complete ?? 0;
   const ahead = spendAheadBy(p.spend, c);
@@ -257,14 +282,30 @@ export function WeeklyUpdateForm(p: WeeklyUpdateFormProps) {
             <FormError id={`${ids.update}-error`}>{errors.updateText}</FormError>
           </div>
         </div>
+        {problem ? (
+          <div role="alert" className="mt-5 bg-warning-tint px-4 py-3 text-[14px]">
+            <p className="font-medium">{problem.text}</p>
+            {problem.conflict ? (
+              <Button variant="secondary" className="mt-2" onClick={() => router.refresh()}>
+                Reload the latest
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
         {!p.readOnly ? (
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button type="submit">
-              {state === "SUBMITTED" ? "Submit again" : "Submit update"}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button type="submit" disabled={pending}>
+              {pending ? "Saving…" : state === "SUBMITTED" ? "Submit again" : "Submit update"}
             </Button>
-            <Button variant="secondary" onClick={() => save("DRAFT")}>
-              Save draft
-            </Button>
+            {state !== "SUBMITTED" ? (
+              <Button variant="secondary" disabled={pending} onClick={() => save("DRAFT")}>
+                Save draft
+              </Button>
+            ) : (
+              <span className="text-[13px] text-muted">
+                Already submitted: change it and submit again.
+              </span>
+            )}
           </div>
         ) : null}
       </form>
