@@ -20,6 +20,7 @@ import { InternalPill } from "@/components/ui/pill";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { formatDate, formatWeekdayDayMonth } from "@/lib/dates";
 import { withWeek } from "@/lib/links";
+import { tileValue } from "@/lib/pipeline";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
 
@@ -117,8 +118,8 @@ export default async function ClientPage(props: PageProps<"/clients/[clientId]">
         />
         <StatTile
           label="Pipeline"
-          value={t.pipeline}
-          sub={`opportunities · ${t.pipelineHigh} High`}
+          value={tileValue(t.pipelineValue, t.pipeline, t.pipelineNotValued)}
+          sub={`${t.pipeline} ${t.pipeline === 1 ? "opportunity" : "opportunities"} · ${t.pipelineHigh} High · ${t.pipelineLongRunning} over 90 days`}
         />
       </section>
 
@@ -195,8 +196,12 @@ export default async function ClientPage(props: PageProps<"/clients/[clientId]">
                 </div>
                 <div>
                   <p className="lbl !text-[11px]">Pipeline</p>
-                  <p className="mt-1 text-[26px] font-light">{wt.pipeline}</p>
-                  <p className="text-[12px]">{wt.pipelineHigh} High</p>
+                  <p className="mt-1 text-[26px] font-light">
+                    {tileValue(wt.pipelineValue, wt.pipeline, wt.pipelineNotValued)}
+                  </p>
+                  <p className="text-[12px]">
+                    {wt.pipeline} {wt.pipeline === 1 ? "opp" : "opps"} · {wt.pipelineHigh} High
+                  </p>
                 </div>
               </div>
               <Link

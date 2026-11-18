@@ -199,3 +199,30 @@ Vercel Cron calls the close job every day at 01:00 UTC (01:00 GMT or 02:00 BST, 
 
 ## 17 Nov 2026 — Pages load the last 13 weeks of snapshots
 Each page loads the snapshots of the 13 most recent closed weeks, enough for every trend (12 weeks of log history, 8 of project history). A closed week older than that is worked out from live data until brief 07 loads the snapshots of the week a page shows. Reason: loading every week on every page would grow all year (about 560 records a week for the sample client alone). Rejected: loading all snapshots.
+
+## 17 Nov 2026 — Generate report from the client and workstream pages
+Client and workstream landing pages get a "Generate report" button for Admins and Updaters. It opens a confirm dialog: the week (the one chosen in the week picker), whether it is open or closed, how many projects in the weekly report are updated (submitted / draft saved / not started), a by-workstream table on the client version, and the list of projects not updated with when they were last submitted. It notes that those projects appear with their last submitted values marked "Not updated", and that drafts are never used. The user picks HTML or PowerPoint (.pptx) and generates, or cancels. Supersedes "Reports as HTML layouts (design to follow)" (16 Nov) and its rejection of PPTX. Reason: one click from where people work, with a check on completeness first. Rejected: a separate reports page; generating without a check.
+
+## 17 Nov 2026 — Report contents and order
+Client report: (1) client summary, (2) client pipeline summary, then for each reported workstream (A–Z, as on the site) its project slide(s) followed by its pipeline slide. Workstream report: that workstream's project slide(s) and pipeline slide. A workstream with no open opportunities has no pipeline slide. Only projects in the weekly report appear. Trends cover 8 weeks: up to 7 closed weeks from snapshots plus the chosen week (live if open). Reason: summary first, details per workstream. Rejected: one slide per project.
+
+## 17 Nov 2026 — Report slides are 16:9, 1280×720
+Every slide is 1280×720 px, PowerPoint's default 16:9 (13.333 × 7.5 in), so the HTML and PowerPoint versions share one layout. Each slide has the navy header (report name, week, INTERNAL), a footer "Internal: not for client distribution" and "Page n of N". Delivery RAG always as word + meaning; no text under 12 px (9 pt). Reason: one design for both formats. Rejected: A4 pages.
+
+## 17 Nov 2026 — Workstreams that need more than one slide
+A workstream's first slide holds its summary tiles, trends and up to 6 projects. More projects continue on extra slides (table only, up to 12 projects each). Every slide of such a workstream shows "‹Workstream› · page x of y" next to the title; the table is headed "Projects 1–6 of 14", the first slide ends "Continued on the next slide: projects 7–14 of 14 →", and the last ends "End of ‹Workstream›'s projects". Reason: readers can tell a workstream continues. Rejected: shrinking text to fit.
+
+## 17 Nov 2026 — Pipeline value
+Each opportunity has an estimated value, in whole US dollars, required when adding or editing. It is shown on the workstream pipeline, the client page, Admin home and the report, with totals and splits by likelihood. Opportunities saved before this change show "Not set" until edited. Currency is USD for every client (to confirm). No weighted value in v1. Reason: show the size of the prize. Rejected: a weighted value (High 75%, Medium 50%, Low 25%) until Paul confirms the weights; a currency per client.
+
+## 17 Nov 2026 — Time in pipeline
+Each opportunity has an "Added to pipeline" date: today by default, editable so opportunities discussed before the tool can be backdated, never in the future. Time in pipeline = days from that date to today (to the week's Friday for a closed week). Over 90 days is flagged in bold and in words for screen readers. Averages and the oldest are shown per workstream and client. Existing opportunities take their creation date. Reason: shows opportunities that are stalling. Rejected: using the creation date only (can't be backdated).
+
+## 17 Nov 2026 — Client pipeline slide shows summaries only
+The client report's pipeline slide has no opportunity lines: a headline ("$1.98m in the TCCC pipeline across 10 opportunities, with $1.07m rated High"), tiles (pipeline value with change on last week, value by likelihood, value that could start in the next 3 months, value in the pipeline over 90 days with the average time), and a table by workstream (value, value by likelihood bar, opportunities, average time in pipeline, over 90 days, next possible start) with a client total. Each opportunity is listed on its workstream's pipeline slide, with likelihood, opportunity, value, possible start, owners, next steps and time in pipeline, plus a timeline of possible starts for the next 6 months. Reason: the client view is for the headline; detail lives with the workstream. Rejected: listing every opportunity on the client slide.
+
+## 17 Nov 2026 — PowerPoint built in code, not from screenshots
+The .pptx is generated on the server with `pptxgenjs` from the same report data as the HTML: native text, tables and shapes (bars drawn as shapes), so it can be edited in PowerPoint. Arial is used in the .pptx until the WPP Sans licence is confirmed. Reports are generated on demand and not stored; each generation is recorded in the change history (who, scope, week, format). Reason: editable, consistent, no browser on the server. Rejected: screenshots of the HTML; a headless browser; storing every report.
+
+## 18 Nov 2026 — Pipeline snapshots already carry value and added date
+Brief 06 (built before 05b) stores each opportunity in full in the weekly pipeline snapshot, so estimated value and added date are recorded from the first close after the 05b migration. The sample weeks 35–46 were recorded before these fields existed: they show "Not set" and use the creation date as the added date. Reason: no change to the close needed. Rejected: rewriting the sample snapshots (snapshots are never modified).

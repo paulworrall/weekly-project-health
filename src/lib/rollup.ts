@@ -6,6 +6,7 @@
 import type { IsoDate, LogItem, PipelineOpportunity } from "@/types/domain";
 import type { ProjectRow, WorkstreamTiles } from "@/types/views";
 import { activeAt } from "./logs";
+import { pipelineSummary } from "./pipeline";
 import { ragCounts } from "./rag";
 import { isOverBudget, spendCounts } from "./spend";
 
@@ -25,7 +26,10 @@ type LogLike = Pick<
 export function workstreamTiles(
   rows: readonly ProjectRow[],
   logs: readonly LogLike[],
-  pipeline: readonly Pick<PipelineOpportunity, "likelihood">[],
+  pipeline: readonly Pick<
+    PipelineOpportunity,
+    "likelihood" | "estimatedValue" | "addedOn" | "possibleStart"
+  >[],
   asOf: IsoDate,
   lastWeekEnd: IsoDate
 ): WorkstreamTiles {
@@ -35,6 +39,7 @@ export function workstreamTiles(
   const count = (kind: LogLike["kind"], date: IsoDate) =>
     mine.filter((l) => l.kind === kind && activeAt(l, date)).length;
   const spend = spendCounts(included.map((r) => r.spend));
+  const pipe = pipelineSummary(pipeline, asOf);
   return {
     inReport: included.length,
     total: rows.length,
@@ -54,8 +59,11 @@ export function workstreamTiles(
     risksPrev: count("RISK", lastWeekEnd),
     issues: count("ISSUE", asOf),
     issuesPrev: count("ISSUE", lastWeekEnd),
-    pipeline: pipeline.length,
-    pipelineHigh: pipeline.filter((p) => p.likelihood === "HIGH").length,
+    pipeline: pipe.count,
+    pipelineHigh: pipe.byLikelihood.HIGH.count,
+    pipelineValue: pipe.value,
+    pipelineLongRunning: pipe.longRunning.count,
+    pipelineNotValued: pipe.notValued,
   };
 }
 
@@ -75,6 +83,9 @@ export function sumTiles(tiles: readonly WorkstreamTiles[]): WorkstreamTiles {
     issuesPrev: 0,
     pipeline: 0,
     pipelineHigh: 0,
+    pipelineValue: 0,
+    pipelineLongRunning: 0,
+    pipelineNotValued: 0,
   };
   return tiles.reduce<WorkstreamTiles>(
     (a, t) => ({
@@ -102,6 +113,9 @@ export function sumTiles(tiles: readonly WorkstreamTiles[]): WorkstreamTiles {
       issuesPrev: a.issuesPrev + t.issuesPrev,
       pipeline: a.pipeline + t.pipeline,
       pipelineHigh: a.pipelineHigh + t.pipelineHigh,
+      pipelineValue: a.pipelineValue + t.pipelineValue,
+      pipelineLongRunning: a.pipelineLongRunning + t.pipelineLongRunning,
+      pipelineNotValued: a.pipelineNotValued + t.pipelineNotValued,
     }),
     zero
   );

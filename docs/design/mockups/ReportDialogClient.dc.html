@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Generate report — TCCC</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+input,button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 1360px; height: 1000px; position: relative; background: #FAFAF0; overflow: hidden">
+  <header style="background: #000050; color: #FAFAF0; padding: 14px 32px; display: flex; align-items: center; gap: 12px" aria-hidden="true">
+    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800"></span>
+    <span style="font-size: 15px; font-weight: 700">Weekly Project Health</span>
+  </header>
+  <div style="padding: 24px 32px" aria-hidden="true">
+    <p style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Client overview · Week 47 · 16–20 Nov 2026</p>
+    <p style="margin: 0; font-size: 48px">TCCC</p>
+  </div>
+
+  <div style="position: absolute; inset: 0; background: rgba(0, 0, 80, 0.6); display: flex; align-items: center; justify-content: center">
+    <section role="dialog" aria-modal="true" aria-labelledby="gen-h" style="width: 1080px; background: #FFFFFF; padding: 36px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+      <div>
+        <p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">Generate report</p>
+        <h2 id="gen-h" style="margin: 0; font-size: 32px; font-weight: 400">TCCC weekly report · Week 47</h2>
+        <p style="margin: 8px 0 0; font-size: 15px">16–20 Nov 2026. The week is still open (it closes Fri 20 Nov at 23:59), so the report uses the latest submitted updates as of now: Thu 19 Nov 2026, 14:32.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+        <div style="display: flex; flex-direction: column; gap: 20px">
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 10px">
+              <span style="font-size: 44px">21</span>
+              <span style="font-size: 20px">of 29 projects updated this week</span>
+            </div>
+            <div style="display: flex; height: 14px; margin-top: 10px; background: #E6E6EE" role="img" aria-label="21 submitted, 3 draft saved, 5 not started, of 29 projects in the weekly report">
+              <div style="width: 72.4%; background: #000050"></div>
+              <div style="width: 10.3%; background: #F5A623"></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; margin-top: 8px">
+              <span><strong>21</strong> submitted</span>
+              <span><strong>3</strong> draft saved, not submitted</span>
+              <span><strong>5</strong> not started</span>
+            </div>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+            <caption style="text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73; padding-bottom: 8px">Updates by workstream</caption>
+            <thead>
+              <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+                <th scope="col" style="padding: 8px 8px 8px 0">Workstream</th>
+                <th scope="col" style="padding: 8px; text-align: right">In report</th>
+                <th scope="col" style="padding: 8px; text-align: right">Updated</th>
+                <th scope="col" style="padding: 8px 0 8px 8px; text-align: right">Not updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ws}}" as="w" hint-placeholder-count="5">
+                <tr style="border-bottom: 1px solid #D6D6E0">
+                  <th scope="row" style="padding: 9px 8px 9px 0; text-align: left; font-weight: 400">{{w.name}}</th>
+                  <td style="padding: 9px 8px; text-align: right">{{w.inReport}}</td>
+                  <td style="padding: 9px 8px; text-align: right">{{w.sub}}</td>
+                  <td style="{{w.missStyle}}">{{w.missText}}</td>
+                </tr>
+              </sc-for>
+              <tr>
+                <th scope="row" style="padding: 9px 8px 9px 0; text-align: left">Total</th>
+                <td style="padding: 9px 8px; text-align: right; font-weight: 700">29</td>
+                <td style="padding: 9px 8px; text-align: right; font-weight: 700">21</td>
+                <td style="padding: 9px 0 9px 8px; text-align: right; font-weight: 700">8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px">
+            <caption style="text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73; padding-bottom: 8px">Not updated this week (8)</caption>
+            <thead>
+              <tr style="text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #3D3D73; border-bottom: 1px solid #000050">
+                <th scope="col" style="padding: 8px 8px 8px 0">Project</th>
+                <th scope="col" style="padding: 8px">Last submitted</th>
+                <th scope="col" style="padding: 8px 0 8px 8px">This week</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{missing}}" as="m" hint-placeholder-count="8">
+                <tr style="border-bottom: 1px solid #D6D6E0; vertical-align: top">
+                  <td style="padding: 8px 8px 8px 0">
+                    <div><strong>{{m.job}}</strong> {{m.name}}</div>
+                    <div style="color: #3D3D73; margin-top: 2px">{{m.ws}}</div>
+                  </td>
+                  <td style="padding: 8px; white-space: nowrap">{{m.last}}</td>
+                  <td style="padding: 8px 0 8px 8px; white-space: nowrap"><span style="{{m.stateStyle}}">{{m.state}}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div role="note" style="background: #FFF1C9; padding: 12px 16px; font-size: 14px">These 8 projects appear in the report with their last submitted values, marked <strong>Not updated</strong>. Drafts aren't used. To include their latest news, ask the PMs to submit first, then generate the report again.</div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; border-top: 1px solid #D6D6E0; padding-top: 20px">
+        <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+          <legend style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73; padding: 0; margin-bottom: 8px">Format</legend>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px">
+            <label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer">
+              <input type="radio" name="fmt" value="html" checked="{{isHtml}}" onChange="{{pickHtml}}" style="width: 20px; height: 20px; accent-color: #000050"></input>
+              <span>HTML report (opens in a new tab)</span>
+            </label>
+            <label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer">
+              <input type="radio" name="fmt" value="pptx" checked="{{isPptx}}" onChange="{{pickPptx}}" style="width: 20px; height: 20px; accent-color: #000050"></input>
+              <span>PowerPoint (.pptx download)</span>
+            </label>
+          </div>
+        </fieldset>
+        <div style="display: flex; gap: 12px">
+          <a href="Client.dc.html" style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border: 1px solid #000050; background: #FFFFFF; color: #000050; font-size: 15px; font-weight: 700; text-decoration: none">Cancel</a>
+          <a href="SlideClientSummary.dc.html" style="display: inline-flex; align-items: center; height: 48px; padding: 0 24px; background: #000050; color: #FAFAF0; font-size: 15px; font-weight: 700; text-decoration: none">{{goLabel}}</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fmt: 'html' };
+  }
+  renderVals() {
+    var self = this;
+    var ws = [
+      { name: 'Josefine', inReport: 7, sub: 3 },
+      { name: 'Mette', inReport: 3, sub: 3 },
+      { name: 'Mike', inReport: 8, sub: 6 },
+      { name: 'Nadine EU', inReport: 6, sub: 4 },
+      { name: 'Nadine Global', inReport: 5, sub: 5 }
+    ].map(function (w) {
+      var miss = w.inReport - w.sub;
+      return Object.assign({}, w, {
+        missText: miss ? String(miss) : 'All updated',
+        missStyle: 'padding: 9px 0 9px 8px; text-align: right;' + (miss ? ' font-weight: 700;' : '')
+      });
+    });
+    var pill = 'display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700;';
+    var missing = [
+      { job: '481207', name: 'NO_CRM_Lifecycle Programme', ws: 'Josefine · KL', last: '12 Nov', state: 'Draft saved' },
+      { job: '481455', name: 'SE_Email_Template Refresh', ws: 'Josefine · KL', last: '6 Nov', state: 'Not started' },
+      { job: '482031', name: 'DK_Paid Social_Flighting Q4', ws: 'Josefine · EP', last: '13 Nov', state: 'Draft saved' },
+      { job: '482390', name: 'FI_Promo Hub_Content Drop', ws: 'Josefine · EP', last: '13 Nov', state: 'Not started' },
+      { job: '479310', name: 'GL_Brand Platform_Content Hub', ws: 'Mike · TH', last: '13 Nov', state: 'Draft saved' },
+      { job: '480566', name: 'GL_Media Reporting_Dashboard', ws: 'Mike · TH', last: '30 Oct', state: 'Not started' },
+      { job: '486311', name: 'EU_Owned Channels_Pilot_Phase 1', ws: 'Nadine EU · AK', last: '6 Nov', state: 'Not started' },
+      { job: '488019', name: 'EU_Transactional Journeys_Rollout', ws: 'Nadine EU · NB', last: '13 Nov', state: 'Not started' }
+    ].map(function (m) {
+      return Object.assign({}, m, { stateStyle: pill + (m.state === 'Draft saved' ? 'background: #FFF1C9; border: 1px solid #000050;' : 'background: #FFE3C2;') + ' color: #000050;' });
+    });
+    var pptx = this.state.fmt === 'pptx';
+    return {
+      ws: ws, missing: missing,
+      isHtml: !pptx, isPptx: pptx,
+      goLabel: pptx ? 'Generate PowerPoint' : 'Generate report',
+      pickHtml: function () { self.setState({ fmt: 'html' }); },
+      pickPptx: function () { self.setState({ fmt: 'pptx' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

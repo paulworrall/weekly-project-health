@@ -274,7 +274,15 @@ export function createViews(ds: Dataset) {
     const snap = isClosedWeek(week.ref)
       ? ds.snapshots?.pipelines.get(`${workstreamId}|${week.key}`)
       : undefined;
-    if (snap) return sortPipeline(snap.opportunities);
+    if (snap)
+      return sortPipeline(
+        // Snapshots written before brief 05b have no value or added date.
+        snap.opportunities.map((o) => ({
+          ...o,
+          estimatedValue: o.estimatedValue ?? null,
+          addedOn: o.addedOn ?? o.createdOn,
+        }))
+      );
     return sortPipeline(
       ds.pipeline.filter(
         (o) =>

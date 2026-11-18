@@ -136,7 +136,11 @@ export interface PipelineOpportunity {
   workstreamId: string;
   likelihood: Likelihood;
   title: string;
+  /** Whole US dollars; null for opportunities saved before brief 05b ("Not set"). */
+  estimatedValue: number | null;
   possibleStart: IsoDate | null;
+  /** Date it entered the pipeline (can be backdated, never in the future). */
+  addedOn: IsoDate;
   mapOwner: string;
   clientOwner: string;
   nextSteps: string;

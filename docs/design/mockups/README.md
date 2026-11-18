@@ -14,6 +14,24 @@ Design mockups of every designed screen, saved unchanged from Paul's Claude Desi
 | `Log.dc.html` | Risk log / Issue log (tabs) | `/clients/[clientId]/risks`, `/clients/[clientId]/issues` | all |
 | `Upload.dc.html` | Admin › Spend uploads | `/admin/uploads` | Admin |
 
+### Report screens (added 17 Nov 2026, brief 05b; built in brief 07)
+
+Saved unchanged from Claude Design on 17 Nov 2026 (previously `docs/design/mockups-update-17nov/`). Slides are 1280×720 (16:9).
+
+| File | Screen | Route (CLAUDE.md §9) |
+|---|---|---|
+| `ReportDialogClient.dc.html` | Generate report: confirm dialog on the client page | on `/clients/[clientId]` |
+| `ReportDialogWorkstream.dc.html` | Generate report: confirm dialog on the workstream page | on `/clients/[clientId]/workstreams/[workstreamId]` |
+| `SlideClientSummary.dc.html` | Client report, slide 1: client summary | `/clients/[clientId]/report` |
+| `SlidePipelineClient.dc.html` | Client report, slide 2: pipeline summary by workstream | `/clients/[clientId]/report` |
+| `SlideWorkstream.dc.html` | Workstream slide that fits on one slide (prop `mode`: client report / workstream report) | both reports |
+| `SlideWorkstreamMike.dc.html` | Workstream slide needing two slides (prop `page`: 1 or 2) | both reports |
+| `SlideWorkstreamMikeP2.dc.html` | Page 2 of the above (wrapper) | both reports |
+| `SlidePipelineWorkstream.dc.html` | Workstream pipeline slide (prop `mode`) | both reports |
+| `ReportWorkstreamOnly.dc.html`, `ReportWorkstreamOnlyPipeline.dc.html` | Workstream report pages 1 and 2 (wrappers) | `/clients/[clientId]/workstreams/[workstreamId]/report` |
+
+The PowerPoint version (`/clients/[clientId]/report.pptx`) uses the same layouts. The small pipeline changes to the workstream page, client page and Admin home (brief 05b §4) are on the Claude Design canvas, not in this folder.
+
 Screens with no mockup (CLAUDE.md §9): Change password (`/change-password`, simple form), Users (`/admin/users`), Clients (`/admin/clients`) and Change history (`/admin/history`), all built as simple tables in the same style.
 
 Past weeks use `?week=2026-W46` on the client, workstream, project and log routes.

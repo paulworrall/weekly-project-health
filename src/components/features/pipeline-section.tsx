@@ -5,8 +5,15 @@ import { useId, useState, useTransition, type FormEvent } from "react";
 import type { ActionResult } from "@/types/action-result";
 import type { Likelihood, PipelineOpportunity } from "@/types/domain";
 import { LIKELIHOODS } from "@/types/domain";
-import { fieldErrors, pipelineSchema } from "@/types/schemas";
+import { fieldErrors, pipelineSchema, type PipelineFormInput } from "@/types/schemas";
 import { formatDate } from "@/lib/dates";
+import {
+  daysInPipeline,
+  formatDays,
+  formatMoney,
+  isLongRunning,
+  pipelineSummary,
+} from "@/lib/pipeline";
 import { LIKELIHOOD_LABEL } from "@/lib/labels";
 import { sortPipeline } from "@/lib/sorting";
 import { Button, IconButton } from "@/components/ui/button";
@@ -33,7 +40,9 @@ export function LikelihoodTag({ likelihood }: { likelihood: Likelihood }) {
 type Draft = {
   likelihood: Likelihood;
   title: string;
+  estimatedValue: string;
   possibleStart: string;
+  addedOn: string;
   mapOwner: string;
   clientOwner: string;
   nextSteps: string;
@@ -42,7 +51,9 @@ type Draft = {
 const EMPTY: Draft = {
   likelihood: "MEDIUM",
   title: "",
+  estimatedValue: "",
   possibleStart: "",
+  addedOn: "",
   mapOwner: "",
   clientOwner: "",
   nextSteps: "",
@@ -55,10 +66,25 @@ const EMPTY: Draft = {
 export interface PipelineActions {
   save: (
     id: string | null,
-    values: Draft,
+    values: PipelineFormInput,
     version: string | null
   ) => Promise<ActionResult<PipelineOpportunity>>;
   archive: (id: string, version: string | null) => Promise<ActionResult<null>>;
+}
+
+/** "57 days" with "added 23 Sep 2026" underneath; over 90 days in bold, said in words too. */
+export function InPipeline({ addedOn, asOf }: { addedOn: string; asOf: string }) {
+  const days = daysInPipeline(addedOn, asOf);
+  const long = isLongRunning(days);
+  return (
+    <>
+      <span className={long ? "font-bold text-overspend" : ""}>
+        {formatDays(days)}
+        {long ? <span className="sr-only"> (over 90 days)</span> : null}
+      </span>
+      <span className="block text-[12px] text-muted">added {formatDate(addedOn)}</span>
+    </>
+  );
 }
 
 export function PipelineSection({
@@ -73,6 +99,7 @@ export function PipelineSection({
   workstreamName: string;
   initial: PipelineOpportunity[];
   readOnly: boolean;
+  /** Today, or the week's Friday for a closed week: time in pipeline is measured to it. */
   today: string;
   /** Saves on the server (brief 05); without, changes stay in the page (tests). */
   actions?: PipelineActions;
@@ -88,7 +115,8 @@ export function PipelineSection({
   const formId = useId();
 
   const shown = sortPipeline(items.filter((o) => !o.archivedAt));
-  const count = (l: Likelihood) => shown.filter((o) => o.likelihood === l).length;
+  const summary = pipelineSummary(shown, today);
+  const count = (l: Likelihood) => summary.byLikelihood[l].count;
 
   function startEdit(o: PipelineOpportunity | null) {
     setErrors({});
@@ -98,14 +126,16 @@ export function PipelineSection({
       setDraft({
         likelihood: o.likelihood,
         title: o.title,
+        estimatedValue: o.estimatedValue === null ? "" : o.estimatedValue.toLocaleString("en-GB"),
         possibleStart: o.possibleStart ?? "",
+        addedOn: o.addedOn,
         mapOwner: o.mapOwner,
         clientOwner: o.clientOwner,
         nextSteps: o.nextSteps,
       });
     } else {
       setEditing("new");
-      setDraft(EMPTY);
+      setDraft({ ...EMPTY, addedOn: today });
     }
   }
 
@@ -193,8 +223,10 @@ export function PipelineSection({
       </p>
       <div className="my-4.5 flex flex-wrap items-center gap-4">
         <span className="text-[14px]">
-          {shown.length} {shown.length === 1 ? "opportunity" : "opportunities"} · {count("HIGH")}{" "}
-          High · {count("MEDIUM")} Medium · {count("LOW")} Low
+          {shown.length} {shown.length === 1 ? "opportunity" : "opportunities"}
+          {summary.count > summary.notValued ? ` worth ${formatMoney(summary.value)}` : ""} ·{" "}
+          {count("HIGH")} High · {count("MEDIUM")} Medium · {count("LOW")} Low
+          {summary.notValued ? ` · ${summary.notValued} not valued` : ""}
         </span>
         {!readOnly && editing === null ? (
           <Button onClick={() => startEdit(null)}>
@@ -246,11 +278,29 @@ export function PipelineSection({
             />
           </div>
           <TextField
+            label="Estimated value (USD)"
+            inputMode="numeric"
+            autoComplete="off"
+            hint="Whole dollars, such as 450,000"
+            value={draft.estimatedValue}
+            onChange={set("estimatedValue")}
+            error={errors.estimatedValue}
+          />
+          <TextField
             label="Possible start"
             type="date"
             value={draft.possibleStart}
             onChange={set("possibleStart")}
             error={errors.possibleStart}
+          />
+          <TextField
+            label="Added to pipeline"
+            type="date"
+            max={today}
+            hint="Today, or earlier if it was discussed before"
+            value={draft.addedOn}
+            onChange={set("addedOn")}
+            error={errors.addedOn}
           />
           <TextField
             label="MAP owner"
@@ -286,7 +336,7 @@ export function PipelineSection({
 
       {shown.length ? (
         <TableScroll label={`Pipeline for ${workstreamName}`}>
-          <table className={`${tableClass} min-w-[1000px]`}>
+          <table className={`${tableClass} min-w-[1240px]`}>
             <caption className="sr-only">Pipeline opportunities for {workstreamName}</caption>
             <thead>
               <tr className={theadRow}>
@@ -296,8 +346,14 @@ export function PipelineSection({
                 <th scope="col" className={th}>
                   Opportunity
                 </th>
+                <th scope="col" className={`${th} w-[130px] text-right`}>
+                  Value (USD)
+                </th>
                 <th scope="col" className={`${th} w-[120px]`}>
                   Possible start
+                </th>
+                <th scope="col" className={`${th} w-[140px]`}>
+                  In pipeline
                 </th>
                 <th scope="col" className={`${th} w-[150px]`}>
                   MAP owner
@@ -322,8 +378,16 @@ export function PipelineSection({
                     <LikelihoodTag likelihood={o.likelihood} />
                   </td>
                   <td className={`${td} max-w-[300px]`}>{o.title}</td>
+                  <td
+                    className={`${td} text-right whitespace-nowrap tabular-nums ${o.estimatedValue === null ? "text-muted" : ""}`}
+                  >
+                    {formatMoney(o.estimatedValue)}
+                  </td>
                   <td className={`${td} whitespace-nowrap`}>
                     {o.possibleStart ? formatDate(o.possibleStart) : "Not set"}
+                  </td>
+                  <td className={`${td} whitespace-nowrap`}>
+                    <InPipeline addedOn={o.addedOn} asOf={today} />
                   </td>
                   <td className={td}>{o.mapOwner}</td>
                   <td className={td}>{o.clientOwner || "—"}</td>
