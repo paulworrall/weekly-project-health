@@ -13,6 +13,7 @@ const ACTION = {
   UPDATE: "Changed",
   ARCHIVE: "Archived",
   RESTORE: "Restored",
+  GENERATE: "Generated",
 } as const;
 
 export default async function HistoryPage() {

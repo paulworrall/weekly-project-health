@@ -19,7 +19,9 @@ import { StatTile } from "@/components/ui/stat-tile";
 import { InternalPill } from "@/components/ui/pill";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { formatDate, formatWeekdayDayMonth } from "@/lib/dates";
-import { withWeek } from "@/lib/links";
+import { reportLinks, withWeek } from "@/lib/links";
+import { reportReadiness } from "@/lib/report";
+import { GenerateReport } from "@/components/features/report-dialog";
 import { tileValue } from "@/lib/pipeline";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
@@ -38,6 +40,8 @@ export default async function ClientPage(props: PageProps<"/clients/[clientId]">
   if (!v) notFound();
   const t = v.totals;
   const base = `/clients/${v.client.id}`;
+  const readiness = reportReadiness(repo, { clientId: v.client.id }, v.week.key, repo.now());
+  const links = reportLinks(v.client.id, v.week.key);
 
   return (
     <>
@@ -63,6 +67,15 @@ export default async function ClientPage(props: PageProps<"/clients/[clientId]">
           <Link href={withWeek(`${base}/issues`, v.week)} className={btnOutline}>
             Issues report
           </Link>
+          {readiness ? (
+            <GenerateReport
+              kind="client"
+              heading={`${v.client.name} weekly report · Week ${v.week.ref.isoWeek}`}
+              readiness={readiness}
+              htmlHref={links.html}
+              pptxHref={links.pptx}
+            />
+          ) : null}
         </div>
       </div>
 

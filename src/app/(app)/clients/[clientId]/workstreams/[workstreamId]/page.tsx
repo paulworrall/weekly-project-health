@@ -6,7 +6,9 @@ import { ClosedWeekNote, WeekPicker } from "@/components/features/week";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { InternalPill } from "@/components/ui/pill";
 import { formatDate } from "@/lib/dates";
-import { withWeek } from "@/lib/links";
+import { reportLinks, withWeek } from "@/lib/links";
+import { reportReadiness } from "@/lib/report";
+import { GenerateReport } from "@/components/features/report-dialog";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
 import {
@@ -32,6 +34,9 @@ export default async function WorkstreamPage(
   if (!v) notFound();
   const clientHref = withWeek(`/clients/${v.client.id}`, v.week);
   const logBase = `/clients/${v.client.id}`;
+  const scope = { clientId: v.client.id, workstreamId: v.workstream.id };
+  const readiness = reportReadiness(repo, scope, v.week.key, repo.now());
+  const links = reportLinks(v.client.id, v.week.key, v.workstream.id);
   const weekKey = v.week.key;
   const wsId = v.workstream.id;
   // Saving is only offered in the open week; the actions check again on the server.
@@ -95,6 +100,16 @@ export default async function WorkstreamPage(
           >
             Issues report
           </Link>
+          {readiness ? (
+            <GenerateReport
+              kind="workstream"
+              heading={`${v.workstream.name} workstream report · Week ${v.week.ref.isoWeek}`}
+              context={v.client.name}
+              readiness={readiness}
+              htmlHref={links.html}
+              pptxHref={links.pptx}
+            />
+          ) : null}
         </div>
       </div>
       <WorkstreamBody v={v} now={repo.now().toISOString()} actions={actions} />

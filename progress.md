@@ -116,3 +116,15 @@ Append-only. Newest at the bottom.
 - Note for brief 06: already covered. The weekly pipeline snapshot stores each opportunity in full, so value and added date are recorded from the first close after the migration. Older snapshots read as "Not set" and the creation date.
 - `npm run pipeline:sample-values` (dry run; `--apply` writes): invented values and dates for Northwind's 11 sample opportunities.
 - 136 tests pass; lint, typecheck, build pass.
+
+## 18 Nov 2026 — Brief 07: Generate report, HTML and PowerPoint (branch `brief-07-report`)
+
+- Step 0 report and answer: `briefs/brief-07-step0-report.md` (Paul: add a Generate action to the change history).
+- `pptxgenjs` 4.0.1 (latest), with `image-size` overridden to 2.1.0 to clear two advisories in a dependency pptxgenjs never loads; listed in `serverExternalPackages`. `npm audit --omit=dev` still shows two moderate advisories in `exceljs`'s `uuid` (brief 04, not reachable from our parsing; follow-up).
+- Report model `src/types/report.ts` and `src/lib/report.ts` (pure, tested): `buildReport` from the same views the pages use (open week live, last submitted values marked Not updated, drafts never used; closed weeks from snapshots), `paginateProjects` (6, then 12), trends over up to 8 weeks, `reportReadiness`.
+- Generate report dialog (`src/components/features/report-dialog.tsx`) on the client and workstream pages: readiness, open or closed week wording, HTML (new tab) or PowerPoint (download); accessible modal (focus moves in and is kept there, Escape and Cancel return focus).
+- HTML report pages in the `(report)` route group, outside the app shell: 1280×720 slides, scaled to fit, toolbar (Download PowerPoint, Print), print CSS one slide per page.
+- PowerPoint `src/services/documents/report-pptx.ts` and `GET /clients/[clientId]/report.pptx?week=&workstream=`: native text, tables and shapes, real slide titles, native trend charts with alt text, Arial.
+- `src/server/report.ts`: sign-in and permission checks, Not found for unknown clients and hidden workstreams, a GENERATE audit row per generation. Migration `20261118140000_audit_generate` (adds the enum value).
+- Live data today: Northwind 12 slides, TCCC 7; building takes about 0.2 s after the usual page data load.
+- 164 tests pass; lint, typecheck, build pass.
