@@ -73,4 +73,6 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 
 ## Next
 
-Phase 7 is complete: log trends read each week's snapshot (`history` in `src/lib/logs.ts`, `LogData.trends` from `getLogData`), and pages load the snapshots around the week they show. Next: brief 08 (hardening and go-live), including moving heavy sums into queries if pages slow down, and the exceljs/uuid advisories.
+Phase 7 is complete: log trends read each week's snapshot (`history` in `src/lib/logs.ts`, `LogData.trends` from `getLogData`), and pages load the snapshots around the week they show.
+
+Brief 08 (hardening) is complete: error and loading pages, Admin › Clients (add, rename, archive, restore), Change history filters and pages (`src/server/history.ts`), axe and contrast checks in the tests, security headers (`src/lib/security-headers.ts`), `npm audit` clean. The tool is ready to go live once the four outside items in `docs/operations.md` §7 are cleared (font licence, data governance, Vercel Pro, development database). Later: Microsoft Entra ID single sign-on; moving heavy sums into queries if pages slow down.

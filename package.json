@@ -49,6 +49,7 @@
     "@types/pg": "^8.23.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "axe-core": "4.14.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.6",
     "eslint-config-prettier": "^10.1.8",
@@ -65,6 +66,9 @@
     "esbuild@0.28.2": true
   },
   "overrides": {
-    "image-size": "2.1.0"
+    "image-size": "2.1.0",
+    "exceljs": {
+      "uuid": "11.1.1"
+    }
   }
 }

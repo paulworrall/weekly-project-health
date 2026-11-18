@@ -138,3 +138,14 @@ Append-only. Newest at the bottom.
 - Checked read-only against the live database: Northwind's closed weeks now keep the items archived on 5 Nov (1–2 more open per week than before); TCCC shows week 47 only (no earlier records). Loading takes about 0.2–0.3 s once connected.
 - Not changed: database queries for the heavy sums. Pages are fast enough at pilot size; revisit in brief 08 if needed.
 - No migration. 176 tests pass; lint and typecheck pass.
+
+## 18 Nov 2026 — Brief 08: hardening and go-live readiness (branch `brief-08-hardening`)
+
+- Step 0 report and answer: `briefs/brief-08-step0-report.md` (Paul: stop at "ready to go live", with a checklist).
+- Error states: `not-found.tsx` (signed-in area, unknown addresses, reports), `error.tsx` (signed-in area and reports: Try again, a link home and a reference), `global-error.tsx`, `loading.tsx`. Shared `StatusPanel` and `BrandBar` (`src/components/features/status-page.tsx`); `Forbidden` uses the same panel.
+- Admin › Clients: add, rename, archive, restore (`src/app/(app)/admin/clients/actions.ts`, `src/components/features/clients-manager.tsx`, name rules in `src/lib/clients.ts`). All audited. Archived clients are hidden from views (`getClient`), uploads and reports, and weekly inputs for them are refused.
+- Admin › Change history: filters (who, what, dates), 50 a page, record names (`src/lib/history.ts`, `src/server/history.ts`). The repository no longer loads audit events for every page. The unused `SimpleTablePage` was removed.
+- Accessibility: `axe-core` 4.14.0 (dev only) checks 11 screens in `tests/components/accessibility.test.tsx`; `tests/lib/contrast.test.ts` checks the colour tokens. No violations found.
+- Security: headers in `src/lib/security-headers.ts`, applied in `next.config.ts` (`poweredByHeader: false`). `uuid` pinned to 11.1.1 for `exceljs`: `npm audit` now reports 0 vulnerabilities.
+- `docs/operations.md`: weekly routine, checking the close, people and clients, problems, backups, secrets, releasing, and the go-live checklist (font licence, data governance, Vercel Pro, development database).
+- No migration.
