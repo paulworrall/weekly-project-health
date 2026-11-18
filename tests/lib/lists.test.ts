@@ -250,7 +250,10 @@ describe("roll-ups", () => {
     const t = workstreamTiles(
       rows,
       logs,
-      [{ likelihood: "HIGH" }, { likelihood: "LOW" }],
+      [
+        { likelihood: "HIGH", estimatedValue: 450_000, addedOn: "2026-07-01", possibleStart: null },
+        { likelihood: "LOW", estimatedValue: null, addedOn: "2026-11-02", possibleStart: null },
+      ],
       "2026-11-17",
       "2026-11-13"
     );
@@ -267,9 +270,13 @@ describe("roll-ups", () => {
       issuesPrev: 0,
       pipeline: 2,
       pipelineHigh: 1,
+      pipelineValue: 450_000,
+      pipelineLongRunning: 1,
+      pipelineNotValued: 1,
     });
     expect(t.spend).toMatchObject({ under75: 1, over100: 1, noFigure: 1, noTimesheet: 1 });
     expect(sumTiles([t, t]).inReport).toBe(6);
+    expect(sumTiles([t, t]).pipelineValue).toBe(900_000);
   });
 
   it("lists projects needing attention, with reasons", () => {

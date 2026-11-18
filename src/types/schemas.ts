@@ -11,6 +11,7 @@ import {
   RISK_SEVERITIES,
 } from "./domain";
 import { RAG_VALUES } from "@/lib/rag";
+import { londonDate } from "@/lib/dates";
 
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { error: "Enter a date." });
 const optionalIsoDate = z.union([isoDate, z.literal("")]).optional();
@@ -75,6 +76,40 @@ export const issueSchema = z.object({
 });
 export type LogItemInput = z.infer<typeof riskSchema> | z.infer<typeof issueSchema>;
 
+/** Largest estimated value accepted (brief 05b). */
+export const MAX_VALUE = 100_000_000;
+
+/**
+ * Estimated value in whole US dollars: a number, or text such as "450,000" or "$450,000"
+ * (commas, spaces and a leading $ are ignored).
+ */
+const moneyField = z
+  .union([z.number(), z.string()], { error: "Enter the estimated value in US dollars." })
+  .transform((v, ctx) => {
+    const text = typeof v === "number" ? String(v) : v.replace(/[\s,]/g, "").replace(/^\$/, "");
+    if (text === "") {
+      ctx.addIssue({ code: "custom", message: "Enter the estimated value in US dollars." });
+      return z.NEVER;
+    }
+    if (!/^\d+(\.\d+)?$/.test(text)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Enter the value as a number of dollars, such as 450,000.",
+      });
+      return z.NEVER;
+    }
+    const n = Number(text);
+    if (!Number.isInteger(n)) {
+      ctx.addIssue({ code: "custom", message: "Use whole dollars, with no cents." });
+      return z.NEVER;
+    }
+    if (n < 1 || n > MAX_VALUE) {
+      ctx.addIssue({ code: "custom", message: "Enter a value from $1 to $100,000,000." });
+      return z.NEVER;
+    }
+    return n;
+  });
+
 export const pipelineSchema = z.object({
   likelihood: z.enum(LIKELIHOODS, { error: "Choose a likelihood." }),
   title: z
@@ -82,12 +117,21 @@ export const pipelineSchema = z.object({
     .trim()
     .min(1, { error: "Describe the opportunity." })
     .max(300, { error: "Keep this under 300 characters." }),
+  estimatedValue: moneyField,
   possibleStart: optionalIsoDate,
+  addedOn: z
+    .string({ error: "Enter the date it was added to the pipeline." })
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: "Enter the date it was added to the pipeline." })
+    .refine((d) => d <= londonDate(new Date()), {
+      error: "The added date can't be in the future.",
+    }),
   mapOwner: z.string().trim().min(1, { error: "Enter the MAP owner." }).max(80),
   clientOwner: z.string().trim().max(80, { error: "Keep this under 80 characters." }),
   nextSteps: z.string().trim().max(1000, { error: "Keep this under 1,000 characters." }),
 });
 export type PipelineInput = z.infer<typeof pipelineSchema>;
+/** What a form sends (the value may still be text such as "450,000"). */
+export type PipelineFormInput = z.input<typeof pipelineSchema>;
 
 export const uploadFormSchema = z.object({
   clientId: z.string().min(1, { error: "Choose a client." }),

@@ -10,6 +10,7 @@ Weekly Project Health is an **internal** WPP Enterprise Solutions (MAP) tool tha
 - Updaters tick which projects go into the weekly report and, for each one, submit the week's status, Delivery RAG, % complete and update, and keep the project's risk and issue logs current.
 - Each workstream has a pipeline of opportunities.
 - Every Friday at 23:59 UK time the week closes automatically and an immutable snapshot is written, so trends (RAG, spend, risk and issue counts) can be tracked week on week and month on month.
+- From the client or workstream page, Admins and Updaters can generate the weekly report as 16:9 slides: an HTML page or a PowerPoint (.pptx) download.
 
 It is a separate application from the Reporting Hub but uses the same stack, conventions and ways of working.
 
@@ -44,6 +45,7 @@ Follow `docs/tech-stack.md` exactly for versions, scaffold, folder structure and
 - **App name / repo**: `weekly-project-health`.
 - **No AI in v1**: do not install `@anthropic-ai/sdk`, no `src/lib/anthropic.ts`, no `src/services/agents/`, no `ANTHROPIC_API_KEY`.
 - **Install `exceljs`** (spend file parsing).
+- **Install `pptxgenjs` in brief 07** (PowerPoint report); check its version for advisories in Step 0.
 - **Versions actually installed** (brief 00, see the decision log): Next.js 16.4.6, React 19.2.8, **Prisma 7.10.1** (not 7.9.1: security advisories), NextAuth 5.0.0-beta.32, exceljs 4.4.0, Vitest 4, Node 24 in CI. Tailwind v4 via `@tailwindcss/postcss` (not the starter's Turbopack loader), and no `cacheComponents`.
 - **`npm run typecheck`** runs `next typegen` before `tsc` (route types such as `LayoutProps` are generated).
 - **`prisma.config.ts`** uses `DIRECT_URL` (falling back to `DATABASE_URL`) for the CLI, and only when set, so `npm install` (which runs `prisma generate`) works without a database. Prisma 7's config has no `directUrl`: the CLI uses the direct URL, the app the pooled one via `@prisma/adapter-pg`.
@@ -83,6 +85,7 @@ Follow `docs/tech-stack.md` exactly for versions, scaffold, folder structure and
 | Switch a workstream to Reported / Hidden | ✓ | ✗ |
 | Clients (create, rename, archive) | ✓ | ✗ |
 | Users (create, set role, reset password, unlock, archive) | ✓ | ✗ |
+| Generate report (HTML or PowerPoint) for a client or workstream | ✓ | ✓ |
 | Change history (audit) view | ✓ | ✗ |
 | Edit a closed week | ✗ | ✗ |
 
@@ -112,9 +115,9 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 
 **Week close** (automatic)
 - Vercel Cron runs a close job often enough to catch Friday 23:59 Europe/London in both GMT and BST (on the Hobby plan crons run at most daily: schedule it early Saturday UK time); the job closes any open period whose `closesAt` has passed. Idempotent. The next period opens immediately; edits after close belong to the next week.
-- Snapshot per included project: included flag, status, Delivery RAG, % complete, update, submitted by/at, `notUpdated` flag, % spend + spend status + upload extract date, open risk and issue counts by level, overdue counts.
+- Snapshot per project in a Reported workstream (decision 17 Nov): included flag, status, Delivery RAG, % complete, update, submitted by/at, `notUpdated` flag, % spend + spend status + upload extract date, open risk and issue counts by level, overdue counts.
 - No submission by close → carry forward last week's submitted values, `notUpdated: true`. Unsubmitted drafts are ignored.
-- Also snapshot each reported workstream's pipeline, and per client the risk and issue log totals needed for the week-on-week and month-on-month trends.
+- Also snapshot each reported workstream's pipeline (each opportunity in full, including its estimated value and added date), and per client the risk and issue log (items and totals) needed for the week-on-week and month-on-month trends.
 
 **Risks and issues**
 - Risk: ref, title, severity (High / Medium / Low), owner, status (Open / On pause / Closed), raised date, due date, mitigation.
@@ -123,7 +126,9 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 - Counts include Open and On pause only. Age = days since raised. Overdue = past due date and not Closed.
 - Owners are free text (confirmed 16 Nov 2026), as are the pipeline's MAP owner and client owner.
 
-**Pipeline** (per workstream): likelihood (High / Medium / Low), opportunity, possible start, MAP owner, client owner, next steps. Sorted by likelihood, then soonest start. Archive, never delete.
+**Pipeline** (per workstream): likelihood (High / Medium / Low), opportunity, estimated value (whole US dollars, required; "Not set" for older ones), possible start, added to pipeline (date, default today, can be backdated, not future), MAP owner, client owner, next steps. Time in pipeline = days since added; over 90 days flagged. Sorted by likelihood, then soonest start. Archive, never delete.
+
+**Reports** (brief 07; decisions 17 Nov): a "Generate report" button on the client and workstream pages opens a confirm dialog (week, open or closed, how many projects are updated, those not updated), then generates HTML or PowerPoint. Client report: client summary, client pipeline summary, then per reported workstream (A–Z) its project slide(s) and pipeline slide; workstream report: its project slide(s) and pipeline slide. Only projects in the weekly report; trends over 8 weeks. Slides are 1280×720 (16:9) with navy header and "Internal: not for client distribution" footer; a workstream's first slide holds up to 6 projects, extra slides up to 12, with "page x of y". HTML and .pptx (built with `pptxgenjs`, Arial until the WPP Sans licence is confirmed) come from one report model, aren't stored, and each generation is audited.
 
 ## 8. Data model (target; confirm in each phase's Step 0)
 
@@ -138,7 +143,7 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 - `ReportingPeriod` — isoYear, isoWeek, startsOn, endsOn, closesAt, state (OPEN | CLOSED), closedAt.
 - `ProjectWeek` — project × period: status, rag, percentComplete, updateText, state (DRAFT | SUBMITTED), submittedAt, submittedBy.
 - `RiskItem`, `IssueItem` — fields in §7, plus client, project, closedAt, archivedAt, archivedById.
-- `PipelineOpportunity` — workstream + fields in §7, archivedAt, archivedById.
+- `PipelineOpportunity` — workstream + fields in §7 (`estimatedValue` Int, nullable for old rows; `addedOn` Date), archivedAt, archivedById.
 - `ProjectWeekSnapshot`, `PipelineWeekSnapshot`, `LogWeekSnapshot` — immutable JSON per closed period.
 - `AuditEvent` — at, user, entity, entityId, action, field, oldValue, newValue.
 
@@ -157,6 +162,10 @@ Updaters see **all** clients; there are no per-client or per-workstream assignme
 | Users | `/admin/users` | Admin | — (simple table) |
 | Clients | `/admin/clients` | Admin | — (simple table) |
 | Change history | `/admin/history` | Admin | — (simple table) |
+| Generate report dialog | on client and workstream pages | all | `ReportDialogClient.dc.html`, `ReportDialogWorkstream.dc.html` |
+| Client report (HTML) | `/clients/[clientId]/report?week=` | all | `SlideClientSummary`, `SlidePipelineClient`, `SlideWorkstream`, `SlideWorkstreamMike`, `SlidePipelineWorkstream` |
+| Workstream report (HTML) | `/clients/[clientId]/workstreams/[workstreamId]/report?week=` | all | `ReportWorkstreamOnly`, `ReportWorkstreamOnlyPipeline` |
+| Report (PowerPoint) | `/clients/[clientId]/report.pptx?week=&workstream=` | all | as above |
 
 Past weeks: `?week=2026-W46` on client, workstream, project and log routes.
 
@@ -170,8 +179,9 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 3. Auth and roles: sign-in, lockout, first-sign-in password change, role landing, permissions. **Done 17 Nov 2026**: NextAuth v5 (`src/auth.ts`), sign-in action with lockout, `requireViewer()` checks the database on every request, Users and access actions (audited). First Admin via `npm run user:create-admin` (run by Paul).
 4. Spend upload: parser, validation, preview, decisions, confirm, history, Reported flag. **Done 17 Nov 2026**: `src/services/parsing/spend-file.ts`, `src/lib/spend-diff.ts`, actions in `src/app/(app)/admin/uploads/actions.ts`; `npm run upload:dry-run` previews a file read-only.
 5. Weekly inputs: selection, weekly update, risks, issues, pipeline (all audited). **Done 17 Nov 2026**: actions in `src/server/actions/weekly.ts`, rules in `src/lib/weekly-rules.ts`; saves only in the open week; a save made over someone else's newer change is refused with a warning and a reload.
+5b. Pipeline value and time in pipeline (brief 05b).
 6. Periods and snapshots: automatic close, carry-forward, snapshots. **Done 17 Nov 2026**: rules in `src/lib/snapshot.ts`, job in `src/server/close-week.ts`, cron `/api/cron/close-week` daily at 01:00 UTC (`vercel.json`, needs `CRON_SECRET` in Vercel); `npm run week:close` closes by hand, `npm run snapshots:backfill` converted the sample weeks.
-7. Reports and logs: aggregations, trends, past weeks. HTML report layouts once designed.
+7. Reports and logs: aggregations, trends, past weeks; Generate report (HTML and PowerPoint) — brief 07.
 8. Hardening and go-live: accessibility, error states, admin tables, production deploy.
 
 ## 11. Ways of working

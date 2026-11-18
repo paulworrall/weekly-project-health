@@ -20,7 +20,8 @@
     "user:create-admin": "tsx scripts/create-admin.mts",
     "upload:dry-run": "tsx scripts/dry-run-upload.mts",
     "week:close": "tsx scripts/close-week.mts",
-    "snapshots:backfill": "tsx scripts/backfill-snapshots.mts"
+    "snapshots:backfill": "tsx scripts/backfill-snapshots.mts",
+    "pipeline:sample-values": "tsx scripts/pipeline-sample-values.mts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",

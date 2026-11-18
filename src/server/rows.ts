@@ -147,7 +147,9 @@ export interface DbRows {
     workstreamId: string;
     likelihood: PipelineOpportunity["likelihood"];
     title: string;
+    estimatedValue: number | null;
     possibleStart: Date | null;
+    addedOn: Date;
     mapOwner: string;
     clientOwner: string;
     nextSteps: string;
@@ -333,7 +335,9 @@ export function rowsFromDataset(ds: Dataset): DbRows {
       workstreamId: o.workstreamId,
       likelihood: o.likelihood,
       title: o.title,
+      estimatedValue: o.estimatedValue,
       possibleStart: dOpt(o.possibleStart),
+      addedOn: d(o.addedOn),
       mapOwner: o.mapOwner,
       clientOwner: o.clientOwner,
       nextSteps: o.nextSteps,
@@ -550,7 +554,9 @@ export function datasetFromRows(rows: DbRows, now: Date): Dataset {
       workstreamId: o.workstreamId,
       likelihood: o.likelihood,
       title: o.title,
+      estimatedValue: o.estimatedValue,
       possibleStart: isoDateOpt(o.possibleStart),
+      addedOn: isoDate(o.addedOn),
       mapOwner: o.mapOwner,
       clientOwner: o.clientOwner,
       nextSteps: o.nextSteps,

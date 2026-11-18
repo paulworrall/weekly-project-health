@@ -393,18 +393,22 @@ model IssueItem {
 }
 
 model PipelineOpportunity {
-  id            String     @id @default(cuid())
-  workstreamId  String
-  likelihood    Likelihood
-  title         String
-  possibleStart DateTime?  @db.Date
-  mapOwner      String
-  clientOwner   String     @default("")
-  nextSteps     String     @default("")
-  archivedAt    DateTime?
-  archivedById  String?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id             String     @id @default(cuid())
+  workstreamId   String
+  likelihood     Likelihood
+  title          String
+  possibleStart  DateTime?  @db.Date
+  /// Whole US dollars (brief 05b). Null only for opportunities saved before 05b ("Not set").
+  estimatedValue Int?
+  /// The date the opportunity entered the pipeline: can be backdated, never in the future.
+  addedOn        DateTime   @db.Date
+  mapOwner       String
+  clientOwner    String     @default("")
+  nextSteps      String     @default("")
+  archivedAt     DateTime?
+  archivedById   String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 
   workstream Workstream @relation(fields: [workstreamId], references: [id])
 

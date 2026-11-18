@@ -107,6 +107,12 @@ export interface WorkstreamTiles {
   issuesPrev: number;
   pipeline: number;
   pipelineHigh: number;
+  /** Total estimated value in whole US dollars (brief 05b); unvalued ones add nothing. */
+  pipelineValue: number;
+  /** Opportunities over 90 days in the pipeline. */
+  pipelineLongRunning: number;
+  /** Opportunities with no value yet ("Not set"). */
+  pipelineNotValued: number;
 }
 
 export interface WorkstreamSummary {

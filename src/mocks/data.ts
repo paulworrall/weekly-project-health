@@ -515,6 +515,13 @@ const OPPORTUNITIES = [
   ["Consent platform upgrade for all markets", "Technical discovery call booked"],
 ];
 
+/** Invented sample values (whole US dollars), used in turn (brief 05b). */
+const SAMPLE_VALUES = [
+  450_000, 120_000, 85_000, 640_000, 230_000, 35_000, 900_000, 175_000, 60_000, 310_000, 95_000,
+  520_000,
+];
+let oppIndex = 0;
+
 export const PIPELINE: PipelineOpportunity[] = [];
 for (const w of WS_DEFS.filter((x) => x.reported)) {
   const n = w.id === "delta-retail" ? 0 : r.int(1, 4);
@@ -525,7 +532,10 @@ for (const w of WS_DEFS.filter((x) => x.reported)) {
       workstreamId: w.id,
       likelihood: r.pick(["HIGH", "MEDIUM", "LOW"] as const),
       title,
+      estimatedValue: SAMPLE_VALUES[oppIndex % SAMPLE_VALUES.length],
       possibleStart: r.chance(0.85) ? addDays("2026-12-01", r.int(0, 150)) : null,
+      // Added between 10 and 200 days before the mock date.
+      addedOn: addDays(MOCK_TODAY, -(10 + ((oppIndex++ * 47) % 191))),
       mapOwner: r.pick(UPDATERS).name,
       clientOwner: r.pick([
         "Client CRM Lead",

@@ -371,10 +371,13 @@ export async function archiveLogItemAction(input: {
 
 // ── Pipeline ─────────────────────────────────────────────────────────────────────────────────
 
-type PipelineInput = {
+/** As the form sends it (validated here with the same schema). */
+type PipelineFormInput = {
   likelihood: string;
   title: string;
-  possibleStart: string;
+  estimatedValue: string | number;
+  possibleStart?: string;
+  addedOn: string;
   mapOwner: string;
   clientOwner: string;
   nextSteps: string;
@@ -385,7 +388,9 @@ function toOpportunity(r: {
   workstreamId: string;
   likelihood: string;
   title: string;
+  estimatedValue: number | null;
   possibleStart: Date | null;
+  addedOn: Date;
   mapOwner: string;
   clientOwner: string;
   nextSteps: string;
@@ -398,7 +403,9 @@ function toOpportunity(r: {
     workstreamId: r.workstreamId,
     likelihood: r.likelihood as PipelineOpportunity["likelihood"],
     title: r.title,
+    estimatedValue: r.estimatedValue,
     possibleStart: isoDay(r.possibleStart),
+    addedOn: isoDay(r.addedOn) as IsoDate,
     mapOwner: r.mapOwner,
     clientOwner: r.clientOwner,
     nextSteps: r.nextSteps,
@@ -413,7 +420,7 @@ export async function savePipelineAction(input: {
   id: string | null;
   weekKey: string;
   version: string | null;
-  values: PipelineInput;
+  values: PipelineFormInput;
 }): Promise<ActionResult<PipelineOpportunity>> {
   const { viewer, error } = await editorViewer();
   if (error) return error;
@@ -427,7 +434,9 @@ export async function savePipelineAction(input: {
   const data = {
     likelihood: d.likelihood,
     title: d.title,
+    estimatedValue: d.estimatedValue,
     possibleStart: d.possibleStart ? day(d.possibleStart) : null,
+    addedOn: day(d.addedOn),
     mapOwner: d.mapOwner,
     clientOwner: d.clientOwner,
     nextSteps: d.nextSteps,

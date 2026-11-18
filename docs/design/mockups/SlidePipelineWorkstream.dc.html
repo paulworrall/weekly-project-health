@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Nadine EU — pipeline slide</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#FAFAF0;font-family:"WPP Sans","Helvetica Neue",Arial,sans-serif;color:#000050}
+a{color:#000050}a:hover{color:#B34F00}
+</style>
+</helmet>
+<div style="width: 1280px; height: 720px; box-sizing: border-box; background: #FAFAF0; display: flex; flex-direction: column; overflow: hidden">
+  <header style="height: 52px; flex: none; background: #000050; color: #FAFAF0; padding: 0 48px; display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: #FF7800" aria-hidden="true"></span>
+      <span style="font-size: 14px; font-weight: 700">Weekly Project Health</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 13px">
+      <span>{{headerText}}</span>
+      <span style="display: inline-flex; align-items: center; height: 22px; padding: 0 10px; border-radius: 999px; background: #FAFAF0; color: #000050; font-size: 11px; font-weight: 700; letter-spacing: 0.08em">INTERNAL</span>
+    </div>
+  </header>
+
+  <main style="flex: 1; min-height: 0; padding: 22px 48px 0; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div>
+        <p style="margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B34F00">{{eyebrow}}</p>
+        <h1 style="margin: 0; font-size: 32px; line-height: 1; font-weight: 400">Nadine EU pipeline</h1>
+      </div>
+      <p style="margin: 0; font-size: 13px; text-align: right; line-height: 1.5">TCCC · Account Director Nadine · kept up to date by the Account Director<br>Time in pipeline = days since the opportunity was added, as of 19 Nov 2026</p>
+    </div>
+
+    <section aria-label="Pipeline this week" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+      <div style="background: #000050; color: #FAFAF0; padding: 10px 14px">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FFA552">Pipeline value</div>
+        <div style="font-size: 30px; margin-top: 4px">$910k</div>
+        <div style="font-size: 12px; margin-top: 2px">3 opportunities · no change on last week</div>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 14px">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Value by likelihood</div>
+        <div style="display: grid; gap: 1px; font-size: 13px; margin-top: 6px"><span><strong>$450k</strong> High (1)</span><span><strong>$310k</strong> Medium (1)</span><span><strong>$150k</strong> Low (1)</span></div>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 14px">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Average time in pipeline</div>
+        <div style="margin-top: 4px"><span style="font-size: 30px">118</span><span style="font-size: 15px"> days</span></div>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 14px">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">In pipeline over 90 days</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px"><span style="font-size: 30px; color: #A03A00">2</span><span style="font-size: 13px">$460k · oldest 191 days</span></div>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 14px">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Possible start by 19 Feb</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px"><span style="font-size: 30px">2</span><span style="font-size: 13px">worth $760k</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="op-h" style="background: #FFFFFF; padding: 10px 16px">
+      <h2 id="op-h" style="margin: 0 0 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Opportunities</h2>
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px">
+        <thead>
+          <tr style="text-align: left; font-size: 11px; letter-spacing: 0.04em; color: #3D3D73; border-bottom: 1px solid #000050">
+            <th scope="col" style="padding: 6px 8px 6px 0; width: 84px">Likelihood</th>
+            <th scope="col" style="padding: 6px 8px; width: 210px">Opportunity</th>
+            <th scope="col" style="padding: 6px 8px; width: 64px; text-align: right">Value</th>
+            <th scope="col" style="padding: 6px 8px; width: 92px">Possible start</th>
+            <th scope="col" style="padding: 6px 8px; width: 92px">MAP owner</th>
+            <th scope="col" style="padding: 6px 8px; width: 120px">Client owner</th>
+            <th scope="col" style="padding: 6px 8px">Next steps</th>
+            <th scope="col" style="padding: 6px 0 6px 8px; width: 190px">Time in pipeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{opps}}" as="o" hint-placeholder-count="3">
+            <tr style="border-bottom: 1px solid #D6D6E0; vertical-align: top">
+              <td style="padding: 8px 8px 8px 0"><span style="{{o.likeStyle}}">{{o.likelihood}}</span></td>
+              <td style="padding: 8px">{{o.title}}</td>
+              <td style="padding: 8px; text-align: right; font-weight: 700">{{o.value}}</td>
+              <td style="padding: 8px; white-space: nowrap">{{o.start}}</td>
+              <td style="padding: 8px">{{o.mapOwner}}</td>
+              <td style="padding: 8px">{{o.clientOwner}}</td>
+              <td style="padding: 8px">{{o.next}}</td>
+              <td style="padding: 8px 0 8px 8px">
+                <div style="width: 180px; height: 10px; background: #E6E6EE; margin-top: 4px" aria-hidden="true"><div style="{{o.barStyle}}"></div></div>
+                <div style="{{o.daysStyle}}">{{o.days}} days · added {{o.added}}</div>
+              </td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+
+    <figure style="margin: 0; flex: 1; min-height: 0; background: #FFFFFF; padding: 10px 16px 12px; display: flex; flex-direction: column">
+      <figcaption style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3D3D73">Possible starts · Dec 2026 to May 2027</figcaption>
+      <div role="img" aria-label="Possible starts: High, CRM retention programme, 11 Jan 2027; Medium, CEE data migration wave 2, 1 Feb 2027; Low, loyalty programme pilot, 5 Apr 2027" style="position: relative; flex: 1; margin-top: 8px">
+        <div style="position: absolute; left: 0; right: 0; bottom: 22px; height: 2px; background: #000050"></div>
+        <sc-for list="{{months}}" as="m" hint-placeholder-count="6">
+          <div style="{{m.style}}">{{m.label}}</div>
+        </sc-for>
+        <sc-for list="{{marks}}" as="k" hint-placeholder-count="3">
+          <div style="{{k.style}}">
+            <span style="{{k.tagStyle}}">{{k.likelihood}}</span>
+            <span style="font-size: 12px; white-space: nowrap">{{k.label}}</span>
+            <span style="width: 2px; height: 14px; background: #000050" aria-hidden="true"></span>
+          </div>
+        </sc-for>
+      </div>
+    </figure>
+  </main>
+
+  <footer style="height: 36px; flex: none; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #3D3D73">
+    <span>Internal: not for client distribution · Sorted by likelihood, then soonest start · Over 90 days in bold · Values are estimated fees in USD</span>
+    <span>{{pageText}}</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["client","workstream"],"default":"client"},"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var wsOnly = (this.props.mode ?? 'client') === 'workstream';
+    var likeBase = 'display: inline-flex; align-items: center; justify-content: center; width: 76px; height: 22px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; box-sizing: border-box;';
+    var likeStyle = { High: likeBase + 'background: #000050; color: #FAFAF0;', Medium: likeBase + 'background: #FFC97A; color: #000050;', Low: likeBase + 'border: 1px solid #000050; color: #000050; background: #FFFFFF;' };
+    var opps = [
+      { likelihood: 'High', title: 'Q1 2027 CRM retention programme for the Nordic markets, following the 2026 welcome journeys', start: '11 Jan 2027', mapOwner: 'AD (Nadine)', clientOwner: 'EU CRM Lead', next: 'Send scope and estimate by 20 Nov; client to confirm budget at the 27 Nov planning meeting', added: '23 Sep 2026', days: 57, value: '$450k' },
+      { likelihood: 'Medium', title: 'Extend the data migration to the CEE markets (wave 2)', start: '1 Feb 2027', mapOwner: 'JS', clientOwner: 'EU Data Lead', next: 'Wait for wave 1 cutover results; discovery workshop pencilled for early December', added: '5 Aug 2026', days: 106, value: '$310k' },
+      { likelihood: 'Low', title: 'Always-on loyalty programme pilot in two EU markets', start: '5 Apr 2027', mapOwner: 'MR', clientOwner: 'EU Marketing Director', next: 'Client exploring internal options; follow up after their budget round in January', added: '12 May 2026', days: 191, value: '$150k' }
+    ].map(function (o) {
+      var long = o.days > 90;
+      return Object.assign({}, o, {
+        likeStyle: likeStyle[o.likelihood],
+        barStyle: 'height: 10px; width: ' + Math.min(100, o.days / 200 * 100) + '%; background: ' + (long ? '#A03A00' : '#000050') + ';',
+        daysStyle: 'font-size: 12px; margin-top: 4px; white-space: nowrap;' + (long ? ' font-weight: 700; color: #A03A00;' : '')
+      });
+    });
+    var months = ['Dec', 'Jan 2027', 'Feb', 'Mar', 'Apr', 'May'].map(function (l, i) {
+      return { label: l, style: 'position: absolute; bottom: 0; left: ' + (i * 100 / 6) + '%; font-size: 12px; padding-left: 4px; border-left: 1px solid #D6D6E0; height: 20px; box-sizing: border-box;' };
+    });
+    var pos = function (daysFromDec1) { return (daysFromDec1 / 182 * 100).toFixed(1) + '%'; };
+    var tagBase = 'display: inline-flex; align-items: center; height: 20px; padding: 0 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;';
+    var marks = [
+      { likelihood: 'High', label: 'CRM retention · 11 Jan', d: 41, row: 0 },
+      { likelihood: 'Medium', label: 'CEE data migration · 1 Feb', d: 62, row: 1 },
+      { likelihood: 'Low', label: 'Loyalty pilot · 5 Apr', d: 125, row: 0 }
+    ].map(function (k) {
+      return Object.assign({}, k, {
+        style: 'position: absolute; left: ' + pos(k.d) + '; bottom: ' + (24 + k.row * 34) + 'px; display: flex; align-items: center; gap: 6px; transform: translateX(-1px); flex-direction: row-reverse;',
+        tagStyle: tagBase + ({ High: 'background: #000050; color: #FAFAF0;', Medium: 'background: #FFC97A; color: #000050;', Low: 'border: 1px solid #000050; background: #FFFFFF; color: #000050;' })[k.likelihood]
+      });
+    });
+    return {
+      opps: opps, months: months, marks: marks,
+      headerText: wsOnly ? 'Nadine EU workstream report · Week 47 · 16–20 Nov 2026' : 'TCCC weekly report · Week 47 · 16–20 Nov 2026',
+      eyebrow: wsOnly ? 'Workstream report · Pipeline' : 'Workstream 4 of 5 · Pipeline',
+      pageText: wsOnly ? 'Page 2 of 2' : 'Page 11 of 13'
+    };
+  }
+}
+</script>
+</body>
+</html>

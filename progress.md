@@ -105,3 +105,14 @@ Append-only. Newest at the bottom.
 - Closed weeks now read their snapshots (project rows, % spend, risk and issue counts, pipeline, logs); without one they are worked out from live data as before. Pages load the last 13 weeks of snapshots.
 - `npm run snapshots:backfill` (dry run by default, `--apply` writes): weeks 35–46, Northwind only, 559 projects a week.
 - No migration needed. 119 tests pass; lint, typecheck, build pass.
+
+## 18 Nov 2026 — Brief 05b: pipeline value and time in pipeline (branch `brief-05b-pipeline`)
+
+- Step 0 report: `briefs/brief-05b-step0-report.md` (no blocking questions; brief 06 already built, so its snapshot note is covered).
+- Docs: report mockups moved into `docs/design/mockups/` with the README map; the brief's eight 17 Nov decisions appended to the decision log, plus one on pipeline snapshots; `CLAUDE.md` updated (pipeline fields, reports, routes, permissions, phases; §7 snapshot scope corrected to "every project in a Reported workstream").
+- `PipelineOpportunity.estimatedValue` (Int, nullable for old rows) and `addedOn` (Date). Migration `20261118100000_pipeline_value` hand-edited: add nullable, backfill `addedOn` from `createdAt` as a London date, then NOT NULL. Touches 11 sample opportunities.
+- `src/lib/pipeline.ts` (pure, tested): days in pipeline, over 90 days, summaries (value, by likelihood, average and oldest, over 90 days, next 3 months, not valued), money formats (`$450,000`, `$450k`, `$1.98m`, "Not set").
+- Form: Estimated value (USD) required (commas allowed, $1 to $100,000,000) and Added to pipeline (default today, not future). Saved and audited per field. Table: Value (USD) and In pipeline columns, summary line with value. Tiles carry value, over-90-days and not-valued counts: client page Pipeline tile and workstream cards, and a Pipeline figure on the client cards (Admin home and client list).
+- Note for brief 06: already covered. The weekly pipeline snapshot stores each opportunity in full, so value and added date are recorded from the first close after the migration. Older snapshots read as "Not set" and the creation date.
+- `npm run pipeline:sample-values` (dry run; `--apply` writes): invented values and dates for Northwind's 11 sample opportunities.
+- 136 tests pass; lint, typecheck, build pass.

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ClientOverview } from "@/types/views";
 import { formatDate } from "@/lib/dates";
 import { withWeek } from "@/lib/links";
+import { tileValue } from "@/lib/pipeline";
 import { Delta, RagBar } from "./display";
 
 const linkBtn = "inline-flex min-h-11 items-center px-5 text-[14px] font-medium no-underline";
@@ -57,6 +58,16 @@ export function ClientCard({ c }: { c: ClientOverview }) {
         <div>
           <p className="lbl">Over budget</p>
           <p className="mt-1.5 text-[30px] font-light text-overspend">{t.spend.over100}</p>
+        </div>
+        <div>
+          <p className="lbl">Pipeline</p>
+          <p className="mt-1.5 text-[30px] font-light">
+            {tileValue(t.pipelineValue, t.pipeline, t.pipelineNotValued)}
+          </p>
+          <p className="text-[13px]">
+            {t.pipeline} {t.pipeline === 1 ? "opportunity" : "opportunities"} · {t.pipelineHigh}{" "}
+            High
+          </p>
         </div>
       </div>
       {t.inReport === 0 ? (

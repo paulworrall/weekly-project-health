@@ -1,6 +1,6 @@
 # Codebase summary
 
-Rewritten at each checkpoint. Last updated: 17 Nov 2026 (brief 06, week close and snapshots).
+Rewritten at each checkpoint. Last updated: 18 Nov 2026 (brief 05b, pipeline value).
 
 ## State
 
@@ -17,6 +17,7 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/services/parsing/spend-file.ts` | Spend file parser (exceljs; structure rejection, row errors). `src/lib/spend-diff.ts`: compare with live data; `confirmProblem`. |
 | `src/server/guards.ts` | `adminViewer()` for Admin-only actions, `editorViewer()` for actions any signed-in person may take. |
 | `src/server/actions/weekly.ts` | Weekly inputs: include tick, weekly update, risk/issue create/update/archive (refs from Client counters in the same transaction), pipeline save/archive. All audited, open week only, version check (`updatedAt`) against overwriting someone else's change. Pages bind them in inline `"use server"` closures. |
+| `src/lib/pipeline.ts` | Pipeline value and time in pipeline (pure): `daysInPipeline`, `isLongRunning` (> 90 days), `pipelineSummary`/`sumSummaries`, `formatMoney` (`$450,000`), `formatMoneyCompact` (`$1.98m`), `tileValue`. |
 | `src/lib/snapshot.ts` | Week close rules (pure): `buildWeekSnapshots` (project, pipeline, log snapshots as at Friday) and `weeksToClose`. Views read snapshots for closed weeks through `Dataset.snapshots`. |
 | `src/server/close-week.ts` | `closeDueWeeks()`: closes due weeks (one transaction each, idempotent), writes snapshots and audit, opens the next week. Called by `src/app/api/cron/close-week/route.ts` (Bearer `CRON_SECRET`; schedule in `vercel.json`). |
 | `src/server/periods.ts` | `ensureOpenPeriod(tx, weekKey)`: creates the open ReportingPeriod on first save. |
@@ -63,9 +64,9 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 ## Uploads
 
 - `npm run upload:dry-run -- --client <id> --file <path>`: what a file would change, read-only.
-- `npm run week:close`: runs the close by hand (live database). `npm run snapshots:backfill`: shows closed weeks without snapshots; `-- --apply` writes them.
+- `npm run week:close`: runs the close by hand (live database). `npm run snapshots:backfill`: shows closed weeks without snapshots; `-- --apply` writes them. `npm run pipeline:sample-values` (`-- --apply`): sample values for Northwind opportunities.
 - Real TCCC weekly files are approved for upload (decision 17 Nov); other clients' real data needs Paul's OK. Tests build synthetic workbooks in memory.
 
 ## Next
 
-Brief 05b (`briefs/brief-05b-pipeline-value.md`): pipeline value and time in pipeline; add both to the pipeline snapshot. Then brief 07 (`briefs/brief-07-generate-report.md`): reports, which should load the snapshots of the week a page shows instead of the last 13 weeks.
+Brief 07 (`briefs/brief-07-generate-report.md`): reports, which should load the snapshots of the week a page shows instead of the last 13 weeks.
