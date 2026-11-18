@@ -96,3 +96,12 @@ Append-only. Newest at the bottom.
 - Pure rules in `src/lib/weekly-rules.ts` with tests. Forms show save problems in a box; a failed tick is put back with a message.
 - Paul tested on the local copy: ticks, weekly update, risks and pipeline all saved (Northwind sample data only).
 - 107 tests pass; lint, typecheck, build pass.
+
+## 17 Nov 2026 — Brief 06: automatic week close and snapshots (branch `brief-06-close`)
+
+- Step 0 report and answers: `briefs/brief-06-step0-report.md`. Decisions (17 Nov): snapshots record every project in a Reported workstream (with its tick); the sample weeks 35–46 become snapshots once; brief 06 before 05b so week 47 closes on time.
+- `src/lib/snapshot.ts` (pure, tested): `buildWeekSnapshots` (project, pipeline and log snapshots as at Friday; carry-forward marked Not updated; drafts ignored) and `weeksToClose` (GMT/BST, catch-up, weeks nobody saved in).
+- `src/server/close-week.ts`: closes each due week in one transaction (Open → Closed only once, snapshots, audit as System), then opens the next. `/api/cron/close-week` (needs `CRON_SECRET`), `vercel.json` cron daily at 01:00 UTC, `npm run week:close` by hand.
+- Closed weeks now read their snapshots (project rows, % spend, risk and issue counts, pipeline, logs); without one they are worked out from live data as before. Pages load the last 13 weeks of snapshots.
+- `npm run snapshots:backfill` (dry run by default, `--apply` writes): weeks 35–46, Northwind only, 559 projects a week.
+- No migration needed. 119 tests pass; lint, typecheck, build pass.

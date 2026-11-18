@@ -3,16 +3,22 @@
  * models as the sample data (src/lib/views.ts). Pages call `await getRepository()` once per
  * request; React's `cache` shares one load between the layout and the page.
  *
- * Read-only for now: saving edits arrives in brief 05 (decision log, 17 Nov 2026). Loading
- * everything per request is fine at pilot size (~1,500 projects); brief 07 moves the heavier
- * aggregations into queries.
+ * Saves go through Server Actions (src/server/actions, brief 05); closed weeks read their
+ * snapshots (brief 06). Loading everything per request is fine at pilot size (~1,500 projects);
+ * brief 07 moves the heavier aggregations into queries.
  */
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
 import { createViews, type Views } from "@/lib/views";
 import { datasetFromRows, type DbRows } from "./rows";
 
-export async function loadRows(): Promise<DbRows> {
+/** Closed weeks whose snapshots are loaded: 12 for the log trends, plus one spare. */
+export const SNAPSHOT_WEEKS = 13;
+
+export async function loadRows(now: Date = new Date()): Promise<DbRows> {
+  const recentPeriods = {
+    closesAt: { gte: new Date(now.getTime() - (SNAPSHOT_WEEKS * 7 + 1) * 86_400_000) },
+  };
   const [
     users,
     clients,
@@ -28,6 +34,9 @@ export async function loadRows(): Promise<DbRows> {
     issues,
     pipeline,
     auditEvents,
+    projectSnapshots,
+    pipelineSnapshots,
+    logSnapshots,
   ] = await Promise.all([
     prisma.user.findMany({
       orderBy: { name: "asc" },
@@ -178,6 +187,21 @@ export async function loadRows(): Promise<DbRows> {
         newValue: true,
       },
     }),
+    // Closed-week snapshots (brief 06): the recent weeks every trend needs (see
+    // SNAPSHOT_WEEKS). Older weeks are worked out from live data until brief 07 loads the
+    // snapshots of the week a page shows.
+    prisma.projectWeekSnapshot.findMany({
+      where: { period: recentPeriods },
+      select: { periodId: true, projectId: true, data: true },
+    }),
+    prisma.pipelineWeekSnapshot.findMany({
+      where: { period: recentPeriods },
+      select: { periodId: true, workstreamId: true, data: true },
+    }),
+    prisma.logWeekSnapshot.findMany({
+      where: { period: recentPeriods },
+      select: { periodId: true, clientId: true, data: true },
+    }),
   ]);
   return {
     users,
@@ -194,6 +218,7 @@ export async function loadRows(): Promise<DbRows> {
     issues,
     pipeline,
     auditEvents,
+    snapshots: { projects: projectSnapshots, pipelines: pipelineSnapshots, logs: logSnapshots },
   };
 }
 
@@ -216,6 +241,6 @@ const logSelect = {
 
 /** The views over the live database, loaded once per request. */
 export const getRepository = cache(async (): Promise<Views> => {
-  const rows = await loadRows();
-  return createViews(datasetFromRows(rows, new Date()));
+  const now = new Date();
+  return createViews(datasetFromRows(await loadRows(now), now));
 });

@@ -187,3 +187,15 @@ Saving a weekly update, risk, issue or pipeline opportunity is refused if someon
 
 ## 17 Nov 2026 — The open week is created on first save
 Weekly inputs are saved against the open reporting week, which is created in the database on first save if it doesn't exist yet (state Open, closing Friday 23:59 London). Saves for a week whose close time has passed are refused even before the close job runs. Reason: the automatic close (brief 06) isn't built yet, and the Hobby cron runs once a day. Rejected: creating weeks in advance.
+
+## 17 Nov 2026 — Snapshots record every project in a Reported workstream
+At each close, every project in a Reported workstream is recorded, with whether it was in that week's report; projects in Hidden workstreams are not. Each record holds the week's values (or the last submitted ones carried forward, marked "Not updated" when the project was in the report), % spend with its upload's extract date, and open and overdue risk and issue counts. Each Reported workstream's pipeline and each client's full risk and issue log (as they stood at the close, with totals) are recorded too. Reason: history exists for a project before it is first ticked, and past weeks stay exactly as they were. Rejected: ticked projects only; every project including Hidden workstreams.
+
+## 17 Nov 2026 — The sample past weeks become snapshots once
+Weeks 35–46 (the sample weeks the seed created) are turned into snapshots by a one-off script, so every closed week is read the same way. Each client is left out of weeks that ended before its first spend upload (TCCC joined in week 47). "Include in weekly report" and Reported workstreams are taken as they are today, as their history wasn't kept before snapshots. Reason: one way of reading closed weeks. Rejected: working the old weeks out from live data indefinitely.
+
+## 17 Nov 2026 — The close job runs daily at 01:00 UTC
+Vercel Cron calls the close job every day at 01:00 UTC (01:00 GMT or 02:00 BST, always after Friday 23:59 London time), which is the most the Hobby plan allows. It closes any week whose close time has passed, oldest first, including weeks nobody saved in, then opens the next. Running it again does nothing. The close appears in Change history as made by "System". Because saves are refused from Friday 23:59, the snapshot records the week as it was even though the job runs a little later. Reason: no weekly admin step, and a missed run catches up. Rejected: a Saturday-only schedule (a missed run would wait a week).
+
+## 17 Nov 2026 — Pages load the last 13 weeks of snapshots
+Each page loads the snapshots of the 13 most recent closed weeks, enough for every trend (12 weeks of log history, 8 of project history). A closed week older than that is worked out from live data until brief 07 loads the snapshots of the week a page shows. Reason: loading every week on every page would grow all year (about 560 records a week for the sample client alone). Rejected: loading all snapshots.

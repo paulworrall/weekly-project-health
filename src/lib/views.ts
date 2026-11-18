@@ -36,6 +36,7 @@ import type {
 } from "@/types/views";
 import { addDays, daysBetween } from "./dates";
 import { activeAt } from "./logs";
+import type { LogSnapshot, PipelineSnapshot, ProjectSnapshot } from "./snapshot";
 import { needsAttention, outstandingUpdates, sumTiles, workstreamTiles } from "./rollup";
 import { sortLog, sortPipeline } from "./sorting";
 import { hasFigure, isOverBudget } from "./spend";
@@ -49,6 +50,16 @@ import {
   weekShort,
   type WeekRef,
 } from "./week";
+
+/** Frozen records of closed weeks (brief 06), keyed by `${id}|${weekKey}`. */
+export interface SnapshotStore {
+  /** By project id. */
+  projects: Map<string, ProjectSnapshot>;
+  /** By workstream id. */
+  pipelines: Map<string, PipelineSnapshot>;
+  /** By client id. */
+  logs: Map<string, LogSnapshot>;
+}
 
 /** Everything the views need, from the mocks or from the database. */
 export interface Dataset {
@@ -83,6 +94,12 @@ export interface Dataset {
   auditEvents: AuditEvent[];
   /** Last risk / issue numbers used, per client. */
   logSeq: Record<string, { RISK: number; ISSUE: number }>;
+  /**
+   * Snapshots of closed weeks. A closed week reads its snapshot when there is one; without one
+   * (the sample data, or the hours between Friday 23:59 and the close job) it is worked out
+   * from live data as before.
+   */
+  snapshots?: SnapshotStore;
 }
 
 export function createViews(ds: Dataset) {
@@ -147,8 +164,36 @@ export function createViews(ds: Dataset) {
     return ds.allWeeks.findIndex((w) => compareWeeks(w, ref) === 0);
   }
 
+  const isClosedWeek = (ref: WeekRef) => compareWeeks(ref, ds.currentWeek) < 0;
+
+  function projectSnapshot(projectId: string, ref: WeekRef) {
+    return isClosedWeek(ref)
+      ? ds.snapshots?.projects.get(`${projectId}|${formatWeekParam(ref)}`)
+      : undefined;
+  }
+
   function entryFor(projectId: string, ref: WeekRef): ProjectWeek | null {
+    const snap = projectSnapshot(projectId, ref);
+    if (snap) {
+      // The values shown that week; carried-forward values are marked as not a submission.
+      if (!snap.entry) return null;
+      return {
+        projectId,
+        week: formatWeekParam(ref),
+        ...snap.entry,
+        state: "SUBMITTED",
+        notUpdated: !snap.submittedThisWeek,
+      };
+    }
     return ds.projectWeeks.get(`${projectId}|${formatWeekParam(ref)}`) ?? null;
+  }
+
+  /** Risks and issues for a client as at the week: the snapshot's for a closed week. */
+  function logItemsFor(clientId: string, week: WeekContext): LogItem[] {
+    const snap = isClosedWeek(week.ref)
+      ? ds.snapshots?.logs.get(`${clientId}|${week.key}`)
+      : undefined;
+    return snap ? snap.items : ds.logItems;
   }
 
   /** Latest genuine submission in or before `ref` (or strictly before, when `before` is set). */
@@ -161,6 +206,8 @@ export function createViews(ds: Dataset) {
   }
 
   function spendFor(projectId: string, ref: WeekRef) {
+    const snap = projectSnapshot(projectId, ref);
+    if (snap) return snap.spend;
     return (
       ds.spend[projectId]?.[formatWeekParam(ref)] ?? {
         percentSpent: null,
@@ -176,27 +223,30 @@ export function createViews(ds: Dataset) {
   }
 
   function projectRow(p: Project, week: WeekContext): ProjectRow {
+    const snap = projectSnapshot(p.id, week.ref);
     const entry = entryFor(p.id, week.ref);
     const latest = latestSubmission(p.id, week.ref);
     const shown = entry?.notUpdated ? entry : entry?.state === "SUBMITTED" ? entry : latest;
+    const included = snap ? snap.included : p.includeInReport;
+    const sum = (o: Record<string, number>) => Object.values(o).reduce((a, b) => a + b, 0);
     return {
       id: p.id,
       jobNumber: p.jobNumber,
       name: p.name,
       workstreamId: p.workstreamId,
       workstreamName: wsById(p.workstreamId)?.name ?? "",
-      included: p.includeInReport,
+      included,
       spend: spendFor(p.id, week.ref),
-      status: p.includeInReport ? (shown?.status ?? null) : null,
-      rag: p.includeInReport ? (shown?.rag ?? null) : null,
-      percentComplete: p.includeInReport ? (shown?.percentComplete ?? null) : null,
+      status: included ? (shown?.status ?? null) : null,
+      rag: included ? (shown?.rag ?? null) : null,
+      percentComplete: included ? (shown?.percentComplete ?? null) : null,
       submittedThisWeek: !!entry && entry.state === "SUBMITTED" && !entry.notUpdated,
       draftThisWeek: entry?.state === "DRAFT",
-      notUpdated: !!entry?.notUpdated,
+      notUpdated: snap ? snap.notUpdated : !!entry?.notUpdated,
       lastSubmittedAt: latest?.submittedAt ?? null,
       lastSubmittedBy: userName(latest?.submittedById ?? null),
-      openRisks: activeLogsFor(p.id, "RISK", week.asOf),
-      openIssues: activeLogsFor(p.id, "ISSUE", week.asOf),
+      openRisks: snap ? sum(snap.risks.open) : activeLogsFor(p.id, "RISK", week.asOf),
+      openIssues: snap ? sum(snap.issues.open) : activeLogsFor(p.id, "ISSUE", week.asOf),
     };
   }
 
@@ -221,6 +271,10 @@ export function createViews(ds: Dataset) {
   }
 
   function pipelineFor(workstreamId: string, week: WeekContext) {
+    const snap = isClosedWeek(week.ref)
+      ? ds.snapshots?.pipelines.get(`${workstreamId}|${week.key}`)
+      : undefined;
+    if (snap) return sortPipeline(snap.opportunities);
     return sortPipeline(
       ds.pipeline.filter(
         (o) =>
@@ -238,7 +292,7 @@ export function createViews(ds: Dataset) {
       workstream,
       tiles: workstreamTiles(
         rows,
-        ds.logItems,
+        logItemsFor(workstream.clientId, week),
         pipelineFor(wsId, week),
         week.asOf,
         lastWeekEnd(week)
@@ -303,10 +357,18 @@ export function createViews(ds: Dataset) {
       workstream,
       week,
       weeks: weekOptions(),
-      tiles: workstreamTiles(projects, ds.logItems, pipeline, week.asOf, lastWeekEnd(week)),
+      tiles: workstreamTiles(
+        projects,
+        logItemsFor(clientId, week),
+        pipeline,
+        week.asOf,
+        lastWeekEnd(week)
+      ),
       pipeline,
       projects,
-      logs: sortLog(ds.logItems.filter((l) => projects.some((p) => p.id === l.projectId))),
+      logs: sortLog(
+        logItemsFor(clientId, week).filter((l) => projects.some((p) => p.id === l.projectId))
+      ),
       lastWeekEnd: lastWeekEnd(week),
       submitters: [
         ...new Set(projects.map((p) => p.lastSubmittedBy).filter(Boolean) as string[]),
@@ -369,7 +431,7 @@ export function createViews(ds: Dataset) {
         current: i === trendWeeks.length - 1,
       })),
       risks: sortLog(
-        ds.logItems.filter(
+        logItemsFor(p.clientId, week).filter(
           (l) =>
             l.projectId === p.id &&
             l.kind === "RISK" &&
@@ -378,7 +440,7 @@ export function createViews(ds: Dataset) {
         )
       ),
       issues: sortLog(
-        ds.logItems.filter(
+        logItemsFor(p.clientId, week).filter(
           (l) =>
             l.projectId === p.id &&
             l.kind === "ISSUE" &&
@@ -398,7 +460,7 @@ export function createViews(ds: Dataset) {
     const workstreams = reportedWorkstreams(clientId);
     const wsIds = new Set(workstreams.map((w) => w.id));
     const projectById = new Map(ds.projects.map((p) => [p.id, p]));
-    const items: LogRow[] = ds.logItems
+    const items: LogRow[] = logItemsFor(clientId, week)
       .filter((l: LogItem) => {
         const p = projectById.get(l.projectId);
         return (

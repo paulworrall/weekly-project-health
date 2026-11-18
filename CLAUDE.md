@@ -170,7 +170,7 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 3. Auth and roles: sign-in, lockout, first-sign-in password change, role landing, permissions. **Done 17 Nov 2026**: NextAuth v5 (`src/auth.ts`), sign-in action with lockout, `requireViewer()` checks the database on every request, Users and access actions (audited). First Admin via `npm run user:create-admin` (run by Paul).
 4. Spend upload: parser, validation, preview, decisions, confirm, history, Reported flag. **Done 17 Nov 2026**: `src/services/parsing/spend-file.ts`, `src/lib/spend-diff.ts`, actions in `src/app/(app)/admin/uploads/actions.ts`; `npm run upload:dry-run` previews a file read-only.
 5. Weekly inputs: selection, weekly update, risks, issues, pipeline (all audited). **Done 17 Nov 2026**: actions in `src/server/actions/weekly.ts`, rules in `src/lib/weekly-rules.ts`; saves only in the open week; a save made over someone else's newer change is refused with a warning and a reload.
-6. Periods and snapshots: automatic close, carry-forward, snapshots.
+6. Periods and snapshots: automatic close, carry-forward, snapshots. **Done 17 Nov 2026**: rules in `src/lib/snapshot.ts`, job in `src/server/close-week.ts`, cron `/api/cron/close-week` daily at 01:00 UTC (`vercel.json`, needs `CRON_SECRET` in Vercel); `npm run week:close` closes by hand, `npm run snapshots:backfill` converted the sample weeks.
 7. Reports and logs: aggregations, trends, past weeks. HTML report layouts once designed.
 8. Hardening and go-live: accessibility, error states, admin tables, production deploy.
 

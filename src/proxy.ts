@@ -6,7 +6,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { hasSessionCookie } from "@/lib/session-cookie";
 
-const PUBLIC = ["/login", "/api/auth"];
+// /api/cron checks its own secret (brief 06), so it isn't sent to the sign-in page.
+const PUBLIC = ["/login", "/api/auth", "/api/cron"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
