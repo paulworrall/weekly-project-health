@@ -247,7 +247,7 @@ export default async function AdminHomePage() {
                 Manage users →
               </Link>
               <Link href="/admin/clients" className={`${linkBtn} border border-navy`}>
-                Clients
+                Manage clients →
               </Link>
               <Link href="/admin/history" className={`${linkBtn} border border-navy`}>
                 Change history
