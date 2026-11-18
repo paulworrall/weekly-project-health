@@ -58,13 +58,16 @@ async function lastChange(entity: string, entityId: string) {
   return conflictMessage(e?.user?.name ?? null, e?.at ?? null);
 }
 
-/** A project in a reported workstream (the only ones with pages). */
+/** A project in a reported workstream of a client that isn't archived (the only ones with pages). */
 async function reportedProject(projectId: string) {
   const p = await prisma.project.findUnique({
     where: { id: String(projectId) },
-    include: { workstream: { select: { reported: true } } },
+    include: {
+      workstream: { select: { reported: true } },
+      client: { select: { archivedAt: true } },
+    },
   });
-  return p && p.workstream.reported ? p : null;
+  return p && p.workstream.reported && !p.client.archivedAt ? p : null;
 }
 
 // ── Include in weekly report ─────────────────────────────────────────────────────────────────
@@ -443,8 +446,12 @@ export async function savePipelineAction(input: {
   };
 
   if (!input.id) {
-    const ws = await prisma.workstream.findUnique({ where: { id: String(input.workstreamId) } });
-    if (!ws || !ws.reported) return fail("NOT_FOUND", "That workstream isn't reported.");
+    const ws = await prisma.workstream.findUnique({
+      where: { id: String(input.workstreamId) },
+      include: { client: { select: { archivedAt: true } } },
+    });
+    if (!ws || !ws.reported || ws.client.archivedAt)
+      return fail("NOT_FOUND", "That workstream isn't reported.");
     const row = await prisma.$transaction(async (tx) => {
       const created = await tx.pipelineOpportunity.create({
         data: { workstreamId: ws.id, ...data },

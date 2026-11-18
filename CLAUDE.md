@@ -25,6 +25,7 @@ It is a separate application from the Reporting Hub but uses the same stack, con
 | `docs/design/mockups/*.dc.html` | Design mockups of every designed screen (added 17 Nov 2026; see the README there for the file → screen → route map): markup for layout and copy, inline script for data shape and behaviour. Reference only, not production code. The client and workstream names in them are real; project names and figures are samples. Never copy any of them into data. |
 | `docs/design/README.md` | MAP design system notes: tokens, differences from the Reporting Hub, font licence warning. Tokens in `docs/design/ds/wppesmap/tokens.json`; fonts in `public/fonts/`, logos in `public/brand/`. |
 | `progress.md`, `agent.md` | Progress log (append-only) and codebase summary (rewritten at checkpoints). |
+| `docs/operations.md` | Runbook: weekly routine, checking the close, users and clients, backups, secrets, releases, go-live checklist. |
 
 ## 3. Terms (use these words in the UI and in code)
 
@@ -182,7 +183,7 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 5b. Pipeline value and time in pipeline (brief 05b).
 6. Periods and snapshots: automatic close, carry-forward, snapshots. **Done 17 Nov 2026**: rules in `src/lib/snapshot.ts`, job in `src/server/close-week.ts`, cron `/api/cron/close-week` daily at 01:00 UTC (`vercel.json`, needs `CRON_SECRET` in Vercel); `npm run week:close` closes by hand, `npm run snapshots:backfill` converted the sample weeks.
 7. Reports and logs: aggregations, trends, past weeks; Generate report (HTML and PowerPoint) — brief 07. **Done 18 Nov 2026.** Log trends read each week's snapshot (`history` in `src/lib/logs.ts`); pages load the snapshots around the week they show (`snapshotWindow`, `getRepository(week)`). Generate report: model in `src/lib/report.ts`, dialog `src/components/features/report-dialog.tsx`, HTML pages in `src/app/(report)/`, PowerPoint in `src/services/documents/report-pptx.ts`; each generation audited as GENERATE.
-8. Hardening and go-live: accessibility, error states, admin tables, production deploy.
+8. Hardening and go-live: accessibility, error states, admin tables, production deploy. **Code done 18 Nov 2026** (brief 08): error and loading pages, Admin › Clients actions, Change history filters, axe and contrast tests, security headers. Go-live waits on the checklist in `docs/operations.md` §7 (font licence, data governance, Vercel Pro, development database).
 
 ## 11. Ways of working
 

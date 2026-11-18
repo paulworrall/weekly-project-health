@@ -152,12 +152,13 @@ export function createViews(ds: Dataset) {
   const userName = (id: string | null) => ds.users.find((u) => u.id === id)?.name ?? null;
   const wsById = (id: string) => ds.workstreams.find((w) => w.id === id);
 
+  /** A client that isn't archived (archived clients have no pages, uploads or reports). */
   function getClient(clientId: string): Client | null {
-    return ds.clients.find((c) => c.id === clientId) ?? null;
+    return ds.clients.find((c) => c.id === clientId && !c.archivedAt) ?? null;
   }
 
   function getClients(): Client[] {
-    return ds.clients;
+    return ds.clients.filter((c) => !c.archivedAt);
   }
 
   function weekIndex(ref: WeekRef): number {
@@ -393,7 +394,8 @@ export function createViews(ds: Dataset) {
     if (!p) return null;
     const workstream = wsById(p.workstreamId)!;
     if (!workstream.reported) return null;
-    const client = getClient(p.clientId)!;
+    const client = getClient(p.clientId);
+    if (!client) return null;
     const week = resolveWeek(weekParam);
     const row = projectRow(p, week);
     const thisWeek = entryFor(p.id, week.ref);
@@ -603,7 +605,7 @@ export function createViews(ds: Dataset) {
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt))[0];
     return {
       client,
-      clients: ds.clients,
+      clients: getClients(),
       latest,
       latestStats: {
         records: projects.length,
@@ -669,7 +671,7 @@ export function createViews(ds: Dataset) {
   }
 
   return {
-    defaultClientId: ds.clients[0]?.id ?? "",
+    defaultClientId: getClients()[0]?.id ?? "",
     logSeq: ds.logSeq,
     now,
     viewerForRole,

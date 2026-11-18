@@ -25,7 +25,7 @@ const inClient = (pathname: string, sub: RegExp) => {
 const clients: NavItem = {
   label: "Clients",
   href: () => "/clients",
-  current: (p) => p === "/clients" || /^\/clients\/[^/]+$/.test(p) || p === "/admin/clients",
+  current: (p) => p === "/clients" || /^\/clients\/[^/]+$/.test(p),
 };
 const workstreams: NavItem = {
   label: "Workstreams",
@@ -53,7 +53,8 @@ export const NAV: Record<Role, NavItem[]> = {
     {
       label: "Users and access",
       href: () => "/admin/users",
-      current: (p) => p === "/admin/users" || p === "/admin/history",
+      // Also the other admin tables reached from Admin home: Clients and Change history.
+      current: (p) => ["/admin/users", "/admin/clients", "/admin/history"].includes(p),
     },
   ],
   UPDATER: [clients, workstreams, logs],

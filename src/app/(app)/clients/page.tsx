@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { ClientCard } from "@/components/features/client-card";
 import { ClosedWeekNote, WeekPicker } from "@/components/features/week";
+import { ButtonLink } from "@/components/ui/button";
 import { InternalPill } from "@/components/ui/pill";
+import { canAdminister } from "@/lib/permissions";
 import { requireViewer } from "@/lib/viewer";
 import { getRepository } from "@/server/repository";
 
@@ -9,7 +11,7 @@ export const metadata: Metadata = { title: "Clients" };
 
 /** Client list: where Updaters land, and the "Clients" menu item (decision 17 Nov). */
 export default async function ClientsPage(props: PageProps<"/clients">) {
-  await requireViewer();
+  const viewer = await requireViewer();
   const repo = await getRepository();
   const { week: weekParam } = await props.searchParams;
   const week = repo.resolveWeek(weekParam);
@@ -26,7 +28,14 @@ export default async function ClientsPage(props: PageProps<"/clients">) {
             <InternalPill />
           </p>
         </div>
-        <WeekPicker weeks={repo.weekOptions()} value={week.key} />
+        <div className="flex flex-wrap items-end gap-3">
+          {canAdminister(viewer) ? (
+            <ButtonLink href="/admin/clients" variant="secondary">
+              Add or manage clients
+            </ButtonLink>
+          ) : null}
+          <WeekPicker weeks={repo.weekOptions()} value={week.key} />
+        </div>
       </div>
       <div className="flex flex-col gap-4">
         {clients.map((c) => (

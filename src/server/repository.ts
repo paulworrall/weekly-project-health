@@ -179,21 +179,8 @@ export async function loadRows(
         updatedAt: true,
       },
     }),
-    prisma.auditEvent.findMany({
-      orderBy: { at: "desc" },
-      take: 200,
-      select: {
-        id: true,
-        at: true,
-        userId: true,
-        entity: true,
-        entityId: true,
-        action: true,
-        field: true,
-        oldValue: true,
-        newValue: true,
-      },
-    }),
+    // The change history is queried on its own page (src/server/history.ts, brief 08).
+    Promise.resolve([] as DbRows["auditEvents"]),
     // Closed-week snapshots (brief 06) for the weeks the shown week's trends need (phase 7).
     prisma.projectWeekSnapshot.findMany({
       where: { period: projectPeriods },
