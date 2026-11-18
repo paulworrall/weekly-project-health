@@ -9,16 +9,21 @@
  */
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
+import { snapshotWindow } from "@/lib/snapshot";
 import { createViews, type Views } from "@/lib/views";
 import { datasetFromRows, type DbRows } from "./rows";
 
-/** Closed weeks whose snapshots are loaded: 12 for the log trends, plus one spare. */
-export const SNAPSHOT_WEEKS = 13;
-
-export async function loadRows(now: Date = new Date()): Promise<DbRows> {
-  const recentPeriods = {
-    closesAt: { gte: new Date(now.getTime() - (SNAPSHOT_WEEKS * 7 + 1) * 86_400_000) },
-  };
+/**
+ * Loads everything, with the closed-week snapshots around the week being shown (`weekParam`,
+ * the open week by default): see `snapshotWindow`.
+ */
+export async function loadRows(
+  now: Date = new Date(),
+  weekParam?: string | string[]
+): Promise<DbRows> {
+  const win = snapshotWindow(now, weekParam);
+  const projectPeriods = { closesAt: { gt: win.projectsFrom, lte: win.to } };
+  const logPeriods = { closesAt: { gt: win.logsFrom, lte: win.to } };
   const [
     users,
     clients,
@@ -189,19 +194,17 @@ export async function loadRows(now: Date = new Date()): Promise<DbRows> {
         newValue: true,
       },
     }),
-    // Closed-week snapshots (brief 06): the recent weeks every trend needs (see
-    // SNAPSHOT_WEEKS). Older weeks are worked out from live data until brief 07 loads the
-    // snapshots of the week a page shows.
+    // Closed-week snapshots (brief 06) for the weeks the shown week's trends need (phase 7).
     prisma.projectWeekSnapshot.findMany({
-      where: { period: recentPeriods },
+      where: { period: projectPeriods },
       select: { periodId: true, projectId: true, data: true },
     }),
     prisma.pipelineWeekSnapshot.findMany({
-      where: { period: recentPeriods },
+      where: { period: projectPeriods },
       select: { periodId: true, workstreamId: true, data: true },
     }),
     prisma.logWeekSnapshot.findMany({
-      where: { period: recentPeriods },
+      where: { period: logPeriods },
       select: { periodId: true, clientId: true, data: true },
     }),
   ]);
@@ -241,8 +244,15 @@ const logSelect = {
   updatedAt: true,
 } as const;
 
-/** The views over the live database, loaded once per request. */
-export const getRepository = cache(async (): Promise<Views> => {
+const load = cache(async (week: string | undefined): Promise<Views> => {
   const now = new Date();
-  return createViews(datasetFromRows(await loadRows(now), now));
+  return createViews(datasetFromRows(await loadRows(now, week), now));
 });
+
+/**
+ * The views over the live database, loaded once per request. Pass the page's `?week=` so a
+ * past week reads its own snapshots and those its trends need.
+ */
+export function getRepository(week?: string | string[]): Promise<Views> {
+  return load(typeof week === "string" ? week : undefined);
+}

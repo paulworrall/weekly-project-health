@@ -118,11 +118,19 @@ export function Delta({
   className = "",
 }: {
   now: number;
-  prev: number;
+  /** Null when there is no figure to compare with (no record for that week). */
+  prev: number | null;
   period?: string;
   showPeriod?: boolean;
   className?: string;
 }) {
+  if (prev === null)
+    return (
+      <span className={className}>
+        <span aria-hidden="true">No earlier figure</span>
+        <span className="sr-only">no figure to compare {period}</span>
+      </span>
+    );
   return (
     <span className={className}>
       <span aria-hidden="true">

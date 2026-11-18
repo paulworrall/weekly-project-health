@@ -29,6 +29,7 @@ import {
   compareWeeks,
   currentWeek,
   formatWeekParam,
+  parseWeekParam,
   weekRange,
   weeksBetween,
   type WeekRef,
@@ -260,6 +261,35 @@ export function buildWeekSnapshots(ds: Dataset, ref: WeekRef): WeekSnapshots {
     });
 
   return { week, projects, pipelines, logs: logSnapshots };
+}
+
+/**
+ * Closed weeks whose snapshots a page loads, counted back from the week it shows (phase 7):
+ * project and pipeline records for the 8-week trends plus the week before; risk and issue logs
+ * for the 12-week chart and the 4-month table.
+ */
+export const SNAPSHOT_WEEKS = { projects: 10, logs: 18 } as const;
+
+export interface SnapshotWindow {
+  /** Load periods closing after `from` and no later than `to`. */
+  projectsFrom: Date;
+  logsFrom: Date;
+  to: Date;
+}
+
+/**
+ * The closes to load for a page showing `weekParam` (the open week when absent, invalid or not
+ * closed yet), so an old week reads its own snapshots and those of the weeks before it.
+ */
+export function snapshotWindow(now: Date, weekParam?: string | string[]): SnapshotWindow {
+  const current = currentWeek(now);
+  const asked = parseWeekParam(typeof weekParam === "string" ? weekParam : undefined);
+  const shown = asked && compareWeeks(asked, current) < 0 ? asked : current;
+  return {
+    projectsFrom: closesAt(addWeeks(shown, -SNAPSHOT_WEEKS.projects)),
+    logsFrom: closesAt(addWeeks(shown, -SNAPSHOT_WEEKS.logs)),
+    to: closesAt(shown),
+  };
 }
 
 /** A reporting period as the close job sees it. */

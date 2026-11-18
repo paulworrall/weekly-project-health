@@ -20,7 +20,7 @@ export async function loadReport(
 ): Promise<Report | null> {
   const viewer = await requireViewer();
   if (!canView(viewer)) return null;
-  const repo = await getRepository();
+  const repo = await getRepository(weekParam);
   const report = buildReport(repo, scope, weekParam, repo.now());
   if (!report) return null;
   const m = report.meta;

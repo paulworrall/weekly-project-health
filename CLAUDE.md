@@ -181,7 +181,7 @@ Each phase has its own brief in `briefs/`. Every brief starts with **Step 0: inv
 5. Weekly inputs: selection, weekly update, risks, issues, pipeline (all audited). **Done 17 Nov 2026**: actions in `src/server/actions/weekly.ts`, rules in `src/lib/weekly-rules.ts`; saves only in the open week; a save made over someone else's newer change is refused with a warning and a reload.
 5b. Pipeline value and time in pipeline (brief 05b).
 6. Periods and snapshots: automatic close, carry-forward, snapshots. **Done 17 Nov 2026**: rules in `src/lib/snapshot.ts`, job in `src/server/close-week.ts`, cron `/api/cron/close-week` daily at 01:00 UTC (`vercel.json`, needs `CRON_SECRET` in Vercel); `npm run week:close` closes by hand, `npm run snapshots:backfill` converted the sample weeks.
-7. Reports and logs: aggregations, trends, past weeks; Generate report (HTML and PowerPoint) — brief 07. **Generate report done 18 Nov 2026**: model in `src/lib/report.ts`, dialog `src/components/features/report-dialog.tsx`, HTML pages in `src/app/(report)/`, PowerPoint in `src/services/documents/report-pptx.ts`; each generation audited as GENERATE.
+7. Reports and logs: aggregations, trends, past weeks; Generate report (HTML and PowerPoint) — brief 07. **Done 18 Nov 2026.** Log trends read each week's snapshot (`history` in `src/lib/logs.ts`); pages load the snapshots around the week they show (`snapshotWindow`, `getRepository(week)`). Generate report: model in `src/lib/report.ts`, dialog `src/components/features/report-dialog.tsx`, HTML pages in `src/app/(report)/`, PowerPoint in `src/services/documents/report-pptx.ts`; each generation audited as GENERATE.
 8. Hardening and go-live: accessibility, error states, admin tables, production deploy.
 
 ## 11. Ways of working

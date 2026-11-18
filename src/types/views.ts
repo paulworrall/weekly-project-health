@@ -2,11 +2,13 @@
  * View models: what the repository (src/mocks/repository.ts now, Prisma in brief 02) returns
  * to pages. Pages never import fixtures directly.
  */
+import type { MonthPoint, WeekPoint } from "@/lib/logs";
 import type {
   Client,
   IsoDate,
   IsoDateTime,
   LogItem,
+  LogKind,
   PipelineOpportunity,
   ProjectStatus,
   ProjectWeek,
@@ -229,12 +231,25 @@ export interface SimpleUser extends User {
 }
 
 /** Risk and issue log page data. */
+/** One log's history for one scope: each closed week's figures come from its snapshot. */
+export interface LogTrend {
+  /** Up to 12 weeks ending with the viewed week; weeks with no record are left out. */
+  weeks: WeekPoint[];
+  /** How many of those 12 weeks were left out for having no record. */
+  weeksLeftOut: number;
+  /** Up to 4 months, the last one to date. */
+  months: MonthPoint[];
+  openLastWeek: number | null;
+  open4WeeksAgo: number | null;
+  avgAgeLastMonth: number | null;
+}
+
 export interface LogData {
   client: Client;
   week: WeekContext;
   weeks: WeekOption[];
-  /** Up to 12 weeks ending with the viewed week, oldest first (as ?week= keys). */
-  chartWeeks: string[];
   workstreams: { id: string; name: string }[];
   items: LogRow[];
+  /** By scope: "" for all reported workstreams, or a workstream id; then by log. */
+  trends: Record<string, Record<LogKind, LogTrend>>;
 }

@@ -141,6 +141,15 @@ export function weeksBetween(from: WeekRef, to: WeekRef): WeekRef[] {
   return out;
 }
 
+/**
+ * The week whose Friday close is the first on or after `date`: the date's own week on a weekday,
+ * the next week on a Saturday or Sunday.
+ */
+export function closeWeekFor(date: string): WeekRef {
+  const ref = isoWeekOfDate(date);
+  return dayNumber(date) > dayNumber(weekRange(ref).friday) ? addWeeks(ref, 1) : ref;
+}
+
 /** The last calendar day of a week for "as at week end" counts: its Friday. */
 export function weekEnd(ref: WeekRef): string {
   return weekRange(ref).friday;

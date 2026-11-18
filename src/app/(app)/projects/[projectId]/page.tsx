@@ -27,9 +27,9 @@ export const metadata: Metadata = { title: "Project" };
 
 export default async function ProjectPage(props: PageProps<"/projects/[projectId]">) {
   const viewer = await requireViewer();
-  const repo = await getRepository();
-  const { projectId } = await props.params;
   const { week } = await props.searchParams;
+  const repo = await getRepository(week);
+  const { projectId } = await props.params;
   const v = repo.getProjectPage(projectId, week);
   if (!v) notFound();
   const p = v.project;

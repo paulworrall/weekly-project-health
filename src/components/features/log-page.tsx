@@ -18,7 +18,7 @@ export async function LogPage({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
   await requireViewer();
-  const repo = await getRepository();
+  const repo = await getRepository(searchParams.week);
   const data = repo.getLogData(clientId, searchParams.week);
   if (!data) notFound();
   const ws = typeof searchParams.ws === "string" ? searchParams.ws : "";

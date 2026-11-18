@@ -14,14 +14,13 @@ import {
   overdueText,
   type AgeBand,
 } from "@/lib/ageing";
-import { formatDate, formatWeekdayDayMonth } from "@/lib/dates";
+import { formatDate, formatWeekdayDayMonth, monthName, parseIsoDate } from "@/lib/dates";
 import { deltaText } from "@/lib/delta";
 import { EMPTY_LOG_FILTERS, filterLog, type LogFilters } from "@/lib/filters";
 import { LEVEL_LABEL, LOG_STATUS_LABEL, levelHeading, levelsFor } from "@/lib/labels";
 import { withWeek } from "@/lib/links";
-import { byWorkstream, logSummary, monthOnMonth, weekOnWeek } from "@/lib/logs";
+import { byWorkstream, logSummary } from "@/lib/logs";
 import { sortLog } from "@/lib/sorting";
-import { parseWeekParam, type WeekRef } from "@/lib/week";
 import {
   Delta,
   LevelTag,
@@ -72,22 +71,26 @@ export function LogView({
   const clientBase = `/clients/${data.client.id}`;
 
   const scoped = data.items.filter((i) => i.kind === kind && (!ws || i.workstreamId === ws));
-  const s = logSummary(scoped, kind, ref, today);
-  const chartWeeks = data.chartWeeks.map((k) => parseWeekParam(k) as WeekRef);
-  const wow = weekOnWeek(scoped, kind, chartWeeks, today);
-  const mom = monthOnMonth(scoped, kind, today, 4);
+  // This week's figures from the items; earlier weeks and months from each week's snapshot,
+  // worked out on the server (src/lib/views.ts).
+  const trend = (data.trends[ws] ?? data.trends[""])[kind];
+  const s = { ...logSummary(scoped, kind, ref, today), ...trend };
+  const wow = trend.weeks;
+  const mom = trend.months;
   const wsRows = byWorkstream(
     data.items.filter((i) => i.kind === kind),
     kind,
     data.workstreams.filter((w) => !ws || w.id === ws),
     ref,
     today
-  );
+  ).map((r) => ({ ...r, openLastWeek: data.trends[r.workstreamId]?.[kind].openLastWeek ?? null }));
   const list = sortLog(filterLog(scoped, filters, today));
   const shown = all ? list : list.slice(0, PREVIEW);
   const maxOpen = Math.max(1, ...wow.map((w) => w.open));
   const wsName = data.workstreams.find((w) => w.id === ws)?.name;
-  const prevMonth = mom.length > 1 ? mom[mom.length - 2] : null;
+  const thisMonth = parseIsoDate(today).m;
+  const monthNow = monthName(thisMonth);
+  const monthBefore = monthName(thisMonth === 1 ? 12 : thisMonth - 1);
 
   function go(k: LogKind) {
     const path = `${clientBase}/${k === "RISK" ? "risks" : "issues"}${ws ? `?ws=${ws}` : ""}`;
@@ -234,7 +237,7 @@ export function LogView({
               <Delta
                 now={s.avgAge}
                 prev={s.avgAgeLastMonth}
-                period={`days on ${prevMonth?.month ?? "last month"}`}
+                period={`days on ${monthBefore}`}
                 showPeriod
               />
             </p>
@@ -255,8 +258,7 @@ export function LogView({
               </div>
             </div>
             <p className="mt-2 text-[13px] text-muted">
-              {mom.at(-1)?.month} to date: {s.raisedMonthToDate} raised · {s.closedMonthToDate}{" "}
-              closed
+              {monthNow} to date: {s.raisedMonthToDate} raised · {s.closedMonthToDate} closed
             </p>
           </div>
           <div className="bg-white p-5">
@@ -301,47 +303,59 @@ export function LogView({
                 Open at week end
               </span>
             </div>
-            <div
-              role="img"
-              aria-label={`Open ${lower} at the end of each week, ${wow[0]?.label} to ${wow.at(-1)?.label}: ${wow.map((w) => `${w.label} ${w.open}`).join(", ")}`}
-              className="mt-4.5 flex h-[170px] items-end gap-2 border-b border-navy"
-            >
-              {wow.map((w) => (
+            {wow.length === 0 ? (
+              <p className="mt-4.5 text-[14px]">No weekly figures recorded for these weeks yet.</p>
+            ) : (
+              <>
                 <div
-                  key={w.label}
-                  className="flex h-full flex-1 flex-col items-center justify-end gap-1"
+                  role="img"
+                  aria-label={`Open ${lower} at the end of each week, ${wow[0].label} to ${wow.at(-1)!.label}: ${wow.map((w) => `${w.label} ${w.open}`).join(", ")}`}
+                  className="mt-4.5 flex h-[170px] items-end gap-2 border-b border-navy"
                 >
-                  <span className="text-[12px] font-medium">{w.open}</span>
-                  <div
-                    className={`w-[70%] ${w.current ? "bg-orange" : "bg-navy"}`}
-                    style={{ height: `${(w.open / maxOpen) * 80}%` }}
-                  />
-                </div>
-              ))}
-            </div>
-            <TableScroll label="Raised and closed per week">
-              <table className="mt-1.5 w-full table-fixed border-collapse text-[12px]">
-                <caption className="sr-only">Raised and closed per week</caption>
-                <tbody>
-                  {(["label", "raised", "closed"] as const).map((rowKey) => (
-                    <tr key={rowKey}>
-                      <th scope="row" className="w-16 py-1 text-left font-normal text-muted">
-                        {rowKey === "label" ? "Week" : rowKey === "raised" ? "Raised" : "Closed"}
-                      </th>
-                      {wow.map((w) => (
-                        <td key={w.label} className="py-1 text-center">
-                          {w[rowKey]}
-                        </td>
-                      ))}
-                    </tr>
+                  {wow.map((w) => (
+                    <div
+                      key={w.label}
+                      className="flex h-full flex-1 flex-col items-center justify-end gap-1"
+                    >
+                      <span className="text-[12px] font-medium">{w.open}</span>
+                      <div
+                        className={`w-[70%] ${w.current ? "bg-orange" : "bg-navy"}`}
+                        style={{ height: `${(w.open / maxOpen) * 80}%` }}
+                      />
+                    </div>
                   ))}
-                </tbody>
-              </table>
-            </TableScroll>
+                </div>
+                <TableScroll label="Raised and closed per week">
+                  <table className="mt-1.5 w-full table-fixed border-collapse text-[12px]">
+                    <caption className="sr-only">Raised and closed per week</caption>
+                    <tbody>
+                      {(["label", "raised", "closed"] as const).map((rowKey) => (
+                        <tr key={rowKey}>
+                          <th scope="row" className="w-16 py-1 text-left font-normal text-muted">
+                            {rowKey === "label"
+                              ? "Week"
+                              : rowKey === "raised"
+                                ? "Raised"
+                                : "Closed"}
+                          </th>
+                          {wow.map((w) => (
+                            <td key={w.label} className="py-1 text-center">
+                              {w[rowKey]}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </TableScroll>
+              </>
+            )}
             <p className="mt-2.5 text-[12px] text-muted">
               {data.week.closed
                 ? "From closed-week figures."
                 : `From closed-week figures; week ${ref.isoWeek} is live until the week closes.`}
+              {trend.weeksLeftOut > 0 &&
+                ` ${trend.weeksLeftOut} earlier ${trend.weeksLeftOut === 1 ? "week has" : "weeks have"} no record and ${trend.weeksLeftOut === 1 ? "is" : "are"} left out.`}
             </p>
           </section>
           <section aria-labelledby="mom-h" className="min-w-0 flex-[2_1_400px] bg-white p-6">
@@ -390,7 +404,10 @@ export function LogView({
                 </tbody>
               </table>
             </TableScroll>
-            <p className="mt-2.5 text-[12px] text-muted">{mom.at(-1)?.month} is month to date.</p>
+            <p className="mt-2.5 text-[12px] text-muted">
+              {monthNow} is month to date.
+              {mom.length < 4 && " Months with no weekly record are left out."}
+            </p>
           </section>
         </div>
 

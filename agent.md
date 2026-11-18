@@ -36,7 +36,7 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 | `src/lib/` | `viewer.ts`: `getViewer()` (session + database check, cached) and `requireViewer({ allowPasswordChange })`. `passwords.ts` (rule, temporary passwords), `lockout.ts`, `session-cookie.ts`. Pure, tested: `week`, `dates`, `spend`, `delta`, `ageing`, `pagination`, `sorting`, `filters`, `logs`, `rollup`, `rag`, `labels`, `permissions`, `links` (`withWeek`), `weekly-rules` (week-open check, refs, closed date, version, conflict message). Server-only helpers: `viewer` (`getViewer`/`requireViewer`), `dev-role`. |
 | `src/types/` | `domain.ts` (records, enums), `views.ts` (page view models), `schemas.ts` (zod), `action-result.ts`. |
 | `src/lib/views.ts` | `createViews(dataset)`: every page view model, built from a `Dataset`. Pure. |
-| `src/server/repository.ts` | `getRepository()` (React `cache`): loads all rows with Prisma, `datasetFromRows`, `createViews`. Used by every page and `lib/viewer.ts`. |
+| `src/server/repository.ts` | `getRepository(week?)` (React `cache`): loads all rows with Prisma plus the snapshots around the week shown (`snapshotWindow`: 10 closes of project and pipeline snapshots, 18 of log snapshots), `datasetFromRows`, `createViews`. Pages pass their `?week=`. |
 | `src/server/rows.ts` | `DbRows` shapes, `rowsFromDataset` (seed) and `datasetFromRows` (site). |
 | `src/mocks/` | `data.ts` (synthetic Northwind + TCCC from `clients/tccc.json`, fixed clock `MOCK_NOW`), `repository.ts` (`mockDataset` + views, for tests and the seed). |
 | `prisma/` | `schema.prisma`, `migrations/` (written offline, applied with `db:migrate` after asking Paul), `seed.ts` (idempotent). |
@@ -73,4 +73,4 @@ Every page reads the live Neon database (Northwind sample + TCCC) through `src/s
 
 ## Next
 
-Rest of phase 7: log page trends from snapshots, loading the snapshots of the week a page shows (not the last 13 weeks), and moving heavy aggregations into queries if pages slow down. Then brief 08 (hardening and go-live).
+Phase 7 is complete: log trends read each week's snapshot (`history` in `src/lib/logs.ts`, `LogData.trends` from `getLogData`), and pages load the snapshots around the week they show. Next: brief 08 (hardening and go-live), including moving heavy sums into queries if pages slow down, and the exceljs/uuid advisories.

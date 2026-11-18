@@ -27,9 +27,9 @@ export default async function WorkstreamPage(
   props: PageProps<"/clients/[clientId]/workstreams/[workstreamId]">
 ) {
   await requireViewer();
-  const repo = await getRepository();
-  const { clientId, workstreamId } = await props.params;
   const { week } = await props.searchParams;
+  const repo = await getRepository(week);
+  const { clientId, workstreamId } = await props.params;
   const v = repo.getWorkstreamOverview(clientId, workstreamId, week);
   if (!v) notFound();
   const clientHref = withWeek(`/clients/${v.client.id}`, v.week);

@@ -128,3 +128,13 @@ Append-only. Newest at the bottom.
 - `src/server/report.ts`: sign-in and permission checks, Not found for unknown clients and hidden workstreams, a GENERATE audit row per generation. Migration `20261118140000_audit_generate` (adds the enum value).
 - Live data today: Northwind 12 slides, TCCC 7; building takes about 0.2 s after the usual page data load.
 - 164 tests pass; lint, typecheck, build pass.
+
+## 18 Nov 2026 — Phase 7 completed: log trends from snapshots, snapshots for the week shown (branch `phase-07-trends`)
+
+- Step 0 report and answer: `briefs/phase-07b-step0-report.md` (Paul: month-end figures for the exact last day).
+- `src/lib/logs.ts`: `logSummary`, `weekOnWeek`, `monthOnMonth` and `byWorkstream` take an optional `history` (the items as at each week's close). Weeks and months with no record are left out; comparisons with no record are `null` ("No earlier figure"). `closeWeekFor(date)` in `src/lib/week.ts`.
+- `src/lib/views.ts` `getLogData`: works out the trends on the server for all reported workstreams and for each one (`LogData.trends`), from each closed week's log snapshot and the open week's live items. The log page uses them; the chart says how many earlier weeks have no record.
+- `snapshotWindow` in `src/lib/snapshot.ts`; `getRepository(week)` and `loadRows(now, week)` load project and pipeline snapshots for 10 closes and log snapshots for 18 closes up to the week shown. Client, workstream, project, log and report pages pass `?week=`.
+- Checked read-only against the live database: Northwind's closed weeks now keep the items archived on 5 Nov (1–2 more open per week than before); TCCC shows week 47 only (no earlier records). Loading takes about 0.2–0.3 s once connected.
+- Not changed: database queries for the heavy sums. Pages are fast enough at pilot size; revisit in brief 08 if needed.
+- No migration. 176 tests pass; lint and typecheck pass.
