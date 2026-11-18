@@ -109,7 +109,10 @@ describe("mock repository", () => {
 
   it("builds the logs with every status", () => {
     const logs = getLogData(DEFAULT_CLIENT_ID)!;
-    expect(logs.chartWeeks).toHaveLength(12);
+    // Sample data has no snapshots, so every week is worked out from the current items.
+    expect(logs.trends[""].RISK.weeks).toHaveLength(12);
+    expect(logs.trends[""].ISSUE.months).toHaveLength(4);
+    expect(Object.keys(logs.trends)).toEqual(["", ...logs.workstreams.map((w) => w.id)]);
     expect(logs.items.length).toBeGreaterThan(20);
     expect(new Set(logs.items.map((i) => i.status))).toEqual(
       new Set(["OPEN", "ON_PAUSE", "CLOSED"])

@@ -1,19 +1,26 @@
 /**
  * Risk and issue log figures (decision log: "Risk log and issue log"). Pure functions over
  * log items. "Active" = Open or On pause; archived items never count. Counts "at" a date use
- * the raised and closed dates, so the same functions give the live week and past weeks
- * (brief 06 swaps the history for snapshot series of the same shape).
+ * the raised and closed dates.
+ *
+ * Earlier weeks and months read `history`: the items as they stood at each week's close (its
+ * snapshot; the open week's live items). A later archive or change of level never alters a
+ * closed week's figures, and a week with no record is left out (phase 7). Without `history`
+ * the current items are used for every week, as for data with no snapshots at all.
  */
 import type { IsoDate, LogItem, LogKind, LogLevel } from "@/types/domain";
 import { ageBand, ageInDays, dueByClose, isOverdue, type AgeBand } from "./ageing";
 import { addDays, daysBetween, monthName, parseIsoDate, toIsoDate } from "./dates";
 import { levelsFor } from "./labels";
-import { weekRange, weekShort, type WeekRef } from "./week";
+import { addWeeks, closeWeekFor, weekRange, weekShort, type WeekRef } from "./week";
 
 type Item = Pick<
   LogItem,
   "kind" | "ref" | "level" | "status" | "raisedOn" | "closedOn" | "dueOn" | "archivedAt"
 >;
+
+/** The items as they stood at a week's close (the open week: live); null when no record exists. */
+export type ItemsAt<T extends Item = Item> = (week: WeekRef) => readonly T[] | null;
 
 /** Active (open or on pause) at the end of `date`. */
 export function activeAt(item: Item, date: IsoDate): boolean {
@@ -29,6 +36,12 @@ function inRange(date: IsoDate | null, from: IsoDate, to: IsoDate): boolean {
 function avgAge(items: readonly Item[], date: IsoDate): number {
   if (!items.length) return 0;
   return Math.round(items.reduce((s, i) => s + ageInDays(i.raisedOn, date), 0) / items.length);
+}
+
+/** Active items of `kind` at the end of `date`, read from the record of the close covering it. */
+function activeFrom(history: ItemsAt, kind: LogKind, date: IsoDate): Item[] | null {
+  const items = history(closeWeekFor(date));
+  return items ? items.filter((i) => i.kind === kind && !i.archivedAt && activeAt(i, date)) : null;
 }
 
 function endOfPreviousMonth(date: IsoDate): IsoDate {
@@ -48,7 +61,8 @@ export interface LogSummary {
   openOnly: number;
   byLevel: Record<string, number>;
   avgAge: number;
-  avgAgeLastMonth: number;
+  /** Null when there is no record for that date (as for the other comparisons below). */
+  avgAgeLastMonth: number | null;
   oldest: { ref: string; days: number } | null;
   raisedThisWeek: number;
   closedThisWeek: number;
@@ -59,8 +73,8 @@ export interface LogSummary {
   /** Whole percent of active items that are overdue. */
   overdueShare: number;
   dueByClose: number;
-  openLastWeek: number;
-  open4WeeksAgo: number;
+  openLastWeek: number | null;
+  open4WeeksAgo: number | null;
 }
 
 /**
@@ -71,7 +85,8 @@ export function logSummary(
   items: readonly Item[],
   kind: LogKind,
   week: WeekRef,
-  today: IsoDate
+  today: IsoDate,
+  history: ItemsAt = () => items
 ): LogSummary {
   const all = items.filter((i) => i.kind === kind && !i.archivedAt);
   const active = all.filter((i) => activeAt(i, today));
@@ -85,16 +100,16 @@ export function logSummary(
   const lastMonthEnd = endOfPreviousMonth(today);
   const monthStart = startOfMonth(today);
   const onPause = active.filter((i) => i.status === "ON_PAUSE").length;
+  const lastMonth = activeFrom(history, kind, lastMonthEnd);
+  const lastWeek = activeFrom(history, kind, weekRange(addWeeks(week, -1)).friday);
+  const fourAgo = activeFrom(history, kind, weekRange(addWeeks(week, -4)).friday);
   return {
     open: active.length,
     onPause,
     openOnly: active.length - onPause,
     byLevel,
     avgAge: avgAge(active, today),
-    avgAgeLastMonth: avgAge(
-      all.filter((i) => activeAt(i, lastMonthEnd)),
-      lastMonthEnd
-    ),
+    avgAgeLastMonth: lastMonth ? avgAge(lastMonth, lastMonthEnd) : null,
     oldest: oldestItem
       ? { ref: oldestItem.ref, days: ageInDays(oldestItem.raisedOn, today) }
       : null,
@@ -106,8 +121,8 @@ export function logSummary(
     overdue,
     overdueShare: active.length ? Math.round((overdue / active.length) * 100) : 0,
     dueByClose: active.filter((i) => dueByClose(i, today, friday)).length,
-    openLastWeek: all.filter((i) => activeAt(i, addDays(monday, -3))).length,
-    open4WeeksAgo: all.filter((i) => activeAt(i, addDays(monday, -24))).length,
+    openLastWeek: lastWeek?.length ?? null,
+    open4WeeksAgo: fourAgo?.length ?? null,
   };
 }
 
@@ -121,27 +136,33 @@ export interface WeekPoint {
 
 /**
  * Week-on-week series: open at week end (Friday; "today" for the week containing it), raised and
- * closed during the week (Monday–Sunday, up to today).
+ * closed during the week (Monday–Sunday, up to today), each week from its own record. Weeks
+ * with no record are left out.
  */
 export function weekOnWeek(
   items: readonly Item[],
   kind: LogKind,
   weeks: readonly WeekRef[],
-  today: IsoDate
+  today: IsoDate,
+  history: ItemsAt = () => items
 ): WeekPoint[] {
-  const all = items.filter((i) => i.kind === kind && !i.archivedAt);
-  return weeks.map((w) => {
+  return weeks.flatMap((w) => {
+    const record = history(w);
+    if (!record) return [];
+    const all = record.filter((i) => i.kind === kind && !i.archivedAt);
     const { monday, friday } = weekRange(w);
     const current = daysBetween(monday, today) >= 0 && daysBetween(today, friday) >= 0;
     const end = current ? today : friday;
     const sunday = current ? today : addDays(monday, 6);
-    return {
-      label: weekShort(w),
-      open: all.filter((i) => activeAt(i, end)).length,
-      raised: all.filter((i) => inRange(i.raisedOn, monday, sunday)).length,
-      closed: all.filter((i) => inRange(i.closedOn, monday, sunday)).length,
-      current,
-    };
+    return [
+      {
+        label: weekShort(w),
+        open: all.filter((i) => activeAt(i, end)).length,
+        raised: all.filter((i) => inRange(i.raisedOn, monday, sunday)).length,
+        closed: all.filter((i) => inRange(i.closedOn, monday, sunday)).length,
+        current,
+      },
+    ];
   });
 }
 
@@ -156,14 +177,18 @@ export interface MonthPoint {
   toDate: boolean;
 }
 
-/** Month-on-month table: the last `count` months up to the month containing `today` (month to date). */
+/**
+ * Month-on-month table: the last `count` months up to the month containing `today` (month to
+ * date). Each finished month is worked out for its last day from the record of the first close
+ * on or after it (decision 18 Nov); months with no record are left out.
+ */
 export function monthOnMonth(
   items: readonly Item[],
   kind: LogKind,
   today: IsoDate,
-  count = 4
+  count = 4,
+  history: ItemsAt = () => items
 ): MonthPoint[] {
-  const all = items.filter((i) => i.kind === kind && !i.archivedAt);
   const { y, m } = parseIsoDate(today);
   const months: { start: IsoDate; end: IsoDate; m: number }[] = [];
   for (let k = count - 1; k >= 0; k--) {
@@ -175,7 +200,13 @@ export function monthOnMonth(
     months.push({ start, end, m: mm + 1 });
   }
   let prev: number | null = null;
-  return months.map((mo, idx) => {
+  return months.flatMap((mo, idx) => {
+    const record = history(closeWeekFor(mo.end));
+    if (!record) {
+      prev = null;
+      return [];
+    }
+    const all = record.filter((i) => i.kind === kind && !i.archivedAt);
     const active = all.filter((i) => activeAt(i, mo.end));
     const open = active.length;
     const point: MonthPoint = {
@@ -188,7 +219,7 @@ export function monthOnMonth(
       toDate: idx === months.length - 1,
     };
     prev = open;
-    return point;
+    return [point];
   });
 }
 
@@ -198,7 +229,7 @@ export interface WorkstreamLogRow {
   open: number;
   byLevel: number[];
   avgAge: number;
-  openLastWeek: number;
+  openLastWeek: number | null;
 }
 
 /** By-workstream table for one log kind. */
@@ -207,10 +238,12 @@ export function byWorkstream(
   kind: LogKind,
   workstreams: readonly { id: string; name: string }[],
   week: WeekRef,
-  today: IsoDate
+  today: IsoDate,
+  history: ItemsAt<Item & { workstreamId: string }> = () => items
 ): WorkstreamLogRow[] {
   const levels = levelsFor(kind) as readonly LogLevel[];
-  const lastWeek = addDays(weekRange(week).monday, -3);
+  const lastFriday = weekRange(addWeeks(week, -1)).friday;
+  const lastWeek = history(addWeeks(week, -1));
   return workstreams.map((w) => {
     const mine = items.filter((i) => i.kind === kind && i.workstreamId === w.id && !i.archivedAt);
     const active = mine.filter((i) => activeAt(i, today));
@@ -220,7 +253,12 @@ export function byWorkstream(
       open: active.length,
       byLevel: levels.map((l) => active.filter((i) => i.level === l).length),
       avgAge: avgAge(active, today),
-      openLastWeek: mine.filter((i) => activeAt(i, lastWeek)).length,
+      openLastWeek: lastWeek
+        ? lastWeek.filter(
+            (i) =>
+              i.kind === kind && i.workstreamId === w.id && !i.archivedAt && activeAt(i, lastFriday)
+          ).length
+        : null,
     };
   });
 }

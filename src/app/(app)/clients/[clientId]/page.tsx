@@ -33,9 +33,9 @@ const btnOutline =
 
 export default async function ClientPage(props: PageProps<"/clients/[clientId]">) {
   await requireViewer();
-  const repo = await getRepository();
-  const { clientId } = await props.params;
   const { week: weekParam } = await props.searchParams;
+  const repo = await getRepository(weekParam);
+  const { clientId } = await props.params;
   const v = repo.getClientOverview(clientId, weekParam);
   if (!v) notFound();
   const t = v.totals;

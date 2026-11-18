@@ -35,7 +35,7 @@ import type {
   WorkstreamSummary,
 } from "@/types/views";
 import { addDays, daysBetween } from "./dates";
-import { activeAt } from "./logs";
+import { activeAt, logSummary, monthOnMonth, weekOnWeek, type ItemsAt } from "./logs";
 import type { LogSnapshot, PipelineSnapshot, ProjectSnapshot } from "./snapshot";
 import { needsAttention, outstandingUpdates, sumTiles, workstreamTiles } from "./rollup";
 import { sortLog, sortPipeline } from "./sorting";
@@ -490,13 +490,65 @@ export function createViews(ds: Dataset) {
         };
       });
     const idx = weekIndex(week.ref);
+    const chartWeeks = ds.allWeeks.slice(Math.max(0, idx - 11), idx + 1);
+
+    // Each week's items as they stood at its close: the snapshot for a closed week, live items
+    // for the open week. With no snapshots loaded at all (sample data), live items throughout.
+    const recorded = new Map<string, LogRow[] | null>();
+    const itemsAtClose = (ref: WeekRef): LogRow[] | null => {
+      const key = formatWeekParam(ref);
+      if (recorded.has(key)) return recorded.get(key)!;
+      let source: readonly LogItem[] | null;
+      if (compareWeeks(ref, ds.currentWeek) > 0) source = null;
+      else if (!isClosedWeek(ref) || !ds.snapshots) source = ds.logItems;
+      else source = ds.snapshots.logs.get(`${clientId}|${key}`)?.items ?? null;
+      const rows = source
+        ? source.flatMap((l): LogRow[] => {
+            const p = projectById.get(l.projectId);
+            if (!p || l.clientId !== clientId || !wsIds.has(p.workstreamId) || l.archivedAt)
+              return [];
+            return [
+              {
+                ...l,
+                projectJob: p.jobNumber,
+                projectName: p.name,
+                workstreamId: p.workstreamId,
+                workstreamName: wsById(p.workstreamId)!.name,
+              },
+            ];
+          })
+        : null;
+      recorded.set(key, rows);
+      return rows;
+    };
+    const trends: LogData["trends"] = {};
+    for (const scope of ["", ...workstreams.map((w) => w.id)]) {
+      const history: ItemsAt = (ref) => {
+        const rows = itemsAtClose(ref);
+        return rows && scope ? rows.filter((r) => r.workstreamId === scope) : rows;
+      };
+      const scoped = scope ? items.filter((i) => i.workstreamId === scope) : items;
+      const trend = (kind: LogKind) => {
+        const s = logSummary(scoped, kind, week.ref, week.asOf, history);
+        const weeks = weekOnWeek(scoped, kind, chartWeeks, week.asOf, history);
+        return {
+          weeks,
+          weeksLeftOut: chartWeeks.length - weeks.length,
+          months: monthOnMonth(scoped, kind, week.asOf, 4, history),
+          openLastWeek: s.openLastWeek,
+          open4WeeksAgo: s.open4WeeksAgo,
+          avgAgeLastMonth: s.avgAgeLastMonth,
+        };
+      };
+      trends[scope] = { RISK: trend("RISK"), ISSUE: trend("ISSUE") };
+    }
     return {
       client,
       week,
       weeks: weekOptions(),
-      chartWeeks: ds.allWeeks.slice(Math.max(0, idx - 11), idx + 1).map(formatWeekParam),
       workstreams: workstreams.map((w) => ({ id: w.id, name: w.name })),
       items: sortLog(items),
+      trends,
     };
   }
 
