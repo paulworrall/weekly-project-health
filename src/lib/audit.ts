@@ -4,7 +4,7 @@
  * writes them in the same transaction as the change.
  */
 
-export type AuditAction = "CREATE" | "UPDATE" | "ARCHIVE" | "RESTORE";
+export type AuditAction = "CREATE" | "UPDATE" | "ARCHIVE" | "RESTORE" | "GENERATE";
 
 export interface AuditRow {
   action: AuditAction;

@@ -110,6 +110,8 @@ enum AuditAction {
   UPDATE
   ARCHIVE
   RESTORE
+  /// A report was generated (brief 07); nothing else is stored.
+  GENERATE
 }
 
 // ── People ───────────────────────────────────────────────────────────────────────────────────

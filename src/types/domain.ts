@@ -187,7 +187,7 @@ export interface AuditEvent {
   userName: string;
   entity: string;
   entityId: string;
-  action: "CREATE" | "UPDATE" | "ARCHIVE" | "RESTORE";
+  action: "CREATE" | "UPDATE" | "ARCHIVE" | "RESTORE" | "GENERATE";
   field: string;
   oldValue: string | null;
   newValue: string | null;
